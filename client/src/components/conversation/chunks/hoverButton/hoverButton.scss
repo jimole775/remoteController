@@ -1,0 +1,87 @@
+/****************************hover button style**********************************/
+
+.message-remain-count {
+  width: 40%;
+  height: 100%;
+  display: block;
+  float: right;
+  box-sizing: border-box;
+  padding: 0 5%;
+  line-height: 200%;
+  text-align: center;
+}
+
+.char-with {
+  width: 60%;
+  height: 100%;
+  display: block;
+  padding: 0 5%;
+  line-height: 200%;
+  white-space: nowrap;
+  overflow: hidden;
+  float: left;
+  box-sizing: border-box;
+  text-overflow: ellipsis
+}
+
+.message-remain-form {
+  width: 8rem;
+  height: 3rem;
+  border-left: 1px solid rgb(150, 181, 212);
+  position: absolute;
+  top: 0.5rem;
+  right: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  overflow: hidden;
+  div {
+    width: 100%;
+    height: 100%;
+    font-size: 1.4rem;
+    color: rgb(232, 238, 245);
+    position: relative;
+    left: 0;
+    top: 0
+  }
+}
+
+.char-message-tips-img {
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 5px;
+  z-index: 2;
+  background-color: #477cb3;
+  //background-image: url("../images/message.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 3rem 3.3rem;
+}
+
+.char-hover-button {
+  width: 4rem;
+  height: 4rem;
+  background: #477cb3;
+  position: absolute;
+  top: 5rem;
+  left: 0;
+  display: none;
+  z-index: 10001;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(110, 110, 110, 0.6);
+  overflow: hidden
+}
+
+.char-hover-button-full {
+  width: 12rem;
+}
+
+.animation-width {
+  transition: width 0.5s ease;
+  -webkit-transition: width 0.5s ease;
+  -o-transition: width 0.5s ease;
+  -moz-transition: width 0.5s ease;
+}
+

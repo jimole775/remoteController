@@ -1,0 +1,68 @@
+
+.slider-tab{
+  width:100%;
+  position:relative;
+  height: 5rem;
+  z-index: 19;
+}
+
+.slider-tab-chunk li.on {
+  border-bottom-color: #DDF3FE;
+}
+
+.slider-tab-chunk li.on a{
+  font-size: 0.7rem;
+  color: #DDF3FE;
+  display: block;
+}
+
+.slider-tab-chunk li a {
+  color: #7CC2E4;
+  font-size: 0.6rem;
+  display: block;
+}
+
+.nav-active{
+  color: #fff !important;
+  font-size: 1.6rem !important;
+  border-right: 1px solid #1d528e !important;
+  border-left: 1px solid #1d528e !important;
+  background: #163b65 !important;
+}
+
+.sliding-shoe{
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  box-sizing: border-box;
+  border-bottom:3px solid #fff;
+}
+
+.button-init{
+  background: none;
+  border:none;
+  outline: none;
+}
+.button-separate{
+  border-right: 1px solid #091d33;
+  border-left: 1px solid #091d33;
+}
+
+.slider-tab-chunk {
+  height: 100%;
+  width: 100%;
+  background: #0c2d51;
+  box-sizing: border-box;
+  box-shadow: 0 3px 3px #253d5d;
+}
+
+.slider-tab-chunk > button{
+  height: 100%;
+  width: 50%;
+  box-sizing: border-box;
+  float:left;
+  font-size: 1.4rem;
+  color:#2d9acd
+}

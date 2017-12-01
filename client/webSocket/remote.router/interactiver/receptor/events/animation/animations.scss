@@ -1,0 +1,12 @@
+.animation {
+  transform: scale(1, 1);
+  width: 8rem;
+  height: 8rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: rgba(0, 254, 25, 0.6);
+  border-radius: 100%;
+  display: none
+}

@@ -1,0 +1,21 @@
+div.context_box#contextBox
+    div.context_main_with_title.car-module-main#sliderBody(
+    ng-class="{'full': contentItem.length === 1}"
+    )
+        div.module-list.car-module-list(
+        ng-repeat="item in contentItem"
+        ng-class="{full: contentItem.length === 1}"
+        )
+            ul.module-list-ul
+                li.module-list-ul-li(
+                ng-repeat="itemInfo in item.items track by $index"
+                )
+                    button.button-init.full(
+                    ng-click="eventHandle(itemInfo)"
+                    ui-sref="{{itemInfo.uiSref}}"
+                    )
+
+                        div.fun-module-line-index
+                            p.index-img-container
+                                img.car-logo-index(ng-src="{{itemInfo.picture}}")
+                            span.car-name(ng-bind="itemInfo.name")

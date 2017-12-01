@@ -1,0 +1,10 @@
+div.slider-tab#sliderTab
+   div.slider-tab-chunk
+      button.button-init.button-separate.animation(
+      ng-class="{'nav-active': $index == 0, 'full': tabItem.length === 1}"
+      ng-repeat="item in tabItem"
+      ng-bind="item.title"
+      ) ÑÇÖÞ³µÏµ
+   div.sliding-shoe#slidingShoe(
+   ng-class="{'full': tabItem.length === 1}"
+   )

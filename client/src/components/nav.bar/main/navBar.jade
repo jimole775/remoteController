@@ -1,0 +1,9 @@
+//
+   Created by Andy on 2017/11/15.
+
+div.scroll-table-header
+   p.box-p
+      span(ng-class="['disable-text',{'href-text':pagesDataIndex==0}]" ng-click="navSelection(-1)") Ö÷²Ëµ¥
+      span(ng-repeat="(recordIndex,item) in pagesOptionChosenRecord" ng-click="navSelection(recordIndex)")
+         i.auxiliary-mark |&nbsp;
+         em(ng-class="['disable-text',{'href-text':recordIndex==(pagesDataIndex - 1)}]" ng-bind="item")

@@ -1,0 +1,269 @@
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  font-size: 62.5%;
+  height: 100%;
+  font-family: ".PingFang-SC-Medium", "微软雅黑", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+
+}
+
+* { /*user-select属性,会使苹果手机端的web输入框无法选中.所以,在实际开发webApp的时候,不要使用~*/
+  moz-user-select: -moz-none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+body{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  height:100%;
+  overflow: hidden;
+  margin:0;
+  padding:0;
+}
+
+header{
+  height:4.5rem;
+  width:100%;
+  order:1;
+  color: #fff;
+  z-index: 9999;
+  overflow: hidden;
+  border-top: 1px solid #416A96;
+
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#295788+0,1b3a5b+100 */
+  background: #295788; /* Old browsers */
+  background: -moz-linear-gradient(top, #295788 0%, #1b3a5b 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #295788 0%, #1b3a5b 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #295788 0%, #1b3a5b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#295788', endColorstr='#1b3a5b', GradientType=0); /* IE6-9 */
+  box-sizing: border-box;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+  h1 {
+    line-height: 4.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+    width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 auto;
+  }
+}
+
+
+section{
+  width:100%;
+  height:100%;
+  flex-shrink:1;
+  order:2;
+  z-index:1;
+  overflow: hidden;
+}
+
+footer{
+  z-index:2;
+  width:100%;
+  height:5rem;
+  order:3;
+}
+
+article, aside, details, figcaption, figure, footer, header, main, nav, section, summary {
+  display: block
+}
+
+audio, canvas, progress, video {
+  display: inline-block;
+  vertical-align: baseline
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0
+}
+
+[hidden], template {
+  display: none
+}
+
+a {
+  background: transparent;
+  text-decoration: none;
+}
+
+a:active, a:hover {
+  outline: 0;
+  text-decoration: none;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted
+}
+
+b, strong {
+  font-weight: bold
+}
+
+dfn {
+  font-style: italic
+}
+
+
+body, div, ul, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+  padding: 0;
+  margin: 0;
+}
+
+ul, li {
+  list-style: none;
+}
+
+mark {
+  color: #000;
+  background: #ff0
+}
+
+small {
+  font-size: 80%
+}
+
+sub, sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline
+}
+
+sup {
+  top: -.5em
+}
+
+sub {
+  bottom: -.25em
+}
+
+img {
+  border: 0
+}
+
+svg:not(:root) {
+  overflow: hidden
+}
+
+figure {
+  margin: 1em 40rem
+}
+
+hr {
+  height: 0;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: 0;
+  border-top: 1px dashed #C5C5C5;
+}
+
+em, i {
+  font-style: normal;
+}
+
+pre {
+  overflow: auto
+}
+
+code, kbd, pre, samp {
+  font-family: monospace, monospace;
+  font-size: 1em
+}
+
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font: inherit;
+  color: inherit
+}
+
+button {
+  overflow: visible
+}
+
+button, select {
+  text-transform: none
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer
+}
+
+button[disabled], html input[disabled] {
+  cursor: default
+}
+
+input {
+  line-height: normal
+}
+
+input[type="checkbox"], input[type="radio"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  display: inline-block;
+  width: 2.5rem;
+  /*margin: 10*/
+}
+
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  height: auto
+}
+
+input[type="search"] {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-appearance: textfield
+}
+
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none
+}
+
+fieldset {
+  padding: .35em .625em .75em;
+  margin: 0 2rem;
+  border: 1px solid #c0c0c0
+}
+
+legend {
+  padding: 0;
+  border: 0
+}
+
+textarea {
+  overflow: auto
+}
+
+optgroup {
+  font-weight: bold
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse
+}
+
+td, th {
+  padding: 0
+}
+
+ul, li, dl, dd, dt {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

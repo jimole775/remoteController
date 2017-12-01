@@ -1,0 +1,18 @@
+div#charHoverButton(
+ng-class=[
+    'animation-width',
+    'char-hover-button',
+    {
+        'char-hover-button-full': charSate.newSentenceAmount,
+        'show': isRMT != 0,
+        'hide': isRMT == 0
+    }
+]
+ng-click="clickTrigger()"
+ng-hide="charSate.charFormState"
+)
+    div.char-message-tips-img
+    div.message-remain-form(ng-hide="!charSate.newSentenceAmount")
+        div
+            span.char-with(ng-bind="charSate.charWith") 远程对象
+            span.message-remain-count(ng-bind="charSate.newSentenceAmount")

@@ -1,0 +1,40 @@
+//
+   Created by Andy on 2017/12/1.
+div#showSyatem.data-box(ng-controller="systemCtrl")
+   div.scroll-table-header
+      button.item-button.padding-when-without-inner-class(disabled="disabled")
+         span(style="color:#A0A0A0;float: left;width:50%;display: block") 测试到模块数：
+            em.light-text(ng-bind="webViewSystemList_arr.length")
+         span(style="color:#A0A0A0;float: right;width:50%;display: none;text-align: right;") 故障码总数：
+            em.warn-text(ng-bind="DTCTotal.length")
+      button.item-button.padding-when-without-inner-class.ellipsis(disabled="disabled" style="box-sizing: border-box")
+         span(ng-bind="scanProcess")
+         span.light-text(
+         ng-hide="(scanProcess === '清除完毕' || scanProcess === '扫描完毕' || scanProcess === '无故障信息' ||  scanProcess === '系统未连接' || scanProcess === '初始化扫描进程')"
+         ng-bind="originalSystemListIndex + 1"
+         )
+         br
+         span(
+         ng-hide="(scanProcess === '清除完毕' || scanProcess === '扫描完毕' || scanProcess === '无故障信息' ||  scanProcess === '系统未连接' || scanProcess === '初始化扫描进程')"
+         ng-bind="originalSystemList_arr[originalSystemListIndex].name"
+         )
+         span(ng-show="scanProcess === '无故障信息'" ng-bind="webViewSystemList_arr[clickItemIndex].name"
+         )
+   div.scroll-table-body#recordScrollTop
+      button.item-button.animation(
+      ng-repeat="(index,system) in webViewSystemList_arr track by $index"
+      ng-show="system.show"
+      ng-click="onItemClick($index,system.index)"
+      )
+         span.item-description.item-description-layout-table(style="width: 45%")
+            em.item-description-layout-cell(
+            ng-bind="($index + 1) + '. ' + system.name"
+            )
+         span.item-value-layout-table(style="width: 45%")
+            span.item-value-layout-cell
+               i.arrow-right(style="top:0.3rem")
+               span(
+               ng-class="{'故障':'warn-text','无故障':'disable-text','故障/已清除':'disable-text'}[system.dtcStateText()]"
+               style="float:right"
+               ng-bind="system.dtcStateText()"
+               )

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="MyModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="./angular.min.js"></script>
+</head>
+<body>
+
+<script>
+    var myModule=angular.module("MyModule",[]);
+
+    myModule.directive("superman",function(){
+        return{
+            scope:{},
+            restrict:'CMAE',
+            controller:function($scope){
+                this.prop = "require work~";
+//                $scope.abilities=[];
+//                this.addStrength=function(){
+//                    console.log("is work~");
+//                    $scope.abilities.push("strength");
+//                };
+//                this.addSpeed=function(){
+//                    $scope.abilities.push("speed");
+//                };
+//                this.addLight=function(){
+//                    $scope.abilities.push("light");
+//                };
+            }
+//            link:function(scope,element,attrs){
+//                element.addClass('btn btn-primary');
+//                element.bind("mouseenter",function(){
+//                    alert(scope.abilities);
+//                })
+//            }
+        }
+
+
+    })
+    myModule.directive("strength",function(){
+        return{
+            restrict:"EMCA",
+            require:'^superman',
+            link: function (scope, element, attrs, supermanCtrl) {
+                    console.log(supermanCtrl);
+//                supermanCtrl.addStrength();
+            }
+        }
+    });
+
+</script>
+<!--<div class="row">-->
+    <!--<div class="col-md-3">-->
+        <superman >
+            <strength></strength>
+            动感超人 力量</superman>
+
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div class="row">-->
+    <!--<div class="col-md-3">-->
+        <superman strength> 动感超人 力量 速度 </superman>
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div class="row">-->
+    <!--<div class="col-md-3">-->
+        <superman strength> 动感超人 力量 速度 发光</superman>
+    <!--</div>-->
+<!--</div>-->
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+.footer-bar {
+  width: 100%;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  background-color: #477CB3;
+  z-index: 16;
+  overflow: hidden;
+  height: 5rem;
+  box-shadow: 0 -3px 4px rgba(0, 0, 0, 0.2);
+}
