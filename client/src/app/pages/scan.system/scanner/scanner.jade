@@ -1,0 +1,34 @@
+//
+   Created by Andy on 2017/12/1.
+
+div.page-box
+   div.scroll-table-header
+      button.item-button.ellipsis(disabled="disabled")
+         span(ng-bind="scanProcessText")  正在扫描模块
+         em &nbsp;&nbsp;
+         span(
+         ng-bind="itemValues[itemValues.length - 1].name"
+         ng-hide="scanState==='scanned' || scanState==='cleared'"
+         class="light-text"
+         )   项目名
+   div.scroll-table-body(remote-scroll)
+      ul.the-wrapper
+         li.animation(
+         ng-repeat="(index,item) in itemValues track by $index"
+         ng-hide="scanState === 'init'"
+         )
+            button.scroll-item(
+            ng-click="enterDTCDetail(item)"
+            ng-class="item.className"
+            )
+               span.scroll-item-description
+                  em(ng-bind="($index + 1) + '. ' + item.name")
+               span.scroll-item-value
+                  em(ng-class="{true:'warn-text',false:'disable-text'}[item.dtcScanStateText === '故障']") {{item.dtcScanStateText}}
+               span.scroll-item-ico
+                  i.arrow-right(ng-class="{true:'arrow-active',false:'arrow-disabled'}[item.dtcScanStateText === '故障']")
+      div.init-scanner-view(ng-show="scanState === 'init'")
+         button(ng-click="firstHit($event.target)" ng-style="initViewButtonStyle")
+         span.disable-text 等待扫描指令
+
+dtc-detail(ng-show="DTCDetailItem.show" ng-mode="DTCDetailItem.info")

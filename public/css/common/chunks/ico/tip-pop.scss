@@ -1,0 +1,20 @@
+
+.tip-pop {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  line-height: 150%;
+  font-size: 12px;
+  text-align: center;
+  background: #f72828;
+  border: 0;
+  color: #fff;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  position: absolute;
+  top:-6px;
+  right:-6px;
+}

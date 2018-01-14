@@ -1,0 +1,33 @@
+//
+   Created by Andy on 2017/12/13.
+
+div.head-bar-left-button-frame
+
+   button.head-bar-left-button(
+   unremote
+   ng-class="{true:'head-bar-left-button-active',false:'head-bar-left-button-normal'}[showUserList]"
+   ng-style="user_list_style"
+   ng-click="mainButtonClick();"
+   )
+      i.tip-pop(ng-if="(newUserCount > 0)" ng-bind="newUserCount")
+
+   div.user-list-frame(ng-show="showUserList")
+      div.user-list-header.ellipsis
+         img(ng-style="avatar_style" alt="{{nativeName}}" title="消息管理员" ng-click="alert.tips($event.target,nativeName)")
+         h2 用户列表(在线)
+         button.init-button.user-list-close-button(unremote ng-click="hideUserList();")
+            i.user-close.ico-close
+      div.user-list-wrapper.user-list-content(remote-scroll)
+         ul
+            li.item-list(ng-repeat="item in items" )
+               button.init-button.item-button(
+                  unremote
+                  ng-click="item.event(item.userName);"
+                  ng-disabled="item.isDisabled || item.isBusing"
+               )
+                  span(ng-bind="item.userName")
+                  span.disable-text(ng-show="item.isBusing") &nbsp;(忙碌中...)
+               button.init-button.extend-button(unremote ng-if="item.isAbleMsgFn" ng-style="send_msg" title="send" ng-click="showCharForm(item.userName)")
+
+      button.extend-trigger.init-button
+         i.ico-extend

@@ -1,0 +1,14 @@
+
+div.user-register-frame
+   div.user-register-content
+      label
+         input.user-register-input(
+         type="text" size=22 maxlength="{{maxLength}}" placeholder="取个牛逼点的名字"
+         ng-model="userName"
+         )
+      label
+         input.item-button.animation.user-register-common-button(
+         ng-class="{true:'user-register-sure-button',false:'user-register-disabled-button'}[userName.length>0]"
+         type="button" value="确定"
+         ng-click="submit()"
+         )

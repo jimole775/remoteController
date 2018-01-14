@@ -1,0 +1,106 @@
+@import "../mixin";
+@import "./chunks/button";
+@import "./chunks/text";
+@import "./chunks/ico/arrow";
+@import "./chunks/ico/close";
+@import "./chunks/ico/extend";
+@import "./chunks/ico/tip-pop";
+@import "chunks/scroll.table/layout";
+@import "chunks/scroll.table/items";
+
+.flex-center{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.kick-out {
+  position: absolute;
+  left: -999.9rem;
+}
+
+.circle {
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+}
+
+.hide {
+  display: none;
+}
+
+.full {
+  width: 100% !important;
+  border: 0 !important;
+  height: 100% !important;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+
+.table {
+  display: table;
+}
+
+.table-cell {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+}
+
+.table-cell-center {
+  text-align: center;
+  @extend .table-cell
+}
+
+.animation {
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+}
+
+.page{
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  background: #416595;
+  @include out-flow(relative,0,0)
+}
+
+.page-box{
+  display: flex;
+  flex-flow: column;
+  @extend .full;
+}
+
+.directive-box{
+  z-index:99999;
+  @extend .full;
+  @include out-flow(absolute,0,0);
+}
+
+.frosted-glass {
+  /*width: 287px;*/
+  /*height: 285px;*/
+  background: inherit;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -ms-filter: blur(5px);
+  -o-filter: blur(5px);
+  filter: blur(5px);
+  filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=4, MakeShadow=false);
+}
+
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  white-space: nowrap;
+}
+

@@ -1,0 +1,16 @@
+
+.warn-tip{
+  background: #e4c064;
+  padding: 1.2rem;
+  text-align: center;
+  font-size: 1.4rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99999;
+  width: 100%;
+  color: #e80a0a;
+  /* font-family: "MicroSoftBlack"; */
+  opacity: 1;
+  display: none;
+}

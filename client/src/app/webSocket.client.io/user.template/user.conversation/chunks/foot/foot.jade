@@ -1,0 +1,11 @@
+
+div.char-footer
+	div.left-side(ng-click="showPhraseForm()")
+		span 短语
+	div.middle-side
+		label
+			input.disable-plugin.type-entering(unremote type="text" ng-model="charState.typeContent" ng-focus="hidePhraseForm()")
+			button.init-button(unremote ng-click="charState.typeContent = ''")
+				i.ico-close
+	div.right-side.type-send
+		span(ng-click="send(charState.typeContent,$event)") 发送

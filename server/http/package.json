@@ -1,5 +1,5 @@
 {
-  "name": "http",
+  "name": "CreateHttp",
   "version": "0.0.1",
-  "main":"httpServer.js"
+  "main":"exports.js"
 }

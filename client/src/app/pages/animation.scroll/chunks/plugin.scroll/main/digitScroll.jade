@@ -1,0 +1,18 @@
+//
+   Created by Andy on 2017/11/29.
+
+div
+   div.scroll-box(ng-style="wrapperHeight")
+      div.middle-mark(ng-style="markFlagPosition")
+      div(
+      ng-repeat="wrapper in wrappers"
+      id="{{wrapper.id}}"
+      remote-scroll
+      )
+         ul
+            li(
+            ng-style="liStyle"
+            ng-repeat="item in wrapper.values track by $index"
+            ng-bind="item"
+            ng-class="[{'listItem-selected':$index == initListIndex}]"
+            )

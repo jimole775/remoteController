@@ -1,0 +1,48 @@
+{
+  "from": "json",
+  "key": "DTCName",
+  "level": "1.0",
+  "itemcount": 8,
+  "items": [
+    {
+      "name": "CPU",
+      "index": 0,
+      "hasErr":true
+    },
+    {
+      "name": "主板",
+      "index": 1,
+      "hasErr":true
+    },
+    {
+      "name": "内存",
+      "index": 2,
+      "hasErr":true
+    },
+    {
+      "name": "风扇",
+      "index": 3,
+      "hasErr":true
+    },
+    {
+      "name": "硬盘",
+      "index": 4,
+      "hasErr":true
+    },
+    {
+      "name": "显卡",
+      "index": 5,
+      "hasErr":true
+    },
+    {
+      "name": "声卡",
+      "index": 6,
+      "hasErr":true
+    },
+    {
+      "name": "网卡",
+      "index": 7,
+      "hasErr":true
+    }
+  ]
+}

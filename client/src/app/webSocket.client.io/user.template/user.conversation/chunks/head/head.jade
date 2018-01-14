@@ -1,0 +1,8 @@
+div.char-header
+	button.init-button.char-back-btn(unremote ng-click="hideCharForm()")
+		span.table-cell
+			i.arrow-left.arrow-layout-middle(style="border-color:#fff")
+	div.char-title
+		span(ng-bind="matchRemoteRole()")
+	button.init-button.char-close-btn(unremote ng-click="hideCharForm()")
+		i.char-close-ico.ico-close

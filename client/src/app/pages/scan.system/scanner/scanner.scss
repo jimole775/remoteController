@@ -1,0 +1,35 @@
+
+.default{
+  background:#fff;
+}
+
+.clearing{
+  background: #EFEFEF;
+}
+
+.init-scanner-view{
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content:center;
+  flex-flow: column;
+  span{
+    color:#898989;
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  button{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    margin: 1rem auto;
+    border: 2px solid #fff;
+    &:focus{
+      border:0;
+      outline:0;
+    }
+  }
+}

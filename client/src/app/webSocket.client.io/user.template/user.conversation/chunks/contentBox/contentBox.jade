@@ -1,0 +1,15 @@
+div.char-body
+	ul
+		li(ng-repeat="item in charState.charParagraphs")
+			p.RMTChar-timer(
+			ng-bind="item.timer"
+			ng-hide = ""
+			)
+			div.char-block(ng-class="item.remoteId === remoteId ? 'native-content' : 'opposite-content'")
+				div.item-descriptor
+					div.user-avatar(ng-style="avatarStyle")
+				div.item-value
+					p.char-username(ng-bind="item.remoteId === remoteId ? item.nativeName : item.oppositeName")
+					p.char-content
+						span.char-sentence(ng-bind="item.sentence") 聊天内容
+

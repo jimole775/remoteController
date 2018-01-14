@@ -1,0 +1,3 @@
+div.hover-box(ng-show="remoteId != 0 && !charShow && newMsgCount")
+    button.init-button(unremote ng-style="hoverStyle" ng-click="showCharForm()")
+        i.tip-pop(ng-bind="newMsgCount" ng-hide="!newMsgCount")

@@ -1,0 +1,53 @@
+.box-frame {
+  position: relative;
+  z-index: 991;
+  background-color: #fff;
+  box-sizing: content-box;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in, width 0.3s ease;
+  -webkit-transition: opacity 0.3s ease-in, width 0.3s ease;
+  -o-transition: opacity 0.3s ease-in, width 0.3s ease;
+  -moz-transition: opacity 0.3s ease-in, width 0.3s ease;
+  margin:0 auto;
+  max-height: 80%;
+}
+.tip-box-wide {
+  width: 90%;
+}
+.scroll-table-header .box-title {
+  border: none;
+}
+.box-title {
+  font-size: 2.0rem;
+  /* line-height: 100%; */
+  border-bottom: 1px #477cb3 solid;
+  color: #588CD2;
+  /* text-indent: 15rem; */
+  /* margin-bottom: 10rem; */
+  padding: 1.0rem 1.5rem;
+}
+
+.box-p {
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  margin: 1.0rem 3%;
+  word-wrap: break-word;
+  overflow: hidden
+}
+
+.alert-box{
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  background: rgba(0,0,0,0.3);
+  /* flex-flow: column; */
+  align-items: center;
+  align-content: center;
+
+}

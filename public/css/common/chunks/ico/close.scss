@@ -1,0 +1,21 @@
+.ico-close{
+  position: relative;
+  width:100%;
+  height: 100%;
+  display: block;
+  //overflow:hidden;
+  font-size:inherit;
+}
+
+.ico-close:before{
+  transform: rotate(45deg);
+  position: absolute;
+  width:inherit;
+  height:inherit;
+  top:inherit;
+  left:inherit;
+  content:"+";
+  font-size:inherit;
+  color:inherit;
+  line-height:inherit;
+}

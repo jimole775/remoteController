@@ -1,0 +1,146 @@
+
+.context_box {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color: #172434;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.context_box .head {
+  top: 0;
+  overflow: hidden;
+}
+
+.context_box .footer {
+  bottom: 0;
+}
+
+.context_box .car-module-list {
+  width: 50%;
+}
+
+.context_main_with_title {
+  background: #FEFEFE;
+  position: absolute;
+  width: 100%;
+}
+
+.car-module-main {
+  background: #FEFEFE;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  width: 200%;
+  box-shadow: 0 0 10px #15202e;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+}
+
+.module-list {
+  height: 100%;
+  width: 100%;
+  float: left;
+  background: #416595;
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  border-right: 1px solid #293f5e;
+  border-left: 1px solid #547fb8;
+  box-sizing: border-box;
+}
+
+.context_box .car-module-list {
+  width: 50%;
+}
+
+.module-list-ul {
+  width: 100%;
+  float: left;
+  height: auto;
+  min-height: 1px;
+  position: absolute;
+  left: 0;
+  top: 1rem;
+}
+
+.module-list-ul-li {
+  //background: url("../images/common/ccdp_list-bg.png") no-repeat center;
+  background-size: 100% 100%;
+  display: block;
+  width: 33.333333%;
+  padding-right: 1.95%;
+  padding-bottom: 1.95%;
+  float: left;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  box-sizing: border-box;
+  /*padding-top: 0.3em;*/
+}
+
+.module-list-ul-li > a {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 5px;
+}
+
+.module-list-ul-li:nth-child(3n+1) {
+  padding-left: 1.95%;
+}
+
+
+.fun-module-line-index {
+  width: 100%;
+  min-height: 80%;
+  max-height: 90%;
+  margin: 0 auto;
+}
+
+.index-assistList-ul-li .fun-module-line-index {
+  max-height: 100%;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 797px) {
+  .index-img-container {
+    width: 4em;
+    height: 4em;
+    margin: 0 auto;
+    //background: url("../images/common/bock_xxhdpi.png") no-repeat;
+    background-size: 100% 100%;
+    vertical-align: middle;
+  }
+}
+
+.index-img-container {
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  margin: 0 auto;
+  vertical-align: middle;
+  img {
+    width: 72%;
+    height: auto;
+    margin-top: 5%;
+  }
+}
+
+.car-name {
+  height: 14%;
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #4E4E4E;
+}
+
+.module-list-ul-li > button{
+  background: #ededed;
+  border-radius: 6px;
+  box-shadow: 3px 5px 6px #2b3b51;
+}

@@ -1,0 +1,193 @@
+{
+  "from": "json",
+  "key": "DTCValue",
+  "level": "1.2",
+  "itemcount": 8,
+  "items": [
+    {
+      "name": "CPU",
+      "index": 0,
+      "hasErr":true,
+      "info": [
+          {
+            "index": 0,
+            "code": "0x001",
+            "description": "温度过高"
+          },
+          {
+            "index": 1,
+            "code": "0x002",
+            "description": "fan error （风扇停转）"
+          },
+          {
+            "index": 2,
+            "code": "0x003",
+            "description": "主频过低，可能针脚接触有问题"
+          }
+        ]
+      
+    },
+    {
+      "name": "主板",
+      "index": 1,
+      "hasErr":true,
+      "info":  [
+          {
+            "index": 0,
+            "code": "0x001",
+            "description": "电容鼓包"
+          },
+          {
+            "index": 1,
+            "code": "0x002",
+            "description": "南桥芯片烧毁"
+          },
+          {
+            "index": 2,
+            "code": "0x003",
+            "description": "北桥电压过低"
+          }
+        ]
+
+    },
+    {
+      "name": "内存",
+      "index": 2,
+      "hasErr":true,
+      "info": [
+          {
+            "index": 0,
+            "code": "0x001",
+            "description": "主频不兼容"
+          },
+          {
+            "index": 1,
+            "code": "0x002",
+            "description": "存储单元出现未知错误"
+          },
+          {
+            "index": 2,
+            "code": "0x003",
+            "description": "检测不到内存"
+          }
+        ]
+
+    },
+    {
+      "name": "风扇",
+      "index": 3,
+      "hasErr":true,
+      "info": [
+          {
+            "index": 0,
+            "code": "0x001",
+            "description": "电压过低"
+          },
+          {
+            "index": 1,
+            "code": "0x002",
+            "description": "检测不到风扇"
+          },
+          {
+            "index": 2,
+            "code": "0x003",
+            "description": "温度过高"
+          }
+        ]
+
+    },
+    {
+      "name": "硬盘",
+      "index": 4,
+      "hasErr":true,
+      "info": [
+          {
+            "index": 0,
+            "code": "0x001",
+            "description": "针头转速异常"
+          },
+          {
+            "index": 1,
+            "code": "0x002",
+            "description": "磁盘坏道"
+          },
+          {
+            "index": 2,
+            "code": "0x003",
+            "description": "供电不足"
+          }
+        ]
+
+    },
+    {
+      "name": "显卡",
+      "index": 5,
+      "hasErr":true,
+      "info": [
+          {
+            "index": 0,
+            "code": "0x001",
+            "description": "无版本型号"
+          },
+          {
+            "index": 1,
+            "code": "0x002",
+            "description": "fan error (风扇异常)"
+          },
+          {
+            "index": 2,
+            "code": "0x003",
+            "description": "显存不足"
+          }
+        ]
+
+    },
+    {
+      "name": "声卡",
+      "index": 6,
+      "hasErr":true,
+
+      "info": [
+          {
+            "index": 0,
+            "code": "0x001",
+            "description": "与DirectX版本不兼容"
+          },
+          {
+            "index": 1,
+            "code": "0x002",
+            "description": "主声道反螺旋振音场景无信号"
+          },
+          {
+            "index": 2,
+            "code": "0x003",
+            "description": "到扬声器通路异常"
+          }
+        ]
+
+    },
+    {
+      "name": "网卡",
+      "index": 7,
+      "hasErr":true,
+      "info": [
+          {
+            "index": 0,
+            "code": "0x001",
+            "description": "无信号"
+          },
+          {
+            "index": 1,
+            "code": "0x002",
+            "description": "DNS服务器出现解析错误"
+          },
+          {
+            "index": 2,
+            "code": "0x003",
+            "description": "信号增幅器无响应"
+          }
+        ]
+
+    }
+  ]
+}

@@ -1,10 +1,11 @@
-
+@import "./common/common";
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   font-size: 62.5%;
   height: 100%;
-  font-family: ".PingFang-SC-Medium", "Î¢ÈíÑÅºÚ", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  //font-family: ".PingFang-SC-Medium", "Î¢ÈíÑÅºÚ", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  font-family: "Microsoft YaHei",".PingFang-SC-Medium", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
 
 }
 
@@ -29,14 +30,15 @@ body{
 }
 
 header{
-  height:4.5rem;
+  height:5.2rem;
   width:100%;
   order:1;
   color: #fff;
   z-index: 9999;
   overflow: hidden;
   border-top: 1px solid #416A96;
-
+  display: flex;
+  flex-direction: row;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#295788+0,1b3a5b+100 */
   background: #295788; /* Old browsers */
   background: -moz-linear-gradient(top, #295788 0%, #1b3a5b 100%); /* FF3.6-15 */
@@ -65,6 +67,8 @@ section{
   order:2;
   z-index:1;
   overflow: hidden;
+  position:relative;
+  //@include compatible(filter,blur(4px));
 }
 
 footer{
@@ -72,10 +76,6 @@ footer{
   width:100%;
   height:5rem;
   order:3;
-}
-
-article, aside, details, figcaption, figure, footer, header, main, nav, section, summary {
-  display: block
 }
 
 audio, canvas, progress, video {

@@ -16,8 +16,7 @@ const webpack = require("webpack");
 const config = {
     output: {
         filename: "[name].js",
-        publicPath:"./public/lib/",
-        path: path.join(__dirname, "public/lib"),
+        path: path.join(__dirname, "client/src/assets/js"),
         library: "[name]"
     },
     entry: {

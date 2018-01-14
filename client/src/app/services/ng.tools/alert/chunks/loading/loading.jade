@@ -1,0 +1,9 @@
+//
+   Created by Andy on 2017/12/23.
+div.loading-frame(ng-show="loadingVisible")
+   div.loading-frame-layer
+      button.loading-close-button(ng-show="isLongWait" ng-click="close()")
+         i.loading-close-ico.ico-close
+      img#loading-img-spin.loading-img-spin(src="images/common/iconfont-loading.png" alt="加载...")
+      p
+         span(ng-bind="message") 数据初始化...

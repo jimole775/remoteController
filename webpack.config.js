@@ -3,8 +3,8 @@
  */
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 let client = require("./webpack.client.js");
-//var server = require("./webpack.server.js");
-//var test = require("./webpack.test.js");
+var server = require("./webpack.server.js");
+let test = require("./webpack.test.js");
 
 //module.exports = [client,server,test];
 
@@ -37,7 +37,6 @@ let _module = {
                         options: {
                             outputPath: 'assets/images/',
                             name: '[hash].[ext]'
-
                         }
                     },
                     {
@@ -63,5 +62,7 @@ let _module = {
 let _devtool = {devtool: "cheap-module-eval-source-map"};
 
 client = Object.assign(client, _module, _devtool);
+//client = Object.assign(test, _module, _devtool);
+server = Object.assign(server, _module, _devtool);
 
-module.exports = [client];
+module.exports = [client,server];

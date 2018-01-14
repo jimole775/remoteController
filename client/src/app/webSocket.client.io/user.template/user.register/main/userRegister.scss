@@ -1,0 +1,48 @@
+
+
+.user-register-frame{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  //background: rgba(0,0,0,.1);
+  background: rgba(2, 46, 69, 0.3);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  .user-register-content{
+    margin:0 auto;
+  }
+
+  .user-register-input{
+    text-align: center;
+    font-size: 1.6rem;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 3px;
+    box-shadow: 3px 6px 9px rgba(0, 70, 92, 0.3);
+
+  }
+
+  .user-register-common-button{
+    width: 5rem;
+    text-align: center;
+    margin-left: 1rem;
+    border-radius: 100%;
+    height: 5rem;
+    padding: 0;
+    border-top: 0;
+    box-shadow: 3px 6px 9px rgba(0, 70, 92, 0.3);
+  }
+}
+
+
+.user-register-sure-button{
+  background: #33961f;
+  color: #e5ffe7;
+}
+.user-register-disabled-button{
+  background: #a0a0a0;
+  color: #dadada;
+}

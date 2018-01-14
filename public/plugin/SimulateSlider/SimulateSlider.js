@@ -1,24 +1,26 @@
 /**
  * Created by Andy on 2017/11/21.
  */
-    
+
 import $ from "jquery";
 export default class {
     constructor(params) {
         var that = this;
-        $("body").ready(function(){
+        $("body").ready(function () {
             that.init(params);
             that.run();
         });
+
+        return this;
     }
 
     init({
-        tabId = "sliderTab"
-        ,slidingShoeId = "slidingShoe" //导航条的滑块，跟随页面左右滑动
-        ,contextBoxId = "contextBox"   //滑动内容展示窗口,位置,尺寸固定,属于布局层
-        ,sliderBodyId = "sliderBody"   //控制左右滑动的盒子,包裹所有的滑动块
-        ,sliderChunkType = "ul"
-
+        tabId = ""
+        ,slidingShoeId = "" //导航条的滑块，跟随页面左右滑动
+        ,contextBoxId = ""   //滑动内容展示窗口,位置,尺寸固定,属于布局层
+        ,sliderBodyId = ""   //控制左右滑动的盒子,包裹所有的滑动块
+        ,sliderChunkTagName = "ul"
+        ,sliderType = 'both'  //column row both
         ,pageWidth = window.document.body.clientWidth
         ,pageHeight = window.document.body.clientHeight
 
@@ -26,7 +28,7 @@ export default class {
         ,touchMove = "ontouchmove" in window ? "touchmove" : "mousemove"
         ,touchEnd = "ontouchend" in window ? "touchend" : "mouseup"
 
-        ,RMTHandler = {horizontalSliding:null,verticalSliding:null}
+        ,RMTHandler = {horizontalSliding: null, verticalSliding: null}
         }) {
 
         this.touchEvent = {};
@@ -68,6 +70,10 @@ export default class {
         this.flag.hasHorizontalScroll = true;     //判断是否存在滚动条
         this.flag.hasVerticalScroll = true;   //判断是否存在滚动条
 
+        this.flag.sliderType = sliderType;
+        this.flag.sliderChunkTagName = sliderChunkTagName;
+        
+        
         this.monitor = {};
         this.monitor.horizontalScrollingTimer = null;     //左右滑动完毕之后，必须等待300毫秒，才能归零flag.isVerticalScroll值，也就是说：左右滑动需要切换到上下滚动操作需要等待300毫秒
         this.monitor.verticalScrollingWatcher = null;
@@ -75,59 +81,76 @@ export default class {
 
         this.elements = {};
 
-        this.elements.nav = $(`\#${tabId}`);
-        this.elements.slidingShoe = $(`\#${slidingShoeId}`);
+
         this.elements.contextBox = $(`\#${contextBoxId}`);
 
-        this.elements.sliderBodyController = $(`\#${sliderBodyId}`);
-        this.elements.sliderBodyController.curContentBox = $(this.elements.sliderBodyController.find(sliderChunkType)[0]); //默认初始化第一个页面
+        this.elements.nav = tabId ? $(`\#${tabId}`) : null;
+        this.elements.slidingShoe = slidingShoeId ? $(`\#${slidingShoeId}`) : null;
 
+        this.elements.sliderBodyController = sliderBodyId ? $(`\#${sliderBodyId}`) : this.elements.contextBox;
+
+        //必要的滑动前提，暂时先这样处理，有时间再进行代码规整
+        //可以用来测试新技术
+        this.elements.sliderBodyController.find(sliderChunkTagName).each(function(index,item){
+            $(item).css({
+                "position":"relative"
+                ,"overflow":"hidden"
+            })
+        });
+
+
+        this.elements.sliderBodyController.curContentBox = $(this.elements.sliderBodyController.find(sliderChunkTagName)[0]);
 
         this.size = {};
         this.size.pageHeight = pageHeight;
         this.size.pageWidth = pageWidth;
 
-        this.size.topHeight = this.elements.nav.height();
+        this.size.topHeight = this.elements.nav ? this.elements.nav.height() : 0;
         this.size.frameHeight = this.elements.contextBox.height();
 
         this.size.limitTop = this.size.frameHeight - this.elements.sliderBodyController.curContentBox.height(); //向上滚动的极限距离 = 内容盒子的高度 - 展示窗口的高度
         this.size.initTop = parseFloat(this.elements.sliderBodyController.curContentBox.css("top")) || 0;
 
-        this.RMTHandler = {};
-        var that = this;
-        //远程执行事件
-        this.RMTHandler.horizontalSliding = function (index) {
-            that.elements.sliderBodyController.animate({"left": -(index * that.size.pageWidth)}, 300);
-            that.elements.slidingShoe.animate({"left": index * that.size.pageWidth / 2}, 300);
-            that.elements.nav.buttons = that.elements.nav.find("button");
-            that.elements.nav.buttons.removeClass("nav-active");
-            $(that.elements.nav.buttons[index]).addClass("nav-active");
-        };
+        this.sliderType = sliderType;
+        this.sliderChunkTagName = sliderChunkTagName;
+        this.resize();
 
-        this.RMTHandler.verticalSliding = function (index, offsetPercent) {
-            $(that.elements.sliderBodyController.find(sliderChunkType)[index]).animate({"top": offsetPercent * that.size.limitTop}, 300);
-        };
+    }
 
-        that.resize();
+    hSlideTo(index){
+        if (/both|row/.test(this.sliderType)) {
+            this.elements.sliderBodyController.animate({"left": -(index * this.size.pageWidth)}, 300);
+            this.elements.slidingShoe.animate({"left": index * this.size.pageWidth / 2}, 300);
+            this.elements.nav.buttons = this.elements.nav.find("button");
+            this.elements.nav.buttons.removeClass("nav-active");
+            $(this.elements.nav.buttons[index]).addClass("nav-active");
+        }
+    }
+
+    vSlideTo(index, offsetPercent){
+        if (/both|row/.test(this.sliderType)) {
+            $(this.elements.sliderBodyController.find(this.sliderChunkTagName)[index]).animate({"top": offsetPercent * this.size.limitTop}, 300);
+        }
     }
 
     resize() {
-        this.elements.nav.off();
+        if (this.elements.nav) this.elements.nav.off();
         this.elements.contextBox.off();
-        this.RMTHandler.horizontalSliding(0); //如果当前tab在第二页，出现计算错误的情况，先hack一下，如果页面有resize就直接设置为第一页
+        this.hSlideTo(0); //如果当前tab在第二页，出现计算错误的情况，先hack一下，如果页面有resize就直接设置为第一页
         //win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [0]);  //转发当前页面下标
     }
 
-    run(){
+    run() {
         var that = this;
 
         //nav点击事件
-        this.elements.nav.on("click", function (e) {
-            console.log("the click event is work");
-            var curTargetIndex = $(e.target.parentElement.children).index(e.target);  //获取点击的button的下标
-            that.RMTHandler.horizontalSliding(curTargetIndex);
-            //win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [curTargetIndex]);  //转发当前页面下标
-        });
+        if (this.elements.nav)
+            this.elements.nav.on("click", function (e) {
+                console.log("the click event is work");
+                var curTargetIndex = $(e.target.parentElement.children).index(e.target);  //获取点击的button的下标
+                that.hSlideTo(curTargetIndex);
+                //win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [curTargetIndex]);  //转发当前页面下标
+            });
 
         //content触摸事件
 
@@ -138,7 +161,7 @@ export default class {
             clearInterval(that.monitor.verticalScrollingWatcher);
             clearInterval(that.monitor.interDeceleration);
             clearTimeout(that.monitor.horizontalScrollingTimer);
-            that.elements.slidingShoe.stop();
+            if (that.elements.slidingShoe) that.elements.slidingShoe.stop();
             that.elements.sliderBodyController.curContentBox.stop();
             that.elements.sliderBodyController.stop();
             var target = e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0] : e.originalEvent;
@@ -148,9 +171,9 @@ export default class {
 
             that.count.slideLeft = parseFloat(that.elements.sliderBodyController.css("left"));   //获取 展示窗体 的left值
             that.count.curPageIndex = Math.ceil(Math.abs(that.count.slideLeft) / that.size.pageWidth);  //当前盒子的 下标
-            that.elements.sliderBodyController.curContentBox = $(that.elements.sliderBodyController.find("ul")[that.count.curPageIndex]);   //获取当前 正文内容盒子
+            that.elements.sliderBodyController.curContentBox = $(that.elements.sliderBodyController.find(that.flag.sliderChunkTagName)[that.count.curPageIndex]);   //获取当前 正文内容盒子
             that.count.slideTop = parseFloat(that.elements.sliderBodyController.curContentBox.css("top")) || that.size.initTop;    //获取当前 正文内容盒子 的top值
-            that.count.curShoeLeft = parseFloat(that.elements.slidingShoe.css("left"));    //获取当前 导航滑动块 的left值
+            if (that.elements.slidingShoe) that.count.curShoeLeft = parseFloat(that.elements.slidingShoe.css("left"));    //获取当前 导航滑动块 的left值
             that.size.limitTop = -(that.elements.sliderBodyController.curContentBox.height() - that.size.frameHeight);  //获取当前页面的 滚动条高度
 
             that.flag.hasVerticalScroll = that.elements.sliderBodyController.curContentBox.height() > that.size.frameHeight;  //水平滑动和垂直滑动 执行的盒子不相同
@@ -161,17 +184,17 @@ export default class {
             if (!that.touchEvent.start.flag)return;
             /**
              * 阻止move的默认动作,比如滚动条滑动 (现在就在模拟move的滚动条,在CSS里面已经禁止了浏览器滚动条:overflowHidden)
-             * 如果不阻止默认动作,某些垃圾浏览器将无法滚动(比如:三星的SM-T310默认浏览器)**/
-            e.preventDefault();
+             * 如果不阻止默认动作,某些手机端的浏览器将无法滚动**/
+            //e.preventDefault();
             var target = e.originalEvent.changedTouches ? e.originalEvent.changedTouches[0] : e.originalEvent;
             //如果X轴未被冻结，就获取X轴信息；
-            if (!that.flag.freezeCoord.X) {
+            if (!that.flag.freezeCoord.X && /both|row/.test(that.flag.sliderType)) {
                 that.touchEvent.move.orgX = target.pageX;
                 that.count.diff_X = that.touchEvent.move.orgX - that.touchEvent.start.orgX;
             }
 
             //如果Y轴未被冻结，就获取Y轴信息；
-            if (!that.flag.freezeCoord.Y) {
+            if (!that.flag.freezeCoord.Y && /both|column/.test(that.flag.sliderType)) {
                 that.touchEvent.move.orgY = target.pageY;
                 that.count.diff_Y = that.touchEvent.move.orgY - that.touchEvent.start.orgY;
             }
@@ -186,7 +209,7 @@ export default class {
             var diff_x_y = Math.abs(that.count.diff_X) - Math.abs(that.count.diff_Y);
 
             //上下滑动 弹力系统
-            if (diff_x_y < 0 && that.flag.isVerticalScroll) {
+            if (diff_x_y < 0 && that.flag.isVerticalScroll && /both|column/.test(that.flag.sliderType)) {
 
                 if (that.count.slideTop >= that.size.initTop && that.count.diff_Y > 0)
                     that.elements.sliderBodyController.curContentBox.css("top", that.count.slideTop + that.count.diff_Y * 0.3);
@@ -201,7 +224,7 @@ export default class {
             }
 
             //左右滑动 弹力系统
-            else if (diff_x_y > 0 && !that.flag.isVerticalScroll) {
+            else if ((diff_x_y > 0 && !that.flag.isVerticalScroll) && /both|row/.test(that.flag.sliderType)) {
 
                 //向右滑动
                 if (diff_x_y > 0) {
@@ -276,20 +299,20 @@ export default class {
                 // 250 代表滑动触发最佳体验（时间）
                 // (1 + ((190-250)/250)) 以250毫秒为基准，计算当前滑动时间的 正负差
                 if (Math.abs(that.count.slideLeft) <= that.size.pageWidth / 10 * (1 + ((that.count.diff_Time - 250) / 250))) {
-                    this.RMTHandler.horizontalSliding(0);
+                    this.hSlideTo(0);
 
                     //只有当前页面在第二页的时候才转发 翻到第一页的事件，count.curPageIndex的值通过start事件获取
                     //if (that.count.curPageIndex === 1) win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [0]);
                 }
                 else {
                     if (that.flag.hasHorizontalScroll) {
-                        this.RMTHandler.horizontalSliding(1);
+                        this.hSlideTo(1);
 
                         //只有当前页面在第一页的时候才转发 翻到第二页的事件，count.curPageIndex的值通过start事件获取
                         //if (that.count.curPageIndex === 0) win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [1]);
                     }
                     else {
-                        this.RMTHandler.horizontalSliding(0);
+                        this.hSlideTo(0);
 
                         //只有当前页面在第二页的时候才转发 翻到第一页的事件，count.curPageIndex的值通过start事件获取
                         //if (that.count.curPageIndex === 1) win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [0]);
@@ -308,13 +331,13 @@ export default class {
                 // 250 代表滑动触发最佳体验（时间）
                 // (1 + ((190-250)/250)) 以250毫秒为基准，计算当前滑动时间的 正负差
                 if (Math.abs(that.count.slideLeft) <= that.size.pageWidth - that.size.pageWidth / 10 * (1 + ((that.count.diff_Time - 250) / 250))) {
-                    this.RMTHandler.horizontalSliding(0);
+                    this.hSlideTo(0);
 
                     //只有当前页面在第二页的时候才转发 翻到第一页的事件，count.curPageIndex的值通过start事件获取
                     //if (that.count.curPageIndex === 1) win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [0]);
                 }
                 else {
-                    this.RMTHandler.horizontalSliding(1);
+                    this.hSlideTo(1);
 
                     //只有当前页面在第一页的时候才转发 翻到第二页的事件，count.curPageIndex的值通过start事件获取
                     //if (that.count.curPageIndex === 0) win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [1]);
@@ -328,14 +351,14 @@ export default class {
 
                 if (Math.abs(that.count.slideLeft) <= that.size.pageWidth / 2) {
 
-                    this.RMTHandler.horizontalSliding(1);
+                    this.hSlideTo(1);
 
                     //只有当前页面在第一页的时候才转发 翻到第二页的事件，count.curPageIndex的值通过start事件获取
                     //if (that.count.curPageIndex === 0) win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [1]);
                 }
                 else {
 
-                    this.RMTHandler.horizontalSliding(0);
+                    this.hSlideTo(0);
 
                     //只有当前页面在第二页的时候才转发 翻到第一页的事件，count.curPageIndex的值通过start事件获取
                     //if (that.count.curPageIndex === 1) win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [0]);

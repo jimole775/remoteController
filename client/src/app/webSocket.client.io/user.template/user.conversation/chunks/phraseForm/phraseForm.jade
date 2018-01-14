@@ -1,0 +1,8 @@
+//
+   Created by Andy on 2017/11/13.
+
+div.phraseForm(ng-show="charState.phraseFormShow")
+   ul.phraseList
+      li.phraseItem(ng-repeat="item in phraseAry")
+         button.init-button.phraseButton(unremote ng-click="chosePhrase(item.content,$event,$index)")
+            span(ng-bind="item.title")

@@ -2,14 +2,8 @@
  * Created by Andy on 2017/11/6.
  */
 
-import Reg from "./main";
-import StorageRegister from "StorageRegister";
+let StorageRegister  = require("../public/plugin/StorageRegister/StorageRegister.js");
+
 let rg = new StorageRegister({foo:"congrssssss"});
 
-let storage = {};
-Reg.setStorage("baz");
-class Rex extends Reg{
-
-}
-Rex.setStorage("bazzzzÍÞÍÞ´ó");
-export default rg;
+module.exports = rg;

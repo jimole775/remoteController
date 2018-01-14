@@ -1,0 +1,95 @@
+.char-footer {
+  position: relative;
+  width: 100%;
+  font-size: 1.4rem;
+  height: 5rem; /*background: #666;*/
+  z-index: 3;
+  border: 1px solid #D1D1D1;
+  flex-shrink: 1;
+}
+
+.char-footer .left-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6rem;
+  height: 100%;
+  display: table;
+  z-index: 3
+}
+
+.char-footer .left-side > span {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #5F5F5F;
+}
+
+.char-footer .middle-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f6f6f6;
+  display: table;
+  z-index: 2;
+  padding: 0.7rem 6rem;
+  box-sizing: border-box
+}
+
+.char-footer .middle-side > label {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.char-footer .middle-side label > button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 3rem;
+  height: 100%;
+
+}
+
+.char-footer .middle-side label button > i {
+  color: #e5e5e5;
+  font-size: 3rem;
+  top: -5px;
+  left: 6px;
+}
+
+.char-footer .middle-side label > input {
+  width: 100%;
+  height: 100%;
+  padding: 0 3rem 0 1rem;
+  margin: 0;
+  box-sizing: border-box;
+  border: 1px solid #D1D1D1;
+  border-radius: 7px;
+  color: #6a6a6a;
+}
+
+.char-footer .right-side {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6rem;
+  height: 100%;
+  display: table;
+  z-index: 3
+}
+
+.char-footer .right-side > span {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #5F5F5F;
+}

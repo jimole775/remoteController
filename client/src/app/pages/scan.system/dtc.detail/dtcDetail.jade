@@ -1,0 +1,16 @@
+//
+   Created by Andy on 2017/12/5.
+div.directive-box
+   div.scroll-table-header
+   div.scroll-table-body
+      table
+         thead
+            tr
+               th(width="20%")   编号
+               th(width="50%")   描述
+               th(width="30%")   故障码
+         tbody
+            tr(ng-repeat="item in itemInfo")
+                  td.t-center.slaver-text(ng-bind="item.index")
+                  td(ng-bind="item.description")
+                  td.t-center.slaver-text(ng-bind="item.code")

@@ -35,13 +35,20 @@
         })(window);
 
     </script>
-<link rel="shortcut icon" href="../src/fav.jpg"><link href="../src/assets/css/bundle.ba315.css" rel="stylesheet"></head>
-<body  ng-app="myApp">
-<head-bar></head-bar>
-<section ui-view="">
+    <script>
+        // 方便调试
+        window.onresize = function(){
+            window.location.href = "http://127.0.0.1:1110";
+        };
+    </script>
+<link rel="shortcut icon" href="favicon.ico"><link href="assets/css/bundle.css" rel="stylesheet"></head>
+<body ng-app="myApp">
 
-</section>
 <foot-bar></foot-bar>
-<script src="../../public/lib/vendor.js"></script>
-<script type="text/javascript" src="../src/assets/js/bundle.ba315.js"></script></body>
+<section ui-view=""></section>
+<head-bar></head-bar>
+
+<components></components>
+<script src="assets/js/vendor.js"></script>
+<script type="text/javascript" src="assets/js/bundle.js"></script></body>
 </html>

@@ -15,7 +15,7 @@ let test = {
         //模块别名定义，方便后续直接引用别名，无须多写长长的地址
         alias: {
             SimulateSlider$: path.join(__dirname, 'public/plugin/SimulateSlider/SimulateSlider.js')     //后续直接 require('SimulateSlider') 即可
-            , StorageRegister$: path.join(__dirname, 'public/lib/StorageRegister.js')
+            , StorageRegister$: path.join(__dirname, 'public/plugin/StorageRegister/StorageRegister.js')
         }
     },
     plugins: [
