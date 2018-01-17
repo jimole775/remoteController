@@ -9,14 +9,14 @@ html {
 
 }
 
-* { /*user-select属性,会使苹果手机端的web输入框无法选中.所以,在实际开发webApp的时候,不要使用~*/
-  moz-user-select: -moz-none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+* { /*user-select属性,会使【苹果手机端】和【MicroSoft Edge】的输入框无法输入.所以,在实际开发webApp的时候,不要使用~*/
+  //moz-user-select: -moz-none;
+  //-moz-user-select: none;
+  //-o-user-select: none;
+  //-khtml-user-select: none;
+  //-webkit-user-select: none;
+  //-ms-user-select: none;
+  //user-select: none;
 }
 
 body{

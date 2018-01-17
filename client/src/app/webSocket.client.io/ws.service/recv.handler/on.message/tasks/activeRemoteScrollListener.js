@@ -115,27 +115,31 @@ let jrollIdCache = new Map();
 
 function startHandler(e) {
     //start = true;
-    let targetId = "";
-    let hasBinded = false;
-    for (let item of e.path) {
-        if (!item.attributes) break;
-        let idDetail = item.attributes["id"];
-        if (idDetail && /(wrapper)/.test(idDetail.value)) {
-            if(jrollIdCache.get(idDetail.value))hasBinded = true;
-            jrollIdCache.set(idDetail.value, true);
-            targetId = idDetail.value;
-            break;
-        }
-    }
+    matchTheScrollElement(e.target);
+    let target = matchTheScrollElement.target;
+
+    let idDetail = target.attributes["id"];
 
     // 防止空内容 和 重复绑定事件
-    if (!targetId || hasBinded)return;
+    if (!idDetail || jrollIdCache.get(idDetail.value)) return;
 
+    jrollIdCache.set(idDetail.value, true);
+
+    let targetId = idDetail.value;
     let curJroll = new JRoll(`#${targetId}`).on("scrollEnd", function () {
         let jrollX = curJroll.x;
         let jrollY = curJroll.y;
         if (wsEmitter)wsEmitter(0x0A, {targetId, jrollX, jrollY});
     });
+}
+
+function matchTheScrollElement(target){
+    let idDetail = target.attributes["id"];
+    if (idDetail && /(wrapper)/.test(idDetail.value) || target.tagName.toUpperCase() === "BODY") {
+        matchTheScrollElement.target = target;
+    }else{
+        matchTheScrollElement(target.parentNode)
+    }
 }
 
 

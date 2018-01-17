@@ -12,23 +12,21 @@ export default function ({prayload, wsService}) {
         // 阻止所有可用按钮的事件向下传播，避免捕获到不相关元素
         //stopEventsPropagation();
         document.body.addEventListener("click",function(e){
-            let target = e.target;
-            let path = e.path;
-
-            if(!/INPUT|BUTTON|SUBMIT/i.test(target.tagName)){
-                for(let item of path){
-                    if(/INPUT|BUTTON|SUBMIT/i.test(item.tagName)){
-                        target = item;
-                        break;
-                    }
-                }
-            }
+            matchTheButtonElement(e.target);
+            let target = matchTheButtonElement.target;
 
             // 从冒泡路径中还是找不到 按键类型的元素 的话，就直接退出
             if (!/INPUT|BUTTON|SUBMIT/i.test(target.tagName)) return;
             queryTarget(target, wsService);
         });
 
+    }
+}
+function matchTheButtonElement(target){
+    if (/INPUT|BUTTON|SUBMIT/i.test(target.tagName) || target.tagName.toUpperCase() === "BODY") {
+        matchTheButtonElement.target = target;
+    }else{
+        matchTheButtonElement(target.parentNode)
     }
 }
 
