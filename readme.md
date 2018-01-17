@@ -1,6 +1,6 @@
 ### 国际惯例，先安装环境
 
-[Node](https://nodejs.org)
+[NodeJS](https://nodejs.org)
 
 [Git](http://www.git-scm.com/downloads)(非必需，但推荐)
 
