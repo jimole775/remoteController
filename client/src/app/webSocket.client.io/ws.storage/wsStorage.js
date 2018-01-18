@@ -5,16 +5,16 @@
 import Rg from "StorageRegister"
 
 let storage = {
-    nativeName:null,    // ±¾µØ×¢²áÕßµÄÃû×Ö
-    oppositeName:null,  // ±êÊ¶ÕıÔÚÓë±¾µØ×¢²áÕßÍ¨ĞÅµÄÄ¿±ê [£¬²¢²»È·¶¨Ë­ÊÇ¿ØÖÆ»ú£¨Ğ­ÖúÕß£©]
-    helperName:null,    // ±êÊ¶¿ØÖÆ»ú [£¬ÓënativeName£¬oppositeNameÆ¥Åä¿ÉÒÔÖªµÀË­ÊÇ¿ØÖÆ»ú£¨Ğ­ÖúÕß£©]
-    askerName:null,     // ±êÊ¶ÇóÖúÕß
-    remoteId:0,         // Ô¶³ÌÒµÎñÖĞµÄÉí·İ [£¬ÓënativeName£¬oppositeNameÆ¥ÅäµÄ½á¹û]
-    userList:[],        // ËùÓĞÔÚÏßÓÃ»§µÄÁĞ±í£¬ÓÉsocket·şÎñÆ÷ÊµÊ±ÍÆËÍ
-    newUserCount:0,     // ĞÂÔöÓÃ»§ÊıÁ¿
-    isChatting:false,   // ÏÔÊ¾ÁÄÌì¿òµÄ±êÊ¶
-    remoteChanelMap:[],  // ±ê¼ÇÕıÔÚ½øĞĞÔ¶³ÌÍ¨Ñ¶ÒµÎñµÄÓÃ»§
-    name:"userStorage"  // ±ê¼ÇÕıÔÚ½øĞĞÔ¶³ÌÍ¨Ñ¶ÒµÎñµÄÓÃ»§
+    nativeName:null,    // æœ¬åœ°æ³¨å†Œè€…çš„åå­—
+    oppositeName:null,  // æ ‡è¯†æ­£åœ¨ä¸æœ¬åœ°æ³¨å†Œè€…é€šä¿¡çš„ç›®æ ‡ [ï¼Œå¹¶ä¸ç¡®å®šè°æ˜¯æ§åˆ¶æœºï¼ˆååŠ©è€…ï¼‰]
+    helperName:null,    // æ ‡è¯†æ§åˆ¶æœº [ï¼Œä¸nativeNameï¼ŒoppositeNameåŒ¹é…å¯ä»¥çŸ¥é“è°æ˜¯æ§åˆ¶æœºï¼ˆååŠ©è€…ï¼‰]
+    askerName:null,     // æ ‡è¯†æ±‚åŠ©è€…
+    remoteId:0,         // è¿œç¨‹ä¸šåŠ¡ä¸­çš„èº«ä»½ [ï¼Œä¸nativeNameï¼ŒoppositeNameåŒ¹é…çš„ç»“æœ]
+    userList:[],        // æ‰€æœ‰åœ¨çº¿ç”¨æˆ·çš„åˆ—è¡¨ï¼Œç”±socketæœåŠ¡å™¨å®æ—¶æ¨é€
+    newUserCount:0,     // æ–°å¢ç”¨æˆ·æ•°é‡
+    isChatting:false,   // æ˜¾ç¤ºèŠå¤©æ¡†çš„æ ‡è¯†
+    remoteChanelMap:[],  // æ ‡è®°æ­£åœ¨è¿›è¡Œè¿œç¨‹é€šè®¯ä¸šåŠ¡çš„ç”¨æˆ·
+    name:"userStorage"  // æ ‡è®°æ­£åœ¨è¿›è¡Œè¿œç¨‹é€šè®¯ä¸šåŠ¡çš„ç”¨æˆ·
 };
 
 export default new Rg(storage);

@@ -6,18 +6,18 @@ import tpl from "./digitScroll.jade";
 import $ from "jquery";
 import JRoll from "jroll";
 
-/** ´æ´¢×îºóÒ»¸öIDºÅµÄ×÷ÓÃÔÚÓÚ£º
- ÔÚnew²Ù×÷µÄÊ±ºò¿ÉÒÔÎŞÊÓµ±Ç°Êµ¼ÊHTMLÖĞwrapperÔªËØµÄIDºÅĞòÁĞ£¬Ã¿´Înew²Ù×÷Ö®ºó£¬×Ô¼Ó¾ÍĞĞ£»
- µ«ÊÇÓÉÓÚÔÚangularäÖÈ¾½×¶Î£¬¹«¹²·½·¨£¨SpellWrapper£©ºÍ£¨BindEvent£©±»·Ö³ÉÁËÒì²½²Ù×÷£¬
- Í¬Ò»¸öÄ£¿éÏÂµÄËùÓĞ£¨SpellWrapper£©¶¼»áÍ¬Ê±Ö´ĞĞ£¬ÏàÍ¬µÄ£¬£¨BindEvent£©Ò²»áÍ¬Ò»Ê±¼äÖ´ĞĞ£¬
- ÕâÑù»áÔì³É£¬Ê¹ÓÃ±éÀúÆ÷ ¹¹Ôì or »ñÈ¡ ÏàÓ¦µÄÔªËØÊ±£¬IDºÅÏÈºó²»·Ö£¬
+/** å­˜å‚¨æœ€åä¸€ä¸ªIDå·çš„ä½œç”¨åœ¨äºï¼š
+ åœ¨newæ“ä½œçš„æ—¶å€™å¯ä»¥æ— è§†å½“å‰å®é™…HTMLä¸­wrapperå…ƒç´ çš„IDå·åºåˆ—ï¼Œæ¯æ¬¡newæ“ä½œä¹‹åï¼Œè‡ªåŠ å°±è¡Œï¼›
+ ä½†æ˜¯ç”±äºåœ¨angularæ¸²æŸ“é˜¶æ®µï¼Œå…¬å…±æ–¹æ³•ï¼ˆSpellWrapperï¼‰å’Œï¼ˆBindEventï¼‰è¢«åˆ†æˆäº†å¼‚æ­¥æ“ä½œï¼Œ
+ åŒä¸€ä¸ªæ¨¡å—ä¸‹çš„æ‰€æœ‰ï¼ˆSpellWrapperï¼‰éƒ½ä¼šåŒæ—¶æ‰§è¡Œï¼Œç›¸åŒçš„ï¼Œï¼ˆBindEventï¼‰ä¹Ÿä¼šåŒä¸€æ—¶é—´æ‰§è¡Œï¼Œ
+ è¿™æ ·ä¼šé€ æˆï¼Œä½¿ç”¨éå†å™¨ æ„é€  or è·å– ç›¸åº”çš„å…ƒç´ æ—¶ï¼ŒIDå·å…ˆåä¸åˆ†ï¼Œ
 
- ±ÈÈç£º
- ÔÚäÖÈ¾½×¶Î£¬ÏÈ¹¹ÔìÁË wrapper0-6£¬µ«ÊÇÔÚÒì²½½×¶Î°ó¶¨ÊÂ¼şµÄÊ±ºò£¬
- ÏÈÔËĞĞÁËIDĞòÁĞÎª 7-13 µÄº¯Êı£¬ÀíËùµ±È»¾ÍÕÒ²»µ½ÔªËØ£¬°ó¶¨Ê§°Ü~
+ æ¯”å¦‚ï¼š
+ åœ¨æ¸²æŸ“é˜¶æ®µï¼Œå…ˆæ„é€ äº† wrapper0-6ï¼Œä½†æ˜¯åœ¨å¼‚æ­¥é˜¶æ®µç»‘å®šäº‹ä»¶çš„æ—¶å€™ï¼Œ
+ å…ˆè¿è¡Œäº†IDåºåˆ—ä¸º 7-13 çš„å‡½æ•°ï¼Œç†æ‰€å½“ç„¶å°±æ‰¾ä¸åˆ°å…ƒç´ ï¼Œç»‘å®šå¤±è´¥~
 
- ËùÒÔĞèÒªÇø·ÖÃ¿´Îµ÷ÓÃ²»Í¬¹«¹²·½·¨Ê±µÄ×´Ì¬£¬·Ö±ğ´æ´¢»òÕßµ÷ÓÃ×¼È·µÄID
- µ±È»£º×îºÃµÄ·½·¨¾ÍÊÇÓÃPromise»òÕßgeneratorº¯ÊıÀ´ÊµÏÖÍ¬²½»¯~
+ æ‰€ä»¥éœ€è¦åŒºåˆ†æ¯æ¬¡è°ƒç”¨ä¸åŒå…¬å…±æ–¹æ³•æ—¶çš„çŠ¶æ€ï¼Œåˆ†åˆ«å­˜å‚¨æˆ–è€…è°ƒç”¨å‡†ç¡®çš„ID
+ å½“ç„¶ï¼šæœ€å¥½çš„æ–¹æ³•å°±æ˜¯ç”¨Promiseæˆ–è€…generatorå‡½æ•°æ¥å®ç°åŒæ­¥åŒ–~
  */
 let jrollCache = {
     //pluginId: {
@@ -72,15 +72,15 @@ function link($scope, $element, $attrs, that) {
 class JrollPlugin {
     constructor($scope, $element, $rootScope, $attrs) {
         "ngInject";
-        this.lineHeight = 3 * Number.parseInt($("html").css("fontSize"));  //»ñÈ¡Ã¿ĞĞµÄĞĞ¸ß£¬¼ÆËã·½Ê½Îª 3 * ä¯ÀÀÆ÷Ä¬ÈÏ×ÖÌå´óĞ¡
+        this.lineHeight = 3 * Number.parseInt($("html").css("fontSize"));  //è·å–æ¯è¡Œçš„è¡Œé«˜ï¼Œè®¡ç®—æ–¹å¼ä¸º 3 * æµè§ˆå™¨é»˜è®¤å­—ä½“å¤§å°
         this.maxColumn = $scope.maxColumn !== undefined ? $scope.maxColumn : $("body").width() > 720 ? 7 : 5;
         this.maxRow = $scope.maxRow !== undefined ? $scope.maxRow : $("body").height() > 720 ? 7 : 5;
         this.spaceInPerHead = $scope.fillSpace !== undefined ? $scope.fillSpace : $("body").height() > 720 ? 3 : 2;
-        this.jrollEvents = []; //»º´æÉèÖÃ
+        this.jrollEvents = []; //ç¼“å­˜è®¾ç½®
         this.pluginId = $scope.pluginId;
         this.appendTo = $scope.appendTo;
-        this.curMiddleIndexOfColumns = [];  //´æ´¢Ã¿Ò»ÁĞµÄµ±Ç°ÏÔÊ¾ÔÚÖĞ²¿µÄÔªËØµÄÏÂ±ê£¨´ÓÕâ¸ö»ñÈ¡Öµ£©
-        this.curTopIndexOfColumns = []; //´æ´¢Ã¿Ò»ÁĞµÄµ±Ç°ÏÔÊ¾ÔÚ¶¥²¿µÄÔªËØµÄÏÂ±ê
+        this.curMiddleIndexOfColumns = [];  //å­˜å‚¨æ¯ä¸€åˆ—çš„å½“å‰æ˜¾ç¤ºåœ¨ä¸­éƒ¨çš„å…ƒç´ çš„ä¸‹æ ‡ï¼ˆä»è¿™ä¸ªè·å–å€¼ï¼‰
+        this.curTopIndexOfColumns = []; //å­˜å‚¨æ¯ä¸€åˆ—çš„å½“å‰æ˜¾ç¤ºåœ¨é¡¶éƒ¨çš„å…ƒç´ çš„ä¸‹æ ‡
         this.initJrollCache();
         //this.callback = callback;
         this.scrollStyle = {
@@ -98,7 +98,7 @@ class JrollPlugin {
     }
 
     listenRemoteEvents(that, $rootScope){
-        // À´×Ôws¶Ë¿Ú0x0AµÄÊı¾İ
+        // æ¥è‡ªwsç«¯å£0x0Açš„æ•°æ®
         $rootScope.$on("scrollCoordinate",function(){
             let scrollCoordinate = $rootScope["scrollCoordinate"];
             let {targetId, jrollX, jrollY} = scrollCoordinate;
@@ -108,8 +108,8 @@ class JrollPlugin {
             let wrapper = jroll.wrapper;
             let scroller = jroll.scroller;
 
-            that.curTopIndexOfColumns[index] = Math.round((jrollY / that.lineHeight) * (-1));    //¼ÆËã&´æ´¢µ±Ç°ÔÚmark´¦µÄliÔªËØµÄÏÂ±í
-            that.curMiddleIndexOfColumns[index] = that.curTopIndexOfColumns[index] + that.spaceInPerHead;    //¼ÆËã&´æ´¢µ±Ç°ÔÚmark´¦µÄliÔªËØµÄÏÂ±í
+            that.curTopIndexOfColumns[index] = Math.round((jrollY / that.lineHeight) * (-1));    //è®¡ç®—&å­˜å‚¨å½“å‰åœ¨markå¤„çš„liå…ƒç´ çš„ä¸‹è¡¨
+            that.curMiddleIndexOfColumns[index] = that.curTopIndexOfColumns[index] + that.spaceInPerHead;    //è®¡ç®—&å­˜å‚¨å½“å‰åœ¨markå¤„çš„liå…ƒç´ çš„ä¸‹è¡¨
 
             if (that.scrollStyle) {
                 $(wrapper).addClass(that.scrollStyle.scrolling.wrapper);
@@ -120,7 +120,7 @@ class JrollPlugin {
             let curMiddleEl = scroller.children[that.curMiddleIndexOfColumns[index]];
 
 
-            jroll.scrollToElement(curTopEl, 300, false, function () { //»¬¶¯Ê±¼ä300MS£¬ÒªºÍtransformµÄ½¥±äÊ±¼äÒ»ÖÂ
+            jroll.scrollToElement(curTopEl, 300, false, function () { //æ»‘åŠ¨æ—¶é—´300MSï¼Œè¦å’Œtransformçš„æ¸å˜æ—¶é—´ä¸€è‡´
 
                 if (that.scrollStyle) {
                     $(scroller.children).removeClass(that.scrollStyle.selected.listItem);
@@ -129,8 +129,8 @@ class JrollPlugin {
                     $(curMiddleEl).addClass(that.scrollStyle.selected.listItem);
                 }
 
-                // ÕâÀï´«indexÎª²ÎÊı£¬ÔÚautoScrollÀïÃæ¼ÆËã¸½Êô¼şµÄ¹ö¶¯Ê±,ĞèÒªÆ´×°³É "wrapper" + index,µ±×÷html IDºÅÊ¹ÓÃ
-                // Çø±ğ ±¾µØ¶ËÖ´ĞĞ ºÍ Ô¶¶ËÖ´ĞĞ
+                // è¿™é‡Œä¼ indexä¸ºå‚æ•°ï¼Œåœ¨autoScrollé‡Œé¢è®¡ç®—é™„å±ä»¶çš„æ»šåŠ¨æ—¶,éœ€è¦æ‹¼è£…æˆ "wrapper" + index,å½“ä½œhtml IDå·ä½¿ç”¨
+                // åŒºåˆ« æœ¬åœ°ç«¯æ‰§è¡Œ å’Œ è¿œç«¯æ‰§è¡Œ
                 that.autoScroll(index, that.curMiddleIndexOfColumns[index]);
             });
         });
@@ -158,7 +158,7 @@ class JrollPlugin {
         }
     }
 
-    definedEvents() {   //³õÊ¼»¯iscrollÊÂ¼ş
+    definedEvents() {   //åˆå§‹åŒ–iscrolläº‹ä»¶
         let thisPrototype = this;
         let scrollStyle = thisPrototype.scrollStyle;
         for (let i = 0; i < thisPrototype.maxColumn; i++) {
@@ -167,7 +167,7 @@ class JrollPlugin {
                 momentum: true,
                 usetransition: true,
                 beforeScrollStart: function (e) {
-                    //e.preventDefault();   //¼æÈİÊÖ»ú¶ËmoveÊÂ¼ş
+                    //e.preventDefault();   //å…¼å®¹æ‰‹æœºç«¯moveäº‹ä»¶
                 },
                 scrollStart: function (index, scrollEvent) {
                     let wrapper = scrollEvent.wrapper;
@@ -180,8 +180,8 @@ class JrollPlugin {
 
                 },
                 scrollEnd: function (index, scrollEvent) {
-                    thisPrototype.curTopIndexOfColumns[index] = Math.round((scrollEvent.y / thisPrototype.lineHeight) * (-1));    //¼ÆËã&´æ´¢µ±Ç°ÔÚmark´¦µÄliÔªËØµÄÏÂ±í
-                    thisPrototype.curMiddleIndexOfColumns[index] = thisPrototype.curTopIndexOfColumns[index] + thisPrototype.spaceInPerHead;    //¼ÆËã&´æ´¢µ±Ç°ÔÚmark´¦µÄliÔªËØµÄÏÂ±í
+                    thisPrototype.curTopIndexOfColumns[index] = Math.round((scrollEvent.y / thisPrototype.lineHeight) * (-1));    //è®¡ç®—&å­˜å‚¨å½“å‰åœ¨markå¤„çš„liå…ƒç´ çš„ä¸‹è¡¨
+                    thisPrototype.curMiddleIndexOfColumns[index] = thisPrototype.curTopIndexOfColumns[index] + thisPrototype.spaceInPerHead;    //è®¡ç®—&å­˜å‚¨å½“å‰åœ¨markå¤„çš„liå…ƒç´ çš„ä¸‹è¡¨
 
                     let wrapper = scrollEvent.wrapper;
                     let scroller = scrollEvent.scroller;
@@ -190,7 +190,7 @@ class JrollPlugin {
                     let curMiddleEl = scroller.children[thisPrototype.curMiddleIndexOfColumns[index]];
 
 
-                    scrollEvent.scrollToElement(curTopEl, 300, false, function () { //»¬¶¯Ê±¼ä300MS£¬ÒªºÍtransformµÄ½¥±äÊ±¼äÒ»ÖÂ
+                    scrollEvent.scrollToElement(curTopEl, 300, false, function () { //æ»‘åŠ¨æ—¶é—´300MSï¼Œè¦å’Œtransformçš„æ¸å˜æ—¶é—´ä¸€è‡´
 
                         if (scrollStyle) {
                             $(scroller.children).removeClass(scrollStyle.selected.listItem);
@@ -199,8 +199,8 @@ class JrollPlugin {
                             $(curMiddleEl).addClass(scrollStyle.selected.listItem);
                         }
 
-                        //ÕâÀï´«iÎª²ÎÊı£¬¾ÍÊÇÒòÎªÔÚ´æ´¢Æ÷¡¾jrollCache¡¿ÀïÃæ£¬ËùÓĞµÄÖ÷¼şºÍ¸½¼ş¶¼ÒÑ¾­½øĞĞÅä¶Ô£¬
-                        // Ö»ÒªÖªµÀÒ»±ßµÄÏÂ±ê£¬¸ù¾İÕâ¸öÏÂ±ê²éÕÒÁíÒ»±ß£¬¾Í¿ÉÒÔµÃµ½¶ÔÓ¦µÄwrapperµÄÊµÀı
+                        //è¿™é‡Œä¼ iä¸ºå‚æ•°ï¼Œå°±æ˜¯å› ä¸ºåœ¨å­˜å‚¨å™¨ã€jrollCacheã€‘é‡Œé¢ï¼Œæ‰€æœ‰çš„ä¸»ä»¶å’Œé™„ä»¶éƒ½å·²ç»è¿›è¡Œé…å¯¹ï¼Œ
+                        // åªè¦çŸ¥é“ä¸€è¾¹çš„ä¸‹æ ‡ï¼Œæ ¹æ®è¿™ä¸ªä¸‹æ ‡æŸ¥æ‰¾å¦ä¸€è¾¹ï¼Œå°±å¯ä»¥å¾—åˆ°å¯¹åº”çš„wrapperçš„å®ä¾‹
                         thisPrototype.autoScroll(i, thisPrototype.curMiddleIndexOfColumns[index]);
 
                         //thisPrototype.callback();
@@ -213,7 +213,7 @@ class JrollPlugin {
     }
 
 
-    bindEvents() {       //°ó¶¨iscrollÊÂ¼ş
+    bindEvents() {       //ç»‘å®šiscrolläº‹ä»¶
         let thisPrototype = this;
         let thisInstances = [];
         for (let [index, item] of thisPrototype.jrollEvents.entries()) {
@@ -243,8 +243,8 @@ class JrollPlugin {
     cacheInstance(instances) {
         jrollCache[this.pluginId]["instances"] = instances;
 
-        // Èç¹ûÏÖÔÚäÖÈ¾µÄÊÇ¸½Êô¼ş£¬
-        // ¾ÍÍùÖ÷¼şÀï´æ´¢¸½Êô¼şµÄIDºÍjrollÊµÀı
+        // å¦‚æœç°åœ¨æ¸²æŸ“çš„æ˜¯é™„å±ä»¶ï¼Œ
+        // å°±å¾€ä¸»ä»¶é‡Œå­˜å‚¨é™„å±ä»¶çš„IDå’Œjrollå®ä¾‹
         if (this.appendTo) {
             let thatMasterPluginId = this.appendTo;
             jrollCache[thatMasterPluginId]["slaverId"] = this.pluginId;
@@ -252,24 +252,24 @@ class JrollPlugin {
             jrollCache[this.appendTo]["slaverInstances"] = instances;
         }
 
-        // ·´Ö®,¾ÍÍù¸½Êô¼şÀï´æ´¢Ö÷¼şµÄjrollÊµÀı
+        // åä¹‹,å°±å¾€é™„å±ä»¶é‡Œå­˜å‚¨ä¸»ä»¶çš„jrollå®ä¾‹
         else{
             let slaverId = jrollCache[this.pluginId]["slaverId"];
             jrollCache[slaverId]["masterInstances"] = instances;
         }
     }
 
-    // ÕâÀïÖ»´¦Àí ¹ØÁª¹ö¶¯Ìõ µÄ¹ö¶¯×´Ì¬
-    // ĞèÒªÇø·ÖÁ½´¦µ÷ÓÃ:
-    // 1, Ô¶³Ì¶Ëµ÷ÓÃ - instanceIndexÊÇÖ÷¼şID,
-    // 2, ±¾µØ¶Ëµ÷ÓÃ - instanceIndexÊÇ¸½¼şID,
+    // è¿™é‡Œåªå¤„ç† å…³è”æ»šåŠ¨æ¡ çš„æ»šåŠ¨çŠ¶æ€
+    // éœ€è¦åŒºåˆ†ä¸¤å¤„è°ƒç”¨:
+    // 1, è¿œç¨‹ç«¯è°ƒç”¨ - instanceIndexæ˜¯ä¸»ä»¶ID,
+    // 2, æœ¬åœ°ç«¯è°ƒç”¨ - instanceIndexæ˜¯é™„ä»¶ID,
     autoScroll(instanceIndex, curMiddleIndex) {
 
         let slaverId = jrollCache[this.pluginId]["slaverId"];
 
-        // Èç¹ûÕÒ²»µ½¹ØÁª²å¼şµÄID£¬¾ÍÅĞ¶¨±¾Éí¾ÍÊÇ¹ØÁª²å¼ş£¬
-        // È»ºóÔÙ´ÓÖ÷²å¼şÄÇÀï»ñÈ¡ slaverId£¬
-        // ËäÈ»ÕâÈÃÓĞµãÈÆ£¬µ«ÊÇÕâÑù¿ÉÒÔ±£³ÖçÇÃÜµÄÂß¼­×´Ì¬£¬²»»á³öÏÖÒì³£
+        // å¦‚æœæ‰¾ä¸åˆ°å…³è”æ’ä»¶çš„IDï¼Œå°±åˆ¤å®šæœ¬èº«å°±æ˜¯å…³è”æ’ä»¶ï¼Œ
+        // ç„¶åå†ä»ä¸»æ’ä»¶é‚£é‡Œè·å– slaverIdï¼Œ
+        // è™½ç„¶è¿™è®©æœ‰ç‚¹ç»•ï¼Œä½†æ˜¯è¿™æ ·å¯ä»¥ä¿æŒç¼œå¯†çš„é€»è¾‘çŠ¶æ€ï¼Œä¸ä¼šå‡ºç°å¼‚å¸¸
         if(!slaverId) {
             //let masterPluginId = jrollCache[this.pluginId]["appendTo"];
             //slaverId = jrollCache[masterPluginId]["slaverId"];
@@ -298,7 +298,7 @@ class JrollPlugin {
 
         if (slaverId) {
             let scrollStyle = this.scrollStyle;
-            slaverInstance.scrollTo(0, slaverMiddleHigh, 300, false, function () { //»¬¶¯Ê±¼ä300MS£¬ÒªºÍtransformµÄ½¥±äÊ±¼äÒ»ÖÂ
+            slaverInstance.scrollTo(0, slaverMiddleHigh, 300, false, function () { //æ»‘åŠ¨æ—¶é—´300MSï¼Œè¦å’Œtransformçš„æ¸å˜æ—¶é—´ä¸€è‡´
                 if (scrollStyle) {
                     $(slaverScroll.children).removeClass(scrollStyle.selected.listItem);
                     $(slaverMiddleEl).addClass(scrollStyle.selected.listItem);
@@ -322,7 +322,7 @@ class JrollPlugin {
     }
 
     getMarkFlagPosition() {
-        return (this.lineHeight * (( this.maxRow - this.maxRow % 2) / 2 + 1) - 2) + "px";    //ÉèÖÃÔÚÖĞ¼ä»¬¶¯¿éµÄµ×²¿£¬ -2PXÊÇmark×ÔÉíµÄ±ß¿ò¸ß¶È
+        return (this.lineHeight * (( this.maxRow - this.maxRow % 2) / 2 + 1) - 2) + "px";    //è®¾ç½®åœ¨ä¸­é—´æ»‘åŠ¨å—çš„åº•éƒ¨ï¼Œ -2PXæ˜¯markè‡ªèº«çš„è¾¹æ¡†é«˜åº¦
     }
 
     getInitListIndex() {
@@ -334,7 +334,7 @@ class JrollPlugin {
     }
 
     fillSpace(wrapperItems) {
-        //¸ù¾İ²å¼ş´óĞ¡¾ö¶¨Í·½ÅµÄ¿ÕÔªËØµÄÊıÁ¿
+        //æ ¹æ®æ’ä»¶å¤§å°å†³å®šå¤´è„šçš„ç©ºå…ƒç´ çš„æ•°é‡
         for (let i of new Array(this.spaceInPerHead)) {
             wrapperItems.unshift("");
             wrapperItems.push("");
