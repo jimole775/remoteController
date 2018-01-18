@@ -4,15 +4,20 @@
 
 import TR from "wsServer/services/socket.storage/socketStorage";
 import emitter from "../../emitter/emitter.js";
-    //Ô¶³ÌÁ´½Ó,°ÑÓ¦´ğÏûÏ¢ÍÆ¸øÑ¯ÎÊÕß
+
+// è¿œç¨‹é“¾æ¥è¯¢é—®ï¼ŒæŠŠè¯¢é—®ä¿¡æ¯æ¨ç»™ååŠ©è€…
 export default function (socket, data) {
-
     let clients = TR.getStorage("clients");
-    let asker = clients[data.remoteUid.askerUid];
-
+    let helper = clients[data.remoteUid.helperUid];
     emitter(
-        0x04,
-        {},
-        asker
+        0x02,
+        {
+            uiHref:data.items.uiHref,
+            remoteUid: {
+                askerUid: data.remoteUid.askerUid,
+                helperUid: data.remoteUid.helperUid
+            }
+        },
+        helper
     );
 };

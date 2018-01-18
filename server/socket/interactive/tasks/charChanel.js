@@ -4,7 +4,7 @@
 import TR from "wsServer/services/socket.storage/socketStorage";
 import emitter from "../../emitter/emitter.js";
 
-// Ô¶³ÌÁ´½ÓÑ¯ÎÊ£¬°ÑÑ¯ÎÊĞÅÏ¢ÍÆ¸øĞ­ÖúÕß
+// è¿œç¨‹é“¾æ¥è¯¢é—®ï¼ŒæŠŠè¯¢é—®ä¿¡æ¯æ¨ç»™ååŠ©è€…
 export default function (data) {
     let toWhom = data.items.oppositeName;
     let fromWhom = data.items.nativeName;

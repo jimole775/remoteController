@@ -16,8 +16,8 @@ const webClient = {
     target: "web",
 
     output: {
-        //publicPath: "../",   //cdn×ÊÔ´¼ÓÔØµÄÍ³Ò»Â·¾¶
-        path: path.join(__dirname, "client/src"),  //webpack´ò°üÎÄ¼şµÄÍ³Ò»Êä³öÂ·¾¶
+        //publicPath: "../",   //cdnèµ„æºåŠ è½½çš„ç»Ÿä¸€è·¯å¾„
+        path: path.join(__dirname, "client/src"),  //webpackæ‰“åŒ…æ–‡ä»¶çš„ç»Ÿä¸€è¾“å‡ºè·¯å¾„
         filename: 'assets/js/bundle.js'
     }
 };
@@ -49,12 +49,12 @@ webClient.plugins = [
 
 webClient.resolve = {
 
-    //×Ô¶¯À©Õ¹ÎÄ¼şºó×ºÃû£¬ÒâÎ¶×ÅÎÒÃÇrequireÄ£¿é¿ÉÒÔÊ¡ÂÔ²»Ğ´ºó×ºÃû
+    //è‡ªåŠ¨æ‰©å±•æ–‡ä»¶åç¼€åï¼Œæ„å‘³ç€æˆ‘ä»¬requireæ¨¡å—å¯ä»¥çœç•¥ä¸å†™åç¼€å
     extensions: ['.js', '.json', '.scss'],
 
-    //Ä£¿é±ğÃû¶¨Òå£¬·½±ãºóĞøÖ±½ÓÒıÓÃ±ğÃû£¬ÎŞĞë¶àĞ´³¤³¤µÄµØÖ·
+    //æ¨¡å—åˆ«åå®šä¹‰ï¼Œæ–¹ä¾¿åç»­ç›´æ¥å¼•ç”¨åˆ«åï¼Œæ— é¡»å¤šå†™é•¿é•¿çš„åœ°å€
     alias: {
-        SimulateSlider$: path.join(__dirname, 'public/plugin/SimulateSlider/SimulateSlider.js')     //ºóĞøÖ±½Ó require('SimulateSlider') ¼´¿É
+        SimulateSlider$: path.join(__dirname, 'public/plugin/SimulateSlider/SimulateSlider.js')     //åç»­ç›´æ¥ require('SimulateSlider') å³å¯
         , StorageRegister$: path.join(__dirname, 'public/plugin/StorageRegister/StorageRegister.js')
         , client: path.join(__dirname,'client')
 

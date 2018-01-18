@@ -14,7 +14,7 @@ export default function (socket, data) {
 
 
     if (askerUid === fromUid) {
-        // Èç¹ûÊı¾İÀ´×Ô asker£¬¾Í´æ´¢£¬Èç¹ûÊı¾İÀ´×Ôhelper£¬¾ÍÖğÖ¡·¢ËÍ
+        // å¦‚æœæ•°æ®æ¥è‡ª askerï¼Œå°±å­˜å‚¨ï¼Œå¦‚æœæ•°æ®æ¥è‡ªhelperï¼Œå°±é€å¸§å‘é€
         ajaxDataCache.set(data.items.ajaxCallbackId, {
             json: data.items.json,
             ajaxCallbackId: data.items.ajaxCallbackId,
@@ -37,7 +37,7 @@ export default function (socket, data) {
                 clients[helperUid]
             );
 
-            // ·¢ËÍÍê±ÏÖ®ºó£¬ÇåÀí£»
+            // å‘é€å®Œæ¯•ä¹‹åï¼Œæ¸…ç†ï¼›
             ajaxDataCache.delete(doneId);
         });
     }
@@ -48,7 +48,7 @@ export default function (socket, data) {
 function sniff(ajaxDataCache, doneId, times, callback) {
 
     if(times <= 0){
-        console.log("callbackId Î´ÄÜ¼°Ê±ÉÏ´«~");
+        console.log("callbackId æœªèƒ½åŠæ—¶ä¸Šä¼ ~");
         return;
     }
 

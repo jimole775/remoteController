@@ -13,8 +13,8 @@ export default function (socket, data) {
     let askerUid = null;
     let helperUid = null;
 
-    // ÅÅ²é¶Ï¿ªµÄÓÃ»§£¬¼ì²éÊÇ·ñÓëÆäËûÓÃ»§ÓĞÍ¨Ñ¶
-    // É¾³ıÅä¶ÔÍ¨µÀ£¬²¢¸æÖªÍ¨ĞÅµÄÁíÒ»¶Ë
+    // æ’æŸ¥æ–­å¼€çš„ç”¨æˆ·ï¼Œæ£€æŸ¥æ˜¯å¦ä¸å…¶ä»–ç”¨æˆ·æœ‰é€šè®¯
+    // åˆ é™¤é…å¯¹é€šé“ï¼Œå¹¶å‘ŠçŸ¥é€šä¿¡çš„å¦ä¸€ç«¯
     remoteChanelMap.forEach(function (item, index) {
         if (item.askerUid == fromUid || item.helperUid == fromUid) {
 
@@ -32,8 +32,8 @@ export default function (socket, data) {
     });
 
 
-    // ÁíĞĞÍ¨ÖªÆäËûËùÓĞµÄÓÃ»§ ÄÄÁ½¸öÓÃ»§½áÊøÔ¶³ÌÒµÎñ
-    // ½â³ıÓÃ»§ÁĞ±íÖĞ"busing"×´Ì¬£¬Ê¹Æä¿ÉÒÔ±»Ñ¡È¡
+    // å¦è¡Œé€šçŸ¥å…¶ä»–æ‰€æœ‰çš„ç”¨æˆ· å“ªä¸¤ä¸ªç”¨æˆ·ç»“æŸè¿œç¨‹ä¸šåŠ¡
+    // è§£é™¤ç”¨æˆ·åˆ—è¡¨ä¸­"busing"çŠ¶æ€ï¼Œä½¿å…¶å¯ä»¥è¢«é€‰å–
     namesMap.forEach(function (item) {
         if (askerUid == item || helperUid == item)return;
         emitter(0x07,

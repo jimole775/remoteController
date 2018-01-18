@@ -12,10 +12,10 @@ export default function (socket, data) {
     let askerUid = data.remoteUid.askerUid;
     let helperUid = data.remoteUid.helperUid;
 
-    // ´æ´¢Ô¶³ÌÒµÎñÖĞµÄÁ½¶Ë£¬Ö÷ÒªÓÃÓÚÔÚÓÃ»§Î´×¢²áµÄÊ±ºò£¬Ò»¿ÚÆø°ÑËùÓĞÍ¨µÀ·¢¸øÇ°¶Ë£¬ÈÃÇ°¶Ë×Ô¼º´¦Àí
+    // å­˜å‚¨è¿œç¨‹ä¸šåŠ¡ä¸­çš„ä¸¤ç«¯ï¼Œä¸»è¦ç”¨äºåœ¨ç”¨æˆ·æœªæ³¨å†Œçš„æ—¶å€™ï¼Œä¸€å£æ°”æŠŠæ‰€æœ‰é€šé“å‘ç»™å‰ç«¯ï¼Œè®©å‰ç«¯è‡ªå·±å¤„ç†
     TR.addStorage("remoteChanelMap",{"askerUid": askerUid, "helperUid": helperUid});
 
-    // Í¨ÖªËùÓĞµÄÓÃ»§ÄÄÁ½¸öÓÃ»§ÕıÔÚ½øĞĞÔ¶³ÌÒµÎñ
+    // é€šçŸ¥æ‰€æœ‰çš„ç”¨æˆ·å“ªä¸¤ä¸ªç”¨æˆ·æ­£åœ¨è¿›è¡Œè¿œç¨‹ä¸šåŠ¡
     namesMap.forEach(function (item) {
         if (askerUid == item || helperUid == item) return;
         emitter(0x06,
@@ -29,7 +29,7 @@ export default function (socket, data) {
     var asker = clients[askerUid];
     var helper = clients[helperUid];
 
-    // ¸øÍ¨Ñ¶ÖĞµÄÓÃ»§ÅÉ·¢Éí·İ±êÊ¶ £¨ÇóÖúÕßID£º1£¬Ğ­ÖúÕßID£º2£©
+    // ç»™é€šè®¯ä¸­çš„ç”¨æˆ·æ´¾å‘èº«ä»½æ ‡è¯† ï¼ˆæ±‚åŠ©è€…IDï¼š1ï¼ŒååŠ©è€…IDï¼š2ï¼‰
     emitter(0x03, {remoteId: 1,remoteUid: {
         "askerUid": askerUid,
         "helperUid": helperUid

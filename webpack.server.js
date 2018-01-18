@@ -33,8 +33,8 @@ server.node = {
     __dirname: true
 };
 server.resolve = {
-    extensions: ['.js', '.json', '.css', '.scss'] //�����ڴ˵ĺ�׺����Ӧ���ļ�����ʡ�Ժ�׺
-    //ģ��������壬�������ֱ�����ñ����������д�����ĵ�ַ
+    extensions: ['.js', '.json', '.css', '.scss'] //添加在此的后缀所对应的文件可以省略后缀
+    //模块别名定义，方便后续直接引用别名，无须多写长长的地址
     ,alias: {
         StorageRegister$: path.join(publicDist, 'plugin/StorageRegister/StorageRegister.js')
         , publicDist: path.join(publicDist)

@@ -3,14 +3,14 @@
  */
 
 /**
- * ����JQ�¼� scrollstart �� scrollstop
- * ������Զ��Э��������,����ֹ֮ͣ�����߶ȷ��͸��Է�����ͬ��
- * ԭjq�汾��û���������¼���!
+ * 添加JQ事件 scrollstart 和 scrollstop
+ * 用于在远程协助功能下,滚动停止之后计算高度发送给对方进行同步
+ * 原jq版本是没有这两个事件的!
  * */
 (function () {
 
     var special = jQuery.event.special,
-        handle = jQuery.event.handle ? jQuery.event.handle : jQuery.event.dispatch,//����1.9֮��jQuery.event.handleΪundefined��BUG
+        handle = jQuery.event.handle ? jQuery.event.handle : jQuery.event.dispatch,//兼容1.9之后jQuery.event.handle为undefined的BUG
         uid1 = 'D' + (+new Date ()),
         uid2 = 'D' + (+new Date () + 1);
 
@@ -91,7 +91,7 @@
                     pageHeight = ele.height ();
                     max_scrollTop = scrollHeight - pageHeight;
                     var curTop = ele.scrollTop ();
-                    if (max_scrollTop > 0 && global.RMTID.role == 2) {     //�����ǰҳ��û�й��������������߶Ⱦ�Ϊ�㣬��Ϊ����ʽ�ķ�ĸ��Ϊ0��ʱ�򣬳�������Ϊ ��NAN��,����û��Ҫ����ת��
+                    if (max_scrollTop > 0 && global.RMTID.role == 2) {     //如果当前页面没有滚动条，最大滚动高度就为零，作为运算式的分母，为0的时候，除运算结果为 “NAN”,所以没必要进行转发
                         win.sendRMTEventToApp ("global.RMTSlider.setScrollTop", [ele.parents (".data-box").attr ("id"), curTop / max_scrollTop]);
                     }
                 });
