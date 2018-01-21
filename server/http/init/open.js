@@ -5,7 +5,7 @@
 export default class CreateHttp {
     constructor() {
         this.url = require('url');
-        this.http = require("http");
+        this.http = require("https");
         this.fs = require("fs");
         this.path = require("path");
     }
