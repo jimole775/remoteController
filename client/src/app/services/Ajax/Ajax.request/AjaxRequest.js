@@ -86,7 +86,7 @@ export default class AjaxRequest{
             type: "POST",
             async: true,
             timeout: 10000, //超时时间设置，单位毫秒
-            url: "http://127.0.0.1:80/" + pathName,
+            url: "http://127.0.0.1:1110/" + pathName,
             dataType: "json",
             data: querySearch,
             complete: function (XMLHttpRequest, status) {
