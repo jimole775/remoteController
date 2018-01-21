@@ -457,7 +457,7 @@ html {
   font-family: "Microsoft YaHei",".PingFang-SC-Medium", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
 
 * {
-  /*user-select����,��ʹ��ƻ���ֻ��ˡ��͡�MicroSoft Edge����������޷�����.����,��ʵ�ʿ���webApp��ʱ��,��Ҫʹ��~*/ }
+  /*user-select属性,会使【苹果手机端】和【MicroSoft Edge】的输入框无法输入.所以,在实际开发webApp的时候,不要使用~*/ }
 
 body {
   display: flex;
