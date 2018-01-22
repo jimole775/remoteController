@@ -32,8 +32,9 @@
     <script>
         // 方便调试
         let href = window.location.href;
+        let host = decodeURIComponent(href.toString()).split("#!")[0];
         window.onresize = function(){
-            window.location.href = href;
+            window.location.href = host;
         };
     </script>
 </head>
