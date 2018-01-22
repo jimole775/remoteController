@@ -24,6 +24,7 @@ div.head-bar-left-button-frame
                   unremote
                   ng-click="item.event(item.userName);"
                   ng-disabled="item.isDisabled || item.isBusing"
+                  ng-class="{true:'user-list-special-mgr'}[item.userName === '管理员(作者)']"
                )
                   span(ng-bind="item.userName")
                   span.disable-text(ng-show="item.isBusing") &nbsp;(忙碌中...)

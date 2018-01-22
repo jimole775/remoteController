@@ -1295,6 +1295,9 @@ ul, li, dl, dd, dt {
     width: 5.6rem;
     border-left: 1px solid #00f19b;
     box-sizing: border-box; }
+
+.user-list-special-mgr {
+  background: '#003f0a' !important; }
 .user-register-frame {
   position: fixed;
   top: 0;
