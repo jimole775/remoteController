@@ -54,7 +54,7 @@ class Ctrl {
                 //if ($scope.userStorage.getStorage("userList").indexOf($scope.userName) >= 0) {
                 //    $scope.tool.alert.warns("那么帅气的名字已经被抢了");
                 //}
-                if (/[`~!！?？@#$%^&'"“”\{}\[\]\(\)\\\/\*]/.test($scope.userName)) {
+                if (/[`~!！?？@#$%^&'"“”\{}\\\/\*]/.test($scope.userName)) {
                     $scope.tool.alert.warns("请不要使用特殊字符");
                 }
                 else {
