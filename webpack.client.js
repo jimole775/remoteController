@@ -9,7 +9,8 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const webClient = {
     entry: [
-        "babel-polyfill",
+        // "babel-core",
+        // "babel-polyfill",
         path.join(__dirname, "public/css/base.scss"),
         path.join(__dirname, "client/src/app/index.js")
     ],

@@ -9,16 +9,18 @@ import msgHandler from "./recv.handler/on.message/host.js";
 import emitHandler from "./emit.handler/emitHandler.js";
 
 /**
- * °Ñws×¢²á³É·şÎñµÄÄ¿µÄÔÚÓÚ£º
- * ¿ÉÒÔÊ¹ÓÃ $rootScope.$emit ÊµÊ±Ë¢ĞÂ»ñÈ¡µÄÊı¾İ¸øÆäËûÄ£¿éÊ¹ÓÃ
+ * æŠŠwsæ³¨å†ŒæˆæœåŠ¡çš„ç›®çš„åœ¨äºï¼š
+ * å¯ä»¥ä½¿ç”¨ $rootScope.$emit å®æ—¶åˆ·æ–°è·å–çš„æ•°æ®ç»™å…¶ä»–æ¨¡å—ä½¿ç”¨
  * */
 export default function service($rootScope, ngTool, wsTool, userStorage, charState) {
     "ngInject";
 
     let that = this;
-    let wsService = new WebSocket("ws://127.0.0.1:1111");
+    let hostUrl = userStorage.getStorage("hostUrl");
+    let wsPort = userStorage.getStorage("wsPort");
+    let wsService = new WebSocket(`ws://${hostUrl}:${wsPort}`);
 
-    // ÕâÀïµÄwsServiceÊÇÌá¹©¸øng-service×¢ÈëÖ®Ç°µÄÄ£¿éÊ¹ÓÃµÄ
+    // è¿™é‡Œçš„wsServiceæ˜¯æä¾›ç»™ng-serviceæ³¨å…¥ä¹‹å‰çš„æ¨¡å—ä½¿ç”¨çš„
     this.emit = wsService.emit = function (...arg) {
         let blob = emitHandler.query.apply(emitHandler, arg);
         wsService.send(blob);
@@ -36,7 +38,7 @@ export default function service($rootScope, ngTool, wsTool, userStorage, charSta
         that.bindListener();
     };
 
-    // ÏÂÃæÕâÒ»¶ÑÊÇ   ÓÃÀ´Ìá¹© websocket ÖØÁ¬»úÖÆµÄ
+    // ä¸‹é¢è¿™ä¸€å †æ˜¯   ç”¨æ¥æä¾› websocket é‡è¿æœºåˆ¶çš„
     this.scopeParams = {$rootScope, wsService, ngTool, wsTool, userStorage, charState};
     this.bindListener = function () {
         that.wsService.onopen = function (res) {

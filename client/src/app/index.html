@@ -31,8 +31,9 @@
     </script>
     <script>
         // 方便调试
+        let href = window.location.href;
         window.onresize = function(){
-            window.location.href = "http://127.0.0.1:1110";
+            window.location.href = href;
         };
     </script>
 </head>
@@ -43,6 +44,6 @@
 <head-bar></head-bar>
 
 <components></components>
-<script src="assets/js/vendor.js"></script>
+<script src="assets/js/vendor.js" defer='defer'></script>
 </body>
 </html>

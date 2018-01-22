@@ -82,11 +82,13 @@ export default class AjaxRequest{
 
     ajaxEmit(pathName, querySearch) {
         let that = this;
+        let hostUrl = that.userStorage.getStorage("hostUrl");
+        let httpPort = that.userStorage.getStorage("httpPort");
         that.ajaxInstance = $.ajax({
             type: "POST",
             async: true,
             timeout: 10000, //超时时间设置，单位毫秒
-            url: that.userStorage.getStorage("hostUrl") + pathName,
+            url: `${hostUrl}:${httpPort}${pathName}`,
             dataType: "json",
             data: querySearch,
             complete: function (XMLHttpRequest, status) {

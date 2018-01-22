@@ -26,7 +26,7 @@ export default function ({
 
         if (!prayload) return;
 
-        // Èç¹û¿Í»§¶Ë´øÓĞ»Øµ÷µÄ£¬ÓÅÏÈ´¦Àí
+        // å¦‚æœå®¢æˆ·ç«¯å¸¦æœ‰å›è°ƒçš„ï¼Œä¼˜å…ˆå¤„ç†
         if(prayload.clientData && prayload.clientData.callbackId !== undefined){
             let callbackId = prayload.clientData.callbackId;
             let callback = callbackStorage.getStorage(callbackId)[0] || function(){};
@@ -47,45 +47,45 @@ export default function ({
         };
 
         switch (prayload.status) {
-            case 0x00:  // Èç¹ûÊÇ00£¬¾Í·µ»ØÒ»‚€¿Õ”µ“ş£¬Œ¬FĞÄÌø
+            case 0x00:  // å¦‚æœæ˜¯00ï¼Œå°±è¿”å›ä¸€å€‹ç©ºæ•¸æ“šï¼Œå¯¦ç¾å¿ƒè·³
                 heartBeat(params);
                 break;
-            case 0x01:  // Ë¢ĞÂÓÃ»§ÁĞ±í
+            case 0x01:  // åˆ·æ–°ç”¨æˆ·åˆ—è¡¨
                 $rootScope.$emit(addUsers(params));
                 break;
-            case 0x02:  // Ğ­ÖúÍ¨µÀµÄÑ¯ÎÊ
+            case 0x02:  // ååŠ©é€šé“çš„è¯¢é—®
                 $rootScope.$emit(connectSniff(params));
                 break;
-            case 0x03:  // ½ÓÊÜÔ¶³ÌĞ­Öú£¬²¢¿ª±ÙÍ¨µÀ(Ë«·½Ö´ĞĞ)
+            case 0x03:  // æ¥å—è¿œç¨‹ååŠ©ï¼Œå¹¶å¼€è¾Ÿé€šé“(åŒæ–¹æ‰§è¡Œ)
                 $rootScope.$emit(acceptConnect(params));
                 activeRemoteEventsListener(params);
                 activeRemoteScrollListener(params);
                 break;
-            case 0x04:  // ¾Ü¾øÔ¶³ÌĞ­Öú
+            case 0x04:  // æ‹’ç»è¿œç¨‹ååŠ©
                 $rootScope.$emit(rejectConnect(params));
                 break;
-            case 0x05:  // Ô¶³ÌĞ­Öú½»»¥Í¨µÀ
+            case 0x05:  // è¿œç¨‹ååŠ©äº¤äº’é€šé“
                 $rootScope.$emit(receiverClickEvent(params));
                 break;
-            case 0x06:  // ±ê¼ÇÕıÔÚÔ¶³ÌÒµÎñµÄÓÃ»§
+            case 0x06:  // æ ‡è®°æ­£åœ¨è¿œç¨‹ä¸šåŠ¡çš„ç”¨æˆ·
                 $rootScope.$emit(signConnectedUser(params));
                 break;
-            case 0x07:  // È¡Ïû±ê¼ÇÕıÔÚÔ¶³ÌÒµÎñµÄÓÃ»§
+            case 0x07:  // å–æ¶ˆæ ‡è®°æ­£åœ¨è¿œç¨‹ä¸šåŠ¡çš„ç”¨æˆ·
                 $rootScope.$emit(signDisconnectUser(params));
                 break;
-            case 0x08:  // ÁÄÌìÊı¾İ½»»¥
+            case 0x08:  // èŠå¤©æ•°æ®äº¤äº’
                 $rootScope.$emit(charSystem(params));
                 break;
-            case 0x09:  // ´¦ÀíÔ¶³ÌÒµÎñÖĞajaxÊı¾İÍ¬²½
+            case 0x09:  // å¤„ç†è¿œç¨‹ä¸šåŠ¡ä¸­ajaxæ•°æ®åŒæ­¥
                 $rootScope.$emit(remoteAjax(params));
                 break;
-            case 0x0A:  // ´¦ÀíÔ¶³ÌÒµÎñÖĞscroll×ø±êÍ¬²½
+            case 0x0A:  // å¤„ç†è¿œç¨‹ä¸šåŠ¡ä¸­scrollåæ ‡åŒæ­¥
                 $rootScope.$emit(takeRemoteScrollCoordinate(params));
                 break;
-            case 0xFE:  // „h³ı¶ÏÏßÁËµÄÓÃ»§
+            case 0xFE:  // åˆªé™¤æ–­çº¿äº†çš„ç”¨æˆ·
                 $rootScope.$emit(reduceUser(params));
                 break;
-            case 0xFF:  // ¶Ï¿ªĞ­ÖúÍ¨µÀÍ¨Öª
+            case 0xFF:  // æ–­å¼€ååŠ©é€šé“é€šçŸ¥
                 $rootScope.$emit(disconnectChanel(params));
                 break;
             default :

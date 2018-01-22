@@ -7,7 +7,6 @@ const vendors = [
     "angular",
     "angular-ui-router",
     "lodash",
-    "Base64",
     "jroll"
 ];
 const webpack = require("webpack");
