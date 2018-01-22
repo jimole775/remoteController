@@ -19,7 +19,7 @@ const webClient = {
     output: {
         //publicPath: "../",   //cdn资源加载的统一路径
         path: path.join(__dirname, "client/src"),  //webpack打包文件的统一输出路径
-        filename: 'assets/js/bundle.js'
+        filename: 'assets/js/bundle.[chunkHash:5].js'
     }
 };
 
@@ -43,7 +43,7 @@ webClient.plugins = [
      }
      })
     , new ExtractTextPlugin({
-        filename: "assets/css/bundle.css",
+        filename: "assets/css/bundle.[chunkHash:5].css",
         allChunks: true
     })
 ];

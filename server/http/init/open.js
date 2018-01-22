@@ -43,7 +43,7 @@ export default class CreateHttp {
         }
 
         res.writeHead(200, {
-            //'Cache-Control':"max-age=" + 1800,
+            'Cache-Control':"max-age=" + 30*24*60*60*1000,
             "Content-Type": contentType
         });
 
