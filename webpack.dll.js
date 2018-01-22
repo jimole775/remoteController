@@ -7,7 +7,6 @@ const vendors = [
     "angular",
     "angular-ui-router",
     "lodash",
-    "photoswipe",
     "Base64",
     "jroll"
 ];
@@ -28,12 +27,12 @@ const config = {
                 name: "[name]",
                 context: __dirname
             }
-        )/*,
+        ),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false
             }
-        })*/
+        })
     ]
 
 };

@@ -14,7 +14,8 @@ let storage = {
     newUserCount:0,     // 新增用户数量
     isChatting:false,   // 显示聊天框的标识
     remoteChanelMap:[],  // 标记正在进行远程通讯业务的用户
-    name:"userStorage"  // 标记正在进行远程通讯业务的用户
+    name:"userStorage",  // 标记正在进行远程通讯业务的用户
+    hostUrl:"39.108.53.121:1110"  // 标记正在进行远程通讯业务的用户
 };
 
 export default new Rg(storage);

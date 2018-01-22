@@ -35,12 +35,12 @@ webClient.plugins = [
             context: __dirname,
             manifest: require('./public/lib/manifest.json')
         }
-    )/*,
+    ),
      new webpack.optimize.UglifyJsPlugin({
      compress: {
      warnings: false
      }
-     })*/
+     })
     , new ExtractTextPlugin({
         filename: "assets/css/bundle.css",
         allChunks: true
