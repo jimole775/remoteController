@@ -26,8 +26,10 @@ const config = {
                 name: "[name]",
                 context: __dirname
             }
-        ),
-        new webpack.optimize.UglifyJsPlugin({
+        )
+        ,new webpack.optimize.UglifyJsPlugin({
+            comments: false,
+            mangle: false,
             compress: {
                 warnings: false
             }
