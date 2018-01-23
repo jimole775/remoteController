@@ -32,7 +32,7 @@ function matchTheButtonElement(target){
 
 function queryTarget(curTarget, wsService){
 
-    console.log("event target: ", curTarget);
+    // console.log("event target: ", curTarget);
 
     // 根据业务类型，禁止一些事件传输，比如：聊天系统
     // 注意html的元素属性名不支持驼峰的书写方式
