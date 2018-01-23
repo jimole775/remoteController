@@ -73,7 +73,7 @@ class JrollPlugin {
     constructor($scope, $element, $rootScope, $attrs) {
         "ngInject";
         this.lineHeight = 3 * Number.parseInt($("html").css("fontSize"));  //获取每行的行高，计算方式为 3 * 浏览器默认字体大小
-        this.maxColumn = $scope.maxColumn !== undefined ? $scope.maxColumn : $("body").width() > 720 ? 7 : 5;
+        this.maxColumn = $scope.maxColumn !== undefined ? $scope.maxColumn : 5;
         this.maxRow = $scope.maxRow !== undefined ? $scope.maxRow : $("body").height() > 720 ? 7 : 5;
         this.spaceInPerHead = $scope.fillSpace !== undefined ? $scope.fillSpace : $("body").height() > 720 ? 3 : 2;
         this.jrollEvents = []; //缓存设置
