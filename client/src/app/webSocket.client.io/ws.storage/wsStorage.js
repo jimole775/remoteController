@@ -15,7 +15,7 @@ let storage = {
     isChatting:false,   // 显示聊天框的标识
     remoteChanelMap:[],  // 标记正在进行远程通讯业务的用户
     name:"userStorage",  // 标记正在进行远程通讯业务的用户
-    hostUrl:"39.108.53.121",  // 标记正在进行远程通讯业务的用户
+    hostUrl:"lester.ink",  // 标记正在进行远程通讯业务的用户
     httpPort:"1110",
     wsPort:"1111"
 };
