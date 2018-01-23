@@ -7,7 +7,6 @@ import wsClient from "./webSocket.client.io/ws.client.export.js";
 import pages from "./pages/exports.js";
 import components from "./components/exports.js";
 
-
 angular.module("myApp", [uiRouter,components.name, pages.name, services.name, wsClient.name])
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("home");
@@ -16,7 +15,7 @@ angular.module("myApp", [uiRouter,components.name, pages.name, services.name, ws
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
             //RMT.uiRouter($state,toState.url,toParams);
 
-            // ½ûÖ¹ ÇóÖúÕß¿ØÖÆ²Ù×÷
+            // ç¦æ­¢ æ±‚åŠ©è€…æ§åˆ¶æ“ä½œ
             if(userStorage.getStorage("remoteId") === 1){
                 $("section").ready(function(){
                     $("section").css("pointerEvents","none");
