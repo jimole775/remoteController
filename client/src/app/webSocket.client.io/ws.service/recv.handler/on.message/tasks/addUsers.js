@@ -9,7 +9,7 @@ export default function ({prayload, userStorage}) {
     let newUserCount = parseInt(namesMap.length - curList.length);
     let userList = [];
 
-    // 为用户绑定chanelMap
+    // 涓虹敤鎴风粦瀹歝hanelMap
     namesMap.forEach(function(namesItem){
         let curItem = {name:namesItem,connectWith:null};
         chanelMap.forEach(function(chanelItem){

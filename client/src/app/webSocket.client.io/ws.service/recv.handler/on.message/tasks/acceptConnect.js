@@ -7,9 +7,9 @@ export default function ({prayload, wsService, userStorage, ngTool}) {
     userStorage.setStorage("remoteId", prayload.serverData.remoteId);
     userStorage.setStorage("askerName", prayload.serverData.remoteUid.askerUid);
     userStorage.setStorage("helperName", prayload.serverData.remoteUid.helperUid);
-    window.location.hash = `#!home`;    //Ô¶³ÌĞ­ÖúÒµÎñ¿ªÊ¼ºó£¬Á½¶Ë¶¼Ìø»ØÊ×Ò³
+    window.location.hash = `#!home`;    //è¿œç¨‹ååŠ©ä¸šåŠ¡å¼€å§‹åï¼Œä¸¤ç«¯éƒ½è·³å›é¦–é¡µ
     if (prayload.serverData.remoteId == 1) {
-        // ÇóÖú·½
+        // æ±‚åŠ©æ–¹
         userStorage.setStorage("oppositeName", prayload.serverData.remoteUid.helperUid);
 
         document.body.getElementsByTagName("section")[0].style.pointerEvents = "none";
@@ -19,7 +19,7 @@ export default function ({prayload, wsService, userStorage, ngTool}) {
 
     if (prayload.serverData.remoteId == 2) {
 
-        // Ğ­Öú·½
+        // ååŠ©æ–¹
         userStorage.setStorage("oppositeName", prayload.serverData.remoteUid.askerUid);
 
     }

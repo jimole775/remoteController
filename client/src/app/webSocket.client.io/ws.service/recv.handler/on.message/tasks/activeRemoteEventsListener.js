@@ -9,13 +9,13 @@ export default function ({prayload, wsService}) {
 
     if (prayload.serverData.remoteId == 2) {
 
-        // ×èÖ¹ËùÓĞ¿ÉÓÃ°´Å¥µÄÊÂ¼şÏòÏÂ´«²¥£¬±ÜÃâ²¶»ñµ½²»Ïà¹ØÔªËØ
+        // é˜»æ­¢æ‰€æœ‰å¯ç”¨æŒ‰é’®çš„äº‹ä»¶å‘ä¸‹ä¼ æ’­ï¼Œé¿å…æ•è·åˆ°ä¸ç›¸å…³å…ƒç´ 
         //stopEventsPropagation();
         document.body.addEventListener("click",function(e){
             matchTheButtonElement(e.target);
             let target = matchTheButtonElement.target;
 
-            // ´ÓÃ°ÅİÂ·¾¶ÖĞ»¹ÊÇÕÒ²»µ½ °´¼üÀàĞÍµÄÔªËØ µÄ»°£¬¾ÍÖ±½ÓÍË³ö
+            // ä»å†’æ³¡è·¯å¾„ä¸­è¿˜æ˜¯æ‰¾ä¸åˆ° æŒ‰é”®ç±»å‹çš„å…ƒç´  çš„è¯ï¼Œå°±ç›´æ¥é€€å‡º
             if (!/INPUT|BUTTON|SUBMIT/i.test(target.tagName)) return;
             queryTarget(target, wsService);
         });
@@ -34,8 +34,8 @@ function queryTarget(curTarget, wsService){
 
     console.log("event target: ", curTarget);
 
-    // ¸ù¾İÒµÎñÀàĞÍ£¬½ûÖ¹Ò»Ğ©ÊÂ¼ş´«Êä£¬±ÈÈç£ºÁÄÌìÏµÍ³
-    // ×¢ÒâhtmlµÄÔªËØÊôĞÔÃû²»Ö§³ÖÍÕ·åµÄÊéĞ´·½Ê½
+    // æ ¹æ®ä¸šåŠ¡ç±»å‹ï¼Œç¦æ­¢ä¸€äº›äº‹ä»¶ä¼ è¾“ï¼Œæ¯”å¦‚ï¼šèŠå¤©ç³»ç»Ÿ
+    // æ³¨æ„htmlçš„å…ƒç´ å±æ€§åä¸æ”¯æŒé©¼å³°çš„ä¹¦å†™æ–¹å¼
     if (curTarget.attributes["unremote"]) return;
 
     let targetName = curTarget.tagName.toUpperCase();

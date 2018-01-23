@@ -42,7 +42,7 @@ export default function ({prayload, userStorage, wsService}) {
 
 function buildScrollEventsToJquery() {
     var special = $.event.special,
-        handle = $.event.handle ? $.event.handle : $.event.dispatch,//¼æÈİ1.9Ö®ºójQuery.event.handleÎªundefinedµÄBUG
+        handle = $.event.handle ? $.event.handle : $.event.dispatch,//å…¼å®¹1.9ä¹‹åjQuery.event.handleä¸ºundefinedçš„BUG
         uid1 = 'D' + (+new Date()),
         uid2 = 'D' + (+new Date() + 1);
 
@@ -120,7 +120,7 @@ function startHandler(e) {
 
     let idDetail = target.attributes["id"];
 
-    // ·ÀÖ¹¿ÕÄÚÈİ ºÍ ÖØ¸´°ó¶¨ÊÂ¼ş
+    // é˜²æ­¢ç©ºå†…å®¹ å’Œ é‡å¤ç»‘å®šäº‹ä»¶
     if (!idDetail || jrollIdCache.get(idDetail.value)) return;
 
     jrollIdCache.set(idDetail.value, true);
@@ -159,8 +159,8 @@ function endHandler(e) {
         let targetIndex = $("body").find(targetName).index(target);
         let offsetTop = target.offsetTop / target.offsetHeight;
         let offsetLeft = target.offsetLeft / target.offsetWidth;
-        let intervalTime = endTime - startTime; // ¸ø×ÔÄâ¶¨sliderÊ¹ÓÃµÄÊôĞÔ,ÓÃÓÚ¼ÆËãÊ²Ã´Ê±ºòÍ£Ö¹¹ö¶¯
+        let intervalTime = endTime - startTime; // ç»™è‡ªæ‹Ÿå®šsliderä½¿ç”¨çš„å±æ€§,ç”¨äºè®¡ç®—ä»€ä¹ˆæ—¶å€™åœæ­¢æ»šåŠ¨
         if (wsEmitter)wsEmitter(0x0A, {offsetTop, offsetLeft, targetName, targetIndex});
-        console.log({offsetTop, offsetLeft, targetName, targetIndex, intervalTime});
+        // console.log({offsetTop, offsetLeft, targetName, targetIndex, intervalTime});
     }
 }
