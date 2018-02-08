@@ -8,7 +8,7 @@ export default function(ele, position){
 
     let tagName = ele.tagName;
     let tagId = $("body").find(tagName).index(ele);
-    // ÑÓ³Ù300msµÄäÖÈ¾Ê±¼ä£¬°ó¶¨jroll¹ö¶¯ÊÂ¼þ
+    // å»¶è¿Ÿ300msçš„æ¸²æŸ“æ—¶é—´ï¼Œç»‘å®šjrollæ»šåŠ¨äº‹ä»¶
     setTimeout(function () {
         if (!jroll[tagId]) {
 
@@ -18,11 +18,11 @@ export default function(ele, position){
             });
 
             var userAgent = navigator.userAgent.toLowerCase();
-            var isWin = (userAgent.indexOf("windows") != -1); // Èç¹ûÊÇWindowsÏµÍ³£¬Ôò·µ»Øtrue
-            var isMac = (userAgent.indexOf("mac") != -1 && userAgent.indexOf("iphone") == -1); // Èç¹ûÊÇMacintoshÏµÍ³£¬Ôò·µ»Øtrue
-            var isUnix = (userAgent.indexOf("x11") != -1); // Èç¹ûÊÇUnixÏµÍ³£¬Ôò·µ»Øtrue
-            var isLinux = (userAgent.indexOf("linux") != -1); // Èç¹ûÊÇLinuxÏµÍ³£¬Ôò·µ»Øtrue ÎÄÕÂ´ó²¿·ÖÄÚÈÝÀ´
-            // Èç¹ûÊÇPC¶Ë£¬½ûÖ¹ÔÚ¹ö¶¯µÄÊ±ºò´¥·¢µã»÷ÊÂ¼þ
+            var isWin = (userAgent.indexOf("windows") != -1); // å¦‚æžœæ˜¯Windowsç³»ç»Ÿï¼Œåˆ™è¿”å›žtrue
+            var isMac = (userAgent.indexOf("mac") != -1 && userAgent.indexOf("iphone") == -1); // å¦‚æžœæ˜¯Macintoshç³»ç»Ÿï¼Œåˆ™è¿”å›žtrue
+            var isUnix = (userAgent.indexOf("x11") != -1); // å¦‚æžœæ˜¯Unixç³»ç»Ÿï¼Œåˆ™è¿”å›žtrue
+            var isLinux = (userAgent.indexOf("linux") != -1); // å¦‚æžœæ˜¯Linuxç³»ç»Ÿï¼Œåˆ™è¿”å›žtrue æ–‡ç« å¤§éƒ¨åˆ†å†…å®¹æ¥
+            // å¦‚æžœæ˜¯PCç«¯ï¼Œç¦æ­¢åœ¨æ»šåŠ¨çš„æ—¶å€™è§¦å‘ç‚¹å‡»äº‹ä»¶
             if (isWin || isMac || isUnix || isLinux) {
 
                 let startY = 0;
@@ -35,13 +35,13 @@ export default function(ele, position){
                 jroll[tagId].on("scroll", function (e) {
                     //scrollY = e.pageY;
 
-                    // È·¶¨ÒÑ¾­¹ö¶¯£¬¾ÍÒþ²Øµã»÷ÊÂ¼þ
+                    // ç¡®å®šå·²ç»æ»šåŠ¨ï¼Œå°±éšè—ç‚¹å‡»äº‹ä»¶
                     //if (scrollY - startY >= 2) {
                         ele.style.pointerEvents = "none";
                     //}
                 });
 
-                // ¹ö¶¯Íê±Ï£¬»Ø¸´µã»÷ÊÂ¼þ
+                // æ»šåŠ¨å®Œæ¯•ï¼Œå›žå¤ç‚¹å‡»äº‹ä»¶
                 jroll[tagId].on("scrollEnd", function () {
                     console.log("scrollEnd");
                     ele.style.pointerEvents = null;
@@ -50,12 +50,12 @@ export default function(ele, position){
 
         } else {
 
-            // Ë¢ÐÂJROllµÄ¸ß¿í
+            // åˆ·æ–°JROllçš„é«˜å®½
             jroll[tagId].refresh();
 
             let beyondEdge = ele.firstChild.clientHeight - ele.clientHeight;
 
-            // Ö´ÐÐ¹ö¶¯ÐèÇó
+            // æ‰§è¡Œæ»šåŠ¨éœ€æ±‚
             if(position === "bottom" && beyondEdge > 0){
                 jroll[tagId].scrollTo(0, -beyondEdge, 300);
             }

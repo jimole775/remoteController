@@ -15,28 +15,28 @@ export default angular.module("ngTool", [alertModule.name])
         let scope = {};
         return {
 
-            // ·µ»Øº¯Êı£¬¿ÉÒÔÖ±½Óµ÷ÓÃ
+            // è¿”å›å‡½æ•°ï¼Œå¯ä»¥ç›´æ¥è°ƒç”¨
             safeApply: function (fn) {
                 safeApply(scope,fn);
                 return this;
             },
 
-            // safeApplyµÄÇ°ÖÃÌõ¼ş£¬±ØĞëÏÈ×¢ÈëÔËĞĞ»·¾³µÄscope
+            // safeApplyçš„å‰ç½®æ¡ä»¶ï¼Œå¿…é¡»å…ˆæ³¨å…¥è¿è¡Œç¯å¢ƒçš„scope
             injectScope: function (_scope) {
                 scope = _scope;
                 return this;
             },
 
-            // ·µ»Ø¹¹Ôìº¯Êı£¬Ê¹ÓÃÊ±µ÷ÓÃµÄÈ«ÊÇ¾²Ì¬·½·¨
+            // è¿”å›æ„é€ å‡½æ•°ï¼Œä½¿ç”¨æ—¶è°ƒç”¨çš„å…¨æ˜¯é™æ€æ–¹æ³•
             layout:Layout,
 
-            // ·µ»Ø¹¹Ôìº¯Êı£¬Ê¹ÓÃÊ±ĞèÒªÊµÀı»¯
+            // è¿”å›æ„é€ å‡½æ•°ï¼Œä½¿ç”¨æ—¶éœ€è¦å®ä¾‹åŒ–
             Drag:Drag,
 
-            // ·µ»Øº¯Êı£¬Ö±½Óµ÷ÓÃ
+            // è¿”å›å‡½æ•°ï¼Œç›´æ¥è°ƒç”¨
             jroll:jroll,
 
-            // ·µ»ØÊµÀı£¬Ö±½Óµ÷ÓÃ
+            // è¿”å›å®ä¾‹ï¼Œç›´æ¥è°ƒç”¨
             alert:alertInterface
         }
     })

@@ -8,6 +8,7 @@ export default class CreateHttp {
         this.http = require("http");
         this.fs = require("fs");
         this.path = require("path");
+        this.zlib = require("zlib");
     }
 
     open(port) {
@@ -19,33 +20,42 @@ export default class CreateHttp {
     }
 
     writeHead(req, res) {
-        var extension = req.url.split(".").pop();
+        let fileName = req.url.split("/").pop();
+        fileName = fileName ? fileName : "index.html";
+        var extension = fileName.split(".").pop();
         var contentType = "text/html";
+        var contentEncoding = "gzip"
+
         switch (extension) {
             case "css":
                 contentType = "text/css";
                 break;
             case "html":
-                contentType = "text/html";
+                contentType = "text/html";                
+                contentEncoding = null;
                 break;
             case "js":
-                contentType = "text/javascript";
+                contentType = "application/javascript";
                 break;
             case "png":
             case "jpg":
             case "jpeg":
             case "gif":
-                contentType = "image/" + extension;
+            case "ico":
+                contentType = "image/" + extension;                
+                contentEncoding = null;
                 break;
             case "json":
                 contentType = "application/" + extension;
                 break;
         }
 
-        res.writeHead(200, {
-            'Cache-Control':"max-age=" + 30*24*60*60*1000,
-            "Content-Type": contentType
-        });
+        let headOption = {};
+        headOption["Cache-Control"] = "max-age=" + 30*24*60*60*1000;
+        headOption["Content-Type"] = contentType;
+        if(contentEncoding) headOption["Content-Encoding"] = contentEncoding;        
+
+        res.writeHead(200, headOption);
 
         return this;
     }
@@ -54,8 +64,9 @@ export default class CreateHttp {
         let that = this;
         let xRequestedWith = req.headers["x-requested-with"];
         let extension = that.path.extname(req.url);
+        let gzipHandler = that.zlib.createGzip();
 
-        if (req.url === "/") {
+        if (!extension) {
             console.log("来自 ", req.headers.host, " 的请求");
             //初始化客户端；
             that.fs.readFile(that.path.join(SOURCES_DIS, req.url, "index.html"), function (err, chunk) {
@@ -69,23 +80,19 @@ export default class CreateHttp {
             });
 
         } else if (extension) {
-            //CDN资源请求；
-            that.fs.readFile(that.path.join(SOURCES_DIS, req.url), function (err, chunk) {
+            //CDN资源请求；      
+            let fileStream = null;
+            if (/\.(png|jpg|jpeg|gif|ico)$/.test(extension)) {
+                // 图片类型转换成“base64”输出
+                fileStream = that.fs.createReadStream(that.path.join(SOURCES_DIS, req.url));            
+                fileStream.pipe(res);
 
-                if (err) {
-                    console.log(err);
-                } else {
-                    if (/\.(png|jpg|jpeg|gif)$/.test(req.url)) {
-                        //图片类型转换成“base64”输出
-                        res.write(new Buffer(chunk, "base64"));
-                    } else {
-                        //文本类型转成明文字串
-                        res.write(chunk.toString());
-                    }
-                }
-                res.end();
+            }else{
 
-            });
+                fileStream = that.fs.createReadStream(that.path.join(SOURCES_DIS, req.url));
+                fileStream.pipe(gzipHandler).pipe(res);
+
+            } 
 
         } else if (xRequestedWith) {
             //ajax请求：

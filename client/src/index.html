@@ -3,13 +3,13 @@
 <head lang="en">
     <title>远程测试</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="Pragma" content="no-cache"/>
-    <meta http-equiv="Cache-control" content="no-cache"/>
-    <meta http-equiv="Cache" content="no-cache"/>
-    <meta http-equiv="Expires" content="0"/>
-
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Connection" content="0">
     <script>
         (function (win) {
             var userAgent = win.navigator.userAgent; //取得浏览器的userAgent字符串
@@ -21,8 +21,8 @@
                 var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
                 reIE.test(userAgent);
                 var fIEVersion = parseFloat(RegExp["$1"]);
-                if (fIEVersion <= 8) {                             
-                    document.write("本程序并不支持IE9以下的浏览器，如需体验，请更新当前浏览器");         
+                if (fIEVersion <= 8) {
+                    document.write("本程序并不支持IE9以下的浏览器，如需体验，请更新当前浏览器");
                 }
             }
 
@@ -37,7 +37,7 @@
             window.location.href = host;
         };
     </script>
-<link rel="shortcut icon" href="favicon.ico"><link href="assets/css/bundle.dd7a2.css" rel="stylesheet"></head>
+<link rel="shortcut icon" href="favicon.ico"><link href="assets/css/bundle.08b2f.css" rel="stylesheet"></head>
 <body ng-app="myApp">
 
 <foot-bar></foot-bar>
@@ -45,6 +45,6 @@
 <head-bar></head-bar>
 
 <components></components>
-<script src="assets/js/vendor.6bd0d1.js" defer="defer"></script>
-<script type="text/javascript" src="assets/js/bundle.dd7a2.js" defer="defer"></script></body>
+<script src="assets/js/vendor.6bd0d1.js"></script>
+<script type="text/javascript" src="assets/js/bundle.08b2f.js"></script></body>
 </html>

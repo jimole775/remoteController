@@ -6,26 +6,26 @@ import _ from "lodash";
 export default class Layout {
 
     /**
-     * ²¼¾Ö·½·¨£¬Ò»°ã°Ñ´°¿Ú ·ÖÎª3¸ö²¿·Ö£¬
+     * å¸ƒå±€æ–¹æ³•ï¼Œä¸€èˆ¬æŠŠçª—å£ åˆ†ä¸º3ä¸ªéƒ¨åˆ†ï¼Œ
      *
-     * Í·²¿£¨°üÀ¨ #title £¬.groupNav , .scroll-table-header£©
-     * ÖĞ¼ä¿É¹ö¶¯²¿·Ö £¨.scroll-table-body£©
-     * ½Å²¿£¨#footer£¬#bottomBtn£¬.scroll-table-footer£©
+     * å¤´éƒ¨ï¼ˆåŒ…æ‹¬ #title ï¼Œ.groupNav , .scroll-table-headerï¼‰
+     * ä¸­é—´å¯æ»šåŠ¨éƒ¨åˆ† ï¼ˆ.scroll-table-bodyï¼‰
+     * è„šéƒ¨ï¼ˆ#footerï¼Œ#bottomBtnï¼Œ.scroll-table-footerï¼‰
      *
-     *@params flag:init  ÖØÖÃ¿ËÂ¡µÄÔªËØ
+     *@params flag:init  é‡ç½®å…‹éš†çš„å…ƒç´ 
      * */
     static init(element = $("section"), flag = 1) {
         let dataBox = null;
 
         /**
-         * section±êÇ©ÊÇuiRouterµÄ¿ØÖÆÆ÷ºĞ×Ó£¬
-         * div±êÇ©ÊÇdirectiveµÄ¿ØÖÆÆ÷ºĞ×Ó
+         * sectionæ ‡ç­¾æ˜¯uiRouterçš„æ§åˆ¶å™¨ç›’å­ï¼Œ
+         * divæ ‡ç­¾æ˜¯directiveçš„æ§åˆ¶å™¨ç›’å­
          * */
         if (element[0].nodeName === "SECTION") {
 
-            //Èç¹û¶à²ãºĞ×ÓÔÚuiViewÖĞÆ½ĞĞ´æÔÚ£¬ÄÇÃ´£¬Ä¬ÈÏµÚÒ»¸ödataBox¾ÍÊÇµ±Ç°uiRouterµÄ¿ØÖÆÆ÷ºĞ×Ó
-            //ÆäËûµÄ¶¼ÊÇdirectiveµÄ¿ØÖÆÆ÷ºĞ×Ó
-            //***Ò»¸öÂ·ÓÉÌø×ªÖ»ÄÜÊÇÒ»¸ö$state¼ÓN¸ödirective***
+            //å¦‚æœå¤šå±‚ç›’å­åœ¨uiViewä¸­å¹³è¡Œå­˜åœ¨ï¼Œé‚£ä¹ˆï¼Œé»˜è®¤ç¬¬ä¸€ä¸ªdataBoxå°±æ˜¯å½“å‰uiRouterçš„æ§åˆ¶å™¨ç›’å­
+            //å…¶ä»–çš„éƒ½æ˜¯directiveçš„æ§åˆ¶å™¨ç›’å­
+            //***ä¸€ä¸ªè·¯ç”±è·³è½¬åªèƒ½æ˜¯ä¸€ä¸ª$stateåŠ Nä¸ªdirective***
             dataBox = $($(element[0]).children[0]);
         } else {
             dataBox = $(element[0]);
@@ -36,14 +36,14 @@ export default class Layout {
         if (flag == 1) {
             Layout.showTable(dataBox);
 
-            //´ò¿ªÒ³Ãæ¡¾ºó¡¿£¬Ì½Ë÷µ±Ç°Ò³ÓĞÃ»ÓĞ´æ´¢ÓĞ¹ö¶¯Ìõ¼ÇÂ¼
+            //æ‰“å¼€é¡µé¢ã€åã€‘ï¼Œæ¢ç´¢å½“å‰é¡µæœ‰æ²¡æœ‰å­˜å‚¨æœ‰æ»šåŠ¨æ¡è®°å½•
             let curScrollTop = parseFloat(sessionStorage.getItem(elementIndex));
             if (curScrollTop != undefined && curScrollTop != null) {
                 $curContentBody.scrollTop(curScrollTop);
             }
         }
         else {
-            //¹Ø±ÕÒ³Ãæ¡¾Ç°¡¿£¬´æ´¢µ±Ç°Ò³µÄ¹ö¶¯Ìõ¸ß¶È
+            //å…³é—­é¡µé¢ã€å‰ã€‘ï¼Œå­˜å‚¨å½“å‰é¡µçš„æ»šåŠ¨æ¡é«˜åº¦
             sessionStorage.setItem(elementIndex, $curContentBody.scrollTop());
 
             Layout.hideTable(dataBox);
@@ -54,12 +54,12 @@ export default class Layout {
 
         let boxChildren = box.children();
         /**
-         * 1£¬ÓÉÓÚangularäÖÈ¾ÔªËØÔÚÔ­ÉúJSÖ®ºó£¬»ñÈ¡²»µ½ÏàÓ¦µÄÔªËØ
-         * ËùÒÔ ÔÚangular¿ò¼ÜÏÂ£¬±ØĞë °Ñ²¼¾ÖĞ´ÔÚ html ÀïÃæ
+         * 1ï¼Œç”±äºangularæ¸²æŸ“å…ƒç´ åœ¨åŸç”ŸJSä¹‹åï¼Œè·å–ä¸åˆ°ç›¸åº”çš„å…ƒç´ 
+         * æ‰€ä»¥ åœ¨angularæ¡†æ¶ä¸‹ï¼Œå¿…é¡» æŠŠå¸ƒå±€å†™åœ¨ html é‡Œé¢
          *
-         * 2£¬ÔÚ·Çangular¿ò¼ÜÏÂ£¬±ØĞëÏŞÖÆÊÇ 3¸öºĞ×Ó
+         * 2ï¼Œåœ¨éangularæ¡†æ¶ä¸‹ï¼Œå¿…é¡»é™åˆ¶æ˜¯ 3ä¸ªç›’å­
          */
-            //Èç¹ûcssÀàÃûÎªdata-box,²¢ÇÒÕÒ²»µ½.scroll-table-body£¬¾ÍÒÀ´ÎÎªºĞ×ÓÌí¼Ó3¸ö²¼¾Ö£»
+            //å¦‚æœcssç±»åä¸ºdata-box,å¹¶ä¸”æ‰¾ä¸åˆ°.scroll-table-bodyï¼Œå°±ä¾æ¬¡ä¸ºç›’å­æ·»åŠ 3ä¸ªå¸ƒå±€ï¼›
             //if (!box.find(".scroll-table-body").length) {
             //    let header = "<div class='scroll-table-header'></div>";
             //    let body = "<div class='scroll-table-body'></div>";
@@ -87,13 +87,13 @@ export default class Layout {
     }
 
     /**
-     * ²¼¾Ö·½·¨£¬Ò»°ã°Ñ´°¿Ú ·ÖÎª3¸ö²¿·Ö£¬
+     * å¸ƒå±€æ–¹æ³•ï¼Œä¸€èˆ¬æŠŠçª—å£ åˆ†ä¸º3ä¸ªéƒ¨åˆ†ï¼Œ
      *
-     * Í·²¿£¨°üÀ¨ #title £¬.groupNav , .scroll-table-header£©
-     * ÖĞ¼ä¿É¹ö¶¯²¿·Ö £¨.scroll-table-body£©
-     * ½Å²¿£¨#footer£¬#bottomBtn£¬.scroll-table-footer£©
+     * å¤´éƒ¨ï¼ˆåŒ…æ‹¬ #title ï¼Œ.groupNav , .scroll-table-headerï¼‰
+     * ä¸­é—´å¯æ»šåŠ¨éƒ¨åˆ† ï¼ˆ.scroll-table-bodyï¼‰
+     * è„šéƒ¨ï¼ˆ#footerï¼Œ#bottomBtnï¼Œ.scroll-table-footerï¼‰
      *
-     *@params flag:init  ÖØÖÃ¿ËÂ¡µÄÔªËØ
+     *@params flag:init  é‡ç½®å…‹éš†çš„å…ƒç´ 
      * */
     static resize(box, flag) {
         let curFrame = null;
@@ -109,7 +109,7 @@ export default class Layout {
             return;
         }
 
-        if (flag === 'init') {          //ÍË³öÇ°ÖØÖÃ ¿ËÂ¡µÄÍ·²¿ÔªËØ£¬±ÜÃâÖØĞÂ½øÈëÊ±³öÏÖÁ½¸öÔªËØÖØµş
+        if (flag === 'init') {          //é€€å‡ºå‰é‡ç½® å…‹éš†çš„å¤´éƒ¨å…ƒç´ ï¼Œé¿å…é‡æ–°è¿›å…¥æ—¶å‡ºç°ä¸¤ä¸ªå…ƒç´ é‡å 
             Layout.removeCloneHead(curFrame);
         }
         else {
@@ -126,11 +126,11 @@ export default class Layout {
 
         let frameHeader = $(curFrame).find('.scroll-table-header');
         let frameBody = $(curFrame).find('.scroll-table-body');
-        if (frameBody.find('table').length > 0) {     //´¦Àítable¹ö¶¯ÔªËØµÄ²¼¾Ö£»
+        if (frameBody.find('table').length > 0) {     //å¤„ç†tableæ»šåŠ¨å…ƒç´ çš„å¸ƒå±€ï¼›
 
             let bodyThead = frameBody.find('thead');
 
-            if (!frameHeader.find('table').length && bodyThead.length) {       		//±ÜÃâÖØ¸´¿ËÂ¡£¬¶øÇÒÓĞĞ©ºĞ×ÓÊÇÃ»ÓĞtheadµÄ£¬¾Í²»ĞèÒª¿ËÂ¡
+            if (!frameHeader.find('table').length && bodyThead.length) {       		//é¿å…é‡å¤å…‹éš†ï¼Œè€Œä¸”æœ‰äº›ç›’å­æ˜¯æ²¡æœ‰theadçš„ï¼Œå°±ä¸éœ€è¦å…‹éš†
                 frameHeader.append('<table></table>');
                 frameHeader.find('table').append(bodyThead.clone());
             }

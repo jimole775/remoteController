@@ -10,8 +10,7 @@ export default function(){
         template:tpl(),
         controller:Ctrl,
         link:link,
-        scope:false,
-        require:"^alertPlugin"
+        scope:false
     }
 }
 

@@ -87,7 +87,7 @@ export default class AjaxRequest{
         that.ajaxInstance = $.ajax({
             type: "POST",
             async: true,
-            timeout: 10000, //超时时间设置，单位毫秒
+            timeout: 5000, //超时时间设置，单位毫秒
             url: `http://${hostUrl}:${httpPort}/${pathName}`,
             dataType: "json",
             data: querySearch,
