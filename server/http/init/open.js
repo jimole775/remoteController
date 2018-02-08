@@ -22,10 +22,10 @@ export default class CreateHttp {
     writeHead(req, res) {
         let fileName = req.url.split("/").pop();
         fileName = fileName ? fileName : "index.html";
-        var extension = fileName.split(".").pop();
-        var contentType = "text/html";
-        var contentEncoding = "gzip"
-
+        let extension = fileName.split(".").pop();
+        let contentType = "text/html";
+        let contentEncoding = "gzip"
+        let useCache = true;
         switch (extension) {
             case "css":
                 contentType = "text/css";
@@ -33,6 +33,7 @@ export default class CreateHttp {
             case "html":
                 contentType = "text/html";                
                 contentEncoding = null;
+                useCache = false;
                 break;
             case "js":
                 contentType = "application/javascript";
@@ -41,18 +42,23 @@ export default class CreateHttp {
             case "jpg":
             case "jpeg":
             case "gif":
+                contentType = "image/" + extension;                
+                contentEncoding = null;
+                break;
             case "ico":
                 contentType = "image/" + extension;                
                 contentEncoding = null;
+                useCache = false;
                 break;
             case "json":
                 contentType = "application/" + extension;
                 break;
         }
 
-        let headOption = {};
-        headOption["Cache-Control"] = "max-age=" + 30*24*60*60*1000;
-        headOption["Content-Type"] = contentType;
+        let headOption = {
+            "Content-Type":contentType
+        };
+        if(useCache)headOption["Cache-Control"] = "max-age=" + 30*24*60*60*1000;
         if(contentEncoding) headOption["Content-Encoding"] = contentEncoding;        
 
         res.writeHead(200, headOption);
