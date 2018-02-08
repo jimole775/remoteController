@@ -26,6 +26,7 @@ export default class CreateHttp {
         let contentType = "text/html";
         let contentEncoding = "gzip"
         let useCache = true;
+
         switch (extension) {
             case "css":
                 contentType = "text/css";
@@ -50,8 +51,12 @@ export default class CreateHttp {
                 contentEncoding = null;
                 useCache = false;
                 break;
-            case "json":
-                contentType = "application/" + extension;
+            default:
+            // ajax请求不会带后缀，默认就是请求json数据类型
+            // 日后还会有xml数据类型
+                contentType = "application/json";
+                useCache = false;
+                contentEncoding = null;
                 break;
         }
 
@@ -72,7 +77,7 @@ export default class CreateHttp {
         let extension = that.path.extname(req.url);
         let gzipHandler = that.zlib.createGzip();
 
-        if (!extension) {
+        if (req.url == "/") {
             console.log("来自 ", req.headers.host, " 的请求");
             //初始化客户端；
             that.fs.readFile(that.path.join(SOURCES_DIS, req.url, "index.html"), function (err, chunk) {
@@ -85,7 +90,9 @@ export default class CreateHttp {
                 res.end();
             });
 
-        } else if (extension) {
+        } 
+        
+        if (extension) {
             //CDN资源请求；      
             let fileStream = null;
             if (/\.(png|jpg|jpeg|gif|ico)$/.test(extension)) {
@@ -100,8 +107,23 @@ export default class CreateHttp {
 
             } 
 
-        } else if (xRequestedWith) {
-            //ajax请求：
+        } 
+        
+        // ajax请求：
+        if (xRequestedWith) {
+            function upsetFinalData(item, targetProp) {
+
+                if (!Math.round(Math.random())) {
+                    if (item[targetProp] instanceof Array) {
+                        item[targetProp].length = 0
+                    } else {
+                        item[targetProp] = {};
+                    }
+                }
+        
+                return item;
+            }
+           
             req.on("data", function (data) {
 
                 let ajaxData = new that.url.parse("?" + data.toString(), true).query;
@@ -111,7 +133,7 @@ export default class CreateHttp {
                     let scannerData = JSON.parse(chunk.toString());
                     let finalData = Object.assign(scannerData.items[ajaxData.index], {itemcount: scannerData.itemcount});
 
-                    res.write(JSON.stringify(CreateHttp.upsetFinalData(finalData, "info")));
+                    res.write(JSON.stringify(upsetFinalData(finalData, "info")));
                     res.end();
                 });
             });
@@ -120,16 +142,16 @@ export default class CreateHttp {
         return this;
     }
 
-    static upsetFinalData(item, targetProp) {
+    // static upsetFinalData(item, targetProp) {
 
-        if (!Math.round(Math.random())) {
-            if (item[targetProp] instanceof Array) {
-                item[targetProp].length = 0
-            } else {
-                item[targetProp] = {};
-            }
-        }
+    //     if (!Math.round(Math.random())) {
+    //         if (item[targetProp] instanceof Array) {
+    //             item[targetProp].length = 0
+    //         } else {
+    //             item[targetProp] = {};
+    //         }
+    //     }
 
-        return item;
-    }
+    //     return item;
+    // }
 }
