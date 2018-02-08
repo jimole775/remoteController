@@ -14,7 +14,7 @@ const webpack = require("webpack");
 const config = {
     output: {
         filename: "[name].[chunkHash:5].js",
-        path: path.join(__dirname, "client/src/assets/js"),
+        path: path.join(__dirname, "public/lib/"),
         library: "[name]"
     },
     entry: {
