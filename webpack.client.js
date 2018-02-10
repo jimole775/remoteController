@@ -62,7 +62,6 @@ webClient.resolve = {
         , client: path.join(__dirname,'client')
 
         , wsClient: path.join(__dirname, 'client/src/app/webSocket.client.io')
-
         //, RMTDistributor$: path.join(__dirname, 'client/src/app/services/remote.distributor/distributor/distributor.js')
     }
 };

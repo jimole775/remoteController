@@ -9,6 +9,7 @@ export default class CreateHttp {
         this.fs = require("fs");
         this.path = require("path");
         this.zlib = require("zlib");
+        this.log = require("log");
     }
 
     open(port) {
@@ -83,7 +84,8 @@ export default class CreateHttp {
             that.fs.readFile(that.path.join(SOURCES_DIS, req.url, "index.html"), function (err, chunk) {
 
                 if (err) {
-                    console.log(err);
+                    that.log.err(err);
+
                 } else {
                     res.write(chunk.toString());
                 }
@@ -129,12 +131,17 @@ export default class CreateHttp {
                 let ajaxData = new that.url.parse("?" + data.toString(), true).query;
                 let filename = ajaxData.dataType + ".json";
                 that.fs.readFile(that.path.join(DB_DIS, req.url, filename), function (err, chunk) {
+                    if(err){
+                        that.log.err(err);
+                    } else{
 
-                    let scannerData = JSON.parse(chunk.toString());
-                    let finalData = Object.assign(scannerData.items[ajaxData.index], {itemcount: scannerData.itemcount});
 
-                    res.write(JSON.stringify(upsetFinalData(finalData, "info")));
-                    res.end();
+                        let scannerData = JSON.parse(chunk.toString());
+                        let finalData = Object.assign(scannerData.items[ajaxData.index], {itemcount: scannerData.itemcount});
+
+                        res.write(JSON.stringify(upsetFinalData(finalData, "info")));
+                        res.end();
+                    }   
                 });
             });
         }
@@ -142,16 +149,4 @@ export default class CreateHttp {
         return this;
     }
 
-    // static upsetFinalData(item, targetProp) {
-
-    //     if (!Math.round(Math.random())) {
-    //         if (item[targetProp] instanceof Array) {
-    //             item[targetProp].length = 0
-    //         } else {
-    //             item[targetProp] = {};
-    //         }
-    //     }
-
-    //     return item;
-    // }
 }
