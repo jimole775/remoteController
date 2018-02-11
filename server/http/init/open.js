@@ -137,7 +137,8 @@ export default class CreateHttp {
 
                         let scannerData = JSON.parse(chunk.toString());
                         let finalData = Object.assign(scannerData.items[ajaxData.index], {itemcount: scannerData.itemcount});
-
+                        that.log.debug(finalData);
+                        that.log.debug(upsetFinalData(finalData, "info"));
                         res.write(JSON.stringify(upsetFinalData(finalData, "info")));
                         res.end();
                     }   
