@@ -68,203 +68,1385 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _StorageRegister = __webpack_require__(16);\n\nvar _StorageRegister2 = _interopRequireDefault(_StorageRegister);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar storage = {\n    clients: {},\n    namesMap: [],\n    remoteChanelMap: [],\n    opcode: 0\n}; /**\r\n    * Created by Andy on 2017/11/7.\r\n    */\nexports.default = new _StorageRegister2.default(storage);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zZXJ2ZXIvc29ja2V0L3NlcnZpY2VzL3NvY2tldC5zdG9yYWdlL3NvY2tldFN0b3JhZ2UuanM/MDk2YiJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcclxuICogQ3JlYXRlZCBieSBBbmR5IG9uIDIwMTcvMTEvNy5cclxuICovXHJcbmltcG9ydCBTdG9yYWdlUmVnaXN0ZXIgZnJvbSBcIlN0b3JhZ2VSZWdpc3RlclwiO1xyXG5sZXQgc3RvcmFnZSA9IHtcclxuICAgIGNsaWVudHM6IHt9LFxyXG4gICAgbmFtZXNNYXA6IFtdLFxyXG4gICAgcmVtb3RlQ2hhbmVsTWFwOiBbXSxcclxuICAgIG9wY29kZTogMFxyXG59O1xyXG5leHBvcnQgZGVmYXVsdCBuZXcgU3RvcmFnZVJlZ2lzdGVyKHN0b3JhZ2UpO1xyXG5cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc2VydmVyL3NvY2tldC9zZXJ2aWNlcy9zb2NrZXQuc3RvcmFnZS9zb2NrZXRTdG9yYWdlLmpzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFHQTtBQUNBOzs7OztBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFKQTs7O0FBTUEiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///0\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _StorageRegister = __webpack_require__(16);
+
+var _StorageRegister2 = _interopRequireDefault(_StorageRegister);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var storage = {
+    clients: {},
+    namesMap: [],
+    remoteChanelMap: [],
+    opcode: 0
+}; /**
+    * Created by Andy on 2017/11/7.
+    */
+exports.default = new _StorageRegister2.default(storage);
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (status, emitData, socket) {\n\n    var opcode = _socketStorage2.default.getStorage(\"opcode\");\n\n    var emitProtocolMap = {\n        \"status\": status,\n        \"serverData\": emitData,\n\n        // 谁发上来的数据，就返回给谁，其他用户一律返回null\n        \"clientData\": emitData.clientData && emitData.clientData.uid === socket.uid ? emitData.clientData : null\n    };\n    console.log(\"emitProtocolMap:\", emitProtocolMap);\n    var PayloadData = opcode == 1 ? JSON.stringify(emitProtocolMap) : new Buffer(JSON.stringify(emitProtocolMap));\n\n    if (socket.uid && socket.writable) socket.write(_exports2.default.frameEncode({\n        FIN: 1,\n        Opcode: opcode,\n        PayloadData: PayloadData\n    }));\n};\n\nvar _exports = __webpack_require__(5);\n\nvar _exports2 = _interopRequireDefault(_exports);\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zZXJ2ZXIvc29ja2V0L2VtaXR0ZXIvZW1pdHRlci5qcz9jNmZlIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBDcmVhdGVkIGJ5IEFuZHkgb24gMjAxNy8zLzIzLlxyXG4gKi9cclxuXHJcbmltcG9ydCB0b29sIGZyb20gXCIuLi9zZXJ2aWNlcy90b29sL2V4cG9ydHMuanNcIjtcclxuaW1wb3J0IFRSIGZyb20gXCJ3c1NlcnZlci9zZXJ2aWNlcy9zb2NrZXQuc3RvcmFnZS9zb2NrZXRTdG9yYWdlXCI7XHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiAoc3RhdHVzLCBlbWl0RGF0YSwgc29ja2V0KSB7XHJcblxyXG4gICAgbGV0IG9wY29kZSA9IFRSLmdldFN0b3JhZ2UoXCJvcGNvZGVcIik7XHJcblxyXG4gICAgbGV0IGVtaXRQcm90b2NvbE1hcCA9IHtcclxuICAgICAgICBcInN0YXR1c1wiOiBzdGF0dXMsXHJcbiAgICAgICAgXCJzZXJ2ZXJEYXRhXCI6IGVtaXREYXRhLFxyXG5cclxuICAgICAgICAvLyDosIHlj5HkuIrmnaXnmoTmlbDmja7vvIzlsLHov5Tlm57nu5nosIHvvIzlhbbku5bnlKjmiLfkuIDlvovov5Tlm55udWxsXHJcbiAgICAgICAgXCJjbGllbnREYXRhXCI6IGVtaXREYXRhLmNsaWVudERhdGEgJiYgZW1pdERhdGEuY2xpZW50RGF0YS51aWQgPT09IHNvY2tldC51aWQgPyBlbWl0RGF0YS5jbGllbnREYXRhIDogbnVsbFxyXG4gICAgfTtcclxuICAgIGNvbnNvbGUubG9nKFwiZW1pdFByb3RvY29sTWFwOlwiLCBlbWl0UHJvdG9jb2xNYXApO1xyXG4gICAgbGV0IFBheWxvYWREYXRhID0gb3Bjb2RlID09IDEgPyBKU09OLnN0cmluZ2lmeShlbWl0UHJvdG9jb2xNYXApIDogbmV3IEJ1ZmZlcihKU09OLnN0cmluZ2lmeShlbWl0UHJvdG9jb2xNYXApKTtcclxuXHJcbiAgICBpZihzb2NrZXQudWlkICYmIHNvY2tldC53cml0YWJsZSlcclxuICAgICAgICBzb2NrZXQud3JpdGUoXHJcbiAgICAgICAgICAgIHRvb2wuZnJhbWVFbmNvZGUoe1xyXG4gICAgICAgICAgICAgICAgRklOOiAxLFxyXG4gICAgICAgICAgICAgICAgT3Bjb2RlOiBvcGNvZGUsXHJcbiAgICAgICAgICAgICAgICBQYXlsb2FkRGF0YTogUGF5bG9hZERhdGFcclxuICAgICAgICAgICAgfSlcclxuICAgICAgICApO1xyXG59XG5cblxuLy8gV0VCUEFDSyBGT09URVIgLy9cbi8vIHNlcnZlci9zb2NrZXQvZW1pdHRlci9lbWl0dGVyLmpzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFPQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUxBO0FBT0E7QUFDQTtBQUNBO0FBQ0E7QUFHQTtBQUNBO0FBQ0E7QUFIQTtBQU1BO0FBQ0E7QUExQkE7QUFDQTs7O0FBQUE7QUFDQTs7O0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///1\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (status, emitData, socket) {
+
+    var opcode = _socketStorage2.default.getStorage("opcode");
+
+    var emitProtocolMap = {
+        "status": status,
+        "serverData": emitData,
+
+        // 谁发上来的数据，就返回给谁，其他用户一律返回null
+        "clientData": emitData.clientData && emitData.clientData.uid === socket.uid ? emitData.clientData : null
+    };
+    console.log("emitProtocolMap:", emitProtocolMap);
+    var PayloadData = opcode == 1 ? JSON.stringify(emitProtocolMap) : new Buffer(JSON.stringify(emitProtocolMap));
+
+    if (socket.uid && socket.writable) socket.write(_exports2.default.frameEncode({
+        FIN: 1,
+        Opcode: opcode,
+        PayloadData: PayloadData
+    }));
+};
+
+var _exports = __webpack_require__(5);
+
+var _exports2 = _interopRequireDefault(_exports);
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"path\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9leHRlcm5hbCBcInBhdGhcIj81YjJhIl0sInNvdXJjZXNDb250ZW50IjpbIm1vZHVsZS5leHBvcnRzID0gcmVxdWlyZShcInBhdGhcIik7XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gZXh0ZXJuYWwgXCJwYXRoXCJcbi8vIG1vZHVsZSBpZCA9IDJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///2\n");
+module.exports = require("path");
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"fs\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9leHRlcm5hbCBcImZzXCI/MmUwOSJdLCJzb3VyY2VzQ29udGVudCI6WyJtb2R1bGUuZXhwb3J0cyA9IHJlcXVpcmUoXCJmc1wiKTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyBleHRlcm5hbCBcImZzXCJcbi8vIG1vZHVsZSBpZCA9IDNcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///3\n");
+module.exports = require("fs");
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("/* WEBPACK VAR INJECTION */(function(__dirname) {\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _typeof = typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; };\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar fs = __webpack_require__(3);\nvar path = __webpack_require__(2);\nexports.default = new (function () {\n    function Log() {\n        _classCallCheck(this, Log);\n    }\n\n    _createClass(Log, [{\n        key: \"consturtor\",\n        value: function consturtor() {}\n    }, {\n        key: \"err\",\n        value: function err(msg) {\n            msg = Log.queryMsg(msg);\n            var timer = Log.getTimer();\n            var fileName = Log.createFileName(\"err\");\n            var content = \"\" + timer + msg + \" \\r\\n\";\n            this.writeFile(fileName, content);\n        }\n    }, {\n        key: \"user\",\n        value: function user(id, ip) {\n            id = Log.queryMsg(id);\n            ip = Log.queryMsg(ip);\n            var timer = Log.getTimer();\n            var fileName = Log.createFileName(\"user\");\n            var content = timer + \" \\u7528\\u6237\\u540D\\uFF1A\" + id + \" \\u5730\\u5740\\uFF1A\" + ip + \" \\r\\n\";\n            this.writeFile(fileName, content);\n        }\n    }, {\n        key: \"writeFile\",\n        value: function writeFile(filePath, content) {\n            fs.appendFile(filePath, content, \"utf8\", function () {\n                console.log(\"writeDone\");\n            });\n        }\n    }], [{\n        key: \"queryMsg\",\n        value: function queryMsg(msg) {\n            if ((typeof msg === \"undefined\" ? \"undefined\" : _typeof(msg)) === \"object\") {\n                try {\n                    msg = JSON.stringify(msg);\n                } catch (error) {\n                    msg = error;\n                }\n            }\n\n            return msg;\n        }\n    }, {\n        key: \"getTimer\",\n        value: function getTimer() {\n\n            var h = new Date().getHours();\n            var m = new Date().getMinutes();\n            var s = new Date().getSeconds();\n\n            return h + \"/\" + m + \"/\" + s + \"\\uFF1A\";\n        }\n    }, {\n        key: \"createFileName\",\n        value: function createFileName(type) {\n            var y = new Date().getFullYear();\n            var m = new Date().getMonth();\n            var d = new Date().getDay();\n\n            return path.resolve(__dirname, type, y + \".\" + m + \".\" + d + \".log\");\n        }\n    }]);\n\n    return Log;\n}())();\n/* WEBPACK VAR INJECTION */}.call(exports, \"server\\\\log\"))//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zZXJ2ZXIvbG9nL21haW4uanM/MTlmZCJdLCJzb3VyY2VzQ29udGVudCI6WyJcclxuIGNvbnN0IGZzID0gcmVxdWlyZShcImZzXCIpO1xyXG4gICAgICAgIGNvbnN0IHBhdGggPSByZXF1aXJlKFwicGF0aFwiKTtcclxuZXhwb3J0IGRlZmF1bHQgbmV3IGNsYXNzIExvZ3tcclxuXHJcbiAgICBjb25zdHVydG9yKCl7XHJcblxyXG4gICAgfVxyXG5cclxuICAgIGVycihtc2cpe1xyXG4gICAgICAgIG1zZyA9IExvZy5xdWVyeU1zZyhtc2cpO1xyXG4gICAgICAgIGxldCB0aW1lciA9IExvZy5nZXRUaW1lcigpO1xyXG4gICAgICAgIGxldCBmaWxlTmFtZSA9IExvZy5jcmVhdGVGaWxlTmFtZShcImVyclwiKTtcclxuICAgICAgICBsZXQgY29udGVudCA9IGAke3RpbWVyfSR7bXNnfSBcXHJcXG5gOyAgICAgICAgXHJcbiAgICAgICAgdGhpcy53cml0ZUZpbGUoZmlsZU5hbWUsIGNvbnRlbnQpO1xyXG4gICAgfVxyXG5cclxuICAgIHVzZXIoaWQsaXApe1xyXG4gICAgICAgIGlkID0gTG9nLnF1ZXJ5TXNnKGlkKTtcclxuICAgICAgICBpcCA9IExvZy5xdWVyeU1zZyhpcCk7XHJcbiAgICAgICAgbGV0IHRpbWVyID0gTG9nLmdldFRpbWVyKCk7XHJcbiAgICAgICAgbGV0IGZpbGVOYW1lID0gTG9nLmNyZWF0ZUZpbGVOYW1lKFwidXNlclwiKTsgICAgICAgIFxyXG4gICAgICAgIGxldCBjb250ZW50ID0gYCR7dGltZXJ9IOeUqOaIt+WQje+8miR7aWR9IOWcsOWdgO+8miR7aXB9IFxcclxcbmBcclxuICAgICAgICB0aGlzLndyaXRlRmlsZShmaWxlTmFtZSwgY29udGVudClcclxuICAgIH1cclxuXHJcbiAgICBzdGF0aWMgcXVlcnlNc2cobXNnKXtcclxuICAgICAgICBpZih0eXBlb2YgbXNnID09PSBcIm9iamVjdFwiKXsgIFxyXG4gICAgICAgICAgICB0cnkge1xyXG4gICAgICAgICAgICAgICAgbXNnID0gSlNPTi5zdHJpbmdpZnkobXNnKTtcclxuICAgICAgICAgICAgfSBjYXRjaCAoZXJyb3IpIHtcclxuICAgICAgICAgICAgICAgIG1zZyA9IGVycm9yO1xyXG4gICAgICAgICAgICB9ICAgICAgICAgICAgICAgICAgICAgIFxyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgcmV0dXJuIG1zZztcclxuICAgIH1cclxuXHJcbiAgICBzdGF0aWMgZ2V0VGltZXIoKXtcclxuICAgICAgXHJcbiAgICAgICAgbGV0IGggPSBuZXcgRGF0ZSgpLmdldEhvdXJzKCk7XHJcbiAgICAgICAgbGV0IG0gPSBuZXcgRGF0ZSgpLmdldE1pbnV0ZXMoKTtcclxuICAgICAgICBsZXQgcyA9IG5ldyBEYXRlKCkuZ2V0U2Vjb25kcygpO1xyXG5cclxuICAgICAgICByZXR1cm4gYCR7aH0vJHttfS8ke3N977yaYDtcclxuICAgIH1cclxuXHJcbiAgICBzdGF0aWMgY3JlYXRlRmlsZU5hbWUodHlwZSl7XHJcbiAgICAgICAgbGV0IHkgPSBuZXcgRGF0ZSgpLmdldEZ1bGxZZWFyKCk7XHJcbiAgICAgICAgbGV0IG0gPSBuZXcgRGF0ZSgpLmdldE1vbnRoKCk7XHJcbiAgICAgICAgbGV0IGQgPSBuZXcgRGF0ZSgpLmdldERheSgpO1xyXG5cclxuICAgICAgICByZXR1cm4gcGF0aC5yZXNvbHZlKF9fZGlybmFtZSwgdHlwZSwgYCR7eX0uJHttfS4ke2R9LmxvZ2ApO1xyXG4gICAgfVxyXG5cclxuICAgIHdyaXRlRmlsZShmaWxlUGF0aCxjb250ZW50KXsgIFxyXG4gICAgICAgIGZzLmFwcGVuZEZpbGUoZmlsZVBhdGgsIGNvbnRlbnQsIFwidXRmOFwiLGZ1bmN0aW9uKCl7XHJcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKFwid3JpdGVEb25lXCIpO1xyXG4gICAgICAgIH0pO1xyXG4gICAgfVxyXG4gICAgICAgXHJcbiAgICAgICBcclxuICAgIH1cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc2VydmVyL2xvZy9tYWluLmpzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7QUFDQTtBQUNBO0FBQ0E7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQURBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQU9BO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQVpBO0FBQUE7QUFBQTtBQWVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBckJBO0FBQUE7QUFBQTtBQXFEQTtBQUNBO0FBQ0E7QUFDQTtBQXhEQTtBQUFBO0FBQUE7QUF3QkE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFqQ0E7QUFBQTtBQUFBO0FBQ0E7QUFvQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBMUNBO0FBQUE7QUFBQTtBQTZDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFsREE7QUFDQTtBQURBO0FBQUE7QSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///4\n");
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var fs = __webpack_require__(3);
+var path = __webpack_require__(2);
+exports.default = new (function () {
+    function Log() {
+        _classCallCheck(this, Log);
+    }
+
+    _createClass(Log, [{
+        key: "debug",
+        value: function debug(msg) {
+            msg = Log.queryMsg(msg);
+            var timer = Log.getTimer();
+            var fileName = Log.createFileName("debug");
+            var content = "\u3010" + timer + "\u3011\r\n" + msg + "\r\n";
+            this.writeFile("debug", fileName, content);
+        }
+    }, {
+        key: "user",
+        value: function user(id, ip) {
+            id = Log.queryMsg(id);
+            ip = Log.queryMsg(ip);
+            var timer = Log.getTimer();
+            var fileName = Log.createFileName("user");
+            var content = "\u3010" + timer + "\u3011\r\n" + ip + " " + id + "\r\n";
+            this.writeFile("user", fileName, content);
+        }
+    }, {
+        key: "writeFile",
+        value: function writeFile(type, filePath, content) {
+
+            var mkdir = new Promise(function (resolve, reject) {
+                fs.readdir(path.join(__dirname, type), function (err, fileGroup) {
+                    if (fileGroup instanceof Array) resolve();else reject();
+                });
+            });
+
+            mkdir.then(function () {
+                fs.appendFile(filePath, content, "utf8");
+            }, function () {
+                fs.mkdir(path.join(__dirname, type), function () {
+                    fs.appendFile(filePath, content, "utf8");
+                });
+            });
+        }
+    }], [{
+        key: "queryMsg",
+        value: function queryMsg(msg) {
+            if ((typeof msg === "undefined" ? "undefined" : _typeof(msg)) === "object") {
+                try {
+                    msg = JSON.stringify(msg);
+                } catch (error) {
+                    msg = error;
+                }
+            }
+
+            return msg;
+        }
+    }, {
+        key: "getTimer",
+        value: function getTimer() {
+
+            var h = new Date().getHours().toString();
+            var m = new Date().getMinutes().toString();
+            var s = new Date().getSeconds().toString();
+            h = h.length < 2 ? 0 + h : h;
+            m = m.length < 2 ? 0 + m : m;
+            s = s.length < 2 ? 0 + s : s;
+
+            return h + ":" + m + ":" + s;
+        }
+    }, {
+        key: "createFileName",
+        value: function createFileName(type) {
+            var y = new Date().getFullYear();
+            var m = new Date().getMonth();
+            var d = new Date().getDay();
+
+            return path.resolve(__dirname, type, y + "." + m + "." + d + ".log");
+        }
+    }]);
+
+    return Log;
+}())();
+/* WEBPACK VAR INJECTION */}.call(exports, "server\\log"))
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _path = __webpack_require__(2);\n\nvar _path2 = _interopRequireDefault(_path);\n\nvar _frameEncode = __webpack_require__(13);\n\nvar _frameEncode2 = _interopRequireDefault(_frameEncode);\n\nvar _frameDecode = __webpack_require__(14);\n\nvar _frameDecode2 = _interopRequireDefault(_frameDecode);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } } /**\r\n                                                                                                                                                           * Created by Andy on 2017/3/14.\r\n                                                                                                                                                           */\n\nfunction add(target, name, file) {\n    target.prototype[name] = file;\n}\n//@add(Tool,\"frameEncode\", frameEncode);\n//@add(Tool,\"frameDecode\", frameDecode);\n\nvar Tool = function Tool() {\n    _classCallCheck(this, Tool);\n};\n\nadd(Tool, \"frameEncode\", _frameEncode2.default);\nadd(Tool, \"frameDecode\", _frameDecode2.default);\nexports.default = new Tool();//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zZXJ2ZXIvc29ja2V0L3NlcnZpY2VzL3Rvb2wvZXhwb3J0cy5qcz8yMTZjIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxyXG4gKiBDcmVhdGVkIGJ5IEFuZHkgb24gMjAxNy8zLzE0LlxyXG4gKi9cclxuXHJcbmltcG9ydCBwYXRoIGZyb20gXCJwYXRoXCI7XHJcbmltcG9ydCBmcmFtZUVuY29kZSBmcm9tIFwiLi9wYXlsb2FkLmNvbXBpbGVyL2ZyYW1lRW5jb2RlXCI7XHJcbmltcG9ydCBmcmFtZURlY29kZSBmcm9tIFwiLi9wYXlsb2FkLmNvbXBpbGVyL2ZyYW1lRGVjb2RlXCI7XHJcblxyXG5mdW5jdGlvbiBhZGQodGFyZ2V0LCBuYW1lLCBmaWxlKSB7XHJcbiAgICB0YXJnZXQucHJvdG90eXBlW25hbWVdID0gZmlsZTtcclxufVxyXG4vL0BhZGQoVG9vbCxcImZyYW1lRW5jb2RlXCIsIGZyYW1lRW5jb2RlKTtcclxuLy9AYWRkKFRvb2wsXCJmcmFtZURlY29kZVwiLCBmcmFtZURlY29kZSk7XHJcbmNsYXNzIFRvb2wge1xyXG4gICAgY29uc3RydWN0b3IoKSB7XHJcblxyXG4gICAgfVxyXG59XHJcblxyXG5hZGQoVG9vbCwgXCJmcmFtZUVuY29kZVwiLCBmcmFtZUVuY29kZSk7XHJcbmFkZChUb29sLCBcImZyYW1lRGVjb2RlXCIsIGZyYW1lRGVjb2RlKTtcclxuZXhwb3J0IGRlZmF1bHQgbmV3IFRvb2woKTtcclxuXHJcblxyXG5cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc2VydmVyL3NvY2tldC9zZXJ2aWNlcy90b29sL2V4cG9ydHMuanMiXSwibWFwcGluZ3MiOiI7Ozs7OztBQUlBO0FBQ0E7OztBQUFBO0FBQ0E7OztBQUFBO0FBQ0E7Ozs7O0FBUEE7Ozs7QUFRQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFBQTtBQUNBO0FBRUE7QUFDQTtBQUVBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///5\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _path = __webpack_require__(2);
+
+var _path2 = _interopRequireDefault(_path);
+
+var _frameEncode = __webpack_require__(13);
+
+var _frameEncode2 = _interopRequireDefault(_frameEncode);
+
+var _frameDecode = __webpack_require__(14);
+
+var _frameDecode2 = _interopRequireDefault(_frameDecode);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /**
+                                                                                                                                                           * Created by Andy on 2017/3/14.
+                                                                                                                                                           */
+
+function add(target, name, file) {
+    target.prototype[name] = file;
+}
+//@add(Tool,"frameEncode", frameEncode);
+//@add(Tool,"frameDecode", frameDecode);
+
+var Tool = function Tool() {
+    _classCallCheck(this, Tool);
+};
+
+add(Tool, "frameEncode", _frameEncode2.default);
+add(Tool, "frameDecode", _frameDecode2.default);
+exports.default = new Tool();
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("/* WEBPACK VAR INJECTION */(function(__dirname) {\n\nvar _path = __webpack_require__(2);\n\nvar _path2 = _interopRequireDefault(_path);\n\nvar _open = __webpack_require__(7);\n\nvar _open2 = _interopRequireDefault(_open);\n\nvar _open3 = __webpack_require__(11);\n\nvar _open4 = _interopRequireDefault(_open3);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nglobal.ROOT_DIS = _path2.default.resolve(__dirname, \"../\"); /**\r\n                                                             * Created by Andy on 2017/12/2.\r\n                                                             */\n\n\nconsole.log(global.ROOT_DIS);\nglobal.SOURCES_DIS = _path2.default.resolve(__dirname, \"../client/src\");\nglobal.ASSETS_DIS = _path2.default.resolve(__dirname, \"../client/src/assets\");\nconsole.log(global.CLIENT_DIS);\nglobal.SERVER_DIS = _path2.default.resolve(__dirname);\nconsole.log(global.SERVER_DIS);\nglobal.DB_DIS = _path2.default.resolve(global.SERVER_DIS, \"DB\");\nconsole.log(global.DB_DIS);\n\nnew _open2.default().open(1110);\n\n(0, _open4.default)(1111);\n/* WEBPACK VAR INJECTION */}.call(exports, \"server\"))//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zZXJ2ZXIvaW5kZXguanM/MDg2MSJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcclxuICogQ3JlYXRlZCBieSBBbmR5IG9uIDIwMTcvMTIvMi5cclxuICovXHJcbmltcG9ydCBwYXRoIGZyb20gXCJwYXRoXCI7XHJcbmdsb2JhbC5ST09UX0RJUyA9IHBhdGgucmVzb2x2ZShfX2Rpcm5hbWUsXCIuLi9cIik7XHJcblxyXG5jb25zb2xlLmxvZyhnbG9iYWwuUk9PVF9ESVMpO1xyXG5nbG9iYWwuU09VUkNFU19ESVMgPSBwYXRoLnJlc29sdmUoX19kaXJuYW1lLFwiLi4vY2xpZW50L3NyY1wiKTtcclxuZ2xvYmFsLkFTU0VUU19ESVMgPSBwYXRoLnJlc29sdmUoX19kaXJuYW1lLFwiLi4vY2xpZW50L3NyYy9hc3NldHNcIik7XHJcbmNvbnNvbGUubG9nKGdsb2JhbC5DTElFTlRfRElTKTtcclxuZ2xvYmFsLlNFUlZFUl9ESVMgPSBwYXRoLnJlc29sdmUoX19kaXJuYW1lKTtcclxuY29uc29sZS5sb2coZ2xvYmFsLlNFUlZFUl9ESVMpO1xyXG5nbG9iYWwuREJfRElTID0gcGF0aC5yZXNvbHZlKGdsb2JhbC5TRVJWRVJfRElTLFwiREJcIik7XHJcbmNvbnNvbGUubG9nKGdsb2JhbC5EQl9ESVMpO1xyXG5cclxuXHJcbmltcG9ydCBDcmVhdGVIdHRwIGZyb20gXCIuL2h0dHAvaW5pdC9vcGVuLmpzXCI7XHJcblxyXG4obmV3IENyZWF0ZUh0dHAoKSkub3BlbigxMTEwKTtcclxuXHJcbmltcG9ydCBjcmVhdGVTb2NrZXQgZnJvbSBcIi4vc29ja2V0L2luaXQvb3Blbi9vcGVuLmpzXCI7XHJcbmNyZWF0ZVNvY2tldCgxMTExKTtcblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc2VydmVyL2luZGV4LmpzIl0sIm1hcHBpbmdzIjoiOztBQUdBO0FBQ0E7OztBQVlBO0FBQ0E7OztBQUdBO0FBQ0E7Ozs7O0FBakJBOzs7OztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUlBO0FBQ0E7QUFFQTtBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///6\n");
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+
+var _path = __webpack_require__(2);
+
+var _path2 = _interopRequireDefault(_path);
+
+var _open = __webpack_require__(7);
+
+var _open2 = _interopRequireDefault(_open);
+
+var _open3 = __webpack_require__(11);
+
+var _open4 = _interopRequireDefault(_open3);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+global.ROOT_DIS = _path2.default.resolve(__dirname, "../"); /**
+                                                             * Created by Andy on 2017/12/2.
+                                                             */
+
+
+console.log(global.ROOT_DIS);
+global.SOURCES_DIS = _path2.default.resolve(__dirname, "../client/src");
+global.ASSETS_DIS = _path2.default.resolve(__dirname, "../client/src/assets");
+console.log(global.CLIENT_DIS);
+global.SERVER_DIS = _path2.default.resolve(__dirname);
+console.log(global.SERVER_DIS);
+global.DB_DIS = _path2.default.resolve(global.SERVER_DIS, "DB");
+console.log(global.DB_DIS);
+
+new _open2.default().open(1110);
+
+(0, _open4.default)(1111);
+/* WEBPACK VAR INJECTION */}.call(exports, "server"))
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\n/**\r\n * Created by Andy on 2017/2/8.\r\n */\n\nvar CreateHttp = function () {\n    function CreateHttp() {\n        _classCallCheck(this, CreateHttp);\n\n        this.url = __webpack_require__(8);\n        this.http = __webpack_require__(9);\n        this.fs = __webpack_require__(3);\n        this.path = __webpack_require__(2);\n        this.zlib = __webpack_require__(10);\n        this.log = __webpack_require__(4);\n    }\n\n    _createClass(CreateHttp, [{\n        key: \"open\",\n        value: function open(port) {\n            var that = this;\n            that.http.createServer(function (req, res) {\n                that.writeHead(req, res).response(req, res);\n            }).listen(port, function () {});\n        }\n    }, {\n        key: \"writeHead\",\n        value: function writeHead(req, res) {\n            var fileName = req.url.split(\"/\").pop();\n            fileName = fileName ? fileName : \"index.html\";\n            var extension = fileName.split(\".\").pop();\n            var contentType = \"text/html\";\n            var contentEncoding = \"gzip\";\n            var useCache = true;\n\n            switch (extension) {\n                case \"css\":\n                    contentType = \"text/css\";\n                    break;\n                case \"html\":\n                    contentType = \"text/html\";\n                    contentEncoding = null;\n                    useCache = false;\n                    break;\n                case \"js\":\n                    contentType = \"application/javascript\";\n                    break;\n                case \"png\":\n                case \"jpg\":\n                case \"jpeg\":\n                case \"gif\":\n                    contentType = \"image/\" + extension;\n                    contentEncoding = null;\n                    break;\n                case \"ico\":\n                    contentType = \"image/\" + extension;\n                    contentEncoding = null;\n                    useCache = false;\n                    break;\n                default:\n                    // ajax请求不会带后缀，默认就是请求json数据类型\n                    // 日后还会有xml数据类型\n                    contentType = \"application/json\";\n                    useCache = false;\n                    contentEncoding = null;\n                    break;\n            }\n\n            var headOption = {\n                \"Content-Type\": contentType\n            };\n            if (useCache) headOption[\"Cache-Control\"] = \"max-age=\" + 30 * 24 * 60 * 60 * 1000;\n            if (contentEncoding) headOption[\"Content-Encoding\"] = contentEncoding;\n\n            res.writeHead(200, headOption);\n\n            return this;\n        }\n    }, {\n        key: \"response\",\n        value: function response(req, res) {\n            var that = this;\n            var xRequestedWith = req.headers[\"x-requested-with\"];\n            var extension = that.path.extname(req.url);\n            var gzipHandler = that.zlib.createGzip();\n\n            if (req.url == \"/\") {\n                console.log(\"来自 \", req.headers.host, \" 的请求\");\n                //初始化客户端；\n                that.fs.readFile(that.path.join(SOURCES_DIS, req.url, \"index.html\"), function (err, chunk) {\n\n                    if (err) {\n                        that.log.err(err);\n                    } else {\n                        res.write(chunk.toString());\n                    }\n                    res.end();\n                });\n            }\n\n            if (extension) {\n                //CDN资源请求；      \n                var fileStream = null;\n                if (/\\.(png|jpg|jpeg|gif|ico)$/.test(extension)) {\n                    // 图片类型转换成“base64”输出\n                    fileStream = that.fs.createReadStream(that.path.join(SOURCES_DIS, req.url));\n                    fileStream.pipe(res);\n                } else {\n\n                    fileStream = that.fs.createReadStream(that.path.join(SOURCES_DIS, req.url));\n                    fileStream.pipe(gzipHandler).pipe(res);\n                }\n            }\n\n            // ajax请求：\n            if (xRequestedWith) {\n                var upsetFinalData = function upsetFinalData(item, targetProp) {\n\n                    if (!Math.round(Math.random())) {\n                        if (item[targetProp] instanceof Array) {\n                            item[targetProp].length = 0;\n                        } else {\n                            item[targetProp] = {};\n                        }\n                    }\n\n                    return item;\n                };\n\n                req.on(\"data\", function (data) {\n\n                    var ajaxData = new that.url.parse(\"?\" + data.toString(), true).query;\n                    var filename = ajaxData.dataType + \".json\";\n                    that.fs.readFile(that.path.join(DB_DIS, req.url, filename), function (err, chunk) {\n                        if (err) {\n                            that.log.err(err);\n                        } else {\n\n                            var scannerData = JSON.parse(chunk.toString());\n                            var finalData = Object.assign(scannerData.items[ajaxData.index], { itemcount: scannerData.itemcount });\n\n                            res.write(JSON.stringify(upsetFinalData(finalData, \"info\")));\n                            res.end();\n                        }\n                    });\n                });\n            }\n\n            return this;\n        }\n    }]);\n\n    return CreateHttp;\n}();\n\nexports.default = CreateHttp;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zZXJ2ZXIvaHR0cC9pbml0L29wZW4uanM/ZDkyZCJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcclxuICogQ3JlYXRlZCBieSBBbmR5IG9uIDIwMTcvMi84LlxyXG4gKi9cclxuXHJcbmV4cG9ydCBkZWZhdWx0IGNsYXNzIENyZWF0ZUh0dHAge1xyXG4gICAgY29uc3RydWN0b3IoKSB7XHJcbiAgICAgICAgdGhpcy51cmwgPSByZXF1aXJlKCd1cmwnKTtcclxuICAgICAgICB0aGlzLmh0dHAgPSByZXF1aXJlKFwiaHR0cFwiKTtcclxuICAgICAgICB0aGlzLmZzID0gcmVxdWlyZShcImZzXCIpO1xyXG4gICAgICAgIHRoaXMucGF0aCA9IHJlcXVpcmUoXCJwYXRoXCIpO1xyXG4gICAgICAgIHRoaXMuemxpYiA9IHJlcXVpcmUoXCJ6bGliXCIpO1xyXG4gICAgICAgIHRoaXMubG9nID0gcmVxdWlyZShcImxvZ1wiKTtcclxuICAgIH1cclxuXHJcbiAgICBvcGVuKHBvcnQpIHtcclxuICAgICAgICBsZXQgdGhhdCA9IHRoaXM7XHJcbiAgICAgICAgdGhhdC5odHRwLmNyZWF0ZVNlcnZlcihmdW5jdGlvbiAocmVxLCByZXMpIHtcclxuICAgICAgICAgICAgdGhhdC53cml0ZUhlYWQocmVxLCByZXMpLnJlc3BvbnNlKHJlcSwgcmVzKTtcclxuICAgICAgICB9KS5saXN0ZW4ocG9ydCwgZnVuY3Rpb24gKCkge1xyXG4gICAgICAgIH0pO1xyXG4gICAgfVxyXG5cclxuICAgIHdyaXRlSGVhZChyZXEsIHJlcykge1xyXG4gICAgICAgIGxldCBmaWxlTmFtZSA9IHJlcS51cmwuc3BsaXQoXCIvXCIpLnBvcCgpO1xyXG4gICAgICAgIGZpbGVOYW1lID0gZmlsZU5hbWUgPyBmaWxlTmFtZSA6IFwiaW5kZXguaHRtbFwiO1xyXG4gICAgICAgIGxldCBleHRlbnNpb24gPSBmaWxlTmFtZS5zcGxpdChcIi5cIikucG9wKCk7XHJcbiAgICAgICAgbGV0IGNvbnRlbnRUeXBlID0gXCJ0ZXh0L2h0bWxcIjtcclxuICAgICAgICBsZXQgY29udGVudEVuY29kaW5nID0gXCJnemlwXCJcclxuICAgICAgICBsZXQgdXNlQ2FjaGUgPSB0cnVlO1xyXG5cclxuICAgICAgICBzd2l0Y2ggKGV4dGVuc2lvbikge1xyXG4gICAgICAgICAgICBjYXNlIFwiY3NzXCI6XHJcbiAgICAgICAgICAgICAgICBjb250ZW50VHlwZSA9IFwidGV4dC9jc3NcIjtcclxuICAgICAgICAgICAgICAgIGJyZWFrO1xyXG4gICAgICAgICAgICBjYXNlIFwiaHRtbFwiOlxyXG4gICAgICAgICAgICAgICAgY29udGVudFR5cGUgPSBcInRleHQvaHRtbFwiOyAgICAgICAgICAgICAgICBcclxuICAgICAgICAgICAgICAgIGNvbnRlbnRFbmNvZGluZyA9IG51bGw7XHJcbiAgICAgICAgICAgICAgICB1c2VDYWNoZSA9IGZhbHNlO1xyXG4gICAgICAgICAgICAgICAgYnJlYWs7XHJcbiAgICAgICAgICAgIGNhc2UgXCJqc1wiOlxyXG4gICAgICAgICAgICAgICAgY29udGVudFR5cGUgPSBcImFwcGxpY2F0aW9uL2phdmFzY3JpcHRcIjtcclxuICAgICAgICAgICAgICAgIGJyZWFrO1xyXG4gICAgICAgICAgICBjYXNlIFwicG5nXCI6XHJcbiAgICAgICAgICAgIGNhc2UgXCJqcGdcIjpcclxuICAgICAgICAgICAgY2FzZSBcImpwZWdcIjpcclxuICAgICAgICAgICAgY2FzZSBcImdpZlwiOlxyXG4gICAgICAgICAgICAgICAgY29udGVudFR5cGUgPSBcImltYWdlL1wiICsgZXh0ZW5zaW9uOyAgICAgICAgICAgICAgICBcclxuICAgICAgICAgICAgICAgIGNvbnRlbnRFbmNvZGluZyA9IG51bGw7XHJcbiAgICAgICAgICAgICAgICBicmVhaztcclxuICAgICAgICAgICAgY2FzZSBcImljb1wiOlxyXG4gICAgICAgICAgICAgICAgY29udGVudFR5cGUgPSBcImltYWdlL1wiICsgZXh0ZW5zaW9uOyAgICAgICAgICAgICAgICBcclxuICAgICAgICAgICAgICAgIGNvbnRlbnRFbmNvZGluZyA9IG51bGw7XHJcbiAgICAgICAgICAgICAgICB1c2VDYWNoZSA9IGZhbHNlO1xyXG4gICAgICAgICAgICAgICAgYnJlYWs7XHJcbiAgICAgICAgICAgIGRlZmF1bHQ6XHJcbiAgICAgICAgICAgIC8vIGFqYXjor7fmsYLkuI3kvJrluKblkI7nvIDvvIzpu5jorqTlsLHmmK/or7fmsYJqc29u5pWw5o2u57G75Z6LXHJcbiAgICAgICAgICAgIC8vIOaXpeWQjui/mOS8muaciXhtbOaVsOaNruexu+Wei1xyXG4gICAgICAgICAgICAgICAgY29udGVudFR5cGUgPSBcImFwcGxpY2F0aW9uL2pzb25cIjtcclxuICAgICAgICAgICAgICAgIHVzZUNhY2hlID0gZmFsc2U7XHJcbiAgICAgICAgICAgICAgICBjb250ZW50RW5jb2RpbmcgPSBudWxsO1xyXG4gICAgICAgICAgICAgICAgYnJlYWs7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICBsZXQgaGVhZE9wdGlvbiA9IHtcclxuICAgICAgICAgICAgXCJDb250ZW50LVR5cGVcIjpjb250ZW50VHlwZVxyXG4gICAgICAgIH07XHJcbiAgICAgICAgaWYodXNlQ2FjaGUpaGVhZE9wdGlvbltcIkNhY2hlLUNvbnRyb2xcIl0gPSBcIm1heC1hZ2U9XCIgKyAzMCoyNCo2MCo2MCoxMDAwO1xyXG4gICAgICAgIGlmKGNvbnRlbnRFbmNvZGluZykgaGVhZE9wdGlvbltcIkNvbnRlbnQtRW5jb2RpbmdcIl0gPSBjb250ZW50RW5jb2Rpbmc7ICAgICAgICBcclxuXHJcbiAgICAgICAgcmVzLndyaXRlSGVhZCgyMDAsIGhlYWRPcHRpb24pO1xyXG5cclxuICAgICAgICByZXR1cm4gdGhpcztcclxuICAgIH1cclxuXHJcbiAgICByZXNwb25zZShyZXEsIHJlcykge1xyXG4gICAgICAgIGxldCB0aGF0ID0gdGhpcztcclxuICAgICAgICBsZXQgeFJlcXVlc3RlZFdpdGggPSByZXEuaGVhZGVyc1tcIngtcmVxdWVzdGVkLXdpdGhcIl07XHJcbiAgICAgICAgbGV0IGV4dGVuc2lvbiA9IHRoYXQucGF0aC5leHRuYW1lKHJlcS51cmwpO1xyXG4gICAgICAgIGxldCBnemlwSGFuZGxlciA9IHRoYXQuemxpYi5jcmVhdGVHemlwKCk7XHJcblxyXG4gICAgICAgIGlmIChyZXEudXJsID09IFwiL1wiKSB7XHJcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKFwi5p2l6IeqIFwiLCByZXEuaGVhZGVycy5ob3N0LCBcIiDnmoTor7fmsYJcIik7XHJcbiAgICAgICAgICAgIC8v5Yid5aeL5YyW5a6i5oi356uv77ybXHJcbiAgICAgICAgICAgIHRoYXQuZnMucmVhZEZpbGUodGhhdC5wYXRoLmpvaW4oU09VUkNFU19ESVMsIHJlcS51cmwsIFwiaW5kZXguaHRtbFwiKSwgZnVuY3Rpb24gKGVyciwgY2h1bmspIHtcclxuXHJcbiAgICAgICAgICAgICAgICBpZiAoZXJyKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgdGhhdC5sb2cuZXJyKGVycik7XHJcblxyXG4gICAgICAgICAgICAgICAgfSBlbHNlIHtcclxuICAgICAgICAgICAgICAgICAgICByZXMud3JpdGUoY2h1bmsudG9TdHJpbmcoKSk7XHJcbiAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgICByZXMuZW5kKCk7XHJcbiAgICAgICAgICAgIH0pO1xyXG5cclxuICAgICAgICB9IFxyXG4gICAgICAgIFxyXG4gICAgICAgIGlmIChleHRlbnNpb24pIHtcclxuICAgICAgICAgICAgLy9DRE7otYTmupDor7fmsYLvvJsgICAgICBcclxuICAgICAgICAgICAgbGV0IGZpbGVTdHJlYW0gPSBudWxsO1xyXG4gICAgICAgICAgICBpZiAoL1xcLihwbmd8anBnfGpwZWd8Z2lmfGljbykkLy50ZXN0KGV4dGVuc2lvbikpIHtcclxuICAgICAgICAgICAgICAgIC8vIOWbvueJh+exu+Wei+i9rOaNouaIkOKAnGJhc2U2NOKAnei+k+WHulxyXG4gICAgICAgICAgICAgICAgZmlsZVN0cmVhbSA9IHRoYXQuZnMuY3JlYXRlUmVhZFN0cmVhbSh0aGF0LnBhdGguam9pbihTT1VSQ0VTX0RJUywgcmVxLnVybCkpOyAgICAgICAgICAgIFxyXG4gICAgICAgICAgICAgICAgZmlsZVN0cmVhbS5waXBlKHJlcyk7XHJcblxyXG4gICAgICAgICAgICB9ZWxzZXtcclxuXHJcbiAgICAgICAgICAgICAgICBmaWxlU3RyZWFtID0gdGhhdC5mcy5jcmVhdGVSZWFkU3RyZWFtKHRoYXQucGF0aC5qb2luKFNPVVJDRVNfRElTLCByZXEudXJsKSk7XHJcbiAgICAgICAgICAgICAgICBmaWxlU3RyZWFtLnBpcGUoZ3ppcEhhbmRsZXIpLnBpcGUocmVzKTtcclxuXHJcbiAgICAgICAgICAgIH0gXHJcblxyXG4gICAgICAgIH0gXHJcbiAgICAgICAgXHJcbiAgICAgICAgLy8gYWpheOivt+axgu+8mlxyXG4gICAgICAgIGlmICh4UmVxdWVzdGVkV2l0aCkge1xyXG4gICAgICAgICAgICBmdW5jdGlvbiB1cHNldEZpbmFsRGF0YShpdGVtLCB0YXJnZXRQcm9wKSB7XHJcblxyXG4gICAgICAgICAgICAgICAgaWYgKCFNYXRoLnJvdW5kKE1hdGgucmFuZG9tKCkpKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgaWYgKGl0ZW1bdGFyZ2V0UHJvcF0gaW5zdGFuY2VvZiBBcnJheSkge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBpdGVtW3RhcmdldFByb3BdLmxlbmd0aCA9IDBcclxuICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xyXG4gICAgICAgICAgICAgICAgICAgICAgICBpdGVtW3RhcmdldFByb3BdID0ge307XHJcbiAgICAgICAgICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICAgICAgfVxyXG4gICAgICAgIFxyXG4gICAgICAgICAgICAgICAgcmV0dXJuIGl0ZW07XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICAgICBcclxuICAgICAgICAgICAgcmVxLm9uKFwiZGF0YVwiLCBmdW5jdGlvbiAoZGF0YSkge1xyXG5cclxuICAgICAgICAgICAgICAgIGxldCBhamF4RGF0YSA9IG5ldyB0aGF0LnVybC5wYXJzZShcIj9cIiArIGRhdGEudG9TdHJpbmcoKSwgdHJ1ZSkucXVlcnk7XHJcbiAgICAgICAgICAgICAgICBsZXQgZmlsZW5hbWUgPSBhamF4RGF0YS5kYXRhVHlwZSArIFwiLmpzb25cIjtcclxuICAgICAgICAgICAgICAgIHRoYXQuZnMucmVhZEZpbGUodGhhdC5wYXRoLmpvaW4oREJfRElTLCByZXEudXJsLCBmaWxlbmFtZSksIGZ1bmN0aW9uIChlcnIsIGNodW5rKSB7XHJcbiAgICAgICAgICAgICAgICAgICAgaWYoZXJyKXtcclxuICAgICAgICAgICAgICAgICAgICAgICAgdGhhdC5sb2cuZXJyKGVycik7XHJcbiAgICAgICAgICAgICAgICAgICAgfSBlbHNle1xyXG5cclxuXHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGxldCBzY2FubmVyRGF0YSA9IEpTT04ucGFyc2UoY2h1bmsudG9TdHJpbmcoKSk7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIGxldCBmaW5hbERhdGEgPSBPYmplY3QuYXNzaWduKHNjYW5uZXJEYXRhLml0ZW1zW2FqYXhEYXRhLmluZGV4XSwge2l0ZW1jb3VudDogc2Nhbm5lckRhdGEuaXRlbWNvdW50fSk7XHJcblxyXG4gICAgICAgICAgICAgICAgICAgICAgICByZXMud3JpdGUoSlNPTi5zdHJpbmdpZnkodXBzZXRGaW5hbERhdGEoZmluYWxEYXRhLCBcImluZm9cIikpKTtcclxuICAgICAgICAgICAgICAgICAgICAgICAgcmVzLmVuZCgpO1xyXG4gICAgICAgICAgICAgICAgICAgIH0gICBcclxuICAgICAgICAgICAgICAgIH0pO1xyXG4gICAgICAgICAgICB9KTtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIHJldHVybiB0aGlzO1xyXG4gICAgfVxyXG5cclxufVxyXG5cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc2VydmVyL2h0dHAvaW5pdC9vcGVuLmpzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUE7Ozs7QUFJQTtBQUNBO0FBQUE7QUFDQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7OztBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTs7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBOUJBO0FBQ0E7QUFnQ0E7QUFDQTtBQURBO0FBR0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7OztBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBRUE7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUFBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOzs7Ozs7QUFqSkEiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///7\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Created by Andy on 2017/2/8.
+ */
+
+var CreateHttp = function () {
+    function CreateHttp() {
+        _classCallCheck(this, CreateHttp);
+
+        this.url = __webpack_require__(8);
+        this.http = __webpack_require__(9);
+        this.fs = __webpack_require__(3);
+        this.path = __webpack_require__(2);
+        this.zlib = __webpack_require__(10);
+        this.log = __webpack_require__(4);
+    }
+
+    _createClass(CreateHttp, [{
+        key: "open",
+        value: function open(port) {
+            var that = this;
+            that.http.createServer(function (req, res) {
+                that.writeHead(req, res).response(req, res);
+            }).listen(port, function () {});
+        }
+    }, {
+        key: "writeHead",
+        value: function writeHead(req, res) {
+            var fileName = req.url.split("/").pop();
+            fileName = fileName ? fileName : "index.html";
+            var extension = fileName.split(".").pop();
+            var contentType = "text/html";
+            var contentEncoding = "gzip";
+            var useCache = true;
+
+            switch (extension) {
+                case "css":
+                    contentType = "text/css";
+                    break;
+                case "html":
+                    contentType = "text/html";
+                    contentEncoding = null;
+                    useCache = false;
+                    break;
+                case "js":
+                    contentType = "application/javascript";
+                    break;
+                case "png":
+                case "jpg":
+                case "jpeg":
+                case "gif":
+                    contentType = "image/" + extension;
+                    contentEncoding = null;
+                    break;
+                case "ico":
+                    contentType = "image/" + extension;
+                    contentEncoding = null;
+                    useCache = false;
+                    break;
+                default:
+                    // ajax请求不会带后缀，默认就是请求json数据类型
+                    // 日后还会有xml数据类型
+                    contentType = "application/json";
+                    useCache = false;
+                    contentEncoding = null;
+                    break;
+            }
+
+            var headOption = {
+                "Content-Type": contentType
+            };
+            if (useCache) headOption["Cache-Control"] = "max-age=" + 30 * 24 * 60 * 60 * 1000;
+            if (contentEncoding) headOption["Content-Encoding"] = contentEncoding;
+
+            res.writeHead(200, headOption);
+
+            return this;
+        }
+    }, {
+        key: "response",
+        value: function response(req, res) {
+            var that = this;
+            var xRequestedWith = req.headers["x-requested-with"];
+            var extension = that.path.extname(req.url);
+            var gzipHandler = that.zlib.createGzip();
+
+            if (req.url == "/") {
+                console.log("来自 ", req.headers.host, " 的请求");
+                //初始化客户端；
+                that.fs.readFile(that.path.join(SOURCES_DIS, req.url, "index.html"), function (err, chunk) {
+
+                    if (err) {
+                        that.log.debug(err);
+                    } else {
+                        res.write(chunk.toString());
+                    }
+                    res.end();
+                });
+            }
+
+            if (extension) {
+                //CDN资源请求；      
+                var fileStream = null;
+                if (/\.(png|jpg|jpeg|gif|ico)$/.test(extension)) {
+                    // 图片类型转换成“base64”输出
+                    fileStream = that.fs.createReadStream(that.path.join(SOURCES_DIS, req.url));
+                    fileStream.pipe(res);
+                } else {
+
+                    fileStream = that.fs.createReadStream(that.path.join(SOURCES_DIS, req.url));
+                    fileStream.pipe(gzipHandler).pipe(res);
+                }
+            }
+
+            // ajax请求：
+            if (xRequestedWith) {
+                var upsetFinalData = function upsetFinalData(item, targetProp) {
+
+                    if (!Math.round(Math.random())) {
+                        if (item[targetProp] instanceof Array) {
+                            item[targetProp].length = 0;
+                        } else {
+                            item[targetProp] = {};
+                        }
+                    }
+
+                    return item;
+                };
+
+                req.on("data", function (data) {
+
+                    var ajaxData = new that.url.parse("?" + data.toString(), true).query;
+                    var filename = ajaxData.dataType + ".json";
+                    that.fs.readFile(that.path.join(DB_DIS, req.url, filename), function (err, chunk) {
+                        if (err) {
+                            that.log.debug(err);
+                        } else {
+
+                            var scannerData = JSON.parse(chunk.toString());
+                            var finalData = Object.assign(scannerData.items[ajaxData.index], { itemcount: scannerData.itemcount });
+
+                            res.write(JSON.stringify(upsetFinalData(finalData, "info")));
+                            res.end();
+                        }
+                    });
+                });
+            }
+
+            return this;
+        }
+    }]);
+
+    return CreateHttp;
+}();
+
+exports.default = CreateHttp;
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"url\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiOC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9leHRlcm5hbCBcInVybFwiP2NhZWMiXSwic291cmNlc0NvbnRlbnQiOlsibW9kdWxlLmV4cG9ydHMgPSByZXF1aXJlKFwidXJsXCIpO1xuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIGV4dGVybmFsIFwidXJsXCJcbi8vIG1vZHVsZSBpZCA9IDhcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///8\n");
+module.exports = require("url");
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"http\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiOS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9leHRlcm5hbCBcImh0dHBcIj84ZTQ0Il0sInNvdXJjZXNDb250ZW50IjpbIm1vZHVsZS5leHBvcnRzID0gcmVxdWlyZShcImh0dHBcIik7XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gZXh0ZXJuYWwgXCJodHRwXCJcbi8vIG1vZHVsZSBpZCA9IDlcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///9\n");
+module.exports = require("http");
 
 /***/ }),
 /* 10 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"zlib\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTAuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vZXh0ZXJuYWwgXCJ6bGliXCI/MzdiNiJdLCJzb3VyY2VzQ29udGVudCI6WyJtb2R1bGUuZXhwb3J0cyA9IHJlcXVpcmUoXCJ6bGliXCIpO1xuXG5cbi8vLy8vLy8vLy8vLy8vLy8vL1xuLy8gV0VCUEFDSyBGT09URVJcbi8vIGV4dGVybmFsIFwiemxpYlwiXG4vLyBtb2R1bGUgaWQgPSAxMFxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///10\n");
+module.exports = require("zlib");
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (port) {\n    __webpack_require__(12).createServer(function (socket) {\n        socket.on('error', function (e) {\n            console.log(e);\n        });\n        socket.on('data', function (e) {\n            var frame = _exports2.default.frameDecode(e);\n            //第一次握手\n            if (frame.FIN === 0) {\n                console.log(\"握手\");\n                (0, _shakehand2.default)(e, socket);\n            }\n            //数据交互\n            else {\n                    (0, _host2.default)(frame, socket);\n                }\n        });\n    }).listen(port, function () {});\n};\n\nvar _exports = __webpack_require__(5);\n\nvar _exports2 = _interopRequireDefault(_exports);\n\nvar _host = __webpack_require__(15);\n\nvar _host2 = _interopRequireDefault(_host);\n\nvar _shakehand = __webpack_require__(28);\n\nvar _shakehand2 = _interopRequireDefault(_shakehand);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTEuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbml0L29wZW4vb3Blbi5qcz9mN2YxIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB0b29sIGZyb20gXCJ3c1NlcnZlci9zZXJ2aWNlcy90b29sL2V4cG9ydHNcIjtcbmltcG9ydCBob3N0IGZyb20gXCJ3c1NlcnZlci9pbnRlcmFjdGl2ZS9ob3N0XCI7XG5pbXBvcnQgaGFuZHNoYWtlIGZyb20gXCIuLy4uL3NoYWtlaGFuZC9zaGFrZWhhbmRcIjtcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gKHBvcnQpIHtcbiAgICByZXF1aXJlKCduZXQnKS5jcmVhdGVTZXJ2ZXIoZnVuY3Rpb24gKHNvY2tldCkge1xuICAgICAgICBzb2NrZXQub24oJ2Vycm9yJywgZnVuY3Rpb24gKGUpIHtcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKGUpO1xuICAgICAgICB9KTtcbiAgICAgICAgc29ja2V0Lm9uKCdkYXRhJywgZnVuY3Rpb24gKGUpIHtcbiAgICAgICAgICAgIGxldCBmcmFtZSA9IHRvb2wuZnJhbWVEZWNvZGUoZSk7XG4gICAgICAgICAgICAvL+esrOS4gOasoeaPoeaJi1xuICAgICAgICAgICAgaWYgKGZyYW1lLkZJTiA9PT0gMCkge1xuICAgICAgICAgICAgICAgIGNvbnNvbGUubG9nKFwi5o+h5omLXCIpO1xuICAgICAgICAgICAgICAgIGhhbmRzaGFrZShlLCBzb2NrZXQpO1xuICAgICAgICAgICAgfVxuICAgICAgICAgICAgLy/mlbDmja7kuqTkupJcbiAgICAgICAgICAgIGVsc2Uge1xuICAgICAgICAgICAgICAgIGhvc3QoZnJhbWUsIHNvY2tldCk7XG4gICAgICAgICAgICB9XG4gICAgICAgIH0pO1xuXG4gICAgfSkubGlzdGVuKHBvcnQsICgpID0+IHt9KTtcbn1cblxuXG5cbi8vIFdFQlBBQ0sgRk9PVEVSIC8vXG4vLyBzZXJ2ZXIvc29ja2V0L2luaXQvb3Blbi9vcGVuLmpzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFJQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUpBO0FBTUE7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBeEJBO0FBQ0E7OztBQUFBO0FBQ0E7OztBQUFBO0FBQ0E7OztBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///11\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (port) {
+    var netServer = __webpack_require__(12).createServer(function (socket) {
+        socket.on('error', function (e) {
+            console.log(e);
+        });
+        socket.on('data', function (e) {
+            var frame = _exports2.default.frameDecode(e);
+            //第一次握手
+            if (frame.FIN === 0) {
+                console.log("握手");
+                (0, _shakehand2.default)(e, socket);
+            }
+            //数据交互
+            else {
+                    (0, _host2.default)(frame, socket);
+                }
+        });
+    }).listen(port, function () {});
+};
+
+var _exports = __webpack_require__(5);
+
+var _exports2 = _interopRequireDefault(_exports);
+
+var _host = __webpack_require__(15);
+
+var _host2 = _interopRequireDefault(_host);
+
+var _shakehand = __webpack_require__(28);
+
+var _shakehand2 = _interopRequireDefault(_shakehand);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"net\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTIuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vZXh0ZXJuYWwgXCJuZXRcIj9lYjg1Il0sInNvdXJjZXNDb250ZW50IjpbIm1vZHVsZS5leHBvcnRzID0gcmVxdWlyZShcIm5ldFwiKTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyBleHRlcm5hbCBcIm5ldFwiXG4vLyBtb2R1bGUgaWQgPSAxMlxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///12\n");
+module.exports = require("net");
 
 /***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (e) {\n    var s = [],\n        o = new Buffer(e.PayloadData),\n        l = o.length;\n    //输入第一个字节\n    s.push((e.FIN << 7) + e.Opcode);\n\n    //输入第二个字节，判断它的长度并放入相应的后续长度消息\n    //永远不使用掩码\n    if (l < 126) {\n        s.push(l);\n    } else if (l < 0x10000) {\n        s.push(126, (l & 0xFF00) >> 8, l & 0xFF);\n    } else {\n        //8字节数据，前4字节一般没用留空;\n\n        s.push(127, 0, 0, 0, 0, (l & 0xFF000000) >> 24, (l & 0xFF0000) >> 16, (l & 0xFF00) >> 8, l & 0xFF);\n    }\n\n    //返回头部分和数据部分的合并缓冲区\n    return Buffer.concat([new Buffer(s), o]);\n};//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9zZXJ2aWNlcy90b29sL3BheWxvYWQuY29tcGlsZXIvZnJhbWVFbmNvZGUuanM/NzJlMSJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzExLzQuXG4gKi9cbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIChlKSB7XG4gICAgdmFyIHMgPSBbXSwgbyA9IG5ldyBCdWZmZXIoZS5QYXlsb2FkRGF0YSksIGwgPSBvLmxlbmd0aDtcbiAgICAvL+i+k+WFpeesrOS4gOS4quWtl+iKglxuICAgIHMucHVzaCgoZS5GSU4gPDwgNykgKyBlLk9wY29kZSk7XG5cbiAgICAvL+i+k+WFpeesrOS6jOS4quWtl+iKgu+8jOWIpOaWreWug+eahOmVv+W6puW5tuaUvuWFpeebuOW6lOeahOWQjue7remVv+W6pua2iOaBr1xuICAgIC8v5rC46L+c5LiN5L2/55So5o6p56CBXG4gICAgaWYgKGwgPCAxMjYpIHtcbiAgICAgICAgcy5wdXNoKGwpO1xuICAgIH1cbiAgICBlbHNlIGlmIChsIDwgMHgxMDAwMCkge1xuICAgICAgICBzLnB1c2goMTI2LCAobCAmIDB4RkYwMCkgPj4gOCwgbCAmIDB4RkYpO1xuICAgIH1cbiAgICBlbHNlIHtcbiAgICAgICAgLy845a2X6IqC5pWw5o2u77yM5YmNNOWtl+iKguS4gOiIrOayoeeUqOeVmeepujtcblxuICAgICAgICBzLnB1c2goMTI3LCAwLCAwLCAwLCAwLCAobCAmIDB4RkYwMDAwMDApID4+IDI0LCAobCAmIDB4RkYwMDAwKSA+PiAxNiwgKGwgJiAweEZGMDApID4+IDgsIGwgJiAweEZGKTtcbiAgICB9XG5cbiAgICAvL+i/lOWbnuWktOmDqOWIhuWSjOaVsOaNrumDqOWIhueahOWQiOW5tue8k+WGsuWMulxuICAgIHJldHVybiBCdWZmZXIuY29uY2F0KFtuZXcgQnVmZmVyKHMpLCBvXSk7XG59XG5cblxuLy8gV0VCUEFDSyBGT09URVIgLy9cbi8vIHNlcnZlci9zb2NrZXQvc2VydmljZXMvdG9vbC9wYXlsb2FkLmNvbXBpbGVyL2ZyYW1lRW5jb2RlLmpzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFHQTtBQUNBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///13\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (e) {
+    var s = [],
+        o = new Buffer(e.PayloadData),
+        l = o.length;
+    //输入第一个字节
+    s.push((e.FIN << 7) + e.Opcode);
+
+    //输入第二个字节，判断它的长度并放入相应的后续长度消息
+    //永远不使用掩码
+    if (l < 126) {
+        s.push(l);
+    } else if (l < 0x10000) {
+        s.push(126, (l & 0xFF00) >> 8, l & 0xFF);
+    } else {
+        //8字节数据，前4字节一般没用留空;
+
+        s.push(127, 0, 0, 0, 0, (l & 0xFF000000) >> 24, (l & 0xFF0000) >> 16, (l & 0xFF00) >> 8, l & 0xFF);
+    }
+
+    //返回头部分和数据部分的合并缓冲区
+    return Buffer.concat([new Buffer(s), o]);
+};
 
 /***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (e) {\n    var i = 0,\n        j = void 0,\n        s = void 0,\n        frame = {\n        //解析前两个字节的基本数据\n        FIN: e[i] >> 7, Opcode: e[i++] & 15, Mask: e[i] >> 7,\n        PayloadLength: e[i++] & 0x7F\n    };\n\n    if (frame.PayloadLength == 126) {\n        //处理特殊长度126和127\n        frame.PayloadLength = (e[i++] << 8) + e[i++];\n    }\n    if (frame.PayloadLength == 127) {\n        i += 4; //长度一般用四字节的整型，前四个字节通常为长整形留空的\n        frame.PayloadLength = (e[i++] << 24) + (e[i++] << 16) + (e[i++] << 8) + e[i++];\n    }\n    if (frame.Mask) {\n        //判断是否使用掩码\n        //获取掩码实体\n        frame.MaskingKey = [e[i++], e[i++], e[i++], e[i++]];\n        //对数据和掩码做异或运算\n        for (j = 0, s = []; j < frame.PayloadLength; j++) {\n            s.push(e[i + j] ^ frame.MaskingKey[j % 4]);\n        }\n    } else {\n        s = e.slice(i, frame.PayloadLength); //否则直接使用数据\n    }\n    //数组转换成缓冲区来使用\n    s = new Buffer(s);\n    //如果有必要则把缓冲区转换成字符串来使用\n    if (frame.Opcode == 1) {\n        s = s.toString();\n    }\n    //设置上数据部分\n    frame.PayloadData = s;\n    //返回数据帧\n    return frame;\n};//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTQuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9zZXJ2aWNlcy90b29sL3BheWxvYWQuY29tcGlsZXIvZnJhbWVEZWNvZGUuanM/MGY4MSJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzExLzQuXG4gKi9cbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIChlKSB7XG4gICAgbGV0IGkgPSAwLCBqLCBzLCBmcmFtZSA9IHtcbiAgICAgICAgLy/op6PmnpDliY3kuKTkuKrlrZfoioLnmoTln7rmnKzmlbDmja5cbiAgICAgICAgRklOOiBlW2ldID4+IDcsIE9wY29kZTogZVtpKytdICYgMTUsIE1hc2s6IGVbaV0gPj4gNyxcbiAgICAgICAgUGF5bG9hZExlbmd0aDogZVtpKytdICYgMHg3RlxuICAgIH07XG5cbiAgICBpZiAoZnJhbWUuUGF5bG9hZExlbmd0aCA9PSAxMjYpIHsgICAvL+WkhOeQhueJueauiumVv+W6pjEyNuWSjDEyN1xuICAgICAgICBmcmFtZS5QYXlsb2FkTGVuZ3RoID0gKGVbaSsrXSA8PCA4KSArIGVbaSsrXTtcbiAgICB9XG4gICAgaWYgKGZyYW1lLlBheWxvYWRMZW5ndGggPT0gMTI3KSB7XG4gICAgICAgIGkgKz0gNDsgLy/plb/luqbkuIDoiKznlKjlm5vlrZfoioLnmoTmlbTlnovvvIzliY3lm5vkuKrlrZfoioLpgJrluLjkuLrplb/mlbTlvaLnlZnnqbrnmoRcbiAgICAgICAgZnJhbWUuUGF5bG9hZExlbmd0aCA9IChlW2krK10gPDwgMjQpICsgKGVbaSsrXSA8PCAxNikgKyAoZVtpKytdIDw8IDgpICsgZVtpKytdO1xuICAgIH1cbiAgICBpZiAoZnJhbWUuTWFzaykgey8v5Yik5pat5piv5ZCm5L2/55So5o6p56CBXG4gICAgICAgIC8v6I635Y+W5o6p56CB5a6e5L2TXG4gICAgICAgIGZyYW1lLk1hc2tpbmdLZXkgPSBbZVtpKytdLCBlW2krK10sIGVbaSsrXSwgZVtpKytdXTtcbiAgICAgICAgLy/lr7nmlbDmja7lkozmjqnnoIHlgZrlvILmiJbov5DnrpdcbiAgICAgICAgZm9yIChqID0gMCwgcyA9IFtdOyBqIDwgZnJhbWUuUGF5bG9hZExlbmd0aDsgaisrKVxuICAgICAgICAgICAgcy5wdXNoKGVbaSArIGpdIF4gZnJhbWUuTWFza2luZ0tleVtqICUgNF0pO1xuICAgIH1cbiAgICBlbHNlIHtcbiAgICAgICAgcyA9IGUuc2xpY2UoaSwgZnJhbWUuUGF5bG9hZExlbmd0aCk7Ly/lkKbliJnnm7TmjqXkvb/nlKjmlbDmja5cbiAgICB9XG4gICAgLy/mlbDnu4TovazmjaLmiJDnvJPlhrLljLrmnaXkvb/nlKhcbiAgICBzID0gbmV3IEJ1ZmZlcihzKTtcbiAgICAvL+WmguaenOacieW/heimgeWImeaKiue8k+WGsuWMuui9rOaNouaIkOWtl+espuS4suadpeS9v+eUqFxuICAgIGlmIChmcmFtZS5PcGNvZGUgPT0gMSkge1xuICAgICAgICBzID0gcy50b1N0cmluZygpO1xuICAgIH1cbiAgICAvL+iuvue9ruS4iuaVsOaNrumDqOWIhlxuICAgIGZyYW1lLlBheWxvYWREYXRhID0gcztcbiAgICAvL+i/lOWbnuaVsOaNruW4p1xuICAgIHJldHVybiBmcmFtZTtcbn1cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc2VydmVyL3NvY2tldC9zZXJ2aWNlcy90b29sL3BheWxvYWQuY29tcGlsZXIvZnJhbWVEZWNvZGUuanMiXSwibWFwcGluZ3MiOiI7Ozs7OztBQUdBO0FBQ0E7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFIQTtBQUNBO0FBS0E7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBREE7QUFFQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///14\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (e) {
+    var i = 0,
+        j = void 0,
+        s = void 0,
+        frame = {
+        //解析前两个字节的基本数据
+        FIN: e[i] >> 7, Opcode: e[i++] & 15, Mask: e[i] >> 7,
+        PayloadLength: e[i++] & 0x7F
+    };
+
+    if (frame.PayloadLength == 126) {
+        //处理特殊长度126和127
+        frame.PayloadLength = (e[i++] << 8) + e[i++];
+    }
+    if (frame.PayloadLength == 127) {
+        i += 4; //长度一般用四字节的整型，前四个字节通常为长整形留空的
+        frame.PayloadLength = (e[i++] << 24) + (e[i++] << 16) + (e[i++] << 8) + e[i++];
+    }
+    if (frame.Mask) {
+        //判断是否使用掩码
+        //获取掩码实体
+        frame.MaskingKey = [e[i++], e[i++], e[i++], e[i++]];
+        //对数据和掩码做异或运算
+        for (j = 0, s = []; j < frame.PayloadLength; j++) {
+            s.push(e[i + j] ^ frame.MaskingKey[j % 4]);
+        }
+    } else {
+        s = e.slice(i, frame.PayloadLength); //否则直接使用数据
+    }
+    //数组转换成缓冲区来使用
+    s = new Buffer(s);
+    //如果有必要则把缓冲区转换成字符串来使用
+    if (frame.Opcode == 1) {
+        s = s.toString();
+    }
+    //设置上数据部分
+    frame.PayloadData = s;
+    //返回数据帧
+    return frame;
+};
 
 /***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (frame, socket) {\n    switch (frame.Opcode) {\n        case 8:\n            var data = frame.PayloadData.slice(2).toString();\n            console.log(\"会话已经结束:\", socket, data);\n            if (socket.uid) (0, _disconnectChanel2.default)(socket, data);\n            if (socket.uid) (0, _reduceUser2.default)(socket, data);\n            socket.end();\n            socket.destroy(); //删除断线的session，\n            break;\n        default:\n            _socketStorage2.default.setStorage(\"opcode\", frame.Opcode);\n            var data = JSON.parse(frame.PayloadData.toString()) || \"\";\n            switch (data.port) {\n                case 0x00:\n                    (0, _heartBeat2.default)(socket, data);\n                    break;\n                case 0x01:\n                    //返回一個pass信號，並存儲用戶數據\n                    (0, _userRegister2.default)(socket, data);\n                    break;\n                case 0x02:\n                    //协助通道的询问\n                    (0, _connectAsk2.default)(socket, data);\n                    break;\n                case 0x03:\n                    //协助通道的应答\n                    (0, _connectAccept2.default)(socket, data);\n                    break;\n                case 0x04:\n                    (0, _connectReject2.default)(socket, data);\n                    break;\n                case 0x05:\n                    //远程协助交互通道\n                    (0, _interActivePassageway2.default)(socket, data);\n                    break;\n                case 0x06:\n                    break;\n                case 0x07:\n                    break;\n                case 0x08:\n                    (0, _charChanel2.default)(data);\n                    break;\n                case 0x09:\n                    //交接callbackID\n                    (0, _ajaxDataRegister2.default)(socket, data);\n                    break;\n                case 0x0A:\n                    //交接scroll坐标\n                    (0, _scrollCoordinate2.default)(socket, data);\n                    break;\n                case 0xFE:\n                    (0, _disconnectChanel2.default)(socket, data);\n                    break;\n                case 0xFF:\n                    //断开协助通道//关闭ws\n                    //that.close(data);\n                    //console.log(\"中断远程用户\");\n                    break;\n                default:\n                    break;\n            }\n            break;\n    }\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _disconnectChanel = __webpack_require__(17);\n\nvar _disconnectChanel2 = _interopRequireDefault(_disconnectChanel);\n\nvar _reduceUser = __webpack_require__(18);\n\nvar _reduceUser2 = _interopRequireDefault(_reduceUser);\n\nvar _heartBeat = __webpack_require__(19);\n\nvar _heartBeat2 = _interopRequireDefault(_heartBeat);\n\nvar _userRegister = __webpack_require__(20);\n\nvar _userRegister2 = _interopRequireDefault(_userRegister);\n\nvar _connectAsk = __webpack_require__(21);\n\nvar _connectAsk2 = _interopRequireDefault(_connectAsk);\n\nvar _connectAccept = __webpack_require__(22);\n\nvar _connectAccept2 = _interopRequireDefault(_connectAccept);\n\nvar _connectReject = __webpack_require__(23);\n\nvar _connectReject2 = _interopRequireDefault(_connectReject);\n\nvar _interActivePassageway = __webpack_require__(24);\n\nvar _interActivePassageway2 = _interopRequireDefault(_interActivePassageway);\n\nvar _charChanel = __webpack_require__(25);\n\nvar _charChanel2 = _interopRequireDefault(_charChanel);\n\nvar _ajaxDataRegister = __webpack_require__(26);\n\nvar _ajaxDataRegister2 = _interopRequireDefault(_ajaxDataRegister);\n\nvar _scrollCoordinate = __webpack_require__(27);\n\nvar _scrollCoordinate2 = _interopRequireDefault(_scrollCoordinate);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n;\n/**\n * Created by Andy on 2017/3/14.\n *///# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTUuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS9ob3N0LmpzPzQ2NTIiXSwic291cmNlc0NvbnRlbnQiOlsiXG4vKipcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzMvMTQuXG4gKi9cbmltcG9ydCBUUiBmcm9tIFwid3NTZXJ2ZXIvc2VydmljZXMvc29ja2V0LnN0b3JhZ2Uvc29ja2V0U3RvcmFnZVwiO1xuaW1wb3J0IGRpc2Nvbm5lY3RDaGFuZWwgZnJvbSBcIi4vdGFza3MvZGlzY29ubmVjdENoYW5lbFwiO1xuaW1wb3J0IHJlZHVjZVVzZXIgZnJvbSBcIi4vdGFza3MvcmVkdWNlVXNlclwiO1xuaW1wb3J0IGhlYXJ0QmVhdCBmcm9tIFwiLi90YXNrcy9oZWFydEJlYXRcIjtcbmltcG9ydCB1c2VyUmVnaXN0ZXIgZnJvbSBcIi4vdGFza3MvdXNlclJlZ2lzdGVyXCI7XG5pbXBvcnQgY29ubmVjdEFzayBmcm9tIFwiLi90YXNrcy9jb25uZWN0QXNrXCI7XG5pbXBvcnQgY29ubmVjdEFjY2VwdCBmcm9tIFwiLi90YXNrcy9jb25uZWN0QWNjZXB0XCI7XG5pbXBvcnQgY29ubmVjdFJlamVjdCBmcm9tIFwiLi90YXNrcy9jb25uZWN0UmVqZWN0XCI7XG5pbXBvcnQgaW50ZXJBY3RpdmVQYXNzYWdld2F5IGZyb20gXCIuL3Rhc2tzL2ludGVyQWN0aXZlUGFzc2FnZXdheVwiO1xuaW1wb3J0IGNoYXJDaGFuZWwgZnJvbSBcIi4vdGFza3MvY2hhckNoYW5lbFwiO1xuaW1wb3J0IGFqYXhEYXRhUmVnaXN0ZXIgZnJvbSBcIi4vdGFza3MvYWpheERhdGFSZWdpc3RlclwiO1xuaW1wb3J0IHNjcm9sbENvb3JkaW5hdGUgZnJvbSBcIi4vdGFza3Mvc2Nyb2xsQ29vcmRpbmF0ZVwiO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiAoZnJhbWUsIHNvY2tldCkge1xuICAgIHN3aXRjaCAoZnJhbWUuT3Bjb2RlKSB7XG4gICAgICAgIGNhc2UgODpcbiAgICAgICAgICAgIHZhciBkYXRhID0gZnJhbWUuUGF5bG9hZERhdGEuc2xpY2UoMikudG9TdHJpbmcoKTtcbiAgICAgICAgICAgIGNvbnNvbGUubG9nKFwi5Lya6K+d5bey57uP57uT5p2fOlwiLCBzb2NrZXQsIGRhdGEpO1xuICAgICAgICAgICAgaWYoc29ja2V0LnVpZClkaXNjb25uZWN0Q2hhbmVsKHNvY2tldCwgZGF0YSk7XG4gICAgICAgICAgICBpZihzb2NrZXQudWlkKXJlZHVjZVVzZXIoc29ja2V0LCBkYXRhKTtcbiAgICAgICAgICAgIHNvY2tldC5lbmQoKTtcbiAgICAgICAgICAgIHNvY2tldC5kZXN0cm95KCk7ICAgLy/liKDpmaTmlq3nur/nmoRzZXNzaW9u77yMXG4gICAgICAgICAgICBicmVhaztcbiAgICAgICAgZGVmYXVsdCA6XG4gICAgICAgICAgICBUUi5zZXRTdG9yYWdlKFwib3Bjb2RlXCIsZnJhbWUuT3Bjb2RlKTtcbiAgICAgICAgICAgIHZhciBkYXRhID0gSlNPTi5wYXJzZShmcmFtZS5QYXlsb2FkRGF0YS50b1N0cmluZygpKSB8fCBcIlwiO1xuICAgICAgICAgICAgc3dpdGNoIChkYXRhLnBvcnQpIHtcbiAgICAgICAgICAgICAgICBjYXNlIDB4MDA6XG4gICAgICAgICAgICAgICAgICAgIGhlYXJ0QmVhdChzb2NrZXQsIGRhdGEpO1xuICAgICAgICAgICAgICAgICAgICBicmVhaztcbiAgICAgICAgICAgICAgICBjYXNlIDB4MDE6IC8v6L+U5Zue5LiA5YCLcGFzc+S/oeiZn++8jOS4puWtmOWEsueUqOaItuaVuOaTmlxuICAgICAgICAgICAgICAgICAgICB1c2VyUmVnaXN0ZXIoc29ja2V0LCBkYXRhKTtcbiAgICAgICAgICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgICAgICAgICAgY2FzZSAweDAyOiAvL+WNj+WKqemAmumBk+eahOivoumXrlxuICAgICAgICAgICAgICAgICAgICBjb25uZWN0QXNrKHNvY2tldCwgZGF0YSk7XG4gICAgICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgICAgIGNhc2UgMHgwMzogLy/ljY/liqnpgJrpgZPnmoTlupTnrZRcbiAgICAgICAgICAgICAgICAgICAgY29ubmVjdEFjY2VwdChzb2NrZXQsIGRhdGEpO1xuICAgICAgICAgICAgICAgICAgICBicmVhaztcbiAgICAgICAgICAgICAgICBjYXNlIDB4MDQ6XG4gICAgICAgICAgICAgICAgICAgIGNvbm5lY3RSZWplY3Qoc29ja2V0LCBkYXRhKTtcbiAgICAgICAgICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgICAgICAgICAgY2FzZSAweDA1OiAgICAvL+i/nOeoi+WNj+WKqeS6pOS6kumAmumBk1xuICAgICAgICAgICAgICAgICAgICBpbnRlckFjdGl2ZVBhc3NhZ2V3YXkoc29ja2V0LCBkYXRhKTtcbiAgICAgICAgICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgICAgICAgICAgY2FzZSAweDA2OlxuICAgICAgICAgICAgICAgICAgICBicmVhaztcbiAgICAgICAgICAgICAgICBjYXNlIDB4MDc6XG4gICAgICAgICAgICAgICAgICAgIGJyZWFrO1xuICAgICAgICAgICAgICAgIGNhc2UgMHgwODpcbiAgICAgICAgICAgICAgICAgICAgY2hhckNoYW5lbChkYXRhKTtcbiAgICAgICAgICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgICAgICAgICAgY2FzZSAweDA5OiAgLy/kuqTmjqVjYWxsYmFja0lEXG4gICAgICAgICAgICAgICAgICAgIGFqYXhEYXRhUmVnaXN0ZXIoc29ja2V0LCBkYXRhKTtcbiAgICAgICAgICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgICAgICAgICAgY2FzZSAweDBBOiAgLy/kuqTmjqVzY3JvbGzlnZDmoIdcbiAgICAgICAgICAgICAgICAgICAgc2Nyb2xsQ29vcmRpbmF0ZShzb2NrZXQsIGRhdGEpO1xuICAgICAgICAgICAgICAgICAgICBicmVhaztcbiAgICAgICAgICAgICAgICBjYXNlIDB4RkU6XG4gICAgICAgICAgICAgICAgICAgIGRpc2Nvbm5lY3RDaGFuZWwoc29ja2V0LCBkYXRhKTtcbiAgICAgICAgICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgICAgICAgICAgY2FzZSAweEZGOiAvL+aWreW8gOWNj+WKqemAmumBky8v5YWz6Zetd3NcbiAgICAgICAgICAgICAgICAgICAgLy90aGF0LmNsb3NlKGRhdGEpO1xuICAgICAgICAgICAgICAgICAgICAvL2NvbnNvbGUubG9nKFwi5Lit5pat6L+c56iL55So5oi3XCIpO1xuICAgICAgICAgICAgICAgICAgICBicmVhaztcbiAgICAgICAgICAgICAgICBkZWZhdWx0IDpcbiAgICAgICAgICAgICAgICAgICAgYnJlYWs7XG4gICAgICAgICAgICB9XG4gICAgICAgICAgICBicmVhaztcbiAgICB9XG59O1xuXG5cblxuLy8gV0VCUEFDSyBGT09URVIgLy9cbi8vIHNlcnZlci9zb2NrZXQvaW50ZXJhY3RpdmUvaG9zdC5qcyJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBaUJBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBeENBO0FBMENBO0FBdERBO0FBd0RBO0FBQ0E7QUF2RUE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7Ozs7QUEwREE7QUF6RUE7O0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///15\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (frame, socket) {
+    switch (frame.Opcode) {
+        case 8:
+            var data = frame.PayloadData.slice(2).toString();
+            console.log("会话已经结束:", socket, data);
+            if (socket.uid) (0, _disconnectChanel2.default)(socket, data);
+            if (socket.uid) (0, _reduceUser2.default)(socket, data);
+            socket.end();
+            socket.destroy(); //删除断线的session，
+            break;
+        default:
+            _socketStorage2.default.setStorage("opcode", frame.Opcode);
+            var data = JSON.parse(frame.PayloadData.toString()) || "";
+            switch (data.port) {
+                case 0x00:
+                    (0, _heartBeat2.default)(socket, data);
+                    break;
+                case 0x01:
+                    //返回一個pass信號，並存儲用戶數據
+                    (0, _userRegister2.default)(socket, data);
+                    break;
+                case 0x02:
+                    //协助通道的询问
+                    (0, _connectAsk2.default)(socket, data);
+                    break;
+                case 0x03:
+                    //协助通道的应答
+                    (0, _connectAccept2.default)(socket, data);
+                    break;
+                case 0x04:
+                    (0, _connectReject2.default)(socket, data);
+                    break;
+                case 0x05:
+                    //远程协助交互通道
+                    (0, _interActivePassageway2.default)(socket, data);
+                    break;
+                case 0x06:
+                    break;
+                case 0x07:
+                    break;
+                case 0x08:
+                    (0, _charChanel2.default)(data);
+                    break;
+                case 0x09:
+                    //交接callbackID
+                    (0, _ajaxDataRegister2.default)(socket, data);
+                    break;
+                case 0x0A:
+                    //交接scroll坐标
+                    (0, _scrollCoordinate2.default)(socket, data);
+                    break;
+                case 0xFE:
+                    (0, _disconnectChanel2.default)(socket, data);
+                    break;
+                case 0xFF:
+                    //断开协助通道//关闭ws
+                    //that.close(data);
+                    //console.log("中断远程用户");
+                    break;
+                default:
+                    break;
+            }
+            break;
+    }
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _disconnectChanel = __webpack_require__(17);
+
+var _disconnectChanel2 = _interopRequireDefault(_disconnectChanel);
+
+var _reduceUser = __webpack_require__(18);
+
+var _reduceUser2 = _interopRequireDefault(_reduceUser);
+
+var _heartBeat = __webpack_require__(19);
+
+var _heartBeat2 = _interopRequireDefault(_heartBeat);
+
+var _userRegister = __webpack_require__(20);
+
+var _userRegister2 = _interopRequireDefault(_userRegister);
+
+var _connectAsk = __webpack_require__(21);
+
+var _connectAsk2 = _interopRequireDefault(_connectAsk);
+
+var _connectAccept = __webpack_require__(22);
+
+var _connectAccept2 = _interopRequireDefault(_connectAccept);
+
+var _connectReject = __webpack_require__(23);
+
+var _connectReject2 = _interopRequireDefault(_connectReject);
+
+var _interActivePassageway = __webpack_require__(24);
+
+var _interActivePassageway2 = _interopRequireDefault(_interActivePassageway);
+
+var _charChanel = __webpack_require__(25);
+
+var _charChanel2 = _interopRequireDefault(_charChanel);
+
+var _ajaxDataRegister = __webpack_require__(26);
+
+var _ajaxDataRegister2 = _interopRequireDefault(_ajaxDataRegister);
+
+var _scrollCoordinate = __webpack_require__(27);
+
+var _scrollCoordinate2 = _interopRequireDefault(_scrollCoordinate);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+/**
+ * Created by Andy on 2017/3/14.
+ */
 
 /***/ }),
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\n/**\n * Created by Andy on 2017/11/9.\n */\n\nvar StorageRegister = function () {\n    function StorageRegister() {\n        var inject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};\n\n        _classCallCheck(this, StorageRegister);\n\n        this.storage = inject;\n    }\n\n    _createClass(StorageRegister, [{\n        key: \"getStorage\",\n        value: function getStorage(name) {\n            return this.storage[name];\n        }\n    }, {\n        key: \"setStorage\",\n        value: function setStorage(itemName, innerProp, val) {\n            /* if (this.storage[itemName] instanceof Array) {\n                 val = prop;\n                 this.storage[itemName].push(val);\n             }\n             else */if (val === undefined) {\n                val = innerProp;\n                this.storage[itemName] = val;\n            } else {\n                this.storage[itemName][innerProp] = val;\n            }\n\n            return this;\n        }\n    }, {\n        key: \"addStorage\",\n        value: function addStorage(itemName, val) {\n            if (this.storage[itemName] instanceof Array) {\n                this.storage[itemName].push(val);\n            } else {\n                throw new Error(\"this storage isn't a Array!\");\n            }\n            return this;\n        }\n    }, {\n        key: \"delStorage\",\n        value: function delStorage(name, val) {\n            if (this.storage[name] instanceof Array) {\n                var index = val;\n                this.storage[name].splice(index, 1);\n            } else {\n                delete this.storage[name][val];\n            }\n            return this;\n        }\n    }], [{\n        key: \"version\",\n        value: function version() {\n            console.log(\"v1.0\");\n        }\n    }, {\n        key: \"author\",\n        value: function author() {\n            console.log(\"我不tell you~\");\n        }\n    }]);\n\n    return StorageRegister;\n}();\n\nexports.default = StorageRegister;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTYuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vcHVibGljL3BsdWdpbi9TdG9yYWdlUmVnaXN0ZXIvU3RvcmFnZVJlZ2lzdGVyLmpzPzIyZmUiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBDcmVhdGVkIGJ5IEFuZHkgb24gMjAxNy8xMS85LlxuICovXG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIFN0b3JhZ2VSZWdpc3RlciB7XG5cbiAgICBjb25zdHJ1Y3RvcihpbmplY3QgPSB7fSkge1xuICAgICAgICB0aGlzLnN0b3JhZ2UgPSBpbmplY3Q7XG4gICAgfVxuXG4gICAgZ2V0U3RvcmFnZShuYW1lKSB7XG4gICAgICAgIHJldHVybiB0aGlzLnN0b3JhZ2VbbmFtZV07XG4gICAgfVxuXG4gICAgc2V0U3RvcmFnZShpdGVtTmFtZSwgaW5uZXJQcm9wLCB2YWwpIHtcbiAgICAgICAvKiBpZiAodGhpcy5zdG9yYWdlW2l0ZW1OYW1lXSBpbnN0YW5jZW9mIEFycmF5KSB7XG4gICAgICAgICAgICB2YWwgPSBwcm9wO1xuICAgICAgICAgICAgdGhpcy5zdG9yYWdlW2l0ZW1OYW1lXS5wdXNoKHZhbCk7XG4gICAgICAgIH1cbiAgICAgICAgZWxzZSAqL2lmKHZhbCA9PT0gdW5kZWZpbmVkKXtcbiAgICAgICAgICAgIHZhbCA9IGlubmVyUHJvcDtcbiAgICAgICAgICAgIHRoaXMuc3RvcmFnZVtpdGVtTmFtZV0gPSB2YWw7XG4gICAgICAgIH1lbHNle1xuICAgICAgICAgICAgdGhpcy5zdG9yYWdlW2l0ZW1OYW1lXVtpbm5lclByb3BdID0gdmFsO1xuICAgICAgICB9XG5cbiAgICAgICAgcmV0dXJuIHRoaXM7XG4gICAgfVxuXG4gICAgYWRkU3RvcmFnZShpdGVtTmFtZSwgdmFsKXtcbiAgICAgICAgaWYgKHRoaXMuc3RvcmFnZVtpdGVtTmFtZV0gaW5zdGFuY2VvZiBBcnJheSkge1xuICAgICAgICAgICAgdGhpcy5zdG9yYWdlW2l0ZW1OYW1lXS5wdXNoKHZhbCk7XG4gICAgICAgIH1lbHNle1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKFwidGhpcyBzdG9yYWdlIGlzbid0IGEgQXJyYXkhXCIpO1xuICAgICAgICB9XG4gICAgICAgIHJldHVybiB0aGlzO1xuICAgIH1cbiAgICBkZWxTdG9yYWdlKG5hbWUsIHZhbCkge1xuICAgICAgICBpZiAodGhpcy5zdG9yYWdlW25hbWVdIGluc3RhbmNlb2YgQXJyYXkpIHtcbiAgICAgICAgICAgIGxldCBpbmRleCA9IHZhbDtcbiAgICAgICAgICAgIHRoaXMuc3RvcmFnZVtuYW1lXS5zcGxpY2UoaW5kZXgsIDEpO1xuICAgICAgICB9XG4gICAgICAgIGVsc2Uge1xuICAgICAgICAgICAgZGVsZXRlIHRoaXMuc3RvcmFnZVtuYW1lXVt2YWxdO1xuICAgICAgICB9XG4gICAgICAgIHJldHVybiB0aGlzO1xuICAgIH1cblxuICAgIHN0YXRpYyB2ZXJzaW9uKCl7XG4gICAgICAgIGNvbnNvbGUubG9nKFwidjEuMFwiKTtcbiAgICB9XG5cbiAgICBzdGF0aWMgYXV0aG9yKCl7XG4gICAgICAgIGNvbnNvbGUubG9nKFwi5oiR5LiNdGVsbCB5b3V+XCIpO1xuICAgIH1cbn1cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gcHVibGljL3BsdWdpbi9TdG9yYWdlUmVnaXN0ZXIvU3RvcmFnZVJlZ2lzdGVyLmpzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQUE7Ozs7QUFJQTtBQUVBO0FBQUE7QUFDQTtBQURBO0FBQ0E7QUFBQTtBQUNBO0FBQ0E7OztBQUNBO0FBQ0E7QUFDQTs7O0FBRUE7QUFDQTs7OztBQUlBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7O0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7O0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBOzs7QUFFQTtBQUNBO0FBQ0E7OztBQUVBO0FBQ0E7QUFDQTs7Ozs7O0FBbERBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///16\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Created by Andy on 2017/11/9.
+ */
+
+var StorageRegister = function () {
+    function StorageRegister() {
+        var inject = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+        _classCallCheck(this, StorageRegister);
+
+        this.storage = inject;
+    }
+
+    _createClass(StorageRegister, [{
+        key: "getStorage",
+        value: function getStorage(name) {
+            return this.storage[name];
+        }
+    }, {
+        key: "setStorage",
+        value: function setStorage(itemName, innerProp, val) {
+            /* if (this.storage[itemName] instanceof Array) {
+                 val = prop;
+                 this.storage[itemName].push(val);
+             }
+             else */if (val === undefined) {
+                val = innerProp;
+                this.storage[itemName] = val;
+            } else {
+                this.storage[itemName][innerProp] = val;
+            }
+
+            return this;
+        }
+    }, {
+        key: "addStorage",
+        value: function addStorage(itemName, val) {
+            if (this.storage[itemName] instanceof Array) {
+                this.storage[itemName].push(val);
+            } else {
+                throw new Error("this storage isn't a Array!");
+            }
+            return this;
+        }
+    }, {
+        key: "delStorage",
+        value: function delStorage(name, val) {
+            if (this.storage[name] instanceof Array) {
+                var index = val;
+                this.storage[name].splice(index, 1);
+            } else {
+                delete this.storage[name][val];
+            }
+            return this;
+        }
+    }], [{
+        key: "version",
+        value: function version() {
+            console.log("v1.0");
+        }
+    }, {
+        key: "author",
+        value: function author() {
+            console.log("我不tell you~");
+        }
+    }]);
+
+    return StorageRegister;
+}();
+
+exports.default = StorageRegister;
 
 /***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (socket, data) {\n    var fromUid = socket.uid;\n    var clients = _socketStorage2.default.getStorage(\"clients\");\n    var namesMap = _socketStorage2.default.getStorage(\"namesMap\");\n    var remoteChanelMap = _socketStorage2.default.getStorage(\"remoteChanelMap\") || [];\n    var askerUid = null;\n    var helperUid = null;\n\n    // 排查断开的用户，检查是否与其他用户有通讯\n    // 删除配对通道，并告知通信的另一端\n    remoteChanelMap.forEach(function (item, index) {\n        if (item.askerUid == fromUid || item.helperUid == fromUid) {\n\n            askerUid = item.askerUid;\n            helperUid = item.helperUid;\n            (0, _emitter2.default)(0xFF, {\n                remoteId: 0,\n                remoteChanelMap: _socketStorage2.default.delStorage(\"remoteChanelMap\", index).getStorage(\"remoteChanelMap\")\n            }, clients[askerUid == fromUid ? helperUid : askerUid]);\n        }\n    });\n\n    // 另行通知其他所有的用户 哪两个用户结束远程业务\n    // 解除用户列表中\"busing\"状态，使其可以被选取\n    namesMap.forEach(function (item) {\n        if (askerUid == item || helperUid == item) return;\n        (0, _emitter2.default)(0x07, {\n            remoteChanelMap: _socketStorage2.default.getStorage(\"remoteChanelMap\")\n        }, clients[item]);\n    });\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n; /**\r\n   * Created by Andy on 2017/11/4.\r\n   *///# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTcuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9kaXNjb25uZWN0Q2hhbmVsLmpzPzVkNzkiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzExLzQuXHJcbiAqL1xyXG5cclxuaW1wb3J0IFRSIGZyb20gXCJ3c1NlcnZlci9zZXJ2aWNlcy9zb2NrZXQuc3RvcmFnZS9zb2NrZXRTdG9yYWdlXCI7XHJcbmltcG9ydCBlbWl0dGVyIGZyb20gXCIuLi8uLi9lbWl0dGVyL2VtaXR0ZXIuanNcIjtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIChzb2NrZXQsIGRhdGEpIHtcclxuICAgIGxldCBmcm9tVWlkID0gc29ja2V0LnVpZDtcclxuICAgIGxldCBjbGllbnRzID0gVFIuZ2V0U3RvcmFnZShcImNsaWVudHNcIik7XHJcbiAgICBsZXQgbmFtZXNNYXAgPSBUUi5nZXRTdG9yYWdlKFwibmFtZXNNYXBcIik7XHJcbiAgICBsZXQgcmVtb3RlQ2hhbmVsTWFwID0gVFIuZ2V0U3RvcmFnZShcInJlbW90ZUNoYW5lbE1hcFwiKSB8fCBbXTtcclxuICAgIGxldCBhc2tlclVpZCA9IG51bGw7XHJcbiAgICBsZXQgaGVscGVyVWlkID0gbnVsbDtcclxuXHJcbiAgICAvLyDmjpLmn6Xmlq3lvIDnmoTnlKjmiLfvvIzmo4Dmn6XmmK/lkKbkuI7lhbbku5bnlKjmiLfmnInpgJrorq9cclxuICAgIC8vIOWIoOmZpOmFjeWvuemAmumBk++8jOW5tuWRiuefpemAmuS/oeeahOWPpuS4gOerr1xyXG4gICAgcmVtb3RlQ2hhbmVsTWFwLmZvckVhY2goZnVuY3Rpb24gKGl0ZW0sIGluZGV4KSB7XHJcbiAgICAgICAgaWYgKGl0ZW0uYXNrZXJVaWQgPT0gZnJvbVVpZCB8fCBpdGVtLmhlbHBlclVpZCA9PSBmcm9tVWlkKSB7XHJcblxyXG4gICAgICAgICAgICBhc2tlclVpZCA9IGl0ZW0uYXNrZXJVaWQ7XHJcbiAgICAgICAgICAgIGhlbHBlclVpZCA9IGl0ZW0uaGVscGVyVWlkO1xyXG4gICAgICAgICAgICBlbWl0dGVyKFxyXG4gICAgICAgICAgICAgICAgMHhGRixcclxuICAgICAgICAgICAgICAgIHtcclxuICAgICAgICAgICAgICAgICAgICByZW1vdGVJZDowLFxyXG4gICAgICAgICAgICAgICAgICAgIHJlbW90ZUNoYW5lbE1hcDogVFIuZGVsU3RvcmFnZShcInJlbW90ZUNoYW5lbE1hcFwiLCBpbmRleCkuZ2V0U3RvcmFnZShcInJlbW90ZUNoYW5lbE1hcFwiKVxyXG4gICAgICAgICAgICAgICAgfSxcclxuICAgICAgICAgICAgICAgIGNsaWVudHNbKGFza2VyVWlkID09IGZyb21VaWQgPyBoZWxwZXJVaWQgOiBhc2tlclVpZCldXHJcbiAgICAgICAgICAgICk7XHJcbiAgICAgICAgfVxyXG4gICAgfSk7XHJcblxyXG5cclxuICAgIC8vIOWPpuihjOmAmuefpeWFtuS7luaJgOacieeahOeUqOaItyDlk6rkuKTkuKrnlKjmiLfnu5PmnZ/ov5znqIvkuJrliqFcclxuICAgIC8vIOino+mZpOeUqOaIt+WIl+ihqOS4rVwiYnVzaW5nXCLnirbmgIHvvIzkvb/lhbblj6/ku6XooqvpgInlj5ZcclxuICAgIG5hbWVzTWFwLmZvckVhY2goZnVuY3Rpb24gKGl0ZW0pIHtcclxuICAgICAgICBpZiAoYXNrZXJVaWQgPT0gaXRlbSB8fCBoZWxwZXJVaWQgPT0gaXRlbSlyZXR1cm47XHJcbiAgICAgICAgZW1pdHRlcigweDA3LFxyXG4gICAgICAgICAgICB7XHJcbiAgICAgICAgICAgICAgICByZW1vdGVDaGFuZWxNYXA6IFRSLmdldFN0b3JhZ2UoXCJyZW1vdGVDaGFuZWxNYXBcIilcclxuICAgICAgICAgICAgfSxcclxuICAgICAgICAgICAgY2xpZW50c1tpdGVtXVxyXG4gICAgICAgICk7XHJcbiAgICB9KTtcclxufTtcblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9kaXNjb25uZWN0Q2hhbmVsLmpzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFPQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUdBO0FBQ0E7QUFGQTtBQU1BO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQURBO0FBS0E7QUFDQTtBQUNBO0FBMUNBO0FBQ0E7OztBQUFBO0FBQ0E7Ozs7O0FBdUNBOztBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///17\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (socket, data) {
+    var fromUid = socket.uid;
+    var clients = _socketStorage2.default.getStorage("clients");
+    var namesMap = _socketStorage2.default.getStorage("namesMap");
+    var remoteChanelMap = _socketStorage2.default.getStorage("remoteChanelMap") || [];
+    var askerUid = null;
+    var helperUid = null;
+
+    // 排查断开的用户，检查是否与其他用户有通讯
+    // 删除配对通道，并告知通信的另一端
+    remoteChanelMap.forEach(function (item, index) {
+        if (item.askerUid == fromUid || item.helperUid == fromUid) {
+
+            askerUid = item.askerUid;
+            helperUid = item.helperUid;
+            (0, _emitter2.default)(0xFF, {
+                remoteId: 0,
+                remoteChanelMap: _socketStorage2.default.delStorage("remoteChanelMap", index).getStorage("remoteChanelMap")
+            }, clients[askerUid == fromUid ? helperUid : askerUid]);
+        }
+    });
+
+    // 另行通知其他所有的用户 哪两个用户结束远程业务
+    // 解除用户列表中"busing"状态，使其可以被选取
+    namesMap.forEach(function (item) {
+        if (askerUid == item || helperUid == item) return;
+        (0, _emitter2.default)(0x07, {
+            remoteChanelMap: _socketStorage2.default.getStorage("remoteChanelMap")
+        }, clients[item]);
+    });
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+; /**
+   * Created by Andy on 2017/11/4.
+   */
 
 /***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (socket) {\n\n    var namesMap = _socketStorage2.default.getStorage(\"namesMap\");\n    var clients = _socketStorage2.default.getStorage(\"clients\");\n    var deadUid = socket.uid;\n\n    if (deadUid) {\n\n        //删除断线的会话，\n        _socketStorage2.default.delStorage(\"clients\", deadUid);\n\n        //删除断线的用户名，\n        var index = namesMap.indexOf(deadUid);\n        console.log(\"删除了用户：\", namesMap[index]);\n        _socketStorage2.default.delStorage(\"namesMap\", index);\n        console.log(\"删除之后剩余的用户：\", _socketStorage2.default.getStorage(\"namesMap\"));\n    }\n\n    //刷新用户列表到客户端\n    _socketStorage2.default.getStorage(\"namesMap\").forEach(function (item, index) {\n        var clients = _socketStorage2.default.getStorage(\"clients\");\n        (0, _emitter2.default)(0xFE, { deadUid: socket.uid }, clients[item]);\n    });\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n;\n\n//通知前端删除断开的用户\n/**\n * Created by Andy on 2017/11/4.\n *///# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTguanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9yZWR1Y2VVc2VyLmpzPzhhMTkiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBDcmVhdGVkIGJ5IEFuZHkgb24gMjAxNy8xMS80LlxuICovXG5cbmltcG9ydCBUUiBmcm9tIFwid3NTZXJ2ZXIvc2VydmljZXMvc29ja2V0LnN0b3JhZ2Uvc29ja2V0U3RvcmFnZVwiO1xuaW1wb3J0IGVtaXR0ZXIgZnJvbSBcIi4uLy4uL2VtaXR0ZXIvZW1pdHRlci5qc1wiO1xuXG4vL+mAmuefpeWJjeerr+WIoOmZpOaWreW8gOeahOeUqOaIt1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gKHNvY2tldCkge1xuXG4gICAgbGV0IG5hbWVzTWFwID0gVFIuZ2V0U3RvcmFnZShcIm5hbWVzTWFwXCIpO1xuICAgIGxldCBjbGllbnRzID0gVFIuZ2V0U3RvcmFnZShcImNsaWVudHNcIik7XG4gICAgbGV0IGRlYWRVaWQgPSBzb2NrZXQudWlkO1xuXG4gICAgaWYgKGRlYWRVaWQpIHtcblxuICAgICAgICAvL+WIoOmZpOaWree6v+eahOS8muivne+8jFxuICAgICAgICBUUi5kZWxTdG9yYWdlKFwiY2xpZW50c1wiLGRlYWRVaWQpO1xuXG4gICAgICAgIC8v5Yig6Zmk5pat57q/55qE55So5oi35ZCN77yMXG4gICAgICAgIGxldCBpbmRleCA9IG5hbWVzTWFwLmluZGV4T2YoZGVhZFVpZCk7XG4gICAgICAgIGNvbnNvbGUubG9nKFwi5Yig6Zmk5LqG55So5oi377yaXCIsbmFtZXNNYXBbaW5kZXhdKTtcbiAgICAgICAgVFIuZGVsU3RvcmFnZShcIm5hbWVzTWFwXCIsaW5kZXgpO1xuICAgICAgICBjb25zb2xlLmxvZyhcIuWIoOmZpOS5i+WQjuWJqeS9meeahOeUqOaIt++8mlwiLFRSLmdldFN0b3JhZ2UoXCJuYW1lc01hcFwiKSk7XG4gICAgfVxuXG4gICAgLy/liLfmlrDnlKjmiLfliJfooajliLDlrqLmiLfnq69cbiAgICBUUi5nZXRTdG9yYWdlKFwibmFtZXNNYXBcIikuZm9yRWFjaChmdW5jdGlvbiAoaXRlbSwgaW5kZXgpIHtcbiAgICAgICAgbGV0IGNsaWVudHMgPSBUUi5nZXRTdG9yYWdlKFwiY2xpZW50c1wiKTtcbiAgICAgICAgZW1pdHRlcigweEZFLCB7ZGVhZFVpZDogc29ja2V0LnVpZH0sIGNsaWVudHNbaXRlbV0pO1xuICAgIH0pO1xuXG59O1xuXG5cbi8vIFdFQlBBQ0sgRk9PVEVSIC8vXG4vLyBzZXJ2ZXIvc29ja2V0L2ludGVyYWN0aXZlL3Rhc2tzL3JlZHVjZVVzZXIuanMiXSwibWFwcGluZ3MiOiI7Ozs7OztBQVFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBN0JBO0FBQ0E7OztBQUFBO0FBQ0E7Ozs7O0FBMEJBO0FBQ0E7QUExQkE7QUFQQTs7QSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///18\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (socket) {
+
+    var namesMap = _socketStorage2.default.getStorage("namesMap");
+    var clients = _socketStorage2.default.getStorage("clients");
+    var deadUid = socket.uid;
+
+    if (deadUid) {
+
+        //删除断线的会话，
+        _socketStorage2.default.delStorage("clients", deadUid);
+
+        //删除断线的用户名，
+        var index = namesMap.indexOf(deadUid);
+        console.log("删除了用户：", namesMap[index]);
+        _socketStorage2.default.delStorage("namesMap", index);
+        console.log("删除之后剩余的用户：", _socketStorage2.default.getStorage("namesMap"));
+    }
+
+    //刷新用户列表到客户端
+    _socketStorage2.default.getStorage("namesMap").forEach(function (item, index) {
+        var clients = _socketStorage2.default.getStorage("clients");
+        (0, _emitter2.default)(0xFE, { deadUid: socket.uid }, clients[item]);
+    });
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+
+//通知前端删除断开的用户
+/**
+ * Created by Andy on 2017/11/4.
+ */
 
 /***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (socket, data) {\n    setTimeout(function () {\n        (0, _emitter2.default)(0x00, { fin: \"1\" }, socket);\n    }, 5 * 60 * 1000); //5分鐘一次心跳\n};\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * Created by Andy on 2017/11/4.\n */\n\n;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMTkuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9oZWFydEJlYXQuanM/M2MzYiJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzExLzQuXG4gKi9cblxuaW1wb3J0IGVtaXR0ZXIgZnJvbSBcIi4uLy4uL2VtaXR0ZXIvZW1pdHRlci5qc1wiO1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gKHNvY2tldCwgZGF0YSkge1xuICAgIHNldFRpbWVvdXQoZnVuY3Rpb24oKXtcbiAgICAgICAgZW1pdHRlcigweDAwLCB7ZmluOlwiMVwifSwgc29ja2V0KTtcbiAgICB9LDUgKiA2MCAqMTAwMCk7IC8vNeWIhumQmOS4gOasoeW/g+i3s1xufTtcblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9oZWFydEJlYXQuanMiXSwibWFwcGluZ3MiOiI7Ozs7OztBQUtBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQU5BO0FBQ0E7Ozs7O0FBTEE7Ozs7QUFTQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///19\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (socket, data) {
+    setTimeout(function () {
+        (0, _emitter2.default)(0x00, { fin: "1" }, socket);
+    }, 5 * 60 * 1000); //5分鐘一次心跳
+};
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by Andy on 2017/11/4.
+ */
+
+;
 
 /***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (socket, data) {\n    socket.uid = data.uid;\n    console.log(data.uid, socket);\n    _log2.default.user(data.uid, socket);\n    var namesMap = _socketStorage2.default.getStorage(\"namesMap\");\n    var clients = _socketStorage2.default.getStorage(\"clients\");\n\n    if (namesMap.indexOf(data.uid) < 0) {\n        _socketStorage2.default.addStorage(\"namesMap\", data.uid);\n        _socketStorage2.default.setStorage(\"clients\", data.uid, socket);\n\n        // 向所有的用户推送用户名\n        // 不过要把包含用户目标的名字去掉\n        _socketStorage2.default.getStorage(\"namesMap\").forEach(function (item, index) {\n            var curNamesMap = Array.prototype.slice.call(_socketStorage2.default.getStorage(\"namesMap\"));\n            curNamesMap.splice(curNamesMap.indexOf(item), 1);\n            var remoteChanelMap = _socketStorage2.default.getStorage(\"remoteChanelMap\") || [];\n            var curClients = _socketStorage2.default.getStorage(\"clients\"); // 由于前面有操作，在推送之前重新获取\n            (0, _emitter2.default)(0x01, { namesMap: curNamesMap, \"regPass\": true, clientData: data, remoteChanelMap: remoteChanelMap }, curClients[item]);\n        });\n    } else {\n        (0, _emitter2.default)(0x01, { namesMap: [], \"regPass\": false, clientData: data }, socket); //用戶名已經被注冊\n    }\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nvar _log = __webpack_require__(4);\n\nvar _log2 = _interopRequireDefault(_log);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * Created by Andy on 2017/11/4.\n */\n\n;\n// 绑定用户信息//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjAuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy91c2VyUmVnaXN0ZXIuanM/MWUwNiJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzExLzQuXG4gKi9cblxuaW1wb3J0IFRSIGZyb20gXCJ3c1NlcnZlci9zZXJ2aWNlcy9zb2NrZXQuc3RvcmFnZS9zb2NrZXRTdG9yYWdlXCI7XG5pbXBvcnQgZW1pdHRlciBmcm9tIFwiLi4vLi4vZW1pdHRlci9lbWl0dGVyLmpzXCI7XG5pbXBvcnQgbG9nIGZyb20gXCJsb2dcIjtcbi8vIOe7keWumueUqOaIt+S/oeaBr1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gKHNvY2tldCwgZGF0YSkge1xuICAgIHNvY2tldC51aWQgPSBkYXRhLnVpZDtcbiAgICBjb25zb2xlLmxvZyhkYXRhLnVpZCxzb2NrZXQpO1xuICAgIGxvZy51c2VyKGRhdGEudWlkLCBzb2NrZXQpO1xuICAgIGxldCBuYW1lc01hcCA9IFRSLmdldFN0b3JhZ2UoXCJuYW1lc01hcFwiKTtcbiAgICBsZXQgY2xpZW50cyA9IFRSLmdldFN0b3JhZ2UoXCJjbGllbnRzXCIpO1xuXG4gICAgaWYgKG5hbWVzTWFwLmluZGV4T2YoZGF0YS51aWQpIDwgMCkge1xuICAgICAgICBUUi5hZGRTdG9yYWdlKFwibmFtZXNNYXBcIiwgZGF0YS51aWQpO1xuICAgICAgICBUUi5zZXRTdG9yYWdlKFwiY2xpZW50c1wiLCBkYXRhLnVpZCwgc29ja2V0KTtcblxuICAgICAgICAvLyDlkJHmiYDmnInnmoTnlKjmiLfmjqjpgIHnlKjmiLflkI1cbiAgICAgICAgLy8g5LiN6L+H6KaB5oqK5YyF5ZCr55So5oi355uu5qCH55qE5ZCN5a2X5Y675o6JXG4gICAgICAgIFRSLmdldFN0b3JhZ2UoXCJuYW1lc01hcFwiKS5mb3JFYWNoKGZ1bmN0aW9uIChpdGVtLCBpbmRleCkge1xuICAgICAgICAgICAgbGV0IGN1ck5hbWVzTWFwID0gQXJyYXkucHJvdG90eXBlLnNsaWNlLmNhbGwoVFIuZ2V0U3RvcmFnZShcIm5hbWVzTWFwXCIpKTtcbiAgICAgICAgICAgIGN1ck5hbWVzTWFwLnNwbGljZShjdXJOYW1lc01hcC5pbmRleE9mKGl0ZW0pLCAxKTtcbiAgICAgICAgICAgIGxldCByZW1vdGVDaGFuZWxNYXAgPSBUUi5nZXRTdG9yYWdlKFwicmVtb3RlQ2hhbmVsTWFwXCIpIHx8IFtdO1xuICAgICAgICAgICAgbGV0IGN1ckNsaWVudHMgPSBUUi5nZXRTdG9yYWdlKFwiY2xpZW50c1wiKTsgLy8g55Sx5LqO5YmN6Z2i5pyJ5pON5L2c77yM5Zyo5o6o6YCB5LmL5YmN6YeN5paw6I635Y+WXG4gICAgICAgICAgICBlbWl0dGVyKDB4MDEsIHtuYW1lc01hcDogY3VyTmFtZXNNYXAsIFwicmVnUGFzc1wiOiB0cnVlLCBjbGllbnREYXRhOiBkYXRhLCByZW1vdGVDaGFuZWxNYXA6cmVtb3RlQ2hhbmVsTWFwfSwgY3VyQ2xpZW50c1tpdGVtXSk7XG4gICAgICAgIH0pO1xuXG4gICAgfWVsc2V7XG4gICAgICAgIGVtaXR0ZXIoMHgwMSwge25hbWVzTWFwOiBbXSwgXCJyZWdQYXNzXCI6IGZhbHNlLCBjbGllbnREYXRhOiBkYXRhfSwgc29ja2V0KTsgICAgLy/nlKjmiLblkI3lt7LntpPooqvms6jlhopcbiAgICB9XG59O1xuXG5cbi8vIFdFQlBBQ0sgRk9PVEVSIC8vXG4vLyBzZXJ2ZXIvc29ja2V0L2ludGVyYWN0aXZlL3Rhc2tzL3VzZXJSZWdpc3Rlci5qcyJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBUUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUE3QkE7QUFDQTs7O0FBQUE7QUFDQTs7O0FBQUE7QUFDQTs7Ozs7QUFQQTs7OztBQWdDQTtBQXpCQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///20\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (socket, data) {
+    socket.uid = data.uid;
+    _log2.default.user(data.uid, socket.remoteAddress + ":" + socket.remotePort);
+    var namesMap = _socketStorage2.default.getStorage("namesMap");
+    var clients = _socketStorage2.default.getStorage("clients");
+
+    if (namesMap.indexOf(data.uid) < 0) {
+        _socketStorage2.default.addStorage("namesMap", data.uid);
+        _socketStorage2.default.setStorage("clients", data.uid, socket);
+
+        // 向所有的用户推送用户名
+        // 不过要把包含用户目标的名字去掉
+        _socketStorage2.default.getStorage("namesMap").forEach(function (item, index) {
+            var curNamesMap = Array.prototype.slice.call(_socketStorage2.default.getStorage("namesMap"));
+            curNamesMap.splice(curNamesMap.indexOf(item), 1);
+            var remoteChanelMap = _socketStorage2.default.getStorage("remoteChanelMap") || [];
+            var curClients = _socketStorage2.default.getStorage("clients"); // 由于前面有操作，在推送之前重新获取
+            (0, _emitter2.default)(0x01, { namesMap: curNamesMap, "regPass": true, clientData: data, remoteChanelMap: remoteChanelMap }, curClients[item]);
+        });
+    } else {
+        (0, _emitter2.default)(0x01, { namesMap: [], "regPass": false, clientData: data }, socket); //用戶名已經被注冊
+    }
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+var _log = __webpack_require__(4);
+
+var _log2 = _interopRequireDefault(_log);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by Andy on 2017/11/4.
+ */
+
+;
+// 绑定用户信息
 
 /***/ }),
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (socket, data) {\n    var clients = _socketStorage2.default.getStorage(\"clients\");\n    var helper = clients[data.remoteUid.helperUid];\n    (0, _emitter2.default)(0x02, {\n        uiHref: data.items.uiHref,\n        remoteUid: {\n            askerUid: data.remoteUid.askerUid,\n            helperUid: data.remoteUid.helperUid\n        }\n    }, helper);\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n;\n\n// Զ������ѯ�ʣ���ѯ����Ϣ�Ƹ�Э����\n/**\r\n * Created by Andy on 2017/11/4.\r\n *///# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjEuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9jb25uZWN0QXNrLmpzPzIwMTMiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzExLzQuXHJcbiAqL1xyXG5cclxuaW1wb3J0IFRSIGZyb20gXCJ3c1NlcnZlci9zZXJ2aWNlcy9zb2NrZXQuc3RvcmFnZS9zb2NrZXRTdG9yYWdlXCI7XHJcbmltcG9ydCBlbWl0dGVyIGZyb20gXCIuLi8uLi9lbWl0dGVyL2VtaXR0ZXIuanNcIjtcclxuXHJcbi8vINS277+977+977+977+977+977+90a/vv73Ko++/ve+/ve+/vdGv77+977+977+977+9z6Lvv73GuO+/vdCt77+977+977+977+9XHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIChzb2NrZXQsIGRhdGEpIHtcclxuICAgIGxldCBjbGllbnRzID0gVFIuZ2V0U3RvcmFnZShcImNsaWVudHNcIik7XHJcbiAgICBsZXQgaGVscGVyID0gY2xpZW50c1tkYXRhLnJlbW90ZVVpZC5oZWxwZXJVaWRdO1xyXG4gICAgZW1pdHRlcihcclxuICAgICAgICAweDAyLFxyXG4gICAgICAgIHtcclxuICAgICAgICAgICAgdWlIcmVmOmRhdGEuaXRlbXMudWlIcmVmLFxyXG4gICAgICAgICAgICByZW1vdGVVaWQ6IHtcclxuICAgICAgICAgICAgICAgIGFza2VyVWlkOiBkYXRhLnJlbW90ZVVpZC5hc2tlclVpZCxcclxuICAgICAgICAgICAgICAgIGhlbHBlclVpZDogZGF0YS5yZW1vdGVVaWQuaGVscGVyVWlkXHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9LFxyXG4gICAgICAgIGhlbHBlclxyXG4gICAgKTtcclxufTtcclxuXG5cblxuLy8gV0VCUEFDSyBGT09URVIgLy9cbi8vIHNlcnZlci9zb2NrZXQvaW50ZXJhY3RpdmUvdGFza3MvY29ubmVjdEFzay5qcyJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBUUE7QUFDQTtBQUNBO0FBQ0E7QUFHQTtBQUNBO0FBQ0E7QUFDQTtBQUZBO0FBRkE7QUFTQTtBQUNBO0FBbkJBO0FBQ0E7OztBQUFBO0FBQ0E7Ozs7O0FBZ0JBO0FBQ0E7QUFoQkE7QUFQQTs7QSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///21\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (socket, data) {
+    var clients = _socketStorage2.default.getStorage("clients");
+    var helper = clients[data.remoteUid.helperUid];
+    (0, _emitter2.default)(0x02, {
+        uiHref: data.items.uiHref,
+        remoteUid: {
+            askerUid: data.remoteUid.askerUid,
+            helperUid: data.remoteUid.helperUid
+        }
+    }, helper);
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+
+// Զ������ѯ�ʣ���ѯ����Ϣ�Ƹ�Э����
+/**
+ * Created by Andy on 2017/11/4.
+ */
 
 /***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (socket, data) {\n\n    var namesMap = _socketStorage2.default.getStorage(\"namesMap\");\n    var clients = _socketStorage2.default.getStorage(\"clients\");\n\n    var askerUid = data.remoteUid.askerUid;\n    var helperUid = data.remoteUid.helperUid;\n\n    // 存储远程业务中的两端，主要用于在用户未注册的时候，一口气把所有通道发给前端，让前端自己处理\n    _socketStorage2.default.addStorage(\"remoteChanelMap\", { \"askerUid\": askerUid, \"helperUid\": helperUid });\n\n    // 通知所有的用户哪两个用户正在进行远程业务\n    namesMap.forEach(function (item) {\n        if (askerUid == item || helperUid == item) return;\n        (0, _emitter2.default)(0x06, {\n            remoteChanel: { \"askerUid\": askerUid, \"helperUid\": helperUid }\n        }, clients[item]);\n    });\n\n    var asker = clients[askerUid];\n    var helper = clients[helperUid];\n\n    // 给通讯中的用户派发身份标识 （求助者ID：1，协助者ID：2）\n    (0, _emitter2.default)(0x03, { remoteId: 1, remoteUid: {\n            \"askerUid\": askerUid,\n            \"helperUid\": helperUid\n        } }, asker);\n\n    (0, _emitter2.default)(0x03, { remoteId: 2, remoteUid: {\n            \"askerUid\": askerUid,\n            \"helperUid\": helperUid\n        } }, helper);\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n; /**\r\n   * Created by Andy on 2017/11/4.\r\n   *///# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjIuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9jb25uZWN0QWNjZXB0LmpzP2U5NjciXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzExLzQuXHJcbiAqL1xyXG5pbXBvcnQgVFIgZnJvbSBcIndzU2VydmVyL3NlcnZpY2VzL3NvY2tldC5zdG9yYWdlL3NvY2tldFN0b3JhZ2VcIjtcclxuaW1wb3J0IGVtaXR0ZXIgZnJvbSBcIi4uLy4uL2VtaXR0ZXIvZW1pdHRlci5qc1wiO1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gKHNvY2tldCwgZGF0YSkge1xyXG5cclxuICAgIGxldCBuYW1lc01hcCA9IFRSLmdldFN0b3JhZ2UoXCJuYW1lc01hcFwiKTtcclxuICAgIGxldCBjbGllbnRzID0gVFIuZ2V0U3RvcmFnZShcImNsaWVudHNcIik7XHJcblxyXG4gICAgbGV0IGFza2VyVWlkID0gZGF0YS5yZW1vdGVVaWQuYXNrZXJVaWQ7XHJcbiAgICBsZXQgaGVscGVyVWlkID0gZGF0YS5yZW1vdGVVaWQuaGVscGVyVWlkO1xyXG5cclxuICAgIC8vIOWtmOWCqOi/nOeoi+S4muWKoeS4reeahOS4pOerr++8jOS4u+imgeeUqOS6juWcqOeUqOaIt+acquazqOWGjOeahOaXtuWAme+8jOS4gOWPo+awlOaKiuaJgOaciemAmumBk+WPkee7meWJjeerr++8jOiuqeWJjeerr+iHquW3seWkhOeQhlxyXG4gICAgVFIuYWRkU3RvcmFnZShcInJlbW90ZUNoYW5lbE1hcFwiLHtcImFza2VyVWlkXCI6IGFza2VyVWlkLCBcImhlbHBlclVpZFwiOiBoZWxwZXJVaWR9KTtcclxuXHJcbiAgICAvLyDpgJrnn6XmiYDmnInnmoTnlKjmiLflk6rkuKTkuKrnlKjmiLfmraPlnKjov5vooYzov5znqIvkuJrliqFcclxuICAgIG5hbWVzTWFwLmZvckVhY2goZnVuY3Rpb24gKGl0ZW0pIHtcclxuICAgICAgICBpZiAoYXNrZXJVaWQgPT0gaXRlbSB8fCBoZWxwZXJVaWQgPT0gaXRlbSkgcmV0dXJuO1xyXG4gICAgICAgIGVtaXR0ZXIoMHgwNixcclxuICAgICAgICAgICAge1xyXG4gICAgICAgICAgICAgICAgcmVtb3RlQ2hhbmVsOiAge1wiYXNrZXJVaWRcIjogYXNrZXJVaWQsIFwiaGVscGVyVWlkXCI6IGhlbHBlclVpZH1cclxuICAgICAgICAgICAgfSxcclxuICAgICAgICAgICAgY2xpZW50c1tpdGVtXVxyXG4gICAgICAgICk7XHJcbiAgICB9KTtcclxuXHJcbiAgICB2YXIgYXNrZXIgPSBjbGllbnRzW2Fza2VyVWlkXTtcclxuICAgIHZhciBoZWxwZXIgPSBjbGllbnRzW2hlbHBlclVpZF07XHJcblxyXG4gICAgLy8g57uZ6YCa6K6v5Lit55qE55So5oi35rS+5Y+R6Lqr5Lu95qCH6K+GIO+8iOaxguWKqeiAhUlE77yaMe+8jOWNj+WKqeiAhUlE77yaMu+8iVxyXG4gICAgZW1pdHRlcigweDAzLCB7cmVtb3RlSWQ6IDEscmVtb3RlVWlkOiB7XHJcbiAgICAgICAgXCJhc2tlclVpZFwiOiBhc2tlclVpZCxcclxuICAgICAgICBcImhlbHBlclVpZFwiOiBoZWxwZXJVaWRcclxuICAgIH19LCBhc2tlcik7XHJcblxyXG4gICAgZW1pdHRlcigweDAzLCB7cmVtb3RlSWQ6IDIscmVtb3RlVWlkOiB7XHJcbiAgICAgICAgXCJhc2tlclVpZFwiOiBhc2tlclVpZCxcclxuICAgICAgICBcImhlbHBlclVpZFwiOiBoZWxwZXJVaWRcclxuICAgIH19LCBoZWxwZXIpO1xyXG59O1xuXG5cbi8vIFdFQlBBQ0sgRk9PVEVSIC8vXG4vLyBzZXJ2ZXIvc29ja2V0L2ludGVyYWN0aXZlL3Rhc2tzL2Nvbm5lY3RBY2NlcHQuanMiXSwibWFwcGluZ3MiOiI7Ozs7OztBQU1BO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBREE7QUFLQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFGQTtBQUNBO0FBSUE7QUFDQTtBQUNBO0FBRkE7QUFJQTtBQUNBO0FBdkNBO0FBQ0E7OztBQUFBO0FBQ0E7Ozs7O0FBb0NBOztBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///22\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (socket, data) {
+
+    var namesMap = _socketStorage2.default.getStorage("namesMap");
+    var clients = _socketStorage2.default.getStorage("clients");
+
+    var askerUid = data.remoteUid.askerUid;
+    var helperUid = data.remoteUid.helperUid;
+
+    // 存储远程业务中的两端，主要用于在用户未注册的时候，一口气把所有通道发给前端，让前端自己处理
+    _socketStorage2.default.addStorage("remoteChanelMap", { "askerUid": askerUid, "helperUid": helperUid });
+
+    // 通知所有的用户哪两个用户正在进行远程业务
+    namesMap.forEach(function (item) {
+        if (askerUid == item || helperUid == item) return;
+        (0, _emitter2.default)(0x06, {
+            remoteChanel: { "askerUid": askerUid, "helperUid": helperUid }
+        }, clients[item]);
+    });
+
+    var asker = clients[askerUid];
+    var helper = clients[helperUid];
+
+    // 给通讯中的用户派发身份标识 （求助者ID：1，协助者ID：2）
+    (0, _emitter2.default)(0x03, { remoteId: 1, remoteUid: {
+            "askerUid": askerUid,
+            "helperUid": helperUid
+        } }, asker);
+
+    (0, _emitter2.default)(0x03, { remoteId: 2, remoteUid: {
+            "askerUid": askerUid,
+            "helperUid": helperUid
+        } }, helper);
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+; /**
+   * Created by Andy on 2017/11/4.
+   */
 
 /***/ }),
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (socket, data) {\n    var clients = _socketStorage2.default.getStorage(\"clients\");\n    var helper = clients[data.remoteUid.helperUid];\n    (0, _emitter2.default)(0x02, {\n        uiHref: data.items.uiHref,\n        remoteUid: {\n            askerUid: data.remoteUid.askerUid,\n            helperUid: data.remoteUid.helperUid\n        }\n    }, helper);\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n;\n\n// 远程链接询问，把询问信息推给协助者\n/**\r\n * Created by Andy on 2017/11/4.\r\n *///# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjMuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9jb25uZWN0UmVqZWN0LmpzPzU3YWYiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzExLzQuXHJcbiAqL1xyXG5cclxuaW1wb3J0IFRSIGZyb20gXCJ3c1NlcnZlci9zZXJ2aWNlcy9zb2NrZXQuc3RvcmFnZS9zb2NrZXRTdG9yYWdlXCI7XHJcbmltcG9ydCBlbWl0dGVyIGZyb20gXCIuLi8uLi9lbWl0dGVyL2VtaXR0ZXIuanNcIjtcclxuXHJcbi8vIOi/nOeoi+mTvuaOpeivoumXru+8jOaKiuivoumXruS/oeaBr+aOqOe7meWNj+WKqeiAhVxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiAoc29ja2V0LCBkYXRhKSB7XHJcbiAgICBsZXQgY2xpZW50cyA9IFRSLmdldFN0b3JhZ2UoXCJjbGllbnRzXCIpO1xyXG4gICAgbGV0IGhlbHBlciA9IGNsaWVudHNbZGF0YS5yZW1vdGVVaWQuaGVscGVyVWlkXTtcclxuICAgIGVtaXR0ZXIoXHJcbiAgICAgICAgMHgwMixcclxuICAgICAgICB7XHJcbiAgICAgICAgICAgIHVpSHJlZjpkYXRhLml0ZW1zLnVpSHJlZixcclxuICAgICAgICAgICAgcmVtb3RlVWlkOiB7XHJcbiAgICAgICAgICAgICAgICBhc2tlclVpZDogZGF0YS5yZW1vdGVVaWQuYXNrZXJVaWQsXHJcbiAgICAgICAgICAgICAgICBoZWxwZXJVaWQ6IGRhdGEucmVtb3RlVWlkLmhlbHBlclVpZFxyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfSxcclxuICAgICAgICBoZWxwZXJcclxuICAgICk7XHJcbn07XHJcblxuXG5cbi8vIFdFQlBBQ0sgRk9PVEVSIC8vXG4vLyBzZXJ2ZXIvc29ja2V0L2ludGVyYWN0aXZlL3Rhc2tzL2Nvbm5lY3RSZWplY3QuanMiXSwibWFwcGluZ3MiOiI7Ozs7OztBQVFBO0FBQ0E7QUFDQTtBQUNBO0FBR0E7QUFDQTtBQUNBO0FBQ0E7QUFGQTtBQUZBO0FBU0E7QUFDQTtBQW5CQTtBQUNBOzs7QUFBQTtBQUNBOzs7OztBQWdCQTtBQUNBO0FBaEJBO0FBUEE7O0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///23\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (socket, data) {
+    var clients = _socketStorage2.default.getStorage("clients");
+    var helper = clients[data.remoteUid.helperUid];
+    (0, _emitter2.default)(0x02, {
+        uiHref: data.items.uiHref,
+        remoteUid: {
+            askerUid: data.remoteUid.askerUid,
+            helperUid: data.remoteUid.helperUid
+        }
+    }, helper);
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+
+// 远程链接询问，把询问信息推给协助者
+/**
+ * Created by Andy on 2017/11/4.
+ */
 
 /***/ }),
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (socket, data) {\n\n    var clients = _socketStorage2.default.getStorage(\"clients\");\n    var asker = clients[data.remoteUid.askerUid];\n    var helper = clients[data.remoteUid.helperUid];\n\n    if (data.remoteId == 1) {\n\n        // 求助者，接收的只有 点击事件\n        //emitter(0x05, data.items, helper);\n    } else if (data.remoteId == 2) {\n\n        // 协助者，接收的只有 ajax 数据\n        (0, _emitter2.default)(0x05, data.items, asker);\n    }\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n;\n\n//远程交互\n/**\n * Created by Andy on 2017/11/4.\n *///# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjQuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9pbnRlckFjdGl2ZVBhc3NhZ2V3YXkuanM/MjMwYiJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzExLzQuXG4gKi9cbmltcG9ydCBUUiBmcm9tIFwid3NTZXJ2ZXIvc2VydmljZXMvc29ja2V0LnN0b3JhZ2Uvc29ja2V0U3RvcmFnZVwiO1xuaW1wb3J0IGVtaXR0ZXIgZnJvbSBcIi4uLy4uL2VtaXR0ZXIvZW1pdHRlci5qc1wiO1xuXG4vL+i/nOeoi+S6pOS6klxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gKHNvY2tldCwgZGF0YSkge1xuXG4gICAgbGV0IGNsaWVudHMgPSBUUi5nZXRTdG9yYWdlKFwiY2xpZW50c1wiKTtcbiAgICBsZXQgYXNrZXIgPSBjbGllbnRzW2RhdGEucmVtb3RlVWlkLmFza2VyVWlkXTtcbiAgICBsZXQgaGVscGVyID0gY2xpZW50c1tkYXRhLnJlbW90ZVVpZC5oZWxwZXJVaWRdO1xuXG4gICAgaWYgKGRhdGEucmVtb3RlSWQgPT0gMSkge1xuXG4gICAgICAgIC8vIOaxguWKqeiAhe+8jOaOpeaUtueahOWPquaciSDngrnlh7vkuovku7ZcbiAgICAgICAgLy9lbWl0dGVyKDB4MDUsIGRhdGEuaXRlbXMsIGhlbHBlcik7XG4gICAgfVxuICAgIGVsc2UgaWYgKGRhdGEucmVtb3RlSWQgPT0gMikge1xuXG4gICAgICAgIC8vIOWNj+WKqeiAhe+8jOaOpeaUtueahOWPquaciSBhamF4IOaVsOaNrlxuICAgICAgICBlbWl0dGVyKDB4MDUsIGRhdGEuaXRlbXMsIGFza2VyKTtcbiAgICB9XG59O1xuXG5cbi8vIFdFQlBBQ0sgRk9PVEVSIC8vXG4vLyBzZXJ2ZXIvc29ja2V0L2ludGVyYWN0aXZlL3Rhc2tzL2ludGVyQWN0aXZlUGFzc2FnZXdheS5qcyJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBT0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQXJCQTtBQUNBOzs7QUFBQTtBQUNBOzs7OztBQWtCQTtBQUNBO0FBbEJBO0FBTkE7O0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///24\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (socket, data) {
+
+    var clients = _socketStorage2.default.getStorage("clients");
+    var asker = clients[data.remoteUid.askerUid];
+    var helper = clients[data.remoteUid.helperUid];
+
+    if (data.remoteId == 1) {
+
+        // 求助者，接收的只有 点击事件
+        //emitter(0x05, data.items, helper);
+    } else if (data.remoteId == 2) {
+
+        // 协助者，接收的只有 ajax 数据
+        (0, _emitter2.default)(0x05, data.items, asker);
+    }
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+
+//远程交互
+/**
+ * Created by Andy on 2017/11/4.
+ */
 
 /***/ }),
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (data) {\n    var toWhom = data.items.oppositeName;\n    var fromWhom = data.items.nativeName;\n    var clients = _socketStorage2.default.getStorage(\"clients\");\n\n    (0, _emitter2.default)(0x08, {\n        remoteId: data.items.remoteId,\n        oppositeName: fromWhom,\n        nativeName: toWhom,\n        sentence: data.items.sentence,\n        timer: data.items.timer\n    }, clients[toWhom]);\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n;\n\n// 远程链接询问，把询问信息推给协助者\n/**\r\n * Created by Andy on 2018/1/6.\r\n *///# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjUuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9jaGFyQ2hhbmVsLmpzP2NiODkiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE4LzEvNi5cclxuICovXHJcbmltcG9ydCBUUiBmcm9tIFwid3NTZXJ2ZXIvc2VydmljZXMvc29ja2V0LnN0b3JhZ2Uvc29ja2V0U3RvcmFnZVwiO1xyXG5pbXBvcnQgZW1pdHRlciBmcm9tIFwiLi4vLi4vZW1pdHRlci9lbWl0dGVyLmpzXCI7XHJcblxyXG4vLyDov5znqIvpk77mjqXor6Lpl67vvIzmioror6Lpl67kv6Hmga/mjqjnu5nljY/liqnogIVcclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gKGRhdGEpIHtcclxuICAgIGxldCB0b1dob20gPSBkYXRhLml0ZW1zLm9wcG9zaXRlTmFtZTtcclxuICAgIGxldCBmcm9tV2hvbSA9IGRhdGEuaXRlbXMubmF0aXZlTmFtZTtcclxuICAgIGxldCBjbGllbnRzID0gVFIuZ2V0U3RvcmFnZShcImNsaWVudHNcIik7XHJcblxyXG4gICAgZW1pdHRlcihcclxuICAgICAgICAweDA4LFxyXG4gICAgICAgIHtcclxuICAgICAgICAgIHJlbW90ZUlkOmRhdGEuaXRlbXMucmVtb3RlSWRcclxuICAgICAgICAgICwgb3Bwb3NpdGVOYW1lOiBmcm9tV2hvbVxyXG4gICAgICAgICAgLCBuYXRpdmVOYW1lOiB0b1dob21cclxuICAgICAgICAgICwgc2VudGVuY2U6ZGF0YS5pdGVtcy5zZW50ZW5jZVxyXG4gICAgICAgICAgLCB0aW1lcjogIGRhdGEuaXRlbXMudGltZXJcclxuICAgICAgICB9LFxyXG4gICAgICAgIGNsaWVudHNbdG9XaG9tXVxyXG4gICAgKTtcclxufTtcclxuXG5cblxuLy8gV0VCUEFDSyBGT09URVIgLy9cbi8vIHNlcnZlci9zb2NrZXQvaW50ZXJhY3RpdmUvdGFza3MvY2hhckNoYW5lbC5qcyJdLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBT0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBR0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUxBO0FBU0E7QUFDQTtBQXJCQTtBQUNBOzs7QUFBQTtBQUNBOzs7OztBQWtCQTtBQUNBO0FBbEJBO0FBTkE7O0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///25\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (data) {
+    var toWhom = data.items.oppositeName;
+    var fromWhom = data.items.nativeName;
+    var clients = _socketStorage2.default.getStorage("clients");
+
+    (0, _emitter2.default)(0x08, {
+        remoteId: data.items.remoteId,
+        oppositeName: fromWhom,
+        nativeName: toWhom,
+        sentence: data.items.sentence,
+        timer: data.items.timer
+    }, clients[toWhom]);
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+;
+
+// 远程链接询问，把询问信息推给协助者
+/**
+ * Created by Andy on 2018/1/6.
+ */
 
 /***/ }),
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (socket, data) {\n    var clients = _socketStorage2.default.getStorage(\"clients\");\n    var helperUid = data.remoteUid.helperUid;\n    var askerUid = data.remoteUid.askerUid;\n    var fromUid = data.uid;\n\n    if (askerUid === fromUid) {\n        // 如果数据来自 asker，就存储，如果数据来自helper，就逐帧发送\n        ajaxDataCache.set(data.items.ajaxCallbackId, {\n            json: data.items.json,\n            ajaxCallbackId: data.items.ajaxCallbackId,\n            status: data.items.status\n        });\n    }\n\n    if (helperUid === fromUid) {\n        var doneId = data.items.doneId;\n        sniff(ajaxDataCache, doneId, 5, function () {\n\n            (0, _emitter2.default)(0x09, {\n                status: ajaxDataCache.get(doneId).status,\n                json: ajaxDataCache.get(doneId).json,\n                ajaxCallbackId: ajaxDataCache.get(doneId).ajaxCallbackId\n            }, clients[helperUid]);\n\n            // 发送完毕之后，清理；\n            ajaxDataCache.delete(doneId);\n        });\n    }\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\r\n * Created by Andy on 2018/1/10.\r\n */\nvar ajaxDataCache = new Map();\n\nfunction sniff(ajaxDataCache, doneId, times, callback) {\n\n    if (times <= 0) {\n        console.log(\"callbackId 未能及时上传~\");\n        return;\n    }\n\n    var promise = new Promise(function (resolve, reject) {\n        setTimeout(function () {\n            var result = ajaxDataCache.get(doneId);\n            result ? resolve(result) : reject(result);\n        }, 500);\n    });\n\n    promise.then(callback, function () {\n        sniff(ajaxDataCache, doneId, --times, callback);\n    });\n}//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjYuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9hamF4RGF0YVJlZ2lzdGVyLmpzPzA1OGEiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE4LzEvMTAuXHJcbiAqL1xyXG5pbXBvcnQgVFIgZnJvbSBcIndzU2VydmVyL3NlcnZpY2VzL3NvY2tldC5zdG9yYWdlL3NvY2tldFN0b3JhZ2VcIjtcclxuaW1wb3J0IGVtaXR0ZXIgZnJvbSBcIi4uLy4uL2VtaXR0ZXIvZW1pdHRlci5qc1wiO1xyXG5cclxubGV0IGFqYXhEYXRhQ2FjaGUgPSBuZXcgTWFwKCk7XHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiAoc29ja2V0LCBkYXRhKSB7XHJcbiAgICBsZXQgY2xpZW50cyA9IFRSLmdldFN0b3JhZ2UoXCJjbGllbnRzXCIpO1xyXG4gICAgbGV0IGhlbHBlclVpZCA9IGRhdGEucmVtb3RlVWlkLmhlbHBlclVpZDtcclxuICAgIGxldCBhc2tlclVpZCA9IGRhdGEucmVtb3RlVWlkLmFza2VyVWlkO1xyXG4gICAgbGV0IGZyb21VaWQgPSBkYXRhLnVpZDtcclxuXHJcblxyXG4gICAgaWYgKGFza2VyVWlkID09PSBmcm9tVWlkKSB7XHJcbiAgICAgICAgLy8g5aaC5p6c5pWw5o2u5p2l6IeqIGFza2Vy77yM5bCx5a2Y5YKo77yM5aaC5p6c5pWw5o2u5p2l6IeqaGVscGVy77yM5bCx6YCQ5bin5Y+R6YCBXHJcbiAgICAgICAgYWpheERhdGFDYWNoZS5zZXQoZGF0YS5pdGVtcy5hamF4Q2FsbGJhY2tJZCwge1xyXG4gICAgICAgICAgICBqc29uOiBkYXRhLml0ZW1zLmpzb24sXHJcbiAgICAgICAgICAgIGFqYXhDYWxsYmFja0lkOiBkYXRhLml0ZW1zLmFqYXhDYWxsYmFja0lkLFxyXG4gICAgICAgICAgICBzdGF0dXM6IGRhdGEuaXRlbXMuc3RhdHVzXHJcbiAgICAgICAgfSk7XHJcblxyXG5cclxuICAgIH1cclxuXHJcbiAgICBpZiAoaGVscGVyVWlkID09PSBmcm9tVWlkKSB7XHJcbiAgICAgICAgbGV0IGRvbmVJZCA9IGRhdGEuaXRlbXMuZG9uZUlkO1xyXG4gICAgICAgIHNuaWZmKGFqYXhEYXRhQ2FjaGUsIGRvbmVJZCwgNSwgZnVuY3Rpb24oKXtcclxuXHJcbiAgICAgICAgICAgIGVtaXR0ZXIoMHgwOSxcclxuICAgICAgICAgICAgICAgIHtcclxuICAgICAgICAgICAgICAgICAgICBzdGF0dXM6IGFqYXhEYXRhQ2FjaGUuZ2V0KGRvbmVJZCkuc3RhdHVzLFxyXG4gICAgICAgICAgICAgICAgICAgIGpzb246IGFqYXhEYXRhQ2FjaGUuZ2V0KGRvbmVJZCkuanNvbixcclxuICAgICAgICAgICAgICAgICAgICBhamF4Q2FsbGJhY2tJZDogYWpheERhdGFDYWNoZS5nZXQoZG9uZUlkKS5hamF4Q2FsbGJhY2tJZFxyXG4gICAgICAgICAgICAgICAgfSxcclxuICAgICAgICAgICAgICAgIGNsaWVudHNbaGVscGVyVWlkXVxyXG4gICAgICAgICAgICApO1xyXG5cclxuICAgICAgICAgICAgLy8g5Y+R6YCB5a6M5q+V5LmL5ZCO77yM5riF55CG77ybXHJcbiAgICAgICAgICAgIGFqYXhEYXRhQ2FjaGUuZGVsZXRlKGRvbmVJZCk7XHJcbiAgICAgICAgfSk7XHJcbiAgICB9XHJcblxyXG59XHJcblxyXG5cclxuZnVuY3Rpb24gc25pZmYoYWpheERhdGFDYWNoZSwgZG9uZUlkLCB0aW1lcywgY2FsbGJhY2spIHtcclxuXHJcbiAgICBpZih0aW1lcyA8PSAwKXtcclxuICAgICAgICBjb25zb2xlLmxvZyhcImNhbGxiYWNrSWQg5pyq6IO95Y+K5pe25LiK5LygflwiKTtcclxuICAgICAgICByZXR1cm47XHJcbiAgICB9XHJcblxyXG4gICAgbGV0IHByb21pc2UgPSBuZXcgUHJvbWlzZShmdW5jdGlvbiAocmVzb2x2ZSwgcmVqZWN0KSB7XHJcbiAgICAgICAgc2V0VGltZW91dChmdW5jdGlvbiAoKSB7XHJcbiAgICAgICAgICAgIGxldCByZXN1bHQgPSBhamF4RGF0YUNhY2hlLmdldChkb25lSWQpO1xyXG4gICAgICAgICAgICByZXN1bHQgPyByZXNvbHZlKHJlc3VsdCkgOiByZWplY3QocmVzdWx0KTtcclxuICAgICAgICB9LCA1MDApXHJcbiAgICB9KTtcclxuXHJcbiAgICBwcm9taXNlLnRoZW4oY2FsbGJhY2ssZnVuY3Rpb24oKXtcclxuICAgICAgICBzbmlmZihhamF4RGF0YUNhY2hlLCBkb25lSWQsIC0tdGltZXMsIGNhbGxiYWNrKVxyXG4gICAgfSlcclxufVxyXG5cclxuXHJcblxuXG5cbi8vIFdFQlBBQ0sgRk9PVEVSIC8vXG4vLyBzZXJ2ZXIvc29ja2V0L2ludGVyYWN0aXZlL3Rhc2tzL2FqYXhEYXRhUmVnaXN0ZXIuanMiXSwibWFwcGluZ3MiOiI7Ozs7OztBQVFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUhBO0FBT0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFIQTtBQUNBO0FBT0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBMUNBO0FBQ0E7OztBQUFBO0FBQ0E7Ozs7O0FBTEE7OztBQU1BO0FBQ0E7QUF3Q0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///26\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (socket, data) {
+    var clients = _socketStorage2.default.getStorage("clients");
+    var helperUid = data.remoteUid.helperUid;
+    var askerUid = data.remoteUid.askerUid;
+    var fromUid = data.uid;
+
+    if (askerUid === fromUid) {
+        // 如果数据来自 asker，就存储，如果数据来自helper，就逐帧发送
+        ajaxDataCache.set(data.items.ajaxCallbackId, {
+            json: data.items.json,
+            ajaxCallbackId: data.items.ajaxCallbackId,
+            status: data.items.status
+        });
+    }
+
+    if (helperUid === fromUid) {
+        var doneId = data.items.doneId;
+        sniff(ajaxDataCache, doneId, 5, function () {
+
+            (0, _emitter2.default)(0x09, {
+                status: ajaxDataCache.get(doneId).status,
+                json: ajaxDataCache.get(doneId).json,
+                ajaxCallbackId: ajaxDataCache.get(doneId).ajaxCallbackId
+            }, clients[helperUid]);
+
+            // 发送完毕之后，清理；
+            ajaxDataCache.delete(doneId);
+        });
+    }
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by Andy on 2018/1/10.
+ */
+var ajaxDataCache = new Map();
+
+function sniff(ajaxDataCache, doneId, times, callback) {
+
+    if (times <= 0) {
+        console.log("callbackId 未能及时上传~");
+        return;
+    }
+
+    var promise = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            var result = ajaxDataCache.get(doneId);
+            result ? resolve(result) : reject(result);
+        }, 500);
+    });
+
+    promise.then(callback, function () {
+        sniff(ajaxDataCache, doneId, --times, callback);
+    });
+}
 
 /***/ }),
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (socket, data) {\n    var clients = _socketStorage2.default.getStorage(\"clients\");\n    var helperUid = data.remoteUid.helperUid;\n    var askerUid = data.remoteUid.askerUid;\n    var fromUid = data.uid;\n\n    if (helperUid === fromUid) {\n        (0, _emitter2.default)(0x0A, data.items, clients[askerUid]);\n    }\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _emitter = __webpack_require__(1);\n\nvar _emitter2 = _interopRequireDefault(_emitter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjcuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9zY3JvbGxDb29yZGluYXRlLmpzPzJmOGEiXSwic291cmNlc0NvbnRlbnQiOlsiLyoqXHJcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE4LzEvMTMuXHJcbiAqL1xyXG5pbXBvcnQgVFIgZnJvbSBcIndzU2VydmVyL3NlcnZpY2VzL3NvY2tldC5zdG9yYWdlL3NvY2tldFN0b3JhZ2VcIjtcclxuaW1wb3J0IGVtaXR0ZXIgZnJvbSBcIi4uLy4uL2VtaXR0ZXIvZW1pdHRlci5qc1wiO1xyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbihzb2NrZXQsIGRhdGEpe1xyXG4gICAgbGV0IGNsaWVudHMgPSBUUi5nZXRTdG9yYWdlKFwiY2xpZW50c1wiKTtcclxuICAgIGxldCBoZWxwZXJVaWQgPSBkYXRhLnJlbW90ZVVpZC5oZWxwZXJVaWQ7XHJcbiAgICBsZXQgYXNrZXJVaWQgPSBkYXRhLnJlbW90ZVVpZC5hc2tlclVpZDtcclxuICAgIGxldCBmcm9tVWlkID0gZGF0YS51aWQ7XHJcblxyXG4gICAgaWYoaGVscGVyVWlkID09PSBmcm9tVWlkKXtcclxuICAgICAgICBlbWl0dGVyKDB4MEEsZGF0YS5pdGVtcyxjbGllbnRzW2Fza2VyVWlkXSk7XHJcbiAgICB9XHJcbn1cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc2VydmVyL3NvY2tldC9pbnRlcmFjdGl2ZS90YXNrcy9zY3JvbGxDb29yZGluYXRlLmpzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFLQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBWkE7QUFDQTs7O0FBQUE7QUFDQTs7O0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///27\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (socket, data) {
+    var clients = _socketStorage2.default.getStorage("clients");
+    var helperUid = data.remoteUid.helperUid;
+    var askerUid = data.remoteUid.askerUid;
+    var fromUid = data.uid;
+
+    if (helperUid === fromUid) {
+        (0, _emitter2.default)(0x0A, data.items, clients[askerUid]);
+    }
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _emitter = __webpack_require__(1);
+
+var _emitter2 = _interopRequireDefault(_emitter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nexports.default = function (e, socket) {\n    var original = e.toString().match(/Sec-WebSocket-Key: (.+)/)[1];\n    var key = _crypto2.default.createHash(\"sha1\").update(original + mask).digest(\"base64\");\n    socket.write(\"HTTP/1.1 101 Switching Protocols\\r\\n\");\n    socket.write(\"Upgrade:Websocket\\r\\n\");\n    socket.write(\"Connection:Upgrade\\r\\n\");\n    socket.write(\"Sec-WebSocket-Accept:\" + key + \"\\r\\n\");\n    socket.write(\"\\r\\n\");\n};\n\nvar _socketStorage = __webpack_require__(0);\n\nvar _socketStorage2 = _interopRequireDefault(_socketStorage);\n\nvar _crypto = __webpack_require__(29);\n\nvar _crypto2 = _interopRequireDefault(_crypto);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * Created by Andy on 2017/11/6.\n */\n\nvar mask = \"258EAFA5-E914-47DA-95CA-C5AB0DC85B11\";\n\n//单个用户的握手实例;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjguanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vc2VydmVyL3NvY2tldC9pbml0L3NoYWtlaGFuZC9zaGFrZWhhbmQuanM/YzhiZiJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIENyZWF0ZWQgYnkgQW5keSBvbiAyMDE3LzExLzYuXG4gKi9cblxuaW1wb3J0IFRSIGZyb20gXCJ3c1NlcnZlci9zZXJ2aWNlcy9zb2NrZXQuc3RvcmFnZS9zb2NrZXRTdG9yYWdlXCI7XG5pbXBvcnQgY3J5cHRvIGZyb20gXCJjcnlwdG9cIjtcblxuY29uc3QgbWFzayA9IFwiMjU4RUFGQTUtRTkxNC00N0RBLTk1Q0EtQzVBQjBEQzg1QjExXCI7XG5cbi8v5Y2V5Liq55So5oi355qE5o+h5omL5a6e5L6LO1xuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gKGUsIHNvY2tldCkge1xuICAgIGxldCBvcmlnaW5hbCA9IGUudG9TdHJpbmcoKS5tYXRjaCgvU2VjLVdlYlNvY2tldC1LZXk6ICguKykvKVsxXTtcbiAgICBsZXQga2V5ID0gY3J5cHRvLmNyZWF0ZUhhc2goXCJzaGExXCIpLnVwZGF0ZShvcmlnaW5hbCArIG1hc2spLmRpZ2VzdChcImJhc2U2NFwiKTtcbiAgICBzb2NrZXQud3JpdGUoXCJIVFRQLzEuMSAxMDEgU3dpdGNoaW5nIFByb3RvY29sc1xcclxcblwiKTtcbiAgICBzb2NrZXQud3JpdGUoXCJVcGdyYWRlOldlYnNvY2tldFxcclxcblwiKTtcbiAgICBzb2NrZXQud3JpdGUoXCJDb25uZWN0aW9uOlVwZ3JhZGVcXHJcXG5cIik7XG4gICAgc29ja2V0LndyaXRlKFwiU2VjLVdlYlNvY2tldC1BY2NlcHQ6XCIgKyBrZXkgKyBcIlxcclxcblwiKTtcbiAgICBzb2NrZXQud3JpdGUoXCJcXHJcXG5cIik7XG59XG5cblxuLy8gV0VCUEFDSyBGT09URVIgLy9cbi8vIHNlcnZlci9zb2NrZXQvaW5pdC9zaGFrZWhhbmQvc2hha2VoYW5kLmpzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFVQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQWZBO0FBQ0E7OztBQUFBO0FBQ0E7Ozs7O0FBTkE7Ozs7QUFPQTtBQUNBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///28\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (e, socket) {
+    var original = e.toString().match(/Sec-WebSocket-Key: (.+)/)[1];
+    var key = _crypto2.default.createHash("sha1").update(original + mask).digest("base64");
+    socket.write("HTTP/1.1 101 Switching Protocols\r\n");
+    socket.write("Upgrade:Websocket\r\n");
+    socket.write("Connection:Upgrade\r\n");
+    socket.write("Sec-WebSocket-Accept:" + key + "\r\n");
+    socket.write("\r\n");
+};
+
+var _socketStorage = __webpack_require__(0);
+
+var _socketStorage2 = _interopRequireDefault(_socketStorage);
+
+var _crypto = __webpack_require__(29);
+
+var _crypto2 = _interopRequireDefault(_crypto);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by Andy on 2017/11/6.
+ */
+
+var mask = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+
+//单个用户的握手实例;
 
 /***/ }),
 /* 29 */
 /***/ (function(module, exports) {
 
-eval("module.exports = require(\"crypto\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMjkuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vZXh0ZXJuYWwgXCJjcnlwdG9cIj9lZjQ5Il0sInNvdXJjZXNDb250ZW50IjpbIm1vZHVsZS5leHBvcnRzID0gcmVxdWlyZShcImNyeXB0b1wiKTtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyBleHRlcm5hbCBcImNyeXB0b1wiXG4vLyBtb2R1bGUgaWQgPSAyOVxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///29\n");
+module.exports = require("crypto");
 
 /***/ })
 /******/ ]);

@@ -8,8 +8,7 @@ import log from "log";
 // 绑定用户信息
 export default function (socket, data) {
     socket.uid = data.uid;
-    console.log(data.uid,socket);
-    log.user(data.uid, socket);
+    log.user(data.uid, `${socket.remoteAddress}:${socket.remotePort}`);
     let namesMap = TR.getStorage("namesMap");
     let clients = TR.getStorage("clients");
 

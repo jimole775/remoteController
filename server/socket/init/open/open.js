@@ -1,9 +1,8 @@
 import tool from "wsServer/services/tool/exports";
 import host from "wsServer/interactive/host";
 import handshake from "./../shakehand/shakehand";
-
 export default function (port) {
-    require('net').createServer(function (socket) {
+    let netServer = require('net').createServer(function (socket) {
         socket.on('error', function (e) {
             console.log(e);
         });

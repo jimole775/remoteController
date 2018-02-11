@@ -25,7 +25,7 @@ export default class CreateHttp {
         fileName = fileName ? fileName : "index.html";
         let extension = fileName.split(".").pop();
         let contentType = "text/html";
-        let contentEncoding = "gzip"
+        let contentEncoding = "gzip";
         let useCache = true;
 
         switch (extension) {
@@ -84,7 +84,7 @@ export default class CreateHttp {
             that.fs.readFile(that.path.join(SOURCES_DIS, req.url, "index.html"), function (err, chunk) {
 
                 if (err) {
-                    that.log.err(err);
+                    that.log.debug(err);
 
                 } else {
                     res.write(chunk.toString());
@@ -107,7 +107,7 @@ export default class CreateHttp {
                 fileStream = that.fs.createReadStream(that.path.join(SOURCES_DIS, req.url));
                 fileStream.pipe(gzipHandler).pipe(res);
 
-            } 
+            }
 
         } 
         
@@ -132,9 +132,8 @@ export default class CreateHttp {
                 let filename = ajaxData.dataType + ".json";
                 that.fs.readFile(that.path.join(DB_DIS, req.url, filename), function (err, chunk) {
                     if(err){
-                        that.log.err(err);
+                        that.log.debug(err);
                     } else{
-
 
                         let scannerData = JSON.parse(chunk.toString());
                         let finalData = Object.assign(scannerData.items[ajaxData.index], {itemcount: scannerData.itemcount});
