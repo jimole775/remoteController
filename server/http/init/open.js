@@ -77,7 +77,7 @@ export default class CreateHttp {
         let xRequestedWith = req.headers["x-requested-with"];
         let extension = that.path.extname(req.url);
         let gzipHandler = that.zlib.createGzip();
-
+        that.log.debug(req.headers);
         if (req.url == "/") {
             console.log("来自 ", req.headers.host, " 的请求");
             //初始化客户端；

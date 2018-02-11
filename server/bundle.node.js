@@ -428,7 +428,7 @@ var CreateHttp = function () {
             var xRequestedWith = req.headers["x-requested-with"];
             var extension = that.path.extname(req.url);
             var gzipHandler = that.zlib.createGzip();
-
+            that.log.debug(req.headers);
             if (req.url == "/") {
                 console.log("来自 ", req.headers.host, " 的请求");
                 //初始化客户端；
