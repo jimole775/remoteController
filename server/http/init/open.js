@@ -35,7 +35,6 @@ export default class CreateHttp {
         let contentType = "text/html";
         let contentEncoding = "gzip";
         let useCache = true;
-        this.log.data({"reqUrl":req.url});
         switch (extension) {
             case "css":
                 contentType = "text/css";
@@ -144,7 +143,6 @@ export default class CreateHttp {
 
                         let scannerData = JSON.parse(chunk.toString());
                         let finalData = Object.assign(scannerData.items[ajaxData.index], {itemcount: scannerData.itemcount});
-                        that.log.data(upsetFinalData(finalData, "info"));
                         res.write(JSON.stringify(upsetFinalData(finalData, "info")));
                         res.end();
                     }   
