@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <title>远程测试</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -33,36 +34,52 @@
         // 窗口大小调整之后，重新加载资源，方便调试
         let href = window.location.href;
         let host = decodeURIComponent(href.toString()).split("#!")[0];
-        window.onresize = function(){
+        window.onresize = function () {
             window.location.href = host;
         };
 
     </script>
     <style>
-        #prevLoad{
-            width:100%;height:100%;position:fixed;display: flex;align-items: center;flex-direction: row;background: rgb(33, 78, 119);z-index: 999999;color: #fff;
-            transition:0.5s opacity linear;
+        #prevLoad {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            background: rgb(33, 78, 119);
+            z-index: 999999;
+            color: #fff;
+            transition: 0.5s opacity linear;
             -moz-transition: 0.5s opacity linear;
             -webkit-transition: 0.5s opacity linear;
         }
-        #prevLoad .loadBar{
-            width: 80%;border: 1px solid #fff;margin: 0 auto;
+
+        #prevLoad .loadBar {
+            width: 80%;
+            border: 1px solid #fff;
+            margin: 0 auto;
             position: relative;
             overflow: hidden;
+            transition: 5s opacity linear;
+            -moz-transition: 5s opacity linear;
+            -webkit-transition: 5s opacity linear;
         }
-        #prevLoad .filler{
+
+        #prevLoad .filler {
             position: absolute;
             width: 0%;
-            height:100%;
+            height: 100%;
             box-sizing: border-box;
-            border:0;
+            border: 0;
             display: block;
-            background:#fff;
+            background: #fff;
             left: 0;
             top: 0;
 
         }
-        #prevLoad .loadBar > p{
+
+        #prevLoad .loadBar>p {
             text-indent: 5px;
         }
     </style>
@@ -70,50 +87,59 @@
         var temp = [
             '<div id="prevLoad">',
             '<div class="loadBar">',
-                '<p>loading...</p>',
-                '<i class="filler"></i>',
-                '</div></div>'
+            '<p>loading...</p>',
+            '<i class="filler"></i>',
+            '</div></div>'
         ].join("");
         document.write(temp);
         var prevLoad = document.getElementById("prevLoad");
         var filler = document.getElementsByClassName("filler")[0];
+        var loadBar = document.getElementsByClassName("loadBar")[0];
         window.fillerWidth = 0;
-        function fill(){
-            setTimeout(function(){
+        function fill() {
+            setTimeout(function () {
                 fillerWidth += 1;
                 filler.style.width = fillerWidth + "%";
-                if(fillerWidth >= 100){
+                if (fillerWidth >= 100) {
                     fillerWidth = null;
-                    setTimeout(function(){   // 给与1S的时间填充满                   
-                        prevLoad.style.opacity = 0;
-                        setTimeout(function(){  // 给与1S的时间fade-out 
-                            prevLoad.remove();
-                        },1000);
-                        
-                    },1000);
+                    loadBar.style.opacity = 0;
                     return;
                 }
                 fill();
-            },100) 
+            }, 100)
         }
 
         fill();
     </script>
 <link rel="shortcut icon" href="favicon.ico"><link href="assets/css/bundle.af65c.css" rel="stylesheet"></head>
+
 <body ng-app="myApp">
 
-<foot-bar></foot-bar>
-<section ui-view=""></section>
-<head-bar></head-bar>
+    <foot-bar></foot-bar>
+    <section ui-view=""></section>
+    <head-bar></head-bar>
 
-<components></components>
-<script src="../assets/js/vendor.6bd0d.js"></script>
-<script>
+    <components></components>
+    <script src="../assets/js/vendor.6bd0d.js"></script>
+    <script>
 
-// 依赖包加载完成之后，直接设置加载条到100%；
-// 以触发钩子，隐藏加载页面
-  window.fillerWidth = 100;            
-  
-</script>
+        // setTimeout(function(){
+        // 依赖包加载完成之后，直接设置加载条到100%；
+        // 以触发钩子，隐藏加载页面
+        window.fillerWidth = 100;
+        var prevLoad = document.getElementById("prevLoad");
+
+        setTimeout(function () {   // 给与1S的时间填充满                   
+            prevLoad.style.opacity = 0;
+            setTimeout(function () {  // 给与1S的时间fade-out 
+                prevLoad.remove();
+            }, 1000);
+        }, 1000);
+
+        // },15000) //15秒延迟，本地测试时使用
+
+
+    </script>
 <script type="text/javascript" src="assets/js/bundle.af65c.js"></script></body>
+
 </html>
