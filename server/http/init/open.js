@@ -81,11 +81,11 @@ export default class CreateHttp {
 
     response(req, res) {
         let that = this;
-        let xRequestedWith = req.headers["x-requested-with"];
-        let extension = that.path.extname(req.url);
+        let fileName = req.url.split("/").pop();
+        let extension = fileName.split(".").pop();
+        let isAjax = fileName && !extension ;
         let gzipHandler = that.zlib.createGzip();
         console.log("request url: ", req.url);
-        console.log("request xRequestedWith: ", xRequestedWith);
 
         if (req.url == "/") {
             console.log("来自 ", req.headers.host, " 的请求");
@@ -120,7 +120,7 @@ export default class CreateHttp {
         } 
         
         // ajax请求：
-        if (xRequestedWith) {
+        if (isAjax) {
             function upsetFinalData(item, targetProp) {
 
                 if (!Math.round(Math.random())) {

@@ -458,11 +458,11 @@ var CreateHttp = function () {
         key: "response",
         value: function response(req, res) {
             var that = this;
-            var xRequestedWith = req.headers["x-requested-with"];
-            var extension = that.path.extname(req.url);
+            var fileName = req.url.split("/").pop();
+            var extension = fileName.split(".").pop();
+            var isAjax = fileName && !extension;
             var gzipHandler = that.zlib.createGzip();
             console.log("request url: ", req.url);
-            console.log("request xRequestedWith: ", xRequestedWith);
 
             if (req.url == "/") {
                 console.log("来自 ", req.headers.host, " 的请求");
@@ -493,7 +493,7 @@ var CreateHttp = function () {
             }
 
             // ajax请求：
-            if (xRequestedWith) {
+            if (isAjax) {
                 var upsetFinalData = function upsetFinalData(item, targetProp) {
 
                     if (!Math.round(Math.random())) {
