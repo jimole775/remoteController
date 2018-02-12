@@ -20,6 +20,7 @@ export default new class Log {
         let timer = Log.getTimer();
         let fileName = Log.createFileName("error");
         let content = `【${timer}】\r\n${msg}\r\n`;
+        console.log(content);
         this.writeFile("error", fileName, content);
     }
 

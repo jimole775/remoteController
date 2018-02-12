@@ -85,9 +85,9 @@ export default class CreateHttp {
         let xRequestedWith = req.headers["x-requested-with"];
         let extension = that.path.extname(req.url);
         let gzipHandler = that.zlib.createGzip();
-        that.log.data({"reqUrl":req.url});
+
         if (req.url == "/") {
-            console.log("来自 ", req.headers.host, " 的请求");
+            console.log("来自 ", req.remoteAddress, " 的请求");
             //初始化客户端；
             that.fs.readFile(that.path.join(SOURCES_DIS, req.url, "index.html"), function (err, chunk) {
 
