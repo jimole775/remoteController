@@ -76,14 +76,17 @@
             background: #fff;
             left: 0;
             top: 0;
-
+            transition: 10s opacity linear;
+            -moz-transition: 10s opacity linear;
+            -webkit-transition: 10s opacity linear;
         }
 
         #prevLoad p.loadingText {
             text-align: center;
         }
+
     </style>
-     <script defer="defer">      
+   <script defer="defer">      
         var temp = [
             '<div id="prevLoad">',
             '<div class="loadBar">',
@@ -106,8 +109,11 @@
                     fillerWidth = null;
                     filler.style.opacity = 0;
                     setTimeout(function(){
-                        if(loadingText)loadingText.innerHTML = "网速很慢啊>.<";
-                    },11000);                    
+                        if(loadBar){
+                            loadBar.style.opacity = 0;
+                            loadingText.innerHTML = "网速很慢啊,请切换一下DNS吧 >.<";
+                        }
+                    },10000);    
                     return;
                 }
                 fill();
@@ -140,8 +146,8 @@
                 prevLoad.remove();
             }, 1000);
         }, 1000);
-// 
-        // },20000) //20秒延迟，本地测试时使用
+
+        // },15000) //15秒延迟，本地测试时使用
 
 
     </script>

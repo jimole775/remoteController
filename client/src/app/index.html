@@ -76,7 +76,9 @@
             background: #fff;
             left: 0;
             top: 0;
-
+            transition: 10s opacity linear;
+            -moz-transition: 10s opacity linear;
+            -webkit-transition: 10s opacity linear;
         }
 
         #prevLoad p.loadingText {
@@ -107,8 +109,11 @@
                     fillerWidth = null;
                     filler.style.opacity = 0;
                     setTimeout(function(){
-                        if(loadingText)loadingText.innerHTML = "网速很慢啊>.<";
-                    },11000);    
+                        if(loadBar){
+                            loadBar.style.opacity = 0;
+                            loadingText.innerHTML = "网速很慢啊,请切换一下DNS吧 >.<";
+                        }
+                    },10000);    
                     return;
                 }
                 fill();
