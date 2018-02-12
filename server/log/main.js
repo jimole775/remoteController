@@ -62,6 +62,8 @@ export default new class Log {
         let m = new Date().getMonth();
         let d = new Date().getDay();
 
+        console.log(process.env);
+        console.log(__dirname);
         return path.resolve(__dirname, type, `${y}.${m}.${d}.log`);
     }
 
