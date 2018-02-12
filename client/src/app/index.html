@@ -33,6 +33,14 @@
 
     </script>
     <style>
+        html{
+            font-size:75%;
+        }
+
+        body {
+            margin: 0;
+        }
+
         #prevLoad {
             width: 100%;
             height: 100%;
@@ -50,6 +58,7 @@
 
         #prevLoad .loadBar {
             width: 80%;
+            height: auto;
             border: 1px solid #fff;
             margin: 0 auto;
             position: relative;
@@ -76,6 +85,10 @@
 
         #prevLoad p.loadingText {
             text-align: center;
+            padding: 0;
+            margin: 0;
+            /* font-size: 0.7rem; */
+            line-height: 200%;
         }
     </style>
     <script defer="defer">    
@@ -141,10 +154,10 @@
                 prevLoad.style.opacity = 0;
                 setTimeout(function () {  // 给与1S的时间fade-out 
                     prevLoad.remove();
-                }, 1000);
+                }, 500);
             }, 1000);
 
-            // },15000) //15秒延迟，本地测试时使用
+            // },35000) //15秒延迟，本地测试时使用
         })();
 
 
