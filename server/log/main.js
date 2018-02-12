@@ -1,7 +1,7 @@
 
 const fs = require("fs");
 const path = require("path");
-console.log("firstRun:",__dirname);
+const curDist = path.join(global.SERVER_DIS,__dirname);
 export default new class Log {
 
     constructor() {
@@ -62,16 +62,13 @@ export default new class Log {
         let y = new Date().getFullYear();
         let m = new Date().getMonth();
         let d = new Date().getDay();
-
-        console.log(process.env);
-        console.log(__dirname);
-        return path.resolve(__dirname, type, `${y}.${m}.${d}.log`);
+        return path.resolve(curDist, type, `${y}.${m}.${d}.log`);
     }
 
     writeFile(type, filePath, content) {        
 
         let mkdir = new Promise(function (resolve, reject) {
-            fs.readdir(path.join(__dirname, type), function (err, fileGroup) {
+            fs.readdir(path.join(curDist, type), function (err, fileGroup) {
                 if (fileGroup instanceof Array) resolve();
                 else reject();
             })
@@ -81,7 +78,7 @@ export default new class Log {
             .then(function () {
                 fs.appendFile(filePath, content, "utf8");
             }, function () {
-                fs.mkdir(path.join(__dirname, type), function () {
+                fs.mkdir(path.join(curDist, type), function () {
                     fs.appendFile(filePath, content, "utf8");
                 });
             });
