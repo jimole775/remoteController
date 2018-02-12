@@ -1,10 +1,11 @@
 
 const fs = require("fs");
 const path = require("path");
+conosle.log("firstRun:",__dirname);
 export default new class Log {
 
     constructor() {
-
+    
     }
 
     data(data){
