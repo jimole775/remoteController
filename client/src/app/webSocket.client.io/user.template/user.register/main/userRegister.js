@@ -58,10 +58,11 @@ class Ctrl {
                     $scope.tool.alert.warns("请不要使用特殊字符");
                 }
                 else {
-
+                    $scope.tool.alert.loading("正在注册...");
                     $scope.userStorage.setStorage("nativeName", $scope.userName);
                     $scope.wsService.emit(0x01,function(response){
                         if(response.serverData.regPass){
+                            $scope.tool.alert.loading.hide();
                             $element.remove();
                             $("section").css("filter", "blur(0)");
                             $scope.watcher();
