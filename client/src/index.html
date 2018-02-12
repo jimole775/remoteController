@@ -79,8 +79,8 @@
 
         }
 
-        #prevLoad .loadBar>p {
-            text-indent: 5px;
+        #prevLoad p.loadingText {
+            text-align: center;
         }
     </style>
      <script defer="defer">      
@@ -105,7 +105,9 @@
                 if (fillerWidth >= 100) {
                     fillerWidth = null;
                     filler.style.opacity = 0;
-                    loadingText.innerHTML = "网速很慢啊>.<";
+                    setTimeout(function(){
+                        if(loadingText)loadingText.innerHTML = "网速很慢啊>.<";
+                    },11000);                    
                     return;
                 }
                 fill();

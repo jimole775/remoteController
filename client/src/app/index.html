@@ -83,7 +83,6 @@
             text-align: center;
         }
 
-        loadingText
     </style>
    <script defer="defer">      
         var temp = [
@@ -107,7 +106,9 @@
                 if (fillerWidth >= 100) {
                     fillerWidth = null;
                     filler.style.opacity = 0;
-                    loadingText.innerHTML = "网速很慢啊>.<";
+                    setTimeout(function(){
+                        if(loadingText)loadingText.innerHTML = "网速很慢啊>.<";
+                    },11000);    
                     return;
                 }
                 fill();
