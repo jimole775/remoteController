@@ -8,7 +8,7 @@ let test = require("./webpack.test.js");
 
 //module.exports = [client,server,test];
 
-let _module = {
+let $module = {
     
     module: {
         loaders: [
@@ -59,11 +59,9 @@ let _module = {
         ]
     }
 };
-
-let _devtool = {devtool: "cheap-module-eval-source-map"};
-
-client = Object.assign(client, _module, _devtool);
-server = Object.assign(server, _module, _devtool);
-// client = Object.assign(client, _module);
-// server = Object.assign(server, _module);
+let $devtool;
+// $devtool = {devtool: "cheap-module-eval-source-map"};
+$devtool = $devtool ? $devtool : {};    // 在注销devtool时，不用修改后面的代码
+client = Object.assign(client, $module, $devtool);
+server = Object.assign(server, $module, $devtool);
 module.exports = [client,server];
