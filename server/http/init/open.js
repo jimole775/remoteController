@@ -81,10 +81,11 @@ export default class CreateHttp {
 
     response(req, res) {
         let that = this;
-        let fileName = req.url.split("/").pop();
-        let extension = fileName.split(".").pop();
-        let isAjax = fileName && !extension ;
+        let query = req.url.split("/").pop();
+        let extension = that.path.extname(req.url);
         let gzipHandler = that.zlib.createGzip();
+        
+        let isAjax = query && !extension;
         console.log("request url: ", req.url);
 
         if (req.url == "/") {
@@ -102,8 +103,8 @@ export default class CreateHttp {
 
         } 
         
-        if (extension) {
-            //CDN资源请求；      
+            //CDN资源请求；   
+        if (extension) {   
             let fileStream = null;
             if (/\.(png|jpg|jpeg|gif|ico)$/.test(extension)) {
                 // 图片类型转换成“base64”输出

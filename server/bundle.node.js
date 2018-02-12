@@ -458,10 +458,11 @@ var CreateHttp = function () {
         key: "response",
         value: function response(req, res) {
             var that = this;
-            var fileName = req.url.split("/").pop();
-            var extension = fileName.split(".").pop();
-            var isAjax = fileName && !extension;
+            var query = req.url.split("/").pop();
+            var extension = that.path.extname(req.url);
             var gzipHandler = that.zlib.createGzip();
+
+            var isAjax = query && !extension;
             console.log("request url: ", req.url);
 
             if (req.url == "/") {
@@ -478,8 +479,8 @@ var CreateHttp = function () {
                 });
             }
 
+            //CDN资源请求；   
             if (extension) {
-                //CDN资源请求；      
                 var fileStream = null;
                 if (/\.(png|jpg|jpeg|gif|ico)$/.test(extension)) {
                     // 图片类型转换成“base64”输出
