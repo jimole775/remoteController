@@ -16,6 +16,7 @@ let storage = {
     remoteChanelMap:[],  // 标记正在进行远程通讯业务的用户
     name:"userStorage",  // 标记正在进行远程通讯业务的用户
     hostUrl:"39.108.53.121",  // 标记正在进行远程通讯业务的用户
+    // hostUrl:"127.0.0.1",  // 标记正在进行远程通讯业务的用户
     httpPort:"1110",
     wsPort:"1111"
 };

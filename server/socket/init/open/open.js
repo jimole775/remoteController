@@ -5,7 +5,7 @@ import log from "log";
 export default function (port) {
     let netServer = require('net').createServer(function (socket) {
         socket.on('error', function (e) {
-            log.debug(e);
+            log.error(e);
         });
         socket.on('data', function (e) {
             let frame = tool.frameDecode(e);

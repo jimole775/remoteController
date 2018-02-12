@@ -35,7 +35,7 @@ export default class CreateHttp {
         let contentType = "text/html";
         let contentEncoding = "gzip";
         let useCache = true;
-
+        that.log.data({"reqUrl":req.url});
         switch (extension) {
             case "css":
                 contentType = "text/css";
@@ -85,7 +85,7 @@ export default class CreateHttp {
         let xRequestedWith = req.headers["x-requested-with"];
         let extension = that.path.extname(req.url);
         let gzipHandler = that.zlib.createGzip();
-        that.log.data({"reqUrl":req.url});
+        
         if (req.url == "/") {
             console.log("来自 ", req.headers.host, " 的请求");
             //初始化客户端；
@@ -144,8 +144,7 @@ export default class CreateHttp {
 
                         let scannerData = JSON.parse(chunk.toString());
                         let finalData = Object.assign(scannerData.items[ajaxData.index], {itemcount: scannerData.itemcount});
-                        that.log.debug(finalData);
-                        that.log.debug(upsetFinalData(finalData, "info"));
+                        that.log.data(upsetFinalData(finalData, "info"));
                         res.write(JSON.stringify(upsetFinalData(finalData, "info")));
                         res.end();
                     }   
