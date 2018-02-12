@@ -62,7 +62,7 @@ export default new class Log {
         let m = new Date().getMonth();
         let d = new Date().getDay();
 
-        return path.resolve(__dirname, `/${type}`, `${y}.${m}.${d}.log`);
+        return path.join(__dirname, `/${type}/${y}.${m}.${d}.log`);
     }
 
     writeFile(type, filePath, content) {        
