@@ -83,26 +83,29 @@
             text-indent: 5px;
         }
     </style>
-    <script defer="defer">      
+     <script defer="defer">      
         var temp = [
             '<div id="prevLoad">',
             '<div class="loadBar">',
-            '<p>loading...</p>',
+            '<p class="loadingText">loading...</p>',
             '<i class="filler"></i>',
             '</div></div>'
         ].join("");
-        document.write(temp);
-        var prevLoad = document.getElementById("prevLoad");
-        var filler = document.getElementsByClassName("filler")[0];
-        var loadBar = document.getElementsByClassName("loadBar")[0];
+        var doc = document;
+        doc.write(temp);
+        var prevLoad = doc.getElementById("prevLoad");
+        var filler = doc.getElementsByClassName("filler")[0];
+        var loadBar = doc.getElementsByClassName("loadBar")[0];
+        var loadingText = doc.getElementsByClassName("loadingText")[0];
         window.fillerWidth = 0;
         function fill() {
             setTimeout(function () {
-                fillerWidth += 0.7;
+                fillerWidth += 1;
                 filler.style.width = fillerWidth + "%";
                 if (fillerWidth >= 100) {
                     fillerWidth = null;
-                    loadBar.style.opacity = 0;
+                    filler.style.opacity = 0;
+                    loadingText.innerHTML = "网速很慢啊>.<";
                     return;
                 }
                 fill();
