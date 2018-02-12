@@ -35,7 +35,7 @@ export default class CreateHttp {
         let contentType = "text/html";
         let contentEncoding = "gzip";
         let useCache = true;
-        that.log.data({"reqUrl":req.url});
+        this.log.data({"reqUrl":req.url});
         switch (extension) {
             case "css":
                 contentType = "text/css";
