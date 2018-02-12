@@ -32,48 +32,6 @@
         })(window);
 
     </script>
-
-    <script defer="defer">    
-
-        (function (win, doc) {
-            var temp = [
-                '<div id="prevLoad">',
-                '<div class="loadBar">',
-                '<p class="loadingText">loading...</p>',
-                '<i class="filler"></i>',
-                '</div></div>'
-            ].join("");
-            var doc = document;
-            doc.write(temp);
-            var prevLoad = doc.getElementById("prevLoad");
-            var filler = doc.getElementsByClassName("filler")[0];
-            var loadBar = doc.getElementsByClassName("loadBar")[0];
-            var loadingText = doc.getElementsByClassName("loadingText")[0];
-            win.fillerWidth = 0;
-            function fill() {
-                setTimeout(function () {
-                    fillerWidth += 1;
-                    filler.style.width = fillerWidth + "%";
-                    if (fillerWidth >= 100) {
-                        fillerWidth = null;
-                        filler.style.opacity = 0;
-                        setTimeout(function () {
-                            if (loadBar) {
-                                loadBar.style.opacity = 0;
-                                loadingText.innerHTML = "网速很慢啊,请切换一下DNS吧 >.<";
-                            }
-                        }, 10000);
-                        return;
-                    }
-                    fill();
-                }, 100)
-            }
-
-            fill();
-        })(window, document);
-
-    </script>
-
     <style>
         #prevLoad {
             width: 100%;
@@ -120,9 +78,50 @@
             text-align: center;
         }
     </style>
+    <script defer="defer">    
 
+        (function (win, doc) {
+            var temp = [
+                '<div id="prevLoad">',
+                '<div class="loadBar">',
+                '<p class="loadingText">loading...</p>',
+                '<i class="filler"></i>',
+                '</div></div>'
+            ].join("");
+            var doc = document;
+            doc.write(temp);
+            var prevLoad = doc.getElementById("prevLoad");
+            var filler = doc.getElementsByClassName("filler")[0];
+            var loadBar = doc.getElementsByClassName("loadBar")[0];
+            var loadingText = doc.getElementsByClassName("loadingText")[0];
+            win.fillerWidth = 0;
+            function fill() {
+                setTimeout(function () {
+                    fillerWidth += 1;
+                    filler.style.width = fillerWidth + "%";
+                    if (fillerWidth >= 100) {
+                        fillerWidth = null;
+                        filler.style.opacity = 0;
+                        setTimeout(function () {
+                            if (loadBar) {
+                                loadBar.style.opacity = 0;
+                                loadingText.innerHTML = "网速很慢啊,请切换一下DNS吧 >.<";
+                            }
+                        }, 10000);
+                        return;
+                    }
+                    fill();
+                }, 100)
+            }
+
+            fill();
+        })(window, document);
+
+    </script>
     <script src="../assets/js/vendor.6bd0d.js"></script>
-<link rel="shortcut icon" href="favicon.ico"><link href="assets/css/bundle.6253d.css" rel="stylesheet"></head>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="assets/css/bundle.6253d.css" rel="stylesheet">
+</head>
 
 <body ng-app="myApp">
 
@@ -150,9 +149,8 @@
             // },15000) //15秒延迟，本地测试时使用
         })();
 
-
-
     </script>
-<script type="text/javascript" src="assets/js/bundle.6253d.js"></script></body>
+    <script type="text/javascript" src="assets/js/bundle.6253d.js"></script>
+</body>
 
 </html>
