@@ -26,19 +26,54 @@
                     document.write("本程序并不支持IE9以下的浏览器，如需体验，请更新当前浏览器");
                 }
             }
-
+            win.onresize = function () {
+                win.location.reload();
+            };
         })(window);
 
     </script>
-    <script>
-        // 窗口大小调整之后，重新加载资源，方便调试
-        let href = window.location.href;
-        let host = decodeURIComponent(href.toString()).split("#!")[0];
-        window.onresize = function () {
-            window.location.href = host;
-        };
+
+    <script defer="defer">    
+
+        (function (win, doc) {
+            var temp = [
+                '<div id="prevLoad">',
+                '<div class="loadBar">',
+                '<p class="loadingText">loading...</p>',
+                '<i class="filler"></i>',
+                '</div></div>'
+            ].join("");
+            var doc = document;
+            doc.write(temp);
+            var prevLoad = doc.getElementById("prevLoad");
+            var filler = doc.getElementsByClassName("filler")[0];
+            var loadBar = doc.getElementsByClassName("loadBar")[0];
+            var loadingText = doc.getElementsByClassName("loadingText")[0];
+            win.fillerWidth = 0;
+            function fill() {
+                setTimeout(function () {
+                    fillerWidth += 1;
+                    filler.style.width = fillerWidth + "%";
+                    if (fillerWidth >= 100) {
+                        fillerWidth = null;
+                        filler.style.opacity = 0;
+                        setTimeout(function () {
+                            if (loadBar) {
+                                loadBar.style.opacity = 0;
+                                loadingText.innerHTML = "网速很慢啊,请切换一下DNS吧 >.<";
+                            }
+                        }, 10000);
+                        return;
+                    }
+                    fill();
+                }, 100)
+            }
+
+            fill();
+        })(window, document);
 
     </script>
+
     <style>
         #prevLoad {
             width: 100%;
@@ -84,70 +119,37 @@
         #prevLoad p.loadingText {
             text-align: center;
         }
-
     </style>
-   <script defer="defer">      
-        var temp = [
-            '<div id="prevLoad">',
-            '<div class="loadBar">',
-            '<p class="loadingText">loading...</p>',
-            '<i class="filler"></i>',
-            '</div></div>'
-        ].join("");
-        var doc = document;
-        doc.write(temp);
-        var prevLoad = doc.getElementById("prevLoad");
-        var filler = doc.getElementsByClassName("filler")[0];
-        var loadBar = doc.getElementsByClassName("loadBar")[0];
-        var loadingText = doc.getElementsByClassName("loadingText")[0];
-        window.fillerWidth = 0;
-        function fill() {
-            setTimeout(function () {
-                fillerWidth += 1;
-                filler.style.width = fillerWidth + "%";
-                if (fillerWidth >= 100) {
-                    fillerWidth = null;
-                    filler.style.opacity = 0;
-                    setTimeout(function(){
-                        if(loadBar){
-                            loadBar.style.opacity = 0;
-                            loadingText.innerHTML = "网速很慢啊,请切换一下DNS吧 >.<";
-                        }
-                    },10000);    
-                    return;
-                }
-                fill();
-            }, 100)
-        }
 
-        fill();
-    </script>
 </head>
 
-<body ng-app="myApp">
+<body ng-app="myApp ">
 
     <foot-bar></foot-bar>
-    <section ui-view=""></section>
+    <section ui-view=" "></section>
     <head-bar></head-bar>
 
     <components></components>
-    <script src="../assets/js/vendor.6bd0d.js"></script>
+    <script src="../assets/js/vendor.6bd0d.js "></script>
     <script>
 
-        // setTimeout(function(){
-        // 依赖包加载完成之后，直接设置加载条到100%；
-        // 以触发钩子，隐藏加载页面
-        window.fillerWidth = 100;
-        var prevLoad = document.getElementById("prevLoad");
+        (function () {
+            // setTimeout(function(){
+            // 依赖包加载完成之后，直接设置加载条到100%；
+            // 以触发钩子，隐藏加载页面
+            window.fillerWidth = 100;
+            var prevLoad = document.getElementById("prevLoad ");
 
-        setTimeout(function () {   // 给与1S的时间填充满                   
-            prevLoad.style.opacity = 0;
-            setTimeout(function () {  // 给与1S的时间fade-out 
-                prevLoad.remove();
+            setTimeout(function () {   // 给与1S的时间填充满                   
+                prevLoad.style.opacity = 0;
+                setTimeout(function () {  // 给与1S的时间fade-out 
+                    prevLoad.remove();
+                }, 1000);
             }, 1000);
-        }, 1000);
 
-        // },15000) //15秒延迟，本地测试时使用
+            // },15000) //15秒延迟，本地测试时使用
+        })();
+
 
 
     </script>
