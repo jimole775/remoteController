@@ -9,6 +9,7 @@ let test = require("./webpack.test.js");
 //module.exports = [client,server,test];
 
 let _module = {
+    
     module: {
         loaders: [
             {
@@ -59,10 +60,10 @@ let _module = {
     }
 };
 
-// let _devtool = {devtool: "cheap-module-eval-source-map"};
+let _devtool = {devtool: "cheap-module-eval-source-map"};
 
-// client = Object.assign(client, _module, _devtool);
-// server = Object.assign(server, _module, _devtool);
-client = Object.assign(client, _module);
-server = Object.assign(server, _module);
+client = Object.assign(client, _module, _devtool);
+server = Object.assign(server, _module, _devtool);
+// client = Object.assign(client, _module);
+// server = Object.assign(server, _module);
 module.exports = [client,server];

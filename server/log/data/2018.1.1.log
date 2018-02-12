@@ -1,0 +1,22 @@
+【14:18:37】
+Converting circular structure to JSON
+TypeError: Converting circular structure to JSON
+    at Function.queryMsg (webpack-internal:///3:71:32)
+    at Log.data (webpack-internal:///3:23:25)
+    at CreateHttp.response (webpack-internal:///7:119:22)
+    at Server.eval (webpack-internal:///7:56:42)
+    at emitTwo (events.js:106:13)
+    at Server.emit (events.js:191:7)
+    at HTTPParser.parserOnIncoming [as onIncoming] (_http_server.js:543:12)
+    at HTTPParser.parserOnHeadersComplete (_http_common.js:105:23)
+【14:19:04】
+Converting circular structure to JSON
+TypeError: Converting circular structure to JSON
+    at Function.queryMsg (webpack-internal:///3:71:32)
+    at Log.data (webpack-internal:///3:23:25)
+    at CreateHttp.response (webpack-internal:///7:119:22)
+    at Server.eval (webpack-internal:///7:56:42)
+    at emitTwo (events.js:106:13)
+    at Server.emit (events.js:191:7)
+    at HTTPParser.parserOnIncoming [as onIncoming] (_http_server.js:543:12)
+    at HTTPParser.parserOnHeadersComplete (_http_common.js:105:23)

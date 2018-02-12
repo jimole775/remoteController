@@ -85,15 +85,14 @@ export default class CreateHttp {
         let xRequestedWith = req.headers["x-requested-with"];
         let extension = that.path.extname(req.url);
         let gzipHandler = that.zlib.createGzip();
-        that.log.debug(req.headers);
+        that.log.data({"reqUrl":req.url});
         if (req.url == "/") {
             console.log("来自 ", req.headers.host, " 的请求");
             //初始化客户端；
             that.fs.readFile(that.path.join(SOURCES_DIS, req.url, "index.html"), function (err, chunk) {
 
                 if (err) {
-                    that.log.debug(err);
-
+                    that.log.error(err);
                 } else {
                     res.write(chunk.toString());
                 }
@@ -140,7 +139,7 @@ export default class CreateHttp {
                 let filename = ajaxData.dataType + ".json";
                 that.fs.readFile(that.path.join(DB_DIS, req.url, filename), function (err, chunk) {
                     if(err){
-                        that.log.debug(err);
+                        that.log.error(err);
                     } else{
 
                         let scannerData = JSON.parse(chunk.toString());

@@ -7,12 +7,20 @@ export default new class Log {
 
     }
 
-    debug(msg) {
+    data(data){
+        data = Log.queryMsg(data);
+        let timer = Log.getTimer();
+        let fileName = Log.createFileName("data");
+        let content = `【${timer}】\r\n${data}\r\n`;
+        this.writeFile("data", fileName, content);
+    }
+
+    error(msg) {
         msg = Log.queryMsg(msg);
         let timer = Log.getTimer();
-        let fileName = Log.createFileName("debug");
+        let fileName = Log.createFileName("error");
         let content = `【${timer}】\r\n${msg}\r\n`;
-        this.writeFile("debug", fileName, content);
+        this.writeFile("error", fileName, content);
     }
 
     user(id, ip) {
@@ -29,7 +37,8 @@ export default new class Log {
             try {
                 msg = JSON.stringify(msg);
             } catch (error) {
-                msg = error;
+
+                msg = `${error.message}\r\n${error.stack}`;
             }
         }
 
@@ -56,7 +65,7 @@ export default new class Log {
         return path.resolve(__dirname, type, `${y}.${m}.${d}.log`);
     }
 
-    writeFile(type, filePath, content) {
+    writeFile(type, filePath, content) {        
 
         let mkdir = new Promise(function (resolve, reject) {
             fs.readdir(path.join(__dirname, type), function (err, fileGroup) {
