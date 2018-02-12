@@ -140,12 +140,6 @@ module.exports = require("path");
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("fs");
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -161,7 +155,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var fs = __webpack_require__(3);
+var fs = __webpack_require__(4);
 var path = __webpack_require__(2);
 exports.default = new (function () {
     function Log() {
@@ -245,6 +239,12 @@ exports.default = new (function () {
     return Log;
 }())();
 /* WEBPACK VAR INJECTION */}.call(exports, "server\\log"))
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
 
 /***/ }),
 /* 5 */
@@ -340,24 +340,48 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by Andy on 2017/2/8.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
+
+var _url = __webpack_require__(8);
+
+var _url2 = _interopRequireDefault(_url);
+
+var _http = __webpack_require__(9);
+
+var _http2 = _interopRequireDefault(_http);
+
+var _fs = __webpack_require__(4);
+
+var _fs2 = _interopRequireDefault(_fs);
+
+var _path = __webpack_require__(2);
+
+var _path2 = _interopRequireDefault(_path);
+
+var _zlib = __webpack_require__(10);
+
+var _zlib2 = _interopRequireDefault(_zlib);
+
+var _log = __webpack_require__(3);
+
+var _log2 = _interopRequireDefault(_log);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/**
- * Created by Andy on 2017/2/8.
- */
 
 var CreateHttp = function () {
     function CreateHttp() {
         _classCallCheck(this, CreateHttp);
 
-        this.url = __webpack_require__(8);
-        this.http = __webpack_require__(9);
-        this.fs = __webpack_require__(3);
-        this.path = __webpack_require__(2);
-        this.zlib = __webpack_require__(10);
-        this.log = __webpack_require__(4);
+        this.url = _url2.default;
+        this.http = _http2.default;
+        this.fs = _fs2.default;
+        this.path = _path2.default;
+        this.zlib = _zlib2.default;
+        this.log = _log2.default;
     }
 
     _createClass(CreateHttp, [{
@@ -533,7 +557,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function (port) {
     var netServer = __webpack_require__(12).createServer(function (socket) {
         socket.on('error', function (e) {
-            console.log(e);
+            _log2.default.debug(e);
         });
         socket.on('data', function (e) {
             var frame = _exports2.default.frameDecode(e);
@@ -561,6 +585,10 @@ var _host2 = _interopRequireDefault(_host);
 var _shakehand = __webpack_require__(28);
 
 var _shakehand2 = _interopRequireDefault(_shakehand);
+
+var _log = __webpack_require__(3);
+
+var _log2 = _interopRequireDefault(_log);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1057,7 +1085,7 @@ var _emitter = __webpack_require__(1);
 
 var _emitter2 = _interopRequireDefault(_emitter);
 
-var _log = __webpack_require__(4);
+var _log = __webpack_require__(3);
 
 var _log2 = _interopRequireDefault(_log);
 

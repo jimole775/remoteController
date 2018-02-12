@@ -1,10 +1,11 @@
 import tool from "wsServer/services/tool/exports";
 import host from "wsServer/interactive/host";
 import handshake from "./../shakehand/shakehand";
+import log from "log";
 export default function (port) {
     let netServer = require('net').createServer(function (socket) {
         socket.on('error', function (e) {
-            console.log(e);
+            log.debug(e);
         });
         socket.on('data', function (e) {
             let frame = tool.frameDecode(e);

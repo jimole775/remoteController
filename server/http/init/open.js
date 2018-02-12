@@ -2,14 +2,22 @@
  * Created by Andy on 2017/2/8.
  */
 
+import url from "url";
+import http from "http";
+import fs from "fs";
+import path from "path";
+import zlib from "zlib";
+import log from "log";
+
+
 export default class CreateHttp {
     constructor() {
-        this.url = require('url');
-        this.http = require("http");
-        this.fs = require("fs");
-        this.path = require("path");
-        this.zlib = require("zlib");
-        this.log = require("log");
+        this.url = url;
+        this.http = http;
+        this.fs = fs;
+        this.path = path;
+        this.zlib = zlib;
+        this.log = log;
     }
 
     open(port) {
