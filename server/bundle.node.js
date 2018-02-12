@@ -461,6 +461,8 @@ var CreateHttp = function () {
             var xRequestedWith = req.headers["x-requested-with"];
             var extension = that.path.extname(req.url);
             var gzipHandler = that.zlib.createGzip();
+            console.log("request url: ", req.url);
+            console.log("request xRequestedWith: ", xRequestedWith);
 
             if (req.url == "/") {
                 console.log("来自 ", req.headers.host, " 的请求");
@@ -509,6 +511,7 @@ var CreateHttp = function () {
 
                     var ajaxData = new that.url.parse("?" + data.toString(), true).query;
                     var filename = ajaxData.dataType + ".json";
+                    console.log("the db direct: ", that.path.join(DB_DIS, req.url, filename));
                     that.fs.readFile(that.path.join(DB_DIS, req.url, filename), function (err, chunk) {
                         if (err) {
                             that.log.error(err);
