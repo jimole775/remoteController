@@ -178,6 +178,7 @@ exports.default = new (function () {
             var timer = Log.getTimer();
             var fileName = Log.createFileName("error");
             var content = "\u3010" + timer + "\u3011\r\n" + msg + "\r\n";
+            console.log(content);
             this.writeFile("error", fileName, content);
         }
     }, {
@@ -411,6 +412,7 @@ var CreateHttp = function () {
             var contentType = "text/html";
             var contentEncoding = "gzip";
             var useCache = true;
+
             switch (extension) {
                 case "css":
                     contentType = "text/css";
@@ -458,15 +460,12 @@ var CreateHttp = function () {
         key: "response",
         value: function response(req, res) {
             var that = this;
-            var query = req.url.split("/").pop();
+            var xRequestedWith = req.headers["x-requested-with"];
             var extension = that.path.extname(req.url);
             var gzipHandler = that.zlib.createGzip();
 
-            var isAjax = query && !extension;
-            console.log("request url: ", req.url);
-
             if (req.url == "/") {
-                console.log("来自 ", req.headers.host, " 的请求");
+                console.log("来自 ", req.remoteAddress, " 的请求");
                 //初始化客户端；
                 that.fs.readFile(that.path.join(SOURCES_DIS, req.url, "index.html"), function (err, chunk) {
 
@@ -479,8 +478,8 @@ var CreateHttp = function () {
                 });
             }
 
-            //CDN资源请求；   
             if (extension) {
+                //CDN资源请求；      
                 var fileStream = null;
                 if (/\.(png|jpg|jpeg|gif|ico)$/.test(extension)) {
                     // 图片类型转换成“base64”输出
@@ -494,7 +493,7 @@ var CreateHttp = function () {
             }
 
             // ajax请求：
-            if (isAjax) {
+            if (xRequestedWith) {
                 var upsetFinalData = function upsetFinalData(item, targetProp) {
 
                     if (!Math.round(Math.random())) {
@@ -512,7 +511,7 @@ var CreateHttp = function () {
 
                     var ajaxData = new that.url.parse("?" + data.toString(), true).query;
                     var filename = ajaxData.dataType + ".json";
-                    console.log("the db direct: ", that.path.join(DB_DIS, req.url, filename));
+                    console.log("the db direct", that.path.join(DB_DIS, req.url, filename));
                     that.fs.readFile(that.path.join(DB_DIS, req.url, filename), function (err, chunk) {
                         if (err) {
                             that.log.error(err);

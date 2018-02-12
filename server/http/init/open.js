@@ -117,7 +117,7 @@ export default class CreateHttp {
             }
             }
 
-        } 
+         
         
         // ajax请求：
         if (xRequestedWith) {
