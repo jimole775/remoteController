@@ -81,15 +81,14 @@ export default class CreateHttp {
 
     response(req, res) {
         let that = this;
-        let query = req.url.split("/").pop();
+        let xRequestedWith = req.headers["x-requested-with"];
         let extension = that.path.extname(req.url);
         let gzipHandler = that.zlib.createGzip();
-        
-        let isAjax = query && !extension;
         console.log("request url: ", req.url);
+        console.log("request xRequestedWith: ", xRequestedWith);
 
         if (req.url == "/") {
-            console.log("来自 ", req.headers.host, " 的请求");
+            console.log("来自 ", req.remoteAddress, " 的请求");
             //初始化客户端；
             that.fs.readFile(that.path.join(SOURCES_DIS, req.url, "index.html"), function (err, chunk) {
 
@@ -103,8 +102,8 @@ export default class CreateHttp {
 
         } 
         
-            //CDN资源请求；   
-        if (extension) {   
+        if (extension) {
+            //CDN资源请求；      
             let fileStream = null;
             if (/\.(png|jpg|jpeg|gif|ico)$/.test(extension)) {
                 // 图片类型转换成“base64”输出
@@ -121,7 +120,7 @@ export default class CreateHttp {
         } 
         
         // ajax请求：
-        if (isAjax) {
+        if (xRequestedWith) {
             function upsetFinalData(item, targetProp) {
 
                 if (!Math.round(Math.random())) {
@@ -139,7 +138,7 @@ export default class CreateHttp {
 
                 let ajaxData = new that.url.parse("?" + data.toString(), true).query;
                 let filename = ajaxData.dataType + ".json";
-                console.log("the db direct: ",that.path.join(DB_DIS, req.url, filename));
+                console.log("the db direct",that.path.join(DB_DIS, req.url, filename));
                 that.fs.readFile(that.path.join(DB_DIS, req.url, filename), function (err, chunk) {
                     if(err){
                         that.log.error(err);
