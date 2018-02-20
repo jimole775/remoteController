@@ -32,12 +32,11 @@
     "webpack": "^3.5.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dll": "webpack --display-modules --colors --config ./webpack.dll.js",
     "cache": "npm cache clean --force",
-    "build": "webpack --hide-modules",
-    "watch":"webpack --watch",
-    "server":"devtool server/bundle.node.js"
+    "pack": "webpack --hide-modules",
+    "devtool":"devtool server/bundle.node.js",
+    "test":"node server/bundle.node.js"
   },
   "repository": {
     "type": "git",
