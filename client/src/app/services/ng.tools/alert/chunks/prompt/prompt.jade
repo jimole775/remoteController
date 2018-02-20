@@ -6,7 +6,7 @@ div.alert-box.box-background(ng-show="promptVisible")
       div.box-head
          h1.box-title 提示
       div.box-content
-         p.box-p(ng-bind="message") 消息
+         pre.box-p {{message}}
       div.bottom-bar-button-box
          button.bottom-bar-button.bottom-bar-button1(ng-bind="confirmText" ng-click="confirmBehavior()") 确认
          button.bottom-bar-button(ng-show="cancelBehavior" ng-bind="cancelText" ng-click="cancelBehavior()") 取消

@@ -64,7 +64,7 @@ class Ctrl {
                             $element.remove();
                             $("section").css("filter", "blur(0)");
                             $scope.watcher();
-                            $scope.tool.alert.prompt("恭喜注册成功，可以点击左上角的好友列表进行远程协助操作，如果还没有好友，可以自己再新建一个窗口！");
+                            $scope.tool.alert.prompt("恭喜您，已经注册成功。\r\n现在您可以点击左上角的用户列表，和其他用户进行互动了。\r\n如果还没有用户在线，可以再新建一个窗口，自己和自己玩！");
                         }else{
                             $scope.tool.alert.warns("那么帅气的名字已经被抢了");
                         }
