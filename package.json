@@ -43,7 +43,7 @@
     "type": "git",
     "url": "git+https://github.com/jimole775/bus.git"
   },
-  "author": "",
+  "author": "AndyRong",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jimole775/bus/issues"
@@ -53,5 +53,5 @@
     "lib": "lib",
     "test": "test"
   },
-  "description": ""
+  "description": "what do you wanna know?"
 }

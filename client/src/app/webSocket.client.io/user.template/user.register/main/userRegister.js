@@ -51,9 +51,7 @@ class Ctrl {
 
         $scope.submit = function () {
             if ($scope.userName.toString().trim()) {
-                //if ($scope.userStorage.getStorage("userList").indexOf($scope.userName) >= 0) {
-                //    $scope.tool.alert.warns("那么帅气的名字已经被抢了");
-                //}
+
                 if (/[`~!！?？@#$%^&'"“”\{}\\\/\*]/.test($scope.userName)) {
                     $scope.tool.alert.warns("请不要使用特殊字符");
                 }
@@ -66,6 +64,7 @@ class Ctrl {
                             $element.remove();
                             $("section").css("filter", "blur(0)");
                             $scope.watcher();
+                            $scope.tool.alert.prompt("恭喜注册成功，可以点击左上角的好友列表进行远程协助操作，如果还没有好友，可以自己再新建一个窗口！");
                         }else{
                             $scope.tool.alert.warns("那么帅气的名字已经被抢了");
                         }
