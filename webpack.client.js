@@ -15,7 +15,10 @@ const webClient = {
         path.join(__dirname, "client/src/app/index.js")
     ],
     target: "web",
-
+    // devServer: {
+    //     contentBase: path.join(__dirname, "client/assets"),
+    //     hot: true
+    //   },
     output: {
         //publicPath: "../",   //cdn资源加载的统一路径
         path: path.join(__dirname, "client/src"),  //webpack打包文件的统一输出路径
@@ -48,6 +51,9 @@ webClient.plugins = [
         filename: "assets/css/bundle.[chunkHash:5].css",
         allChunks: true
     })
+
+    //  ,new webpack.NamedModulesPlugin()
+    //  ,new webpack.HotModuleReplacementPlugin()
 ];
 
 webClient.resolve = {

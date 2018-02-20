@@ -36,7 +36,7 @@
     "cache": "npm cache clean --force",
     "pack": "webpack --hide-modules",
     "devtool":"devtool server/bundle.node.js",
-    "test":"node server/bundle.node.js"
+    "start":"node server/bundle.node.js"
   },
   "repository": {
     "type": "git",
