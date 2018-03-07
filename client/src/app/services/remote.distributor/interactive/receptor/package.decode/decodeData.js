@@ -5,10 +5,10 @@
 export default function (varFuncName, varParams) {
     var func = eval(varFuncName) || function () {};
 
-    var RMTParams_strArr = [],                                          //´æ´¢split(_|_)½á¹û
-        wholePageData_strAry = [],                                      //¶¯Ì¬Êı¾İÁ÷--´æ´¢split(_!_)µÄ½á¹û
-        singleData_strAry = [],                                         //¶¯Ì¬Êı¾İÁ÷--´æ´¢split(_!_)Ö®ºóÔÙsplit(_|_)µÄ½á¹û
-        RMTParams_objArr = [],                                          //×îÖÕapplyÊ¹ÓÃ²ÎÊı
+    var RMTParams_strArr = [],                                          //å­˜å‚¨split(_|_)ç»“æœ
+        wholePageData_strAry = [],                                      //åŠ¨æ€æ•°æ®æµ--å­˜å‚¨split(_!_)çš„ç»“æœ
+        singleData_strAry = [],                                         //åŠ¨æ€æ•°æ®æµ--å­˜å‚¨split(_!_)ä¹‹åå†split(_|_)çš„ç»“æœ
+        RMTParams_objArr = [],                                          //æœ€ç»ˆapplyä½¿ç”¨å‚æ•°
         len, innerLen, i, j, deCodeParams;
 
     try {
@@ -18,23 +18,23 @@ export default function (varFuncName, varParams) {
             /FREEZE_RESULT/i.test(varFuncName)
         ) {
 
-            //´Ó¡°_!_¡±Àï½ØÈ¡³öËùÓĞ²ÎÊıµÄbase64×Ö´®£»
+            //ä»â€œ_!_â€é‡Œæˆªå–å‡ºæ‰€æœ‰å‚æ•°çš„base64å­—ä¸²ï¼›
             wholePageData_strAry = varParams.split(split_mark_outer);
             i = 0;
             len = wholePageData_strAry.length;
 
             while (i < len) {
-                //Öğ¸ö½â°übase64£»
+                //é€ä¸ªè§£åŒ…base64ï¼›
                 deCodeParams = getBse64Decode(wholePageData_strAry[i++]);
 
-                //´Ó¡°_|_¡±Àï½ØÈ¡³öËùÓĞ²ÎÊı×Ö´®£»
+                //ä»â€œ_|_â€é‡Œæˆªå–å‡ºæ‰€æœ‰å‚æ•°å­—ä¸²ï¼›
                 singleData_strAry = deCodeParams.split(split_mark_inner);
 
                 j = 0;
                 innerLen = singleData_strAry.length;
                 while (j < innerLen) RMTParams_objArr[j] = JSON.parse(singleData_strAry[j++]);
 
-                //Ñ­»·Å×³ö£¬Óï¾äË³Ğòµş¼Ó£¬ÔÚCPU¿ÕÏĞÊ±»áÖ´ĞĞ
+                //å¾ªç¯æŠ›å‡ºï¼Œè¯­å¥é¡ºåºå åŠ ï¼Œåœ¨CPUç©ºé—²æ—¶ä¼šæ‰§è¡Œ
                 func.apply(func, RMTParams_objArr);
             }
         }
@@ -44,11 +44,11 @@ export default function (varFuncName, varParams) {
             i = 0;
             len = RMTParams_strArr.length;
             while (i < len) {
-                RMTParams_objArr[i] = /[\[\{]/.test(RMTParams_strArr[i].substr(0, 5)) ?               //Èç¹û´«¹ıÀ´µÄ²ÎÊı²»ÊÇJSON×Ö´®,¾ÍÖ¤Ã÷Ö»ÊÇÆÕÍ¨×Ö´®
+                RMTParams_objArr[i] = /[\[\{]/.test(RMTParams_strArr[i].substr(0, 5)) ?               //å¦‚æœä¼ è¿‡æ¥çš„å‚æ•°ä¸æ˜¯JSONå­—ä¸²,å°±è¯æ˜åªæ˜¯æ™®é€šå­—ä¸²
                     JSON.parse(RMTParams_strArr[i++]) : RMTParams_strArr[i++];
-            }                     //,ÏÈ½âÎö³ÉJSON¶ÔÏó
+            }                     //,å…ˆè§£ææˆJSONå¯¹è±¡
 
-            //ÔÚ´¦Àí³µĞÍÊı¾İµÄÊ±ºò£¬ÑÓ³Ù100ºÁÃë£¬±ÜÃâÔÚ¡¾Éè±¸ÖØÁ¬¡¿µÄÊ±ºò£¬APPÍÆËÍÒ»¶ÑÊı¾İ£¬Ôì³ÉÎŞ·¨Ô¤ÁÏµÄBUG
+            //åœ¨å¤„ç†è½¦å‹æ•°æ®çš„æ—¶å€™ï¼Œå»¶è¿Ÿ100æ¯«ç§’ï¼Œé¿å…åœ¨ã€è®¾å¤‡é‡è¿ã€‘çš„æ—¶å€™ï¼ŒAPPæ¨é€ä¸€å †æ•°æ®ï¼Œé€ æˆæ— æ³•é¢„æ–™çš„BUG
             if (/\.CTYPE/g.test(varFuncName))
                 setTimeout(function () { func.apply(func, RMTParams_objArr); }, 100);
             else
@@ -58,12 +58,12 @@ export default function (varFuncName, varParams) {
     } catch (e) {
         console.log(e.message);
         if (tool.loading.status.display) {
-            tool.alert("Êı¾İ½âÎö³öÏÖ´íÎó£¬Çëµã»÷È·¶¨ÍË³ö³ÌĞò",
+            tool.alert("æ•°æ®è§£æå‡ºç°é”™è¯¯ï¼Œè¯·ç‚¹å‡»ç¡®å®šé€€å‡ºç¨‹åº",
                 function () {
                     win.devService.sendDataToDev("3109FF");
                 })
         }
 
     }
-    console.log("½ÓÊÕÔ¶³ÌÊı¾İ:", "varFuncName:", varFuncName, "varParams:", deCodeParams);
+    console.log("æ¥æ”¶è¿œç¨‹æ•°æ®:", "varFuncName:", varFuncName, "varParams:", deCodeParams);
 }

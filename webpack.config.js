@@ -6,8 +6,6 @@ let client = require("./webpack.client.js");
 var server = require("./webpack.server.js");
 let test = require("./webpack.test.js");
 
-//module.exports = [client,server,test];
-
 let $module = {
     
     module: {

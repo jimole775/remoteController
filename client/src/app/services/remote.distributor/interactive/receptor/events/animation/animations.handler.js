@@ -19,24 +19,24 @@ export default function (funcName, RMTClickAnimationData, varParams) {
     var clickItemType = clickItem.split("_!_")[0];
     var clickItemIndex = parseFloat(clickItem.split("_!_")[1]);
 
-    //ÔÚÃ¿´ÎÔ¶³ÌÊı¾İ´«Êä¹ıÀ´Ö®ºó£¬¶¼»áÖØÖÃwin.CONSTANT.CLICK_POSITION_X ºÍ CLICK_POSITION_Y,
-    //ËùÒÔ£¬µ±Á½¸öÖµ¶¼Îª0µÄÊ±ºò£¬Ö¤Ã÷ button µÄ´úÀíÊÂ¼şÃ»ÓĞ´¥·¢£¬´«ËÍ¹ıÀ´µÄÊÇ»¬¶¯ÊÂ¼ş »òÕß ÆäËûÊÂ¼ş£¬
-    //²»ĞèÒª ¼¤»î¶¯»­£¬Á¢¼´¶ÁÈ¡Ô¶³ÌÊı¾İ¾Í¿ÉÒÔÁË
+    //åœ¨æ¯æ¬¡è¿œç¨‹æ•°æ®ä¼ è¾“è¿‡æ¥ä¹‹åï¼Œéƒ½ä¼šé‡ç½®win.CONSTANT.CLICK_POSITION_X å’Œ CLICK_POSITION_Y,
+    //æ‰€ä»¥ï¼Œå½“ä¸¤ä¸ªå€¼éƒ½ä¸º0çš„æ—¶å€™ï¼Œè¯æ˜ button çš„ä»£ç†äº‹ä»¶æ²¡æœ‰è§¦å‘ï¼Œä¼ é€è¿‡æ¥çš„æ˜¯æ»‘åŠ¨äº‹ä»¶ æˆ–è€… å…¶ä»–äº‹ä»¶ï¼Œ
+    //ä¸éœ€è¦ æ¿€æ´»åŠ¨ç”»ï¼Œç«‹å³è¯»å–è¿œç¨‹æ•°æ®å°±å¯ä»¥äº†
     if (pageX == "0" && pageY == "0") {
         decodeRMTDataPackage(funcName, varParams);
         return;
     }
 
-    //Èç¹û´«Êä¹ıÀ´µÄµã»÷ÊÂ¼ş ÊÇ button »òÕß input ±êÇ©´¥·¢µÄ£¬¾ÍÑ°ÕÒ¶ÔÓ¦µÄ±êÇ©£¬¸Ä±ä±³¾°É«
+    //å¦‚æœä¼ è¾“è¿‡æ¥çš„ç‚¹å‡»äº‹ä»¶ æ˜¯ button æˆ–è€… input æ ‡ç­¾è§¦å‘çš„ï¼Œå°±å¯»æ‰¾å¯¹åº”çš„æ ‡ç­¾ï¼Œæ”¹å˜èƒŒæ™¯è‰²
     if (clickItemIndex >= 0) {
         var clickElement = $($("body").find(clickItemType).eq(clickItemIndex));
 
-        //disable-RMTActive ÒâÎª¾Ü¾øÔ¶³Ì µã»÷¶¯»­
+        //disable-RMTActive æ„ä¸ºæ‹’ç»è¿œç¨‹ ç‚¹å‡»åŠ¨ç”»
         if (!clickElement.hasClass("disable-RMTActive")) {
             var scrollBody = clickElement.parents(".scroll-table-body");
             var originalBackground = clickElement.css("backgroundColor");
 
-            //Èç¹û¶Ô·½Ã»ÓĞ¹ö¶¯Ìõ£¬¶ø±¾µØÓĞ£¬ÄÇ¾ÍÏÈ°ÑĞèÒªµã»÷µÄÔªËØ ¹ö¶¯µ½Ò³Ãæ¶¥²¿Ö®ºó ÔÙÖ´ĞĞµã»÷ÊÂ¼ş
+            //å¦‚æœå¯¹æ–¹æ²¡æœ‰æ»šåŠ¨æ¡ï¼Œè€Œæœ¬åœ°æœ‰ï¼Œé‚£å°±å…ˆæŠŠéœ€è¦ç‚¹å‡»çš„å…ƒç´  æ»šåŠ¨åˆ°é¡µé¢é¡¶éƒ¨ä¹‹å å†æ‰§è¡Œç‚¹å‡»äº‹ä»¶
             if (scrollBody.length &&
                 theControllerHasScrollBar === "false" &&
                 scrollBody[0].scrollHeight - scrollBody.height() > 0) {
@@ -64,7 +64,7 @@ export default function (funcName, RMTClickAnimationData, varParams) {
         }
     }
 
-    //¸ø500MSµÄÊÂ¼şÔËĞĞµã»÷¶¯»­£¬ÔÙÖ´ĞĞÔ¶³ÌÊÂ¼ş
+    //ç»™500MSçš„äº‹ä»¶è¿è¡Œç‚¹å‡»åŠ¨ç”»ï¼Œå†æ‰§è¡Œè¿œç¨‹äº‹ä»¶
     setTimeout(function () {
         decodeRMTDataPackage(funcName, varParams)
     }, 500);

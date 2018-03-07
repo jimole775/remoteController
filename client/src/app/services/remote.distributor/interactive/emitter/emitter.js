@@ -27,7 +27,7 @@ let dataEmitter = function(type, fnName, params){
     if(success)
         external.SendRMTEventToApp(result);
     else
-        console.log("Êı¾İÒì³£");
+        console.log("æ•°æ®å¼‚å¸¸");
 
 };
 
@@ -44,24 +44,24 @@ export default dataEmitter;
 
     var split_mark_outer = "_!_";
     var split_mark_inner = "_|_";
-    var mouseEvent = {};                           //´æ´¢Êó±êĞÅÏ¢
+    var mouseEvent = {};                           //å­˜å‚¨é¼ æ ‡ä¿¡æ¯
     mouseEvent.index = -1;
     mouseEvent.type = "none";
     mouseEvent.coord = {};
     mouseEvent.coord.X = 0;
     mouseEvent.coord.Y = 0;
     /**
-     * Ô¶³ÌĞ­ÖúÖĞ£¬Ò£¿Ø»úÍ¨ÖªÒµÎñ»ú½øĞĞÍ¬²½²Ù×÷£»
-     * @param varFuncName º¯ÊıÃû£¬Í³Ò»Îª×Ö´®ĞÎÊ½£¬²¢ÇÒÊÇÈ«¾Öº¯Êı£»
-     * @param varParams Ö´ĞĞº¯ÊıÊ±ĞèÒªµÄ²ÎÊı£¬ Í³Ò»×ª³É "stringJSON_|_stringJSON_|_stringJSON" µÄĞÎÊ½·¢ËÍ¸øÔ¶³Ì»ú
-     *                                      ¶¯Ì¬Êı¾İÁ÷Ôò×ª³É
-     *                                      "stringJSON_|_stringJSON_|_stringJSON_!_stringJSON_|_stringJSON_|_stringJSON"µÄĞÎÊ½
+     * è¿œç¨‹ååŠ©ä¸­ï¼Œé¥æ§æœºé€šçŸ¥ä¸šåŠ¡æœºè¿›è¡ŒåŒæ­¥æ“ä½œï¼›
+     * @param varFuncName å‡½æ•°åï¼Œç»Ÿä¸€ä¸ºå­—ä¸²å½¢å¼ï¼Œå¹¶ä¸”æ˜¯å…¨å±€å‡½æ•°ï¼›
+     * @param varParams æ‰§è¡Œå‡½æ•°æ—¶éœ€è¦çš„å‚æ•°ï¼Œ ç»Ÿä¸€è½¬æˆ "stringJSON_|_stringJSON_|_stringJSON" çš„å½¢å¼å‘é€ç»™è¿œç¨‹æœº
+     *                                      åŠ¨æ€æ•°æ®æµåˆ™è½¬æˆ
+     *                                      "stringJSON_|_stringJSON_|_stringJSON_!_stringJSON_|_stringJSON_|_stringJSON"çš„å½¢å¼
      * */
     win.sendRMTEventToApp = function (varFuncName, varParams) {
         var strParams, result = "",funcName, RMTClickAnimationData;
 
-        //Èç¹ûÊÇ¹ö¶¯ÊÂ¼ş£¬¾Í¾Ü¾ø·¢ËÍ´¥ÆÁ£¨Êó±ê£©ÊÂ¼şµÄËùÓĞ²ÎÊı£¬Ô¶³Ì¶Ë¾Í²»»áÖ´ĞĞµã»÷¶¯»­
-        //Ô­Òò£º£º£º´¥ÆÁ£¨Êó±ê£©ÊÂ¼ş µÄ²ÎÊı¶¼ÊÇ´Ó touchstart »ñÈ¡µÄ£¬¹ö¶¯ÊÂ¼ş±Ø¶¨´¥·¢ touchstart£¬ËùÒÔ£¬ÔÚÕâÀïÀ¹½Ø´¦Àí¹ö¶¯ÊÂ¼ş
+        //å¦‚æœæ˜¯æ»šåŠ¨äº‹ä»¶ï¼Œå°±æ‹’ç»å‘é€è§¦å±ï¼ˆé¼ æ ‡ï¼‰äº‹ä»¶çš„æ‰€æœ‰å‚æ•°ï¼Œè¿œç¨‹ç«¯å°±ä¸ä¼šæ‰§è¡Œç‚¹å‡»åŠ¨ç”»
+        //åŸå› ï¼šï¼šï¼šè§¦å±ï¼ˆé¼ æ ‡ï¼‰äº‹ä»¶ çš„å‚æ•°éƒ½æ˜¯ä» touchstart è·å–çš„ï¼Œæ»šåŠ¨äº‹ä»¶å¿…å®šè§¦å‘ touchstartï¼Œæ‰€ä»¥ï¼Œåœ¨è¿™é‡Œæ‹¦æˆªå¤„ç†æ»šåŠ¨äº‹ä»¶
         if (/scroll/i.test(varFuncName)) {
             RMTClickAnimationData = "";
         }
@@ -73,53 +73,53 @@ export default dataEmitter;
 
         funcName = (varFuncName || 'String') + split_mark_inner + RMTClickAnimationData;
 
-        //Ã¿´ÎÓĞÊı¾İ·¢ËÍ¶¼»á´øÉÏ´¥ÃşÊÂ¼şµÄÊıÖµ£¬ËùÒÔ£¬·¢ÍêÒ»´Î¾ÍÖØÖÃÒ»´Î£¬Èç¹ûÃ»ÓĞÊıÖµ´«ÊäµÄÊ±ºò¾Í¿ÉÒÔÅĞ¶Ï
+        //æ¯æ¬¡æœ‰æ•°æ®å‘é€éƒ½ä¼šå¸¦ä¸Šè§¦æ‘¸äº‹ä»¶çš„æ•°å€¼ï¼Œæ‰€ä»¥ï¼Œå‘å®Œä¸€æ¬¡å°±é‡ç½®ä¸€æ¬¡ï¼Œå¦‚æœæ²¡æœ‰æ•°å€¼ä¼ è¾“çš„æ—¶å€™å°±å¯ä»¥åˆ¤æ–­
         mouseEvent.coord.X = 0;
         mouseEvent.coord.Y = 0;
         mouseEvent.index = -1;
         mouseEvent.type = "none";
         mouseEvent.hasScrollBar = false;
 
-        if (global.RMTID.role == 0) return;                                                  //Õı³£ÒµÎñ²»×ª·¢
-        else if (/tool/.test(funcName) && global.RMTID.role == 1) return;                    //ÒµÎñ»ú²»×ª·¢µ¯¿òÊÂ¼ş
-        else if (/moduleEntry/.test(funcName) && global.RMTID.role == 1) return;             //ÒµÎñ»ú²»×ª·¢Èë¿ÚÊÂ¼ş
-        else if (/RMTClickEvent/.test(funcName) && global.RMTID.role == 1) return;           //ÒµÎñ»ú²»×ª·¢µã»÷ÊÂ¼ş
-        else if (/jsRecvAppData/.test(funcName) && global.RMTID.role == 2) return;           //¿ØÖÆ»ú²»×ª·¢·şÎñÆ÷Êı¾İ
-        else if (/serverRequestCallback/.test(funcName) && global.RMTID.role == 2) return;   //¿ØÖÆ»ú²»×ª·¢·şÎñÆ÷»Øµ÷ÊÂ¼ş
+        if (global.RMTID.role == 0) return;                                                  //æ­£å¸¸ä¸šåŠ¡ä¸è½¬å‘
+        else if (/tool/.test(funcName) && global.RMTID.role == 1) return;                    //ä¸šåŠ¡æœºä¸è½¬å‘å¼¹æ¡†äº‹ä»¶
+        else if (/moduleEntry/.test(funcName) && global.RMTID.role == 1) return;             //ä¸šåŠ¡æœºä¸è½¬å‘å…¥å£äº‹ä»¶
+        else if (/RMTClickEvent/.test(funcName) && global.RMTID.role == 1) return;           //ä¸šåŠ¡æœºä¸è½¬å‘ç‚¹å‡»äº‹ä»¶
+        else if (/jsRecvAppData/.test(funcName) && global.RMTID.role == 2) return;           //æ§åˆ¶æœºä¸è½¬å‘æœåŠ¡å™¨æ•°æ®
+        else if (/serverRequestCallback/.test(funcName) && global.RMTID.role == 2) return;   //æ§åˆ¶æœºä¸è½¬å‘æœåŠ¡å™¨å›è°ƒäº‹ä»¶
 
         switch (typeof varParams) {
             case "string":
                 strParams = varParams ? varParams : "[]";
                 break;
-            case "object":  //Èç¹ûÊÇ¶ÔÏó£¨Êı×é»òÕß¶ÔÏóÏÂÃæÔÙ½øĞĞÇø·Ö£©£¬¾Í½øĞĞ½â¹¹Æ´½Ó
+            case "object":  //å¦‚æœæ˜¯å¯¹è±¡ï¼ˆæ•°ç»„æˆ–è€…å¯¹è±¡ä¸‹é¢å†è¿›è¡ŒåŒºåˆ†ï¼‰ï¼Œå°±è¿›è¡Œè§£æ„æ‹¼æ¥
                 if (varParams instanceof Array) {
                     varParams.forEach(function(item){
                         result += (typeof item === "object" ? JSON.stringify(item) : item) + split_mark_inner;
                     });
-                    strParams = result.substring(0, result.length - 3);   //¸Éµô×îºóÒ»¸ö·Ö¸ô·û
+                    strParams = result.substring(0, result.length - 3);   //å¹²æ‰æœ€åä¸€ä¸ªåˆ†éš”ç¬¦
                 }
                 else if (varParams instanceof Object) {
                     strParams = JSON.stringify(varParams);
                 }
                 else {
-                    console.log("error:Ô¶³ÌÒµÎñ²»Òª´«Êäº¯ÊıÊµÌå!!!");
+                    console.log("error:è¿œç¨‹ä¸šåŠ¡ä¸è¦ä¼ è¾“å‡½æ•°å®ä½“!!!");
                 }
                 break;
         }
-        console.log("×ª·¢ÒµÎñÊı¾İ:", global.RMTID.role, "funcName:", funcName, typeof strParams + ":", strParams);
+        console.log("è½¬å‘ä¸šåŠ¡æ•°æ®:", global.RMTID.role, "funcName:", funcName, typeof strParams + ":", strParams);
 
         /**
-         * ¡¾¶¯Ì¬Êı¾İ¡¿¡¾Í¨µÀÊı¾İ¡¿Êı¾İÁ÷ĞÎÊ½
-         * ´æ¹»Ò»Ò³ÔÙ½øĞĞ×ª·¢£¬²¢ÇÒÆÁ±ÎÉè±¸Ö¸Áî×ª·¢
-         * µ±Ç°Ò³Êı¾İÁ¿ÊµÊ±Ë¢ĞÂ**/
+         * ã€åŠ¨æ€æ•°æ®ã€‘ã€é€šé“æ•°æ®ã€‘æ•°æ®æµå½¢å¼
+         * å­˜å¤Ÿä¸€é¡µå†è¿›è¡Œè½¬å‘ï¼Œå¹¶ä¸”å±è”½è®¾å¤‡æŒ‡ä»¤è½¬å‘
+         * å½“å‰é¡µæ•°æ®é‡å®æ—¶åˆ·æ–°**/
         var queryJson = getBse64Encode(strParams);
         if (/CALC_ONE_ANS/i.test(funcName) ||
             /CHANNEL_DATA/i.test(funcName)) {
-            win.global.RMTID.DataStream_JsonString += queryJson + split_mark_outer;                                  //ÒÔ"_!_"Îª·Ö¸ô·û,Çø±ğ"_|_"
-            var tempStore_str = global.RMTID.DataStream_JsonString.substring(0, global.RMTID.DataStream_JsonString.length - 3);     //½Øµô×îºóÒ»¸ö·Ö¸ô·û
-            var tempArr = tempStore_str.split(split_mark_outer);                                              //½â³ö×Ö´®×é£¬ÅĞ¶ÏÊıÁ¿
+            win.global.RMTID.DataStream_JsonString += queryJson + split_mark_outer;                                  //ä»¥"_!_"ä¸ºåˆ†éš”ç¬¦,åŒºåˆ«"_|_"
+            var tempStore_str = global.RMTID.DataStream_JsonString.substring(0, global.RMTID.DataStream_JsonString.length - 3);     //æˆªæ‰æœ€åä¸€ä¸ªåˆ†éš”ç¬¦
+            var tempArr = tempStore_str.split(split_mark_outer);                                              //è§£å‡ºå­—ä¸²ç»„ï¼Œåˆ¤æ–­æ•°é‡
 
-            var rowsInEachPage = global.DataStream_CurPageLinesCount;       //¶¯Ì¬¼ÆËãÃ¿Ò³µÄÊı¾İÁ¿
+            var rowsInEachPage = global.DataStream_CurPageLinesCount;       //åŠ¨æ€è®¡ç®—æ¯é¡µçš„æ•°æ®é‡
 
             if (tempArr.length >= rowsInEachPage) {
                 external.SendRMTEventToApp(global.RMTID.role, funcName, tempStore_str);
@@ -127,15 +127,15 @@ export default dataEmitter;
             }
         }
 
-        /**¡¾¼òÒ×Õï¶Ï¡¿£¬¡¾¶³½áÖ¡¡¿
-         * ·½°¸Îª£º
-         * 1ÃëÖÓ·¢Ò»Ö¡£¬
-         * »òÕßÊı¾İ³¤¶È´óÓÚ50KµÄÊ±ºòÒ²·¢£¬È»ºóÇå³ı¶¨Ê±Æ÷**/
+        /**ã€ç®€æ˜“è¯Šæ–­ã€‘ï¼Œã€å†»ç»“å¸§ã€‘
+         * æ–¹æ¡ˆä¸ºï¼š
+         * 1ç§’é’Ÿå‘ä¸€å¸§ï¼Œ
+         * æˆ–è€…æ•°æ®é•¿åº¦å¤§äº50Kçš„æ—¶å€™ä¹Ÿå‘ï¼Œç„¶åæ¸…é™¤å®šæ—¶å™¨**/
         else if (/DTC_simple/i.test(funcName) ||
             /FREEZE_RESULT/i.test(funcName)) {
             win.global.RMTID.DataStream_JsonString += queryJson + split_mark_outer;
 
-            if (global.RMTID.DataStream_JsonString.length >= 50000) { //Èç¹ûÊı¾İ³¤¶È´óÓÚ50K£¬¾ÍÒ»´ÎĞÔ·¢ËÍ³öÈ¥£¬·ñÔò£¬¾Í½øÈë1Ãëµ¹¼ÆÊ±
+            if (global.RMTID.DataStream_JsonString.length >= 50000) { //å¦‚æœæ•°æ®é•¿åº¦å¤§äº50Kï¼Œå°±ä¸€æ¬¡æ€§å‘é€å‡ºå»ï¼Œå¦åˆ™ï¼Œå°±è¿›å…¥1ç§’å€’è®¡æ—¶
                 clearTimeout(clocker);
                 external.SendRMTEventToApp(global.RMTID.role, funcName,
                     win.global.RMTID.DataStream_JsonString.substring(0, global.RMTID.DataStream_JsonString.length - 3));
@@ -144,7 +144,7 @@ export default dataEmitter;
             }
             else {
 
-                if (!clockStart) {        //¶¨Ê±Æ÷Èç¹ûÃ»¿ªÆô£¬¾Í½øÈësetTimeout
+                if (!clockStart) {        //å®šæ—¶å™¨å¦‚æœæ²¡å¼€å¯ï¼Œå°±è¿›å…¥setTimeout
                     clockStart = true;
                     clocker = setTimeout(function () {
                         clockStart = false;
@@ -163,7 +163,7 @@ export default dataEmitter;
             }
         }
 
-        /**ÆäËûÏîÄ¿¾ÍÊÇÕı³£ÇëÇóÒ»´Î£¬·¢ËÍÒ»Ö¡**/
+        /**å…¶ä»–é¡¹ç›®å°±æ˜¯æ­£å¸¸è¯·æ±‚ä¸€æ¬¡ï¼Œå‘é€ä¸€å¸§**/
         else {
             external.SendRMTEventToApp(global.RMTID.role, funcName, queryJson);
         }

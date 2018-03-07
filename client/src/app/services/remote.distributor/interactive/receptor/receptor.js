@@ -10,28 +10,28 @@
     var split_mark_inner = "_|_";
 
     /**
-     * ½ÓÊÕAPPÒ£¿Ø»úµÄ °´Å¥Í¬²½ Ö¸Áî
-     * @param action        1:¿ØÖÆ¶Ë·¢À´µÄÊı¾İ 2£ºÒµÎñ¶Ë·¢À´µÄÊı¾İ 3£º±íÊ¾ÖØÁ¬²»ÉÏ ÒµÎñ»úÖØÁ¬²»ÉÏ £¬Ö±½ÓÍË³ö 4£º±íÊ¾ÍøÂç²»ÎÈ¶¨£¬ÌáÊ¾ÓÃ»§ÊÇ·ñ¼ÌĞøÔ¶³Ì
+     * æ¥æ”¶APPé¥æ§æœºçš„ æŒ‰é’®åŒæ­¥ æŒ‡ä»¤
+     * @param action        1:æ§åˆ¶ç«¯å‘æ¥çš„æ•°æ® 2ï¼šä¸šåŠ¡ç«¯å‘æ¥çš„æ•°æ® 3ï¼šè¡¨ç¤ºé‡è¿ä¸ä¸Š ä¸šåŠ¡æœºé‡è¿ä¸ä¸Š ï¼Œç›´æ¥é€€å‡º 4ï¼šè¡¨ç¤ºç½‘ç»œä¸ç¨³å®šï¼Œæç¤ºç”¨æˆ·æ˜¯å¦ç»§ç»­è¿œç¨‹
 
-     * @param varFuncName   º¯ÊıÃû£¬ÀàĞÍÎª×Ö´®
-     * @param varParams     Ö´ĞĞº¯ÊıÊ±ĞèÒªµÄ²ÎÊı£¬Êı¾İ¸ñÊ½Îª "stringJSON_|_stringJSON_|_stringJSON"
-     *                                         ¶¯Ì¬Êı¾İÁ÷¸ñÊ½ "stringJSON_|_stringJSON_!_stringJSON_|_stringJSON"
-     *                                         ÒÔÉÏ·½°¸Ö÷ÒªÊÇÎªÁË¼æÈİµ±Êı¾İÀïÃæÓĞ \" ×ªÒå·ûÊ±,Á½´ÎJSON.stringifyÔì³É×ªÒå·û¶ªÊ§µÄBUG
+     * @param varFuncName   å‡½æ•°åï¼Œç±»å‹ä¸ºå­—ä¸²
+     * @param varParams     æ‰§è¡Œå‡½æ•°æ—¶éœ€è¦çš„å‚æ•°ï¼Œæ•°æ®æ ¼å¼ä¸º "stringJSON_|_stringJSON_|_stringJSON"
+     *                                         åŠ¨æ€æ•°æ®æµæ ¼å¼ "stringJSON_|_stringJSON_!_stringJSON_|_stringJSON"
+     *                                         ä»¥ä¸Šæ–¹æ¡ˆä¸»è¦æ˜¯ä¸ºäº†å…¼å®¹å½“æ•°æ®é‡Œé¢æœ‰ \" è½¬ä¹‰ç¬¦æ—¶,ä¸¤æ¬¡JSON.stringifyé€ æˆè½¬ä¹‰ç¬¦ä¸¢å¤±çš„BUG
      * */
 
     win.RecvRMTEventFromApp = function (action, varFuncName, varParams) {
 
-        //Ô¶³ÌÊı¾İ¶¼ÊÇÒÔ×Ö´®µÄĞÎÊ½´«Èë£¬ËùÒÔÒªÊ¹ÓÃÊı×Ö£¬¾ÍĞèÒª×ª»»Ò»´Î
+        //è¿œç¨‹æ•°æ®éƒ½æ˜¯ä»¥å­—ä¸²çš„å½¢å¼ä¼ å…¥ï¼Œæ‰€ä»¥è¦ä½¿ç”¨æ•°å­—ï¼Œå°±éœ€è¦è½¬æ¢ä¸€æ¬¡
         var action_int = parseFloat(action);
 
         var funcName = "";
-        //×ª·¢µÄº¯ÊıÃûÓĞÊ±ºò²»ĞèÒªÆ´½Ó_|_
+        //è½¬å‘çš„å‡½æ•°åæœ‰æ—¶å€™ä¸éœ€è¦æ‹¼æ¥_|_
         if (/_|_/.test(varFuncName)) {
 
-            //»ñÈ¡º¯ÊıÃû µã»÷ÊÂ¼ş×ø±ê(°Ù·Ö±È)
+            //è·å–å‡½æ•°å ç‚¹å‡»äº‹ä»¶åæ ‡(ç™¾åˆ†æ¯”)
             funcName = varFuncName.split("_|_")[0];
 
-            //Ô¶³Ìµã»÷¶¯»­ËùĞèÒªµÄÊı¾İ¶¼Æ´½ÓÔÚº¯ÊıÃûÖ®ºó£¬Ö´ĞĞÔ¶³Ìµã»÷ÊÂ¼şÖ®Ç°£¬¼¤»î¶¯»­
+            //è¿œç¨‹ç‚¹å‡»åŠ¨ç”»æ‰€éœ€è¦çš„æ•°æ®éƒ½æ‹¼æ¥åœ¨å‡½æ•°åä¹‹åï¼Œæ‰§è¡Œè¿œç¨‹ç‚¹å‡»äº‹ä»¶ä¹‹å‰ï¼Œæ¿€æ´»åŠ¨ç”»
             var RMTClickAnimationData = varFuncName.split("_|_")[1];
 
         }
@@ -45,7 +45,7 @@
                 break;
             case 2:
                 if (RMTClickAnimationData) {
-                    runClickAnimationFirst(funcName, RMTClickAnimationData, varParams);                //ÒµÎñ»úÔÚÊÕµ½Êı¾İÊ±£¨Ò»°ãÖ»ÓĞµã»÷ÊÂ¼ş´«¸øÒµÎñ»ú£©£¬Ö´ĞĞµã»÷¶¯»­
+                    runClickAnimationFirst(funcName, RMTClickAnimationData, varParams);                //ä¸šåŠ¡æœºåœ¨æ”¶åˆ°æ•°æ®æ—¶ï¼ˆä¸€èˆ¬åªæœ‰ç‚¹å‡»äº‹ä»¶ä¼ ç»™ä¸šåŠ¡æœºï¼‰ï¼Œæ‰§è¡Œç‚¹å‡»åŠ¨ç”»
                 }
                 else {
                     decodeRMTDataPackage(funcName, varParams);
@@ -55,13 +55,13 @@
                 errHandlerAct3();
                 break;
             case 4:
-                errHandlerAct4();                  //´¦ÀíÍøÂçÒì³££¬Í¨ÖªË«·½¶Ï¿ªÔ¶³ÌÒµÎñ
+                errHandlerAct4();                  //å¤„ç†ç½‘ç»œå¼‚å¸¸ï¼Œé€šçŸ¥åŒæ–¹æ–­å¼€è¿œç¨‹ä¸šåŠ¡
                 break;
             case 5:
-                uncommunicateForNativeAct5();      //Í¨ÖªÒµÎñ¶ËÈ¡ÏûÔ¶³Ì»á»°£¨Òş²ØÕÚÕÖ²ã£©£¬¿ØÖÆ»ú´æÔÚÒì³£»áÏÈĞĞÍË³ö£¬APP¸ù¾İ´Ë¶Ë¿ÚÍ¨ÖªÒµÎñ¶ËÊÖ¶¯ÍË³ö
+                uncommunicateForNativeAct5();      //é€šçŸ¥ä¸šåŠ¡ç«¯å–æ¶ˆè¿œç¨‹ä¼šè¯ï¼ˆéšè—é®ç½©å±‚ï¼‰ï¼Œæ§åˆ¶æœºå­˜åœ¨å¼‚å¸¸ä¼šå…ˆè¡Œé€€å‡ºï¼ŒAPPæ ¹æ®æ­¤ç«¯å£é€šçŸ¥ä¸šåŠ¡ç«¯æ‰‹åŠ¨é€€å‡º
                 break;
             case 6:
-                networkDelayAct6(funcName);     //»ñÈ¡ÍøÂçÑÓ³Ù£¬ÏÔÊ¾ÔÚ×óÉÏ½Ç
+                networkDelayAct6(funcName);     //è·å–ç½‘ç»œå»¶è¿Ÿï¼Œæ˜¾ç¤ºåœ¨å·¦ä¸Šè§’
                 break;
             default :
                 break;
@@ -81,10 +81,10 @@
     /*function decodeRMTDataPackage(varFuncName, varParams) {
         var func = eval(varFuncName) || function () {};
 
-        var RMTParams_strArr = [],                                          //´æ´¢split(_|_)½á¹û
-            wholePageData_strAry = [],                                      //¶¯Ì¬Êı¾İÁ÷--´æ´¢split(_!_)µÄ½á¹û
-            singleData_strAry = [],                                         //¶¯Ì¬Êı¾İÁ÷--´æ´¢split(_!_)Ö®ºóÔÙsplit(_|_)µÄ½á¹û
-            RMTParams_objArr = [],                                          //×îÖÕapplyÊ¹ÓÃ²ÎÊı
+        var RMTParams_strArr = [],                                          //å­˜å‚¨split(_|_)ç»“æœ
+            wholePageData_strAry = [],                                      //åŠ¨æ€æ•°æ®æµ--å­˜å‚¨split(_!_)çš„ç»“æœ
+            singleData_strAry = [],                                         //åŠ¨æ€æ•°æ®æµ--å­˜å‚¨split(_!_)ä¹‹åå†split(_|_)çš„ç»“æœ
+            RMTParams_objArr = [],                                          //æœ€ç»ˆapplyä½¿ç”¨å‚æ•°
             len, innerLen, i, j, deCodeParams;
 
         try {
@@ -93,22 +93,22 @@
                 /DTC_simple/i.test(varFuncName) ||
                 /FREEZE_RESULT/i.test(varFuncName)
             ) {
-                //´Ó¡°_!_¡±Àï½ØÈ¡³öËùÓĞ²ÎÊıµÄbase64×Ö´®£»
+                //ä»â€œ_!_â€é‡Œæˆªå–å‡ºæ‰€æœ‰å‚æ•°çš„base64å­—ä¸²ï¼›
                 wholePageData_strAry = varParams.split(split_mark_outer);
                 i = 0;
                 len = wholePageData_strAry.length;
                 while (i < len) {
-                    //Öğ¸ö½â°übase64£»
+                    //é€ä¸ªè§£åŒ…base64ï¼›
                     deCodeParams = getBse64Decode(wholePageData_strAry[i++]);
 
-                    //´Ó¡°_|_¡±Àï½ØÈ¡³öËùÓĞ²ÎÊı×Ö´®£»
+                    //ä»â€œ_|_â€é‡Œæˆªå–å‡ºæ‰€æœ‰å‚æ•°å­—ä¸²ï¼›
                     singleData_strAry = deCodeParams.split(split_mark_inner);
 
                     j = 0;
                     innerLen = singleData_strAry.length;
                     while (j < innerLen) RMTParams_objArr[j] = JSON.parse(singleData_strAry[j++]);
 
-                    //Ñ­»·Å×³ö£¬Óï¾äË³Ğòµş¼Ó£¬ÔÚCPU¿ÕÏĞÊ±»áÖ´ĞĞ
+                    //å¾ªç¯æŠ›å‡ºï¼Œè¯­å¥é¡ºåºå åŠ ï¼Œåœ¨CPUç©ºé—²æ—¶ä¼šæ‰§è¡Œ
                     func.apply(func, RMTParams_objArr);
                 }
             }
@@ -118,11 +118,11 @@
                 i = 0;
                 len = RMTParams_strArr.length;
                 while (i < len) {
-                    RMTParams_objArr[i] = /[\[\{]/.test(RMTParams_strArr[i].substr(0, 5)) ?               //Èç¹û´«¹ıÀ´µÄ²ÎÊı²»ÊÇJSON×Ö´®,¾ÍÖ¤Ã÷Ö»ÊÇÆÕÍ¨×Ö´®
+                    RMTParams_objArr[i] = /[\[\{]/.test(RMTParams_strArr[i].substr(0, 5)) ?               //å¦‚æœä¼ è¿‡æ¥çš„å‚æ•°ä¸æ˜¯JSONå­—ä¸²,å°±è¯æ˜åªæ˜¯æ™®é€šå­—ä¸²
                         JSON.parse(RMTParams_strArr[i++]) : RMTParams_strArr[i++];
-                }                     //,ÏÈ½âÎö³ÉJSON¶ÔÏó
+                }                     //,å…ˆè§£ææˆJSONå¯¹è±¡
 
-                //ÔÚ´¦Àí³µĞÍÊı¾İµÄÊ±ºò£¬ÑÓ³Ù100ºÁÃë£¬±ÜÃâÔÚ¡¾Éè±¸ÖØÁ¬¡¿µÄÊ±ºò£¬APPÍÆËÍÒ»¶ÑÊı¾İ£¬Ôì³ÉÎŞ·¨Ô¤ÁÏµÄBUG
+                //åœ¨å¤„ç†è½¦å‹æ•°æ®çš„æ—¶å€™ï¼Œå»¶è¿Ÿ100æ¯«ç§’ï¼Œé¿å…åœ¨ã€è®¾å¤‡é‡è¿ã€‘çš„æ—¶å€™ï¼ŒAPPæ¨é€ä¸€å †æ•°æ®ï¼Œé€ æˆæ— æ³•é¢„æ–™çš„BUG
                 if (/\.CTYPE/g.test(varFuncName))
                     setTimeout(function () { func.apply(func, RMTParams_objArr); }, 100);
                 else
@@ -132,14 +132,14 @@
         } catch (e) {
             console.log(e.message);
             if (tool.loading.status.display) {
-                tool.alert("Êı¾İ½âÎö³öÏÖ´íÎó£¬Çëµã»÷È·¶¨ÍË³ö³ÌĞò",
+                tool.alert("æ•°æ®è§£æå‡ºç°é”™è¯¯ï¼Œè¯·ç‚¹å‡»ç¡®å®šé€€å‡ºç¨‹åº",
                     function () {
                         win.devService.sendDataToDev("3109FF");
                     })
             }
 
         }
-        console.log("½ÓÊÕÔ¶³ÌÊı¾İ:", "varFuncName:", varFuncName, "varParams:", deCodeParams);
+        console.log("æ¥æ”¶è¿œç¨‹æ•°æ®:", "varFuncName:", varFuncName, "varParams:", deCodeParams);
     }*/
     /*
     var cssParams =
@@ -175,24 +175,24 @@
         var clickItemType = clickItem.split("_!_")[0];
         var clickItemIndex = parseFloat(clickItem.split("_!_")[1]);
 
-        //ÔÚÃ¿´ÎÔ¶³ÌÊı¾İ´«Êä¹ıÀ´Ö®ºó£¬¶¼»áÖØÖÃwin.CONSTANT.CLICK_POSITION_X ºÍ CLICK_POSITION_Y,
-        //ËùÒÔ£¬µ±Á½¸öÖµ¶¼Îª0µÄÊ±ºò£¬Ö¤Ã÷ button µÄ´úÀíÊÂ¼şÃ»ÓĞ´¥·¢£¬´«ËÍ¹ıÀ´µÄÊÇ»¬¶¯ÊÂ¼ş »òÕß ÆäËûÊÂ¼ş£¬
-        //²»ĞèÒª ¼¤»î¶¯»­£¬Á¢¼´¶ÁÈ¡Ô¶³ÌÊı¾İ¾Í¿ÉÒÔÁË
+        //åœ¨æ¯æ¬¡è¿œç¨‹æ•°æ®ä¼ è¾“è¿‡æ¥ä¹‹åï¼Œéƒ½ä¼šé‡ç½®win.CONSTANT.CLICK_POSITION_X å’Œ CLICK_POSITION_Y,
+        //æ‰€ä»¥ï¼Œå½“ä¸¤ä¸ªå€¼éƒ½ä¸º0çš„æ—¶å€™ï¼Œè¯æ˜ button çš„ä»£ç†äº‹ä»¶æ²¡æœ‰è§¦å‘ï¼Œä¼ é€è¿‡æ¥çš„æ˜¯æ»‘åŠ¨äº‹ä»¶ æˆ–è€… å…¶ä»–äº‹ä»¶ï¼Œ
+        //ä¸éœ€è¦ æ¿€æ´»åŠ¨ç”»ï¼Œç«‹å³è¯»å–è¿œç¨‹æ•°æ®å°±å¯ä»¥äº†
         if (pageX == "0" && pageY == "0") {
             decodeRMTDataPackage(funcName, varParams);
             return;
         }
 
-        //Èç¹û´«Êä¹ıÀ´µÄµã»÷ÊÂ¼ş ÊÇ button »òÕß input ±êÇ©´¥·¢µÄ£¬¾ÍÑ°ÕÒ¶ÔÓ¦µÄ±êÇ©£¬¸Ä±ä±³¾°É«
+        //å¦‚æœä¼ è¾“è¿‡æ¥çš„ç‚¹å‡»äº‹ä»¶ æ˜¯ button æˆ–è€… input æ ‡ç­¾è§¦å‘çš„ï¼Œå°±å¯»æ‰¾å¯¹åº”çš„æ ‡ç­¾ï¼Œæ”¹å˜èƒŒæ™¯è‰²
         if (clickItemIndex >= 0) {
             var clickElement = $($("body").find(clickItemType).eq(clickItemIndex));
 
-            //disable-RMTActive ÒâÎª¾Ü¾øÔ¶³Ì µã»÷¶¯»­
+            //disable-RMTActive æ„ä¸ºæ‹’ç»è¿œç¨‹ ç‚¹å‡»åŠ¨ç”»
             if (!clickElement.hasClass("disable-RMTActive")) {
                 var scrollBody = clickElement.parents(".scroll-table-body");
                 var originalBackground = clickElement.css("backgroundColor");
 
-                //Èç¹û¶Ô·½Ã»ÓĞ¹ö¶¯Ìõ£¬¶ø±¾µØÓĞ£¬ÄÇ¾ÍÏÈ°ÑĞèÒªµã»÷µÄÔªËØ ¹ö¶¯µ½Ò³Ãæ¶¥²¿Ö®ºó ÔÙÖ´ĞĞµã»÷ÊÂ¼ş
+                //å¦‚æœå¯¹æ–¹æ²¡æœ‰æ»šåŠ¨æ¡ï¼Œè€Œæœ¬åœ°æœ‰ï¼Œé‚£å°±å…ˆæŠŠéœ€è¦ç‚¹å‡»çš„å…ƒç´  æ»šåŠ¨åˆ°é¡µé¢é¡¶éƒ¨ä¹‹å å†æ‰§è¡Œç‚¹å‡»äº‹ä»¶
                 if (scrollBody.length && theControllerHasScrollBar === "false" && scrollBody[0].scrollHeight - scrollBody.height() > 0) {
 
                     $(scrollBody).animate({scrollTop: clickElement[0].offsetTop}, 300, function () {
@@ -218,24 +218,24 @@
             }
         }
 
-        //¸ø500MSµÄÊÂ¼şÔËĞĞµã»÷¶¯»­£¬ÔÙÖ´ĞĞÔ¶³ÌÊÂ¼ş
+        //ç»™500MSçš„äº‹ä»¶è¿è¡Œç‚¹å‡»åŠ¨ç”»ï¼Œå†æ‰§è¡Œè¿œç¨‹äº‹ä»¶
         setTimeout(function () {decodeRMTDataPackage(funcName, varParams)}, 500);
     }*/
 
     function networkDelayAct6(delay) {
-        console.log("ÍøÂçÑÓ³Ù£º", delay);
+        console.log("ç½‘ç»œå»¶è¿Ÿï¼š", delay);
     }
 
     function uncommunicateForNativeAct5() {
         HiddenRMTCover();
-        tool.alert("Ğ­ÖúÕßÒÑ¾­¶Ï¿ªÁ¬½Ó£¬Ô¶³ÌĞ­ÖúÒÑ¾­ÎŞ·¨¼ÌĞø£¬µã»÷È·¶¨Ö®ºó£¬ÍË³öĞ­ÖúÄ£Ê½", function () {});
+        tool.alert("ååŠ©è€…å·²ç»æ–­å¼€è¿æ¥ï¼Œè¿œç¨‹ååŠ©å·²ç»æ— æ³•ç»§ç»­ï¼Œç‚¹å‡»ç¡®å®šä¹‹åï¼Œé€€å‡ºååŠ©æ¨¡å¼", function () {});
     }
 
     function errHandlerAct3() {
         HiddenRMTCover();
         setTimeout(function () {
             tool.alert(
-                "ÊÖ»úºÍÉè±¸Í¨Ñ¶²»ÎÈ¶¨,Ô¶³ÌĞ­ÖúÒÑ¾­ÎŞ·¨¼ÌĞø£¬µã»÷È·¶¨Ö®ºó£¬ÍË³öĞ­ÖúÄ£Ê½",
+                "æ‰‹æœºå’Œè®¾å¤‡é€šè®¯ä¸ç¨³å®š,è¿œç¨‹ååŠ©å·²ç»æ— æ³•ç»§ç»­ï¼Œç‚¹å‡»ç¡®å®šä¹‹åï¼Œé€€å‡ºååŠ©æ¨¡å¼",
                 function () { win.appService.sendDataToApp(3999, "", ""); });
         }, 500);
     }
@@ -244,48 +244,48 @@
         var loadingTxt = "";
         var tipsParams = "";
 
-        //³¢ÊÔ»ñÈ¡loadingµÄÎÄ±¾,Ö»ÓĞloading²ãÔÚÏÔÊ¾×´Ì¬µÄÊ±ºò²ÅÖ´ĞĞ£»ÓÃ»§µã»÷¼ÌĞøµÈ´ıÊ±£¬·µ»¹loading¿ò
+        //å°è¯•è·å–loadingçš„æ–‡æœ¬,åªæœ‰loadingå±‚åœ¨æ˜¾ç¤ºçŠ¶æ€çš„æ—¶å€™æ‰æ‰§è¡Œï¼›ç”¨æˆ·ç‚¹å‡»ç»§ç»­ç­‰å¾…æ—¶ï¼Œè¿”è¿˜loadingæ¡†
         if (tool.loading.status && tool.loading.status.display)
             loadingTxt = tool.loading.status.text;
 
-        //³¢ÊÔ»ñÈ¡tipsµÄËùÓĞ²ÎÊı£¬Ö»ÓĞtips²ãÔÚÏÔÊ¾×´Ì¬µÄÊ±ºò²ÅÖ´ĞĞ£»ÓÃ»§µã»÷¼ÌĞøµÈ´ıÊ±£¬·µ»¹tips¿ò
+        //å°è¯•è·å–tipsçš„æ‰€æœ‰å‚æ•°ï¼Œåªæœ‰tipså±‚åœ¨æ˜¾ç¤ºçŠ¶æ€çš„æ—¶å€™æ‰æ‰§è¡Œï¼›ç”¨æˆ·ç‚¹å‡»ç»§ç»­ç­‰å¾…æ—¶ï¼Œè¿”è¿˜tipsæ¡†
         if (tool.alert.status && tool.alert.status.display)
             tipsParams = tool.alert.status.params;
 
         tool.loading.status.disable = true;
 
-        //Ô¶³ÌÖĞ£¬ÒµÎñ¶ËºÍ¿ØÖÆ¶ËÇø·Ö¶Ô´ı
+        //è¿œç¨‹ä¸­ï¼Œä¸šåŠ¡ç«¯å’Œæ§åˆ¶ç«¯åŒºåˆ†å¯¹å¾…
         if (global.RMTID.role == "1") {
             HiddenRMTCover();
-            //Ê×ÏÈÒş²ØÕÚÕÖ£¬²ÅÄÜÈÃÌáÊ¾¿ò¿ÉÒÔµã»÷£¬Èç¹ûÓÃ»§Ñ¡Ôñ¡¾¼ÌĞøµÈ´ı¡¿£¬ÔÙ½«ÕÚÕÖ²ã·µ»¹£¬
-            //¶ÔÓÚÌáÊ¾ÍøÂç²»ÎÈ¶¨Ö®Ç°µÄ µ¯¿ò ºÍ ¼ÓÔØÕÚÕÖ£¬²»¹ÜÓÃ»§ÈçºÎÑ¡Ôñ£¬¶¼±ØĞëÔ­Ñù·µ»¹
+            //é¦–å…ˆéšè—é®ç½©ï¼Œæ‰èƒ½è®©æç¤ºæ¡†å¯ä»¥ç‚¹å‡»ï¼Œå¦‚æœç”¨æˆ·é€‰æ‹©ã€ç»§ç»­ç­‰å¾…ã€‘ï¼Œå†å°†é®ç½©å±‚è¿”è¿˜ï¼Œ
+            //å¯¹äºæç¤ºç½‘ç»œä¸ç¨³å®šä¹‹å‰çš„ å¼¹æ¡† å’Œ åŠ è½½é®ç½©ï¼Œä¸ç®¡ç”¨æˆ·å¦‚ä½•é€‰æ‹©ï¼Œéƒ½å¿…é¡»åŸæ ·è¿”è¿˜
             tool.alert(
-                "ÍøÂçÍ¨Ñ¶²»ÎÈ¶¨£¬Ô¶³ÌĞ­ÖúÒÑ¾­ÎŞ·¨¼ÌĞø£¬µã»÷È·¶¨Ö®ºó£¬ÍË³öĞ­ÖúÄ£Ê½",
+                "ç½‘ç»œé€šè®¯ä¸ç¨³å®šï¼Œè¿œç¨‹ååŠ©å·²ç»æ— æ³•ç»§ç»­ï¼Œç‚¹å‡»ç¡®å®šä¹‹åï¼Œé€€å‡ºååŠ©æ¨¡å¼",
                 function () {
                     tool.loading.status.disable = false;
 
-                    //È·±£»ñÈ¡ÎÄ±¾Ö®ºó£¬·µ»¹ÕÚÕÖÖ®Ç°£¬ÕÚÕÖ²ãÃ»ÓĞ×öÈÎºÎµÄĞŞ¸Ä£»
+                    //ç¡®ä¿è·å–æ–‡æœ¬ä¹‹åï¼Œè¿”è¿˜é®ç½©ä¹‹å‰ï¼Œé®ç½©å±‚æ²¡æœ‰åšä»»ä½•çš„ä¿®æ”¹ï¼›
                     if (loadingTxt && tool.loading.status.text) {
                         tool.loading({text: tool.loading.status.text});
                         loadingTxt = "";
                     }
 
                     if (tipsParams)
-                    //@ÓÃÑÓ³ÙÀ´´í¿ªµ±Ç°»Øµ÷ º¯Êı »á¹ØµôtipsBoxµÄ³åÍ»£¬·ñÔò£¬×îºóµÄÒ»²½²Ù×÷ÓÀÔ¶»á¹Ø±ÕÌáÊ¾¿ò
+                    //@ç”¨å»¶è¿Ÿæ¥é”™å¼€å½“å‰å›è°ƒ å‡½æ•° ä¼šå…³æ‰tipsBoxçš„å†²çªï¼Œå¦åˆ™ï¼Œæœ€åçš„ä¸€æ­¥æ“ä½œæ°¸è¿œä¼šå…³é—­æç¤ºæ¡†
                         setTimeout(function () {
                             tool.alert.apply(tool, tipsParams);
                             tipsParams = "";
                         }, 450);
 
-                    //Í¨ÖªAPP²»ÒªÔÙ×ª·¢Ô¶³ÌÊı¾İ£¬ÈÃÒµÎñ»úÕı³£ÍË³ö
+                    //é€šçŸ¥APPä¸è¦å†è½¬å‘è¿œç¨‹æ•°æ®ï¼Œè®©ä¸šåŠ¡æœºæ­£å¸¸é€€å‡º
                     win.appService.sendDataToApp(win.CONSTANT.JS_TO_APP.INFORM_APP_IS_TIMEOUT, "", "");
                 }
             );
         }
         else {
             tool.alert(
-                "ÍøÂçÍ¨Ñ¶²»ÎÈ¶¨£¬Ô¶³ÌĞ­ÖúÒÑ¾­ÎŞ·¨¼ÌĞø£¬µã»÷È·¶¨Ö®ºó£¬ÍË³öĞ­ÖúÄ£Ê½",
-                //Èç¹ûÊÇ¿ØÖÆ»ú£¬·¢ËÍ3999£¬¹Ø±ÕUI´°¿Ú
+                "ç½‘ç»œé€šè®¯ä¸ç¨³å®šï¼Œè¿œç¨‹ååŠ©å·²ç»æ— æ³•ç»§ç»­ï¼Œç‚¹å‡»ç¡®å®šä¹‹åï¼Œé€€å‡ºååŠ©æ¨¡å¼",
+                //å¦‚æœæ˜¯æ§åˆ¶æœºï¼Œå‘é€3999ï¼Œå…³é—­UIçª—å£
                 function () {win.appService.sendDataToApp(3999, "", "");}
             );
         }

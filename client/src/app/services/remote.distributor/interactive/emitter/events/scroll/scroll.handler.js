@@ -4,7 +4,7 @@
  */
 let scrollEventHandler = function(fnName,params){
     let [success,result] = [false,null];
-    //屏幕滚动事件拒绝转发
+    //灞忓箷婊氬姩浜嬩欢鎷掔粷杞彂
     return [success,result];
 };
 

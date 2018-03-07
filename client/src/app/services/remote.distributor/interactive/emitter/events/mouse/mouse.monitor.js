@@ -1,12 +1,12 @@
 /**
  * Created by Andy on 2017/11/9.
  */
-
+import $ from "jquery";
 /**
- *ȫ�ֵ���¼��Ĵ���������
- *����Զ�̹����¼��Ľ���ģʽ��
- *������������� Զ�̵���¼�ִ��֮ǰ���У����Բ�����������֡���ݣ�
- *�ѵ������ƴ���� sendRMTEventToApp �����ĵ�һ���������棬�ԡ�_|_��Ϊ��ʶ
+ *全局点击事件的代理方法；
+ *区别远程滚动事件的交互模式：
+ *点击动画必须在 远程点击事件执行之前运行，所以不能生产独立帧数据，
+ *把点击坐标拼接在 sendRMTEventToApp 方法的第一个参数后面，以“_|_”为标识
  * */
 body.ready(function () {
 
