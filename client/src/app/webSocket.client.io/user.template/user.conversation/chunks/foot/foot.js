@@ -24,23 +24,32 @@ class Ctrl {
         $scope.charState.charParagraphs = [];
         $scope.charState.typeContent = "";
         $scope.charBody = document.body.getElementsByClassName("char-body")[0];
-
+        var latestTimer = null;
+        var latestSpeaker = null;
         $scope.send = function (content) {
             if (!content)return;
-            //添加时间标识
+            //添加时间戳
             var nowDate = new Date();
             var h = nowDate.getHours();
             var m = nowDate.getMinutes();
             var s = nowDate.getSeconds();
             var formatDate = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+            var isTimeShow = !latestTimer && new Date(formatDate) - new Date(latestTimer) < 2*60*1000;  
+            
 
+            // 下面这份数据，不管是远程还是本地，都会执行
             let newSentence = {
                 remoteId: userStorage.getStorage("remoteId"),
                 oppositeName: userStorage.getStorage("oppositeName"),
                 nativeName: userStorage.getStorage("nativeName"),
                 sentence: content,
-                timer: formatDate
+                timer: formatDate,
+                isTimeShow: isTimeShow,
+                latestSpeaker: latestSpeaker,
             };
+
+            latestSpeaker  = userStorage.getStorage("nativeName");
+            latestTimer = formatDate; // 先比对完毕，再获取新值
 
             $scope.safeApply(function(){
                 // 远端接口
