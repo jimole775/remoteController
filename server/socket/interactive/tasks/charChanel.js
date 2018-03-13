@@ -9,16 +9,20 @@ export default function (data) {
     let toWhom = data.items.oppositeName;
     let fromWhom = data.items.nativeName;
     let clients = TR.getStorage("clients");
+    data.items.oppositeName = fromWhom;
+    data.items.nativeName = toWhom;
 
     emitter(
         0x08,
-        {
-          remoteId:data.items.remoteId
-          , oppositeName: fromWhom
-          , nativeName: toWhom
-          , sentence:data.items.sentence
-          , timer:  data.items.timer
-        },
+        data.items,
         clients[toWhom]
     );
+    //  emitter(
+    //     0x08,
+    //     {
+    //         oppositeName: fromWhom
+    //       , nativeName: toWhom
+    //     },
+    //     clients[toWhom]
+    // );
 };
