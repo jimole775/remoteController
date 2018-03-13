@@ -11,7 +11,7 @@ div.char-body
 				div.item-value
 					p.char-username(
 						ng-bind="item.remoteId === remoteId ? item.nativeName : item.oppositeName"
-						ng-show=""						
+						ng-show="item.isNameShow"						
 						)
 					p.char-content
 						span.char-sentence(ng-bind="item.sentence") 聊天内容
