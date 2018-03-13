@@ -16,20 +16,20 @@ export default class {
 
     init({
         tabId = ""
-        ,slidingShoeId = "" //导航条的滑块，跟随页面左右滑动
-        ,contextBoxId = ""   //滑动内容展示窗口,位置,尺寸固定,属于布局层
-        ,sliderBodyId = ""   //控制左右滑动的盒子,包裹所有的滑动块
-        ,sliderChunkTagName = "ul"
-        ,sliderType = 'both'  //column row both
-        ,pageWidth = window.document.body.clientWidth
-        ,pageHeight = window.document.body.clientHeight
+        , slidingShoeId = "" //导航条的滑块，跟随页面左右滑动
+        , contextBoxId = ""   //滑动内容展示窗口,位置,尺寸固定,属于布局层
+        , sliderBodyId = ""   //控制左右滑动的盒子,包裹所有的滑动块
+        , sliderChunkTagName = "ul"
+        , sliderType = 'both'  //column row both
+        , pageWidth = window.document.body.clientWidth
+        , pageHeight = window.document.body.clientHeight
 
-        ,touchStart = "ontouchstart" in window ? "touchstart" : "mousedown"
-        ,touchMove = "ontouchmove" in window ? "touchmove" : "mousemove"
-        ,touchEnd = "ontouchend" in window ? "touchend" : "mouseup"
+        , touchStart = "ontouchstart" in window ? "touchstart" : "mousedown"
+        , touchMove = "ontouchmove" in window ? "touchmove" : "mousemove"
+        , touchEnd = "ontouchend" in window ? "touchend" : "mouseup"
 
-        ,RMTHandler = {horizontalSliding: null, verticalSliding: null}
-        }) {
+        , RMTHandler = { horizontalSliding: null, verticalSliding: null }
+    }) {
 
         this.touchEvent = {};
         this.touchEvent.start = {};
@@ -72,8 +72,8 @@ export default class {
 
         this.flag.sliderType = sliderType;
         this.flag.sliderChunkTagName = sliderChunkTagName;
-        
-        
+
+
         this.monitor = {};
         this.monitor.horizontalScrollingTimer = null;     //左右滑动完毕之后，必须等待300毫秒，才能归零flag.isVerticalScroll值，也就是说：左右滑动需要切换到上下滚动操作需要等待300毫秒
         this.monitor.verticalScrollingWatcher = null;
@@ -91,19 +91,29 @@ export default class {
 
         //必要的滑动前提，暂时先这样处理，有时间再进行代码规整
         //可以用来测试新技术
-        this.elements.sliderBodyController.find(sliderChunkTagName).each(function(index,item){
+        this.elements.sliderBodyController.find(sliderChunkTagName).each(function (index, item) {
             $(item).css({
-                "position":"relative"
-                ,"overflow":"hidden"
+                "position": "relative"
+                , "overflow": "hidden"
             })
         });
 
 
         this.elements.sliderBodyController.curContentBox = $(this.elements.sliderBodyController.find(sliderChunkTagName)[0]);
 
+
+
+        this.sliderType = sliderType;
+        this.sliderChunkTagName = sliderChunkTagName;
+        this.calcSize();
+        this.resize();
+
+    }
+
+    calcSize() {
         this.size = {};
-        this.size.pageHeight = pageHeight;
-        this.size.pageWidth = pageWidth;
+        this.size.pageHeight = window.document.body.clientHeight;
+        this.size.pageWidth = window.document.body.clientWidth;
 
         this.size.topHeight = this.elements.nav ? this.elements.nav.height() : 0;
         this.size.frameHeight = this.elements.contextBox.height();
@@ -111,25 +121,25 @@ export default class {
         this.size.limitTop = this.size.frameHeight - this.elements.sliderBodyController.curContentBox.height(); //向上滚动的极限距离 = 内容盒子的高度 - 展示窗口的高度
         this.size.initTop = parseFloat(this.elements.sliderBodyController.curContentBox.css("top")) || 0;
 
-        this.sliderType = sliderType;
-        this.sliderChunkTagName = sliderChunkTagName;
-        this.resize();
-
+        window.onresize = () => {
+            // 因为关系高宽的变化，所以需要在窗口变化的时候重新init一遍基础数据
+            this.calcSize();
+        };
     }
 
-    hSlideTo(index){
+    hSlideTo(index) {
         if (/both|row/.test(this.sliderType)) {
-            this.elements.sliderBodyController.animate({"left": -(index * this.size.pageWidth)}, 300);
-            this.elements.slidingShoe.animate({"left": index * this.size.pageWidth / 2}, 300);
+            this.elements.sliderBodyController.animate({ "left": -(index * this.size.pageWidth) }, 300);
+            this.elements.slidingShoe.animate({ "left": index * this.size.pageWidth / 2 }, 300);
             this.elements.nav.buttons = this.elements.nav.find("button");
             this.elements.nav.buttons.removeClass("nav-active");
             $(this.elements.nav.buttons[index]).addClass("nav-active");
         }
     }
 
-    vSlideTo(index, offsetPercent){
+    vSlideTo(index, offsetPercent) {
         if (/both|row/.test(this.sliderType)) {
-            $(this.elements.sliderBodyController.find(this.sliderChunkTagName)[index]).animate({"top": offsetPercent * this.size.limitTop}, 300);
+            $(this.elements.sliderBodyController.find(this.sliderChunkTagName)[index]).animate({ "top": offsetPercent * this.size.limitTop }, 300);
         }
     }
 
@@ -138,6 +148,7 @@ export default class {
         this.elements.contextBox.off();
         this.hSlideTo(0); //如果当前tab在第二页，出现计算错误的情况，先hack一下，如果页面有resize就直接设置为第一页
         //win.sendRMTEventToApp("RMTClickEvent.horizontalSliding", [0]);  //转发当前页面下标
+
     }
 
     run() {
@@ -181,7 +192,7 @@ export default class {
         });
 
         this.elements.contextBox.on(this.touchEvent.type.move, function (e) {
-            if (!that.touchEvent.start.flag)return;
+            if (!that.touchEvent.start.flag) return;
             /**
              * 阻止move的默认动作,比如滚动条滑动 (现在就在模拟move的滚动条,在CSS里面已经禁止了浏览器滚动条:overflowHidden)
              * 如果不阻止默认动作,某些手机端的浏览器将无法滚动**/
@@ -273,17 +284,17 @@ export default class {
             //当出现拉扯 事件的时候，就无法还原
             //所以在这里需要重新判断 内容盒子 的top值
             if (that.count.slideTop > that.size.initTop) {
-                that.elements.sliderBodyController.curContentBox.animate({"top": that.size.initTop}, 300, function () {
+                that.elements.sliderBodyController.curContentBox.animate({ "top": that.size.initTop }, 300, function () {
                 });
             }
             else if (that.count.slideTop < that.size.limitTop) {
                 if (that.flag.hasVerticalScroll) {
-                    that.elements.sliderBodyController.curContentBox.animate({"top": that.size.limitTop}, 300, function () {
+                    that.elements.sliderBodyController.curContentBox.animate({ "top": that.size.limitTop }, 300, function () {
                     });
                 }
                 else {
 
-                    that.elements.sliderBodyController.curContentBox.animate({"top": that.size.initTop}, 300, function () {
+                    that.elements.sliderBodyController.curContentBox.animate({ "top": that.size.initTop }, 300, function () {
                     });
                 }
 
@@ -371,7 +382,7 @@ export default class {
             //防止在向下拉扯时，连续点击无法回弹问题
             if (that.count.slideTop > that.size.initTop && that.count.diff_Y >= 0) {
 
-                that.elements.sliderBodyController.curContentBox.animate({"top": that.size.initTop}, 300, function () {
+                that.elements.sliderBodyController.curContentBox.animate({ "top": that.size.initTop }, 300, function () {
 
                     //在回调里面转发，可以减少转发次数（在用户多次无效点击的情况下）
                     //win.sendRMTEventToApp("RMTClickEvent.verticalSliding", [that.count.curPageIndex, that.size.initTop / Math.abs(that.size.limitTop)]);   //转发百分比
@@ -381,14 +392,14 @@ export default class {
             //防止在向上拉扯时，连续点击无法回弹问题
             else if (that.count.slideTop < that.size.limitTop && that.count.diff_Y <= 0) {
                 if (that.flag.hasVerticalScroll) {
-                    that.elements.sliderBodyController.curContentBox.animate({"top": that.size.limitTop}, 300, function () {
+                    that.elements.sliderBodyController.curContentBox.animate({ "top": that.size.limitTop }, 300, function () {
 
                         //在回调里面转发，可以减少转发次数（在用户多次无效点击的情况下）
                         //win.sendRMTEventToApp("RMTClickEvent.verticalSliding", [that.count.curPageIndex, -1]);   //转发百分比
                     });
                 }
                 else {
-                    that.elements.sliderBodyController.curContentBox.animate({"top": that.size.initTop}, 300, function () {
+                    that.elements.sliderBodyController.curContentBox.animate({ "top": that.size.initTop }, 300, function () {
                         //win.sendRMTEventToApp("RMTClickEvent.verticalSliding", [that.count.curPageIndex, that.size.initTop / Math.abs(that.size.limitTop)]);   //转发百分比
                     });
                 }
@@ -417,7 +428,7 @@ export default class {
                             //如果在最顶部，就执行回弹，回弹结束之后发送 停止坐标 到 远程端
                             if (that.count.slideTop + intergrator > 0) {
                                 console.log("count.slideTop", that.count.slideTop, "intergrator", intergrator);
-                                that.elements.sliderBodyController.curContentBox.animate({"top": that.size.initTop}, 300, function () {
+                                that.elements.sliderBodyController.curContentBox.animate({ "top": that.size.initTop }, 300, function () {
 
                                     //win.sendRMTEventToApp("RMTClickEvent.verticalSliding", [that.count.curPageIndex, that.size.initTop / Math.abs(that.size.limitTop)]);   //转发百分比
                                 });
@@ -448,13 +459,13 @@ export default class {
                             if (that.count.slideTop + intergrator < that.size.limitTop) {
                                 console.log("count.slideTop", that.count.slideTop, "intergrator", intergrator, "size.limitTop", that.size.limitTop);
                                 if (that.flag.hasHorizontalScroll) {
-                                    that.elements.sliderBodyController.curContentBox.animate({"top": that.size.limitTop}, 300, function () {
+                                    that.elements.sliderBodyController.curContentBox.animate({ "top": that.size.limitTop }, 300, function () {
 
                                         //win.sendRMTEventToApp("RMTClickEvent.verticalSliding", [that.count.curPageIndex, -1]);   //转发百分比
                                     });
                                 }
                                 else {
-                                    that.elements.sliderBodyController.curContentBox.animate({"top": that.size.initTop}, 300, function () {
+                                    that.elements.sliderBodyController.curContentBox.animate({ "top": that.size.initTop }, 300, function () {
 
                                         //win.sendRMTEventToApp("RMTClickEvent.verticalSliding", [that.count.curPageIndex, that.size.initTop / Math.abs(that.size.limitTop)]);   //转发百分比
                                     });

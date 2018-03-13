@@ -3,7 +3,6 @@
  */
 import tpl from "./main.jade";
 import "./main.scss";
-import $ from "jquery";
 import AlertInterface from "../interface/Alert.js";
 export default function directive() {
     return {

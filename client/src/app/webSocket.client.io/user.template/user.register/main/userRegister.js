@@ -58,9 +58,9 @@ class Ctrl {
                 else {
                     $scope.tool.alert.loading("正在注册...");
                     $scope.userStorage.setStorage("nativeName", $scope.userName);
-                    $scope.wsService.emit(0x01,function(response){
+                    $scope.wsService.emit(0x01,function(response){                        
+                        $scope.tool.alert.loading.hide();
                         if(response.serverData.regPass){
-                            $scope.tool.alert.loading.hide();
                             $element.remove();
                             $("section").css("filter", "blur(0)");
                             $scope.watcher();
