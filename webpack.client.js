@@ -40,13 +40,13 @@ webClient.plugins = [
             manifest: require('./public/lib/manifest.json')
         }
     )
-     ,new webpack.optimize.UglifyJsPlugin({
-        comments: false,
-        mangle: false,
-        compress: {
-            warnings: false
-        }
-     })
+    //  ,new webpack.optimize.UglifyJsPlugin({
+    //     comments: false,
+    //     mangle: false,
+    //     compress: {
+    //         warnings: false
+    //     }
+    //  })
     , new ExtractTextPlugin({
         filename: "assets/css/bundle.[chunkHash:5].css",
         allChunks: true

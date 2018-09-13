@@ -13,7 +13,7 @@ function add(target, name, file) {
 //@add(Tool,"frameDecode", frameDecode);
 class Tool {
     constructor() {
-
+        
     }
 }
 

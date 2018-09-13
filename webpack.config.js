@@ -3,7 +3,7 @@
  */
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 let client = require("./webpack.client.js");
-var server = require("./webpack.server.js");
+let server = require("./webpack.server.js");
 let test = require("./webpack.test.js");
 
 let $module = {

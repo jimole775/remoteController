@@ -29,7 +29,7 @@ export default new class Log {
         ip = Log.queryMsg(ip);
         let timer = Log.getTimer();
         let fileName = Log.createFileName("user");
-        let content = `【${timer}】\r\n${ip} ${id}\r\n`
+        let content = `【${timer}】\r\n${ip} ${id}\r\n`;
         this.writeFile("user", fileName, content)
     }
 
@@ -47,21 +47,22 @@ export default new class Log {
     }
 
     static getTimer() {
-
-        let h = new Date().getHours().toString();
-        let m = new Date().getMinutes().toString();
-        let s = new Date().getSeconds().toString();
+        const now = new Date();
+        let h = now.getHours().toString();  //时
+        let m = now.getMinutes().toString();  //分
+        let s = now.getSeconds().toString();  //秒
         h = h.length < 2 ? 0 + h : h;
         m = m.length < 2 ? 0 + m : m;
         s = s.length < 2 ? 0 + s : s;
-
         return `${h}:${m}:${s}`;
     }
 
     static createFileName(type) {
-        let y = new Date().getFullYear();
-        let m = new Date().getMonth();
-        let d = new Date().getDay();
+        const now = new Date();
+
+        let y = now.getFullYear();
+        let m = now.getMonth();
+        let d = now.getDay();
 
         return path.resolve(__dirname.split("\\").join("/"), type, `${y}.${m}.${d}.log`);
     }

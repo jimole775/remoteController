@@ -4,6 +4,7 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
+    "webpack-cli": "^3.1.0",
     "angular": "^1.6.8",
     "angular-ui-router": "^0.3.2",
     "babel": "^6.23.0",
@@ -29,14 +30,14 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
-    "webpack": "^3.5.4"
+    "webpack": "^4.16.5"
   },
   "scripts": {
     "dll": "webpack --display-modules --colors --config ./webpack.dll.js",
     "cache": "npm cache clean --force",
     "pack": "webpack --hide-modules",
-    "devtool":"devtool server/bundle.node.js",
-    "start":"node server/bundle.node.js"
+    "devtool": "devtool server/bundle.node.js",
+    "start": "node server/bundle.node.js"
   },
   "repository": {
     "type": "git",
