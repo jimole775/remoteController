@@ -25,7 +25,7 @@
     "jquery": "^3.3.1",
     "jroll": "^2.6.0",
     "lodash": "^4.17.4",
-    "node-sass": "^4.6.0",
+    "node-sass": "^4.9.4",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.0",
     "url-loader": "^0.6.2",
@@ -35,8 +35,8 @@
     "dll": "webpack --display-modules --colors --config ./webpack.dll.js",
     "cache": "npm cache clean --force",
     "pack": "webpack --hide-modules",
-    "devtool":"devtool server/bundle.node.js",
-    "start":"node server/bundle.node.js"
+    "devtool": "devtool server/bundle.node.js",
+    "start": "node server/bundle.node.js"
   },
   "repository": {
     "type": "git",

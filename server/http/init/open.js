@@ -123,6 +123,7 @@ export default class CreateHttp {
         
         // ajax请求：
         if (xRequestedWith) {
+            // noinspection JSAnnotator
             function upsetFinalData(item, targetProp) {
 
                 if (!Math.round(Math.random())) {
