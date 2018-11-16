@@ -21,19 +21,13 @@ const config = {
         vendor: vendors
     },
     plugins: [
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.DllPlugin({
                 path: "./public/lib/manifest.json",
                 name: "[name]",
                 context: __dirname
             }
         )
-        ,new webpack.optimize.UglifyJsPlugin({
-            comments: false,
-            mangle: false,
-            compress: {
-                warnings: false
-            }
-        })
     ]
 
 };
