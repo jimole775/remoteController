@@ -16,9 +16,10 @@ export default function service($rootScope, ngTool, wsTool, userStorage, charSta
     "ngInject";
 
     let that = this;
-    let hostUrl = userStorage.getStorage("hostUrl");
+    // let hostUrl = userStorage.getStorage("hostUrl");
+    let hostName = location.hostname || userStorage.getStorage("hostUrl");
     let wsPort = userStorage.getStorage("wsPort");
-    let wsService = new WebSocket(`ws://${hostUrl}:${wsPort}`);
+    let wsService = new WebSocket(`ws://${hostName}:${wsPort}`);
 
     // 这里的wsService是提供给ng-service注入之前的模块使用的
     this.emit = wsService.emit = function (...arg) {
