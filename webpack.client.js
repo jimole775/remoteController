@@ -8,22 +8,22 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const webClient = {
-    /*entry: [
+    entry: [
         // "babel-core",
         // "babel-polyfill",
         path.join(__dirname, "public/css/base.scss"),
         path.join(__dirname, "client/src/app/index.js")
-    ],*/
+    ],
     target: "web",
     // devServer: {
     //     contentBase: path.join(__dirname, "client/assets"),
     //     hot: true
     //   },
-    /*output: {
+    output: {
         //publicPath: "../",   //cdn资源加载的统一路径
         path: path.join(__dirname, "client/src"),  //webpack打包文件的统一输出路径
         filename: 'assets/js/bundle.[chunkHash:5].js'
-    }*/
+    }
 };
 
 webClient.plugins = [
@@ -40,13 +40,6 @@ webClient.plugins = [
             manifest: require('./public/lib/manifest.json')
         }
     )
-    //  ,new webpack.optimize.UglifyJsPlugin({
-    //     comments: false,
-    //     mangle: false,
-    //     compress: {
-    //         warnings: false
-    //     }
-    //  })
     , new ExtractTextPlugin({
         filename: "assets/css/bundle.[chunkHash:5].css",
         allChunks: true

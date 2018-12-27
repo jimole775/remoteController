@@ -9,7 +9,7 @@ let test = require("./webpack.test.js");
 let $module = {
     
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.(js|jsx)$/,
                 loader: "babel-loader",
@@ -31,6 +31,12 @@ let $module = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            
+                        }
+                    },
                     {
                         loader: 'file-loader',
                         options: {

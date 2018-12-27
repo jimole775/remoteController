@@ -10,11 +10,9 @@ gulp.task('default',function() {
   console.log("is run!");
 });
 
-
 var stream = gulp.src("./package-lock.json")
 
 stream.pipe(gulp.dest("./gulpTest/"));
-
 
 gulp.task("async",function(cb){
     console.log("异步开启");
@@ -22,12 +20,14 @@ gulp.task("async",function(cb){
         cb();
     },1000);
 });
+
 gulp.task("async1",function(cb){
     console.log("异步开启1");
     setTimeout(function(){
         cb();
     },1000);
 });
+
 gulp.task("runAsync",["async","async1"],function(cb){
     console.log("异步回调");
     cb();
