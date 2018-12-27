@@ -39,8 +39,7 @@ server.resolve = {
         StorageRegister$: path.join(publicDist, 'plugin/StorageRegister/StorageRegister.js')
         , publicDist: path.join(publicDist)
         , DB: path.join(DBDist)
-        , wsServer: path.join(__dirname, 'server/socket')
-        
+        , wsServer: path.join(__dirname, 'server/socket')        
         , log$: path.join(__dirname, 'server/log/main.js')
     }
 };
