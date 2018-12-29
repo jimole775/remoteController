@@ -5,11 +5,17 @@
     "version": "0.2.0",
     "configurations": [
     
+        // {
+        //     "type": "node",
+        //     "request": "launch",
+        //     "name": "Webpack task",
+        //     "program": "${workspaceFolder}/node_modules/webpack/bin/webpack.js"
+        // },
         {
             "type": "node",
             "request": "launch",
-            "name": "Webpack task",
-            "program": "${workspaceFolder}/node_modules/webpack/bin/webpack.js"
+            "name": "gulp task",
+            "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js"
         }
     ]
 }

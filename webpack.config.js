@@ -31,16 +31,16 @@ let $module = {
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
                 use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
+                    // {
+                    //     loader: 'url-loader',
+                    //     options: {
                             
-                        }
-                    },
+                    //     }
+                    // },
                     {
                         loader: 'file-loader',
                         options: {
-                            outputPath: 'assets/images/',
+                            outputPath: 'images/',
                             name: '[hash].[ext]'
                         }
                     },

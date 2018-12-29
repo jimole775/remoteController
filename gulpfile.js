@@ -1,35 +1,30 @@
 var gulp = require('gulp');
-var webpack = require('webpack-stream');
-
-gulp.task('default',function() {
+var path = require('path');
+var del = require('del');
+var webpack = require('webpack');
+var config = require("./webpack.config.js");
+gulp.task('default',['clean:webpack'],function() {
   // 将你的默认的任务代码放在这
-  return gulp
-        .src("client/src/app/index.js")
-        .pipe(webpack(require("./webpack.config.js")))
-        .pipe(gulp.dest('/gulpTest/'));
-  console.log("is run!");
+//   return gulp
+        // .src("client/src/app/index.js")
+        // .src([
+            //     // "babel-core",
+            //     // "babel-polyfill",
+            //     path.join(__dirname, "public/css/base.scss"),
+            //     path.join(__dirname, "client/src/app/index.js")
+            // ])
+        // .pipe(webpack(config))
+        // .pipe(gulp.dest('/gulpTest/'));
+
+        webpack(config, function(err, stats) {
+            // compileLogger(err, stats);
+            // callback();
+        });
 });
 
-var stream = gulp.src("./package-lock.json")
-
-stream.pipe(gulp.dest("./gulpTest/"));
-
-gulp.task("async",function(cb){
-    console.log("异步开启");
-    setTimeout(function(){
-        cb();
-    },1000);
+// 清理js/css
+gulp.task('clean:webpack', function() {
+    del([
+        config.output.path
+    ], { force: true });
 });
-
-gulp.task("async1",function(cb){
-    console.log("异步开启1");
-    setTimeout(function(){
-        cb();
-    },1000);
-});
-
-gulp.task("runAsync",["async","async1"],function(cb){
-    console.log("异步回调");
-    cb();
-})
-
