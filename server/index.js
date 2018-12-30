@@ -10,7 +10,7 @@ global.ASSETS_DIS = path.resolve(__dirname,"../client/src/assets");
 console.log(global.CLIENT_DIS);
 global.SERVER_DIS = path.resolve(__dirname);
 console.log(global.SERVER_DIS);
-global.DB_DIS = path.resolve(global.SERVER_DIS,"DB");
+global.DB_DIS = path.resolve(global.SERVER_DIS,"database/json");
 console.log(global.DB_DIS);
 
 

@@ -16,7 +16,12 @@ gulp.task('default',['clean:webpack'],function() {
         // .pipe(webpack(config))
         // .pipe(gulp.dest('/gulpTest/'));
 
-        webpack(config, function(err, stats) {
+        webpack(config[0], function(err, stats) {
+            // compileLogger(err, stats);
+            // callback();
+        });
+
+        webpack(config[1], function(err, stats) {
             // compileLogger(err, stats);
             // callback();
         });
@@ -25,6 +30,6 @@ gulp.task('default',['clean:webpack'],function() {
 // 清理js/css
 gulp.task('clean:webpack', function() {
     del([
-        config.output.path
+        config[0].output.path
     ], { force: true });
 });

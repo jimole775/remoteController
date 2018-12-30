@@ -11,7 +11,7 @@ const webClient = {
     entry: [
         // "babel-core",
         // "babel-polyfill",
-        path.join(__dirname, "public/css/base.scss"),
+        path.join(__dirname, "client/src/app/common/css/base.scss"),
         path.join(__dirname, "client/src/app/index.js")
     ],
     target: "web",
@@ -37,7 +37,7 @@ webClient.plugins = [
     new webpack.DllReferencePlugin(
         {
             context: __dirname,
-            manifest: require('./public/lib/manifest.json')
+            manifest: require('./client/src/app/common/lib/manifest.json')
         }
     )
     , new ExtractTextPlugin({

@@ -5,7 +5,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 const hostDist = path.join(__dirname);
-const DBDist = path.join(__dirname,"DB");
+const DBDist = path.join(__dirname,"database/json");
 const serverDis = path.join(__dirname, "server");
 const publicDist = path.join(__dirname,"public");
 

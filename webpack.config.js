@@ -40,7 +40,7 @@ let $module = {
                     {
                         loader: 'file-loader',
                         options: {
-                            outputPath: 'images/',
+                            outputPath: 'assets/images/',
                             name: '[hash].[ext]'
                         }
                     },
@@ -69,4 +69,4 @@ $devtool = {devtool: "cheap-module-eval-source-map"};
 // $devtool = $devtool ? $devtool : {};    // 在注销devtool时，不用修改后面的代码
 client = Object.assign(client, $module, $devtool);
 server = Object.assign(server, $module, $devtool);
-module.exports = client;
+module.exports = [client,server];
