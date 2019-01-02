@@ -5,3 +5,4 @@ test
 server/log/
 .vscode
 client/src/assets/
+server/bundle.node.js
