@@ -4,5 +4,5 @@ node_modules
 test
 server/log/
 .vscode
-client/src/assets/
-server/bundle.node.js
+# client/src/assets/
+# server/bundle.node.js
