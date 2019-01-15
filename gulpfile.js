@@ -3,7 +3,15 @@ var path = require('path');
 var del = require('del');
 var webpack = require('webpack');
 var config = require("./webpack.config.js");
-gulp.task('default',['clean:webpack'],function() {
+// 清理js/css
+gulp.task('clean:webpack', function(done) {
+    del([
+        config.client.output.path
+    ], { force: true });
+    return done && done();
+});
+
+gulp.task('build',function(done) {
 
         webpack(config.client, function(err, stats) {
             // compileLogger(err, stats);
@@ -14,11 +22,9 @@ gulp.task('default',['clean:webpack'],function() {
             // compileLogger(err, stats);
             // callback();
         });
+
+        return done&&done();
 });
 
-// 清理js/css
-gulp.task('clean:webpack', function() {
-    del([
-        config.client.output.path
-    ], { force: true });
-});
+
+gulp.task('default',gulp.parallel('build'));

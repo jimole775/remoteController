@@ -12,13 +12,17 @@ let $module = {
         rules: [
             {
                 test: /\.(js|jsx)$/,
-                loader: "babel-loader",
-                options: {presets: ["es2015"]},
+                // loader: "babel-loader",
+                // exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+				},
+                // options: {presets: ["es2015"]},
                 exclude: [/node_modules/,/lib/]
             },
             {
                 test: /\.jade$/,
-                loader: "jade-loader"
+                loader: "pug-loader"
             },
             {
                 test: /\.(css|scss)$/,
@@ -69,4 +73,4 @@ $devtool = {devtool: "cheap-module-eval-source-map"};
 // $devtool = $devtool ? $devtool : {};    // 在注销devtool时，不用修改后面的代码
 client = Object.assign(client, $module, $devtool);
 server = Object.assign(server, $module, $devtool);
-module.exports = {client,server};
+module.exports = [client,server];
