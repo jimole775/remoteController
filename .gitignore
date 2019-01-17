@@ -4,5 +4,11 @@ node_modules
 test
 server/log/
 .vscode
-# client/src/assets/
-# server/bundle.node.js
+client/src/app/
+./build/
+./server/http/
+./server/socket/
+./server/index.js
+./gulpfile.js
+./package.json
+./webpack.*.js
