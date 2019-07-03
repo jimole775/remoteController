@@ -1,14 +1,14 @@
-var gulp = require('gulp');
-var path = require('path');
-var del = require('del');
-var webpack = require('webpack');
-var config = require("./webpack.config.js");
+var gulp = require('gulp')
+var path = require('path')
+var del = require('del')
+var webpack = require('webpack')
+var config = require("./webpack.config.js")
 // 清理js/css
 gulp.task('clean:webpack', function(done) {
     del([
         config.client.output.path
-    ], { force: true });
-    return done && done();
+    ], { force: true })
+    return done && done()
 });
 
 gulp.task('build',function(done) {
@@ -23,8 +23,8 @@ gulp.task('build',function(done) {
             // callback();
         });
 
-        return done&&done();
-});
+        return done && done()
+})
 
 
-gulp.task('default',gulp.parallel('build'));
+gulp.task('default',gulp.parallel('build'))

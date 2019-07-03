@@ -7,7 +7,7 @@ let server = require("./webpack.server.js");
 let test = require("./webpack.test.js");
 
 let $module = {
-    
+    mode:"production",
     module: {
         rules: [
             {

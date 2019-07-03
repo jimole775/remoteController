@@ -15,7 +15,7 @@ console.log(global.DB_DIS);
 
 
 import CreateHttp from "./http/init/open.js";
-(new CreateHttp()).open(80);
+(new CreateHttp()).open(8081);
 
 import createSocket from "./socket/init/open/open.js";
-createSocket(81);
+createSocket(8082);
