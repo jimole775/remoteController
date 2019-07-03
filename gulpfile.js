@@ -27,4 +27,4 @@ gulp.task('build',function(done) {
 })
 
 
-gulp.task('default',gulp.parallel('build'))
+gulp.task('default',gulp.series('clean:webpack','build'));
