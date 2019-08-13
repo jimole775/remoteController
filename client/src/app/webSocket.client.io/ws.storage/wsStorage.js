@@ -17,8 +17,8 @@ let storage = {
     name:"userStorage",  // 标记正在进行远程通讯业务的用户
     // hostUrl:"lester.ink",  // 标记正在进行远程通讯业务的用户
     hostUrl:"www.rongxis.com",  // 标记正在进行远程通讯业务的用户
-    httpPort:"80",
-    wsPort:"81"
+    httpPort:"8080",
+    wsPort:"8081"
 };
 
 export default new Rg(storage);

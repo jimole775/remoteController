@@ -47,6 +47,7 @@
   "scripts": {
     "dll": "webpack --display-modules --colors --config ./webpack.dll.js",
     "cache": "npm cache clean --force",
+    "build": "gulp build",
     "pack": "webpack --hide-modules",
     "devtool": "devtool server/bundle.node.js",
     "start": "node server/bundle.node.js"
