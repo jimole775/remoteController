@@ -2,9 +2,9 @@
 
 const svrInfo = {
     host : "localhost",
-    httpPort : 8080,
-    wsPort : 8081,
+    httpPort : 8088,
+    wsPort : 8089,
 };
 export default {
-    svrInfo
+    ...svrInfo
 }
