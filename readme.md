@@ -51,7 +51,7 @@ $ npm install image-webpack-loader url-loader file-loader --save-dev
 $ npm run start
 ```
 
-之后打开地址 127.0.0.1:1110 就能正常访问了
+之后打开地址 1xxx 就能正常访问了
 
 另外，除了Chrome，其他浏览器均未测试，使用时，请有心理准备！
 
