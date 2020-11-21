@@ -2,7 +2,7 @@
  * Created by Andy on 2017/11/9.
  */
 import tpl from "./headBar.jade";
-import "./headBar.scss";
+import "./headBar.less";
 
 export default function () {
     return {

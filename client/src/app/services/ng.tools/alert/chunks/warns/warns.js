@@ -2,7 +2,7 @@
  * Created by Andy on 2017/12/23.
  */
 import tpl from "./warns.jade";
-import "./warns.scss";
+import "./warns.less";
 import $ from "jquery";
 export default function(){
     return {

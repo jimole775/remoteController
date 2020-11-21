@@ -2,7 +2,7 @@
  * Created by Andy on 2017/12/23.
  */
 import tpl from "./prompt.jade";
-import "./prompt.scss";
+import "./prompt.less";
 
 export default function(){
     return {

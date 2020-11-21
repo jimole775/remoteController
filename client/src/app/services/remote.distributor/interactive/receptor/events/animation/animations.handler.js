@@ -1,7 +1,7 @@
 /**
  * Created by Andy on 2017/11/1.
  */
-import "animations.scss";
+import "animations.less";
 import tpl from "animations.template.jade";
 import $ from "jQuery";
 

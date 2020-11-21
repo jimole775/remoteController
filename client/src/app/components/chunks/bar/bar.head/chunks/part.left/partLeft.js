@@ -2,7 +2,7 @@
  * Created by Andy on 2017/12/24.
  */
 import tpl from "./partLeft.jade";
-import "./partLeft.scss";
+import "./partLeft.less";
 
 export default function () {
     return {

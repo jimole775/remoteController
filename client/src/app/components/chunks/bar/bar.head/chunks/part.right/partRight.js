@@ -2,7 +2,7 @@
  * Created by Andy on 2017/12/24.
  */
 import tpl from "./partRight.jade";
-import "./partRight.scss";
+import "./partRight.less";
 import disconnect from "../../images/disconnect.png";
 import connect from "../../images/connect.png";
 export default function () {

@@ -2,7 +2,7 @@
  * Created by Andy on 2017/12/21.
  */
 import tpl from "./contentBox.jade";
-import "./contentBox.scss";
+import "./contentBox.less";
 import avatar from "../../images/avatar_1.png";
 export default function () {
     return {

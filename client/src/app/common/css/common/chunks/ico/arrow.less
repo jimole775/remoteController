@@ -1,9 +1,6 @@
-@import "../../../mixin";
-
-@mixin rotate($deg){
-  @include compatible(transform,rotate(#{$deg}deg))
+.rotate(@deg){
+  transform: rotate(e(@deg)deg)
 }
-
 
 .arrow-common{
   width: 1rem;
@@ -15,29 +12,23 @@
   top: .3rem;
 }
 
-.arrow-left {
-  @extend .arrow-common;
-  @include rotate(-135);
+.arrow-left:extend(.arrow-common) {
+  .rotate(-135);
 }
 
-.arrow-right {
-  @extend .arrow-common;
-  @include rotate(45);
+.arrow-right:extend(.arrow-common) {
+  .rotate(45);
 }
 
-.arrow-up {
-  @extend .arrow-common;
-  @include rotate(-45);
+.arrow-up:extend(.arrow-common) {
+  .rotate(-45);
   right:1.0rem;
 }
 
-.arrow-down {
-  @extend .arrow-common;
-  @include rotate(135);
+.arrow-down:extend(.arrow-common) {
+  .rotate(135);
   right:1.0rem;
 }
-
-
 
 .arrow-active{
   border-right: 2px solid #f79594;

@@ -2,7 +2,7 @@
  * Created by Andy on 2016/12/19.
  */
 import tpl from "./hoverButton.jade";
-import "./hoverButton.scss";
+import "./hoverButton.less";
 import hoverButtonImg from "../../images/msg_2.png";
 
 export default function () {

@@ -1,7 +1,7 @@
 /**
  * Created by Andy on 2017/12/1.
  */
-import "./scanner.scss"
+import "./scanner.less"
 import tpl from "./scanner.jade"
 import JRoll from "jroll";
 import initViewButtonImg from "../images/scanner_5.png";

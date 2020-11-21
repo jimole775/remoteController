@@ -2,7 +2,7 @@
  * Created by Andy on 2017/12/2.
  */
 import tpl from "./main.jade";
-import "./main.scss";
+import "./main.less";
 import AlertInterface from "../interface/Alert.js";
 export default function directive() {
     return {

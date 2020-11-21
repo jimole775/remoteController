@@ -2,7 +2,7 @@
  * Created by Andy on 2017/11/15.
  */
 import tpl from "./home.jade";
-import "./home.scss";
+import "./home.less";
 import SimulateSlider  from "SimulateSlider";
 
 export default function ($stateProvider) {

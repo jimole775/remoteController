@@ -2,7 +2,7 @@
  * Created by Andy on 2017/12/23.
  */
 import tpl from "./loading.jade";
-import "./loading.scss";
+import "./loading.less";
 export default function(){
     return {
         replace:true,

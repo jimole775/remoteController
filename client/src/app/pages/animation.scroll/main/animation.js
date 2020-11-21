@@ -2,7 +2,7 @@
  * Created by Andy on 2017/11/22.
  */
 import tpl from "./animation.jade";
-import "./animation.scss";
+import "./animation.less";
 
 export default function ($stateProvider) {
     $stateProvider

@@ -2,7 +2,7 @@
  * Created by Andy on 2016/12/21.
  */
 import tpl from "./phraseForm.jade";
-import "./phraseForm.scss";
+import "./phraseForm.less";
 export default function(){
 	return {
 		restrict:"EA",

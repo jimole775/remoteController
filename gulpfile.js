@@ -5,6 +5,7 @@ var webpack = require('webpack')
 var config = require("./webpack.config.js")
 // 清理js/css
 gulp.task('clean:webpack', function(done) {
+    console.log('config.client.output.path', config.client.output.path)
     del([
         config.client.output.path
     ], { force: true })

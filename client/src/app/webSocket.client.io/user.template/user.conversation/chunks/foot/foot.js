@@ -2,7 +2,7 @@
  * Created by Andy on 2016/12/21.
  */
 import tpl from "./foot.jade";
-import "./foot.scss";
+import "./foot.less";
 
 export default function () {
     return {

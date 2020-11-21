@@ -2,7 +2,7 @@
  * Created by Andy on 2017/12/24.
  */
 import tpl from "./partMiddle.jade";
-import "./partMiddle.scss";
+import "./partMiddle.less";
 export default function () {
     return {
         restrict: 'E',

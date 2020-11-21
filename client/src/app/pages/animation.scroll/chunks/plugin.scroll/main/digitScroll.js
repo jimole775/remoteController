@@ -1,7 +1,7 @@
 /**
  * Created by Andy on 2017/11/26.
  */
-import "./digitScroll.scss";
+import "./digitScroll.less";
 import tpl from "./digitScroll.jade";
 import $ from "jquery";
 import JRoll from "jroll";

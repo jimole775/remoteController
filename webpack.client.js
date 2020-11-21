@@ -11,7 +11,7 @@ const webClient = {
     entry: [
         // "babel-core",
         // "babel-polyfill",
-        path.join(__dirname, "client/src/app/common/css/base.scss"),
+        path.join(__dirname, "client/src/app/common/css/base.less"),
         path.join(__dirname, "client/src/app/index.js")
     ],
     target: "web",
@@ -52,7 +52,7 @@ webClient.plugins = [
 webClient.resolve = {
 
     //自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名
-    extensions: ['.js', '.json', '.scss'],
+    extensions: ['.js', '.json', '.less'],
 
     //模块别名定义，方便后续直接引用别名，无须多写长长的地址
     alias: {

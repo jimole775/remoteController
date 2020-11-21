@@ -2,7 +2,7 @@
  * Created by Andy on 2017/11/9.
  */
 import tpl from "./footButton.jade";
-import "./footButton.scss";
+import "./footButton.less";
 
 export default function () {
 

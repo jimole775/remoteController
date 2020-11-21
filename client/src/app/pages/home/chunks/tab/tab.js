@@ -3,7 +3,7 @@
  */
 
 import tpl from "./tab.jade";
-import "./tab.scss";
+import "./tab.less";
 
 export default function () {
     return {

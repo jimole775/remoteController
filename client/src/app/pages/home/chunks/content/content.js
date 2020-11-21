@@ -2,7 +2,7 @@
  * Created by Andy on 2017/11/20.
  */
 import tpl from "./content.jade";
-import "./content.scss";
+import "./content.less";
 import scrollImg from "./imags/scroll.png";
 import dataImg from "./imags/data.png";
 import dataMultiImg from "./imags/data_multi.png";

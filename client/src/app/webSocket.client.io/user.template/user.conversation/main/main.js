@@ -2,7 +2,7 @@
  * Created by Andy on 2017/11/13.
  */
 import tpl from "./main.jade";
-import "./main.scss";
+import "./main.less";
 
 export default function (){
     return {
@@ -18,7 +18,7 @@ class Ctrl{
     constructor($scope, $element, ngTool, $rootScope, userStorage, charState){
         "ngInject";
         $scope.safeApply = ngTool.injectScope($scope).safeApply;
-        // ÊµÀý»¯ÍÏ×§ÊÂ¼þ
+        // Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×§ï¿½Â¼ï¿½
         new ngTool.Drag(
             $element[0].querySelector(".char-head-bar"),
             $element[0].querySelector(".char-form")

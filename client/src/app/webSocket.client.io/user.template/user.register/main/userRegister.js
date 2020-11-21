@@ -3,7 +3,7 @@
  */
 
 import $ from "jquery";
-import "./userRegister.scss";
+import "./userRegister.less";
 import tpl from "./userRegister.jade";
 
 export default function () {

@@ -1,7 +1,7 @@
 /**
  * Created by Andy on 2017/3/4.
  */
-import "./userList.scss";
+import "./userList.less";
 import tpl from "./userList.jade";
 import user_list from "../images/user_list.png";
 import avatar from "../images/avatar_default.png";

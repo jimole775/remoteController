@@ -21,25 +21,22 @@
   display:block;
 }
 
-.scroll-item-description{
+.scroll-item-description:extend(.scroll-item-common){
   width:45%;
   order:1;
   text-align: left;
-  @extend .scroll-item-common;
 }
-.scroll-item-value{
+.scroll-item-value:extend(.scroll-item-common){
   width:45%;
   flex-grow: 1.5;
   order:2;
   text-align: right;
-  @extend .scroll-item-common;
 }
-.scroll-item-ico{
+.scroll-item-ico:extend(.scroll-item-common){
   flex-grow: 0.1;
   width:1.6rem;
   order:3;
   position:relative;
-  @extend .scroll-item-common;
 }
 .scroll-item:focus{
   outline:none;

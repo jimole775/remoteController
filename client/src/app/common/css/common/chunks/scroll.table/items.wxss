@@ -1,0 +1,42 @@
+.scroll-item {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0 0 -1px 0;
+  color: #626262;
+  font-size: 1.6rem;
+  border-bottom: 0;
+  border-color: transparent;
+  width: 100%;
+  height: 6rem;
+  padding: 0 1.2rem;
+  border-top: 1px solid #E5E5E7;
+  overflow: hidden;
+}
+.scroll-item-common,
+.scroll-item-description,
+.scroll-item-value,
+.scroll-item-ico {
+  flex-grow: 1;
+  height: 100%;
+  display: block;
+}
+.scroll-item-description {
+  width: 45%;
+  order: 1;
+  text-align: left;
+}
+.scroll-item-value {
+  width: 45%;
+  flex-grow: 1.5;
+  order: 2;
+  text-align: right;
+}
+.scroll-item-ico {
+  flex-grow: 0.1;
+  width: 1.6rem;
+  order: 3;
+  position: relative;
+}
+.scroll-item:focus {
+  outline: none;
+}

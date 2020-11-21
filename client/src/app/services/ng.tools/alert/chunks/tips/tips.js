@@ -2,7 +2,7 @@
  * Created by Andy on 2017/12/30.
  */
 import tpl from "./tips.jade";
-import "./tips.scss";
+import "./tips.less";
 import $ from "jquery";
 export default function () {
     return {

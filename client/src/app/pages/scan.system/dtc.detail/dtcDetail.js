@@ -1,7 +1,7 @@
 /**
  * Created by Andy on 2017/12/5.
  */
-import "./dtcDetail.scss"
+import "./dtcDetail.less"
 import tpl from "./dtcDetail.jade"
 export default function () {
     return {

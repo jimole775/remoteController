@@ -54,7 +54,7 @@
 
 .table-cell-center {
   text-align: center;
-  @extend .table-cell
+	&:extend(.table-cell);
 }
 
 .animation {
@@ -69,19 +69,19 @@
   overflow: hidden;
   height: 100%;
   background: #416595;
-  @include out-flow(relative,0,0)
+  .out-flow(relative,0,0)
 }
 
 .page-box{
   display: flex;
   flex-flow: column;
-  @extend .full;
+	&:extend(.full);
 }
 
 .directive-box{
   z-index:99999;
-  @extend .full;
-  @include out-flow(absolute,0,0);
+	&:extend(.full);
+  .out-flow(absolute,0,0);
 }
 
 .frosted-glass {
@@ -103,4 +103,3 @@
   -o-text-overflow: ellipsis;
   white-space: nowrap;
 }
-

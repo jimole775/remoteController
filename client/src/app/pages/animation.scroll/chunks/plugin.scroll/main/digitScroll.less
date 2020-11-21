@@ -39,8 +39,14 @@
   overflow: hidden;
 }
 
-@for $i from 0 through 20 {
-  #wrapper#{$i} {
+.loop(@i) when (@i < 20){
+  .createWrapper(@i);
+  .loop(@i+1);
+}
+.loop(0);
+
+.createWrapper(@i){
+  #wrapper@{i} {
     box-sizing: border-box;
     width: 20%;
     background: #182332;
@@ -51,7 +57,6 @@
     ul {
       width: 100%;
       border: 1px solid #1f2d41;
-
       box-sizing: border-box;
       box-shadow: 2px 0 3px #131b26;
       li {

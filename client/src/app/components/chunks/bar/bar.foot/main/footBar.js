@@ -2,7 +2,7 @@
  * Created by Andy on 2017/11/14.
  */
 import tpl from "./footBar.jade";
-import "./footBar.scss";
+import "./footBar.less";
 
 export default function(){
     return {

@@ -2,7 +2,7 @@
  * Created by Andy on 2016/12/21.
  */
 import tpl from "./head.jade";
-import "./head.scss";
+import "./head.less";
 
 export default function () {
 	return {
