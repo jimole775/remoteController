@@ -14,7 +14,7 @@ const webpack = require("webpack");
 const config = {
     output: {
         filename: "[name].[chunkHash:5].js",
-        path: path.join(__dirname, "client/src/assets/lib/"),
+        path: path.join(__dirname, "client/src/lib/"),
         library: "[name]"
     },
     entry: {
@@ -23,7 +23,7 @@ const config = {
     plugins: [
         new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.DllPlugin({
-                path: "client/src/assets/lib/manifest.json",
+                path: path.join(__dirname, "client/src/lib/manifest.json"),
                 name: "[name]",
                 context: __dirname
             }

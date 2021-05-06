@@ -5,7 +5,6 @@ import services from "./services/services.export.js";
 import wsClient from "./webSocket.client.io/ws.client.export.js";
 import pages from "./pages/exports.js";
 import components from "./components/exports.js";
-console.log('global.env:', global.env)
 angular.module("myApp", [uiRouter, components.name, pages.name, services.name, wsClient.name])
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("home");

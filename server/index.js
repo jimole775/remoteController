@@ -5,8 +5,7 @@ import path from "path";
 global.ROOT_DIS = path.resolve(__dirname,"../");
 
 console.log(global.ROOT_DIS);
-global.SOURCES_DIS = path.resolve(__dirname,"../client/src");
-global.ASSETS_DIS = path.resolve(__dirname,"../client/src/assets");
+global.SOURCES_DIS = path.resolve(__dirname,"../client/dist");
 console.log(global.CLIENT_DIS);
 global.SERVER_DIS = path.resolve(__dirname);
 console.log(global.SERVER_DIS);

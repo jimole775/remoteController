@@ -108,7 +108,7 @@ export default class CreateHttp {
             let fileStream = null;
             if (/\.(png|jpg|jpeg|gif|ico)$/.test(extension)) {
                 // 图片类型转换成“base64”输出
-                fileStream = that.fs.createReadStream(that.path.join(ASSETS_DIS, req.url));            
+                fileStream = that.fs.createReadStream(that.path.join(SOURCES_DIS, req.url));            
                 fileStream.pipe(res);
 
             }else{
