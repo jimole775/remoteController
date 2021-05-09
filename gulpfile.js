@@ -11,6 +11,13 @@ gulp.task('clean:webpack', function(done) {
     return done && done()
 });
 
+
+gulp.task('copy:lib', function(done) {
+    gulp.src('./client/lib/*')
+        .pipe(gulp.dest('./client/dist/lib/'))
+    return done && done()
+});
+
 gulp.task('build',function(done) {
     webpack(config.client, function(err, stats) {
         // compileLogger(err, stats);
@@ -20,30 +27,7 @@ gulp.task('build',function(done) {
         // compileLogger(err, stats);
         // callback();
     });
-    
-    gulp.src('./client/src/lib/*')
-        .pipe(gulp.dest('./client/dist/lib/'))
     return done && done()
-})
-
-gulp.task('copy:lib',function(done) {
-    console.log('run', fs.readdirSync('./client/dist/'))
-    gulp.src('./client/src/lib/*')
-        .pipe(gulp.dest('./client/dist/lib/'))
-    return done && done()
-})
-
-gulp.task('watcher', function (done) {
-    gulp.watch(['/client/dist/*.html'], gulp.series('clean:webpack', 'build'))
 })
 
 gulp.task('default', gulp.series('clean:webpack', 'build'))
-
-// watcher.on('add', function () {
-//     console.log('>>>>>>>>')
-// })
-// watcher.on('unlink', function(path, stats) {
-//     console.log('>>>>>>>>')
-//     console.log(`File ${path} was removed`);
-// });
-// watcher.close()

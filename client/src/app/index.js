@@ -9,7 +9,6 @@ angular.module("myApp", [uiRouter, components.name, pages.name, services.name, w
     .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("home");
     }).run(function($state,$rootScope,userStorage){
-        
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
           
             const $ = angular.element;
