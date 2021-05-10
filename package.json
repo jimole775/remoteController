@@ -51,10 +51,11 @@
   "scripts": {
     "dll": "webpack --display-modules --colors --config ./webpack.dll.js",
     "move:dll": "gulp copy:lib",
+    "inject:tags": "gulp inject:tags",
     "cache": "npm cache clean --force",
     "pack": "webpack --hide-modules",
     "devtool": "npm run build:dev && devtool server/bundle.node.js",
-    "serve": "npm run dll && npm run build:dev && npm run move:dll && npm run start:dev",
+    "serve": "npm run dll && npm run build:dev && npm run move:dll && npm run inject:tags && npm run start:dev",
     "build:dev": "cross-env NODE_ENV=development gulp",
     "start:dev": "cross-env NODE_ENV=development node server/bundle.node.js",
     "test": "cross-env HOST=rongxis PORT=fff node test.js"

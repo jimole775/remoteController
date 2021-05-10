@@ -47,14 +47,19 @@ webClient.plugins = [
         }
     )
     // , new HtmlWebpackTagsPlugin({ tags: ['./client/lib/vendor.[hash].js'], append: true })
-    , new HtmlWebpackTagsPlugin({
-        scripts: [{ glob: 'vendor.*.js', path: 'lib', globPath: './client/lib', attributes: { defer: 'defer' }, append: true }],
-        // scripts: [
-        //     {
-        //         path: './lib/vendor.dll.js'
-        //     }
-        // ]
-        })
+    // , new HtmlWebpackTagsPlugin({
+    //     // new HtmlWebpackTagsPlugin({ tags: ['a.js', 'b.css'], append: true })
+    //     // tags: ['lib/vendor.*.js', 'js/bundle.*.js'], append: true
+    //     scripts: [
+    //         // { glob: 'vendor.*.js', path: 'lib', globPath: 'client/dist/lib', globFlatten: true, attributes: { defer: 'defer' }, append: true },
+    //         { glob: 'bundle.*.js', path: 'js', globPath: 'client/dist/js', globFlatten: true, attributes: { defer: 'defer' }, append: true }
+    //     ],
+    //     // scripts: [
+    //     //     {
+    //     //         path: './lib/vendor.dll.js'
+    //     //     }
+    //     // ]
+    //     })
     , new ExtractTextPlugin({
         filename: 'css/bundle.[chunkHash:5].css',
         allChunks: true
