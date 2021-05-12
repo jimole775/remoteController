@@ -4,6 +4,7 @@
 // const ExtractTextPlugin = require("extract-text-webpack-plugin")
 let client = require("./webpack.client.js")
 let server = require("./webpack.server.js")
+let dll = require("./webpack.dll.js")
 let webpack = require("webpack")
 let test = require("./webpack.test.js")
 let devConfig = require("./build/dev.config.js")
@@ -98,4 +99,4 @@ function injectPlugins (config) {
     return config
 }
 
-module.exports = { client, server }
+module.exports = { client, server, dll }

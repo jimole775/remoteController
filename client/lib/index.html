@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head lang="en">
-    <title>远程测试</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-control" content="no-cache">
-    <meta http-equiv="Cache" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <meta http-equiv="Connection" content="0">
-    <script>
-        (function (win) {
+<!doctype html><html><head lang="en"><title>远程测试</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Cache-control" content="no-cache"><meta http-equiv="Cache" content="no-cache"><meta http-equiv="Expires" content="0"><meta http-equiv="Connection" content="0"><script>(function (win) {
             var userAgent = win.navigator.userAgent; //取得浏览器的userAgent字符串
             var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
             var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
@@ -29,11 +15,7 @@
             // win.onresize = function () {
             //     win.location.reload();
             // };
-        })(window);
-
-    </script>
-    <style>
-        html{
+        })(window);</script><style>html{
             font-size:75%;
         }
 
@@ -89,11 +71,7 @@
             margin: 0;
             /* font-size: 0.7rem; */
             line-height: 200%;
-        }
-    </style>
-    <script defer="defer">    
-
-        (function (win, doc) {
+        }</style><script defer="defer">(function (win, doc) {
             var temp = [
                 '<div id="prevLoad">',
                 '<div class="loadBar">',
@@ -128,18 +106,7 @@
             }
 
             fill();
-        })(window, document);
-
-    </script>
-</head>
-
-<body ng-app="myApp">
-    <foot-bar></foot-bar>
-    <section ui-view=""></section>
-    <head-bar></head-bar>
-    <components></components>
-    <script>
-        (function () {
+        })(window, document);</script></head><body ng-app="myApp"><foot-bar></foot-bar><section ui-view=""></section><head-bar></head-bar><components></components><script>(function () {
             // setTimeout(function(){
             // 依赖包加载完成之后，直接设置加载条到100%；
             // 以触发钩子，隐藏加载页面
@@ -154,8 +121,4 @@
             }, 1000);
 
             // },35000) //15秒延迟，本地测试时使用
-        })();
-    </script>
-</body>
-
-</html>
+        })();</script><script src="lib/vendor.dad04.js"></script></body></html>

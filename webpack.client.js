@@ -8,15 +8,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackInjector = require('html-webpack-injector');
 const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
-function resolve (path) {
-    return path.join(__dirname, path)
-}
 const webClient = {
     entry: [
         // 'babel-core',
         // 'babel-polyfill',
-        path.join(__dirname, 'client/src/app/common/css/base.less'),
-        path.join(__dirname, 'client/src/app/index.js')
+        path.join(__dirname, 'client/app/src/common/css/base.less'),
+        path.join(__dirname, 'client/app/src/index.js')
     ],
     target: 'web',
     // devServer: {
@@ -33,13 +30,11 @@ const webClient = {
 webClient.plugins = [
     new HtmlWebpackPlugin({
         title: 'RMT',
-        template: path.join(__dirname, 'client/src/app/index.html'),
-        filename: path.join(__dirname, 'client/dist/index.html'),
         inject: true,
-        favicon: path.join(__dirname, 'client/src/favicon.ico'),
-        chunks: ['index_head']
+        template: path.join(__dirname, 'client/lib/index.html'),
+        filename: path.join(__dirname, 'client/dist/index.html'),
+        favicon: path.join(__dirname, 'client/app/src/favicon.ico')
     })
-    , new HtmlWebpackInjector()
     , new webpack.DllReferencePlugin(
         {
             context: __dirname,
@@ -90,10 +85,9 @@ webClient.resolve = {
         SimulateSlider$: path.join(__dirname, 'public/plugin/SimulateSlider/SimulateSlider.js')     //后续直接 require('SimulateSlider') 即可
         , StorageRegister$: path.join(__dirname, 'public/plugin/StorageRegister/StorageRegister.js')
         , client: path.join(__dirname,'client')
-        , wsClient: path.join(__dirname, 'client/src/app/webSocket.client.io')
-        //, RMTDistributor$: path.join(__dirname, 'client/src/app/services/remote.distributor/distributor/distributor.js')
+        , wsClient: path.join(__dirname, 'client/app/src/webSocket.client.io')
+        //, RMTDistributor$: path.join(__dirname, 'client/app/src/services/remote.distributor/distributor/distributor.js')
     }
 };
-
 
 module.exports = webClient;

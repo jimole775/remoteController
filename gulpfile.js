@@ -6,20 +6,22 @@ var through = require('through2')
 var webpack = require('webpack')
 var fs = require('fs')
 var config = require("./webpack.config.js")
+
 // 清理js/css
-gulp.task('clean:webpack', function(done) {
+gulp.task('clean:dirty', function(done) {
     del([config.client.output.path], { force: true })
+    del([config.dll.output.path], { force: true })
     return done && done()
 });
 
-
+// 把lib文件复制到dist目录
 gulp.task('copy:lib', function(done) {
     gulp.src('./client/lib/*')
         .pipe(gulp.dest('./client/dist/lib/'))
     return done && done()
 });
 
-
+// 往index.html中注入内容
 function injectHtmlTags (chunk, enc, callback) {
     var contents = chunk.contents.toString('utf8')
     var sp = contents.split('</body>')
@@ -31,23 +33,24 @@ function injectHtmlTags (chunk, enc, callback) {
 }
 
 gulp.task('inject:tags', function(done) {
-    gulp.src('./client/src/app/index.html')
+    gulp.src('./client/app/src/index.html')
         .pipe(through.obj(injectHtmlTags))
         .pipe(gulp.dest('./client/'))
     return done && done()
 });
 
+// 打包
 gulp.task('build',function(done) {
-    webpack(config.client, function(err, stats) {
+    webpack(config.server, function(err, stats) {
         // compileLogger(err, stats);
         // callback();
     });
-    webpack(config.server, function(err, stats) {
+    webpack(config.client, function(err, stats) {
         // compileLogger(err, stats);
         // callback();
     });
     return done && done()
 })
 
-// gulp.task('default', gulp.series('clean:webpack', 'build'))
-gulp.task('default', gulp.series('inject:tags'))
+// gulp.task('default', gulp.series('build'))
+// gulp.task('default', gulp.series('inject:tags'))
