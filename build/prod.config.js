@@ -1,6 +1,6 @@
 const svrInfo = {
     // host : "47.101.67.149",
-    HOST : "remote.rongxis.com",
+    HOST : "47.92.250.165",
     HTTPPORT : 8080,
     WSPORT : 8081,
 };
