@@ -60,7 +60,7 @@
     "start:dev": "cross-env NODE_ENV=development node server/bundle.node.js",
     "start:devtool": "cross-env NODE_ENV=development devtool server/bundle.node.js",
     "start:prod": "cross-env NODE_ENV=production node server/bundle.node.js",
-    "start:pm2": "cross-env NODE_ENV=production pm2 server/bundle.node.js",
+    "start:pm2": "cross-env NODE_ENV=production pm2 start server/bundle.node.js",
     "serve:dev": "npm run build:dev && npm run start:dev",
     "serve:devtool": "npm run build:dev && npm run start:devtool",
     "serve:prod": "npm run build:prod && npm run start:prod",
