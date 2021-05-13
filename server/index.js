@@ -13,7 +13,7 @@ global.DB_DIS = path.resolve(global.SERVER_DIS,"database/json");
 console.log(global.DB_DIS);
 
 import CreateHttp from "./http/init/open.js";
-if (process.env.NODE_ENV === 'development') {
+if (global.env.ENV === 'development') {
   (new CreateHttp()).open(global.env.HTTPPORT);
 }
 
