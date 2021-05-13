@@ -13,7 +13,9 @@ global.DB_DIS = path.resolve(global.SERVER_DIS,"database/json");
 console.log(global.DB_DIS);
 
 import CreateHttp from "./http/init/open.js";
-(new CreateHttp()).open(global.env.HTTPPORT);
+if (process.env.NODE_ENV === 'development') {
+  (new CreateHttp()).open(global.env.HTTPPORT);
+}
 
 import createSocket from "./socket/init/open/open.js";
 createSocket(global.env.WSPORT);
