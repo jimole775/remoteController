@@ -10,7 +10,7 @@ var config = require("./webpack.config.js")
 // 清理js/css
 gulp.task('clean:dirty', function(done) {
     del([config.client.output.path], { force: true })
-    del([config.dll.output.path], { force: true })
+    del(['./client/lib/vendor.*.js'], { force: true })
     return done && done()
 });
 
