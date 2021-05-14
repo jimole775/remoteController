@@ -1,5 +1,6 @@
 const svrInfo = {
-    HOST : "localhost",
+    ENV: 'development',
+    HOST : 'localhost',
     HTTPPORT : 8080,
     WSPORT : 8081,
 };

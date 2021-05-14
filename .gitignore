@@ -6,4 +6,4 @@ server/log/
 .vscode
 client/dist/
 client/lib/
-# server/bundle.node.js
+server/bundle.node.js
