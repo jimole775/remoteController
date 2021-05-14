@@ -32,8 +32,7 @@ webClient.plugins = [
         title: 'RMT',
         inject: true,
         template: path.join(__dirname, 'client/lib/index.html'),
-        filename: path.join(__dirname, 'client/dist/index.html'),
-        favicon: path.join(__dirname, 'client/app/src/favicon.ico')
+        filename: path.join(__dirname, 'client/dist/index.html')
     })
     , new webpack.DllReferencePlugin(
         {
