@@ -2,8 +2,8 @@
 node_modules
 *.zip
 test
-server/log/
 .vscode
 client/dist/
 client/lib/
+server/log/
 server/bundle.node.js

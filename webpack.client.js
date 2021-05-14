@@ -21,8 +21,8 @@ const webClient = {
     //     hot: true
     //   },
     output: {
-        //publicPath: '../',   //cdn资源加载的统一路径
-        path: path.join(__dirname, 'client/dist'),  //webpack打包文件的统一输出路径
+        publicPath: 'static/',   //cdn资源加载的统一路径
+        path: path.join(__dirname, 'client/dist/static'),  //webpack打包文件的统一输出路径
         filename: 'js/bundle.[chunkHash:5].js'
     }
 };
@@ -37,7 +37,7 @@ webClient.plugins = [
     , new webpack.DllReferencePlugin(
         {
             context: __dirname,
-            manifest: require(path.resolve(__dirname, './client/lib/manifest.json'))
+            manifest: require(path.resolve(__dirname, 'client/lib/manifest.json'))
         }
     )
     // , new HtmlWebpackTagsPlugin({ tags: ['./client/lib/vendor.[hash].js'], append: true })
@@ -62,8 +62,8 @@ webClient.plugins = [
     //     [{
     //         patterns: [
     //             {
-    //                 from: path.join(__dirname, '/client/lib/*'),
-    //                 to: path.join(__dirname, '/client/dist/lib/*')
+    //                 from: path.join(__dirname, '/client/app/static/*'),
+    //                 to: path.join(__dirname, '/client/dist/static/*')
     //             }
     //         ],
     //         options: {
