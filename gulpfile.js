@@ -7,19 +7,29 @@ var webpack = require('webpack')
 var fs = require('fs')
 var config = require("./webpack.config.js")
 
-// 清理js/css
-gulp.task('clean:dirty', function(done) {
+gulp.task('clean:dist', function(done) {
     del([config.client.output.path], { force: true })
-    del(['./client/lib/vendor.*.js'], { force: true })
+    return done && done()
+});
+gulp.task('clean:dirty', function(done) {
+    del(['./client/lib'], { force: true })
     return done && done()
 });
 
-// 把lib文件复制到dist目录
 gulp.task('copy:lib', function(done) {
-    gulp.src('./client/lib/*')
-        .pipe(gulp.dest('./client/dist/lib/'))
+    gulp.src(['./client/lib/*.js', './client/lib/*.json'])
+        .pipe(gulp.dest('./client/dist/static/lib/'))
     return done && done()
 });
+
+gulp.task('copy:static', function(done) {
+    gulp.src('./client/static/*')
+        .pipe(gulp.dest('./client/dist/static/'))
+    return done && done()
+});
+
+// 把assets文件复制到dist目录
+gulp.task('copy:assets', gulp.series('copy:static', 'copy:lib'));
 
 // 往index.html中注入内容
 function injectHtmlTags (chunk, enc, callback) {
@@ -52,5 +62,5 @@ gulp.task('build',function(done) {
     return done && done()
 })
 
-// gulp.task('default', gulp.series('build'))
+gulp.task('default', gulp.series('clean:dist', 'build', 'copy:assets'))
 // gulp.task('default', gulp.series('inject:tags'))
