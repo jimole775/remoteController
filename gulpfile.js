@@ -50,11 +50,25 @@ gulp.task('inject:tags', function(done) {
 });
 
 // 打包
-gulp.task('build',function(done) {
+gulp.task('build:dll',function(done) {
+    webpack(config.dll, function(err, stats) {
+        // compileLogger(err, stats);
+        // callback();
+    });
+    return done && done()
+})
+
+// 打包
+gulp.task('build:server',function(done) {
     webpack(config.server, function(err, stats) {
         // compileLogger(err, stats);
         // callback();
     });
+    return done && done()
+})
+
+// 打包
+gulp.task('build:client',function(done) {
     webpack(config.client, function(err, stats) {
         // compileLogger(err, stats);
         // callback();
@@ -62,5 +76,6 @@ gulp.task('build',function(done) {
     return done && done()
 })
 
+gulp.task('build', gulp.series('build:dll', 'build:client', 'build:server'))
 gulp.task('default', gulp.series('clean:dist', 'build', 'copy:assets'))
 // gulp.task('default', gulp.series('inject:tags'))
