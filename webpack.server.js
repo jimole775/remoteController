@@ -44,5 +44,4 @@ server.resolve = {
     }
 };
 
-
 module.exports = server;

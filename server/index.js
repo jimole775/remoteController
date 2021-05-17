@@ -2,20 +2,20 @@
  * Created by Andy on 2017/12/2.
  */
 import path from "path";
+import createSocket from "./socket/init/open/open.js";
+import CreateHttp from "./http/init/open.js";
+
 global.ROOT_DIS = path.resolve(__dirname,"../");
 
-console.log(global.ROOT_DIS);
 global.SOURCES_DIS = path.resolve(__dirname,"../client/dist");
-console.log(global.CLIENT_DIS);
 global.SERVER_DIS = path.resolve(__dirname);
-console.log(global.SERVER_DIS);
 global.DB_DIS = path.resolve(global.SERVER_DIS,"database/json");
-console.log(global.DB_DIS);
 
-import CreateHttp from "./http/init/open.js";
-// if (global.env.ENV === 'development') {
-  (new CreateHttp()).open(global.env.HTTPPORT);
-// }
-
-import createSocket from "./socket/init/open/open.js";
+(new CreateHttp()).open(global.env.HTTPPORT);
 createSocket(global.env.WSPORT);
+
+console.log(global.CLIENT_DIS);
+console.log(global.SERVER_DIS);
+console.log(global.ROOT_DIS);
+console.log(global.DB_DIS);
+console.log(global.env);

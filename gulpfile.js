@@ -5,14 +5,39 @@ var through = require('through2')
 // var gulpCopy = require('gulp-copy')
 var webpack = require('webpack')
 var fs = require('fs')
-var config = require("./webpack.config.js")
+var devConfig = require("./build/dev.config.js")
+var prodConfig = require("./build/prod.config.js")
+
+function parseArgv () {
+    var params = {}
+    process.argv.forEach((a, i) => {
+        if (/--/.test(a)) {
+            params[a.replace('--', '')] = process.argv[i + 1]
+        }
+    })
+    return params
+}
+function injectEnv (config) {
+    let envprops = {}
+    if (parseArgv().env === 'dev') {
+        envprops = devConfig
+    }
+    if (parseArgv().env === 'prod') {
+        envprops = prodConfig
+    }
+    config.plugins.push(new webpack.DefinePlugin({ 'global.env': JSON.stringify(envprops) }))
+    return config
+}
 
 gulp.task('clean:dist', function(done) {
-    del([config.client.output.path], { force: true })
+    var dist = fs.existsSync(path.join(__dirname, './client/dist'))
+    dist && del(['./client/dist'], { force: true })
     return done && done()
 });
-gulp.task('clean:dirty', function(done) {
-    del(['./client/lib'], { force: true })
+
+gulp.task('clean:lib', function(done) {
+    var lib = fs.existsSync(path.join(__dirname, './client/lib'))
+    lib && del(['./client/lib'], { force: true })
     return done && done()
 });
 
@@ -28,30 +53,27 @@ gulp.task('copy:static', function(done) {
     return done && done()
 });
 
-// 把assets文件复制到dist目录
-gulp.task('copy:assets', gulp.series('copy:static', 'copy:lib'));
-
-// 往index.html中注入内容
-function injectHtmlTags (chunk, enc, callback) {
-    var contents = chunk.contents.toString('utf8')
-    var sp = contents.split('</body>')
-    var pre = sp[0]
-    this.push(chunk)
-    // var a = fs.readFileSync(chunk)
-    console.log('dasdassd', )
-    callback()
-}
-
 gulp.task('inject:tags', function(done) {
     gulp.src('./client/app/src/index.html')
         .pipe(through.obj(injectHtmlTags))
         .pipe(gulp.dest('./client/'))
+    // 往index.html中注入内容
+    function injectHtmlTags (chunk, enc, callback) {
+        var contents = chunk.contents.toString('utf8')
+        var sp = contents.split('</body>')
+        var pre = sp[0]
+        this.push(chunk)
+        // var a = fs.readFileSync(chunk)
+        console.log('dasdassd', )
+        callback()
+    }
     return done && done()
 });
 
 // 打包
 gulp.task('build:dll',function(done) {
-    webpack(config.dll, function(err, stats) {
+    var config = require("./webpack.dll.js")
+    webpack(config, function(err, stats) {
         // compileLogger(err, stats);
         // callback();
     });
@@ -60,7 +82,8 @@ gulp.task('build:dll',function(done) {
 
 // 打包
 gulp.task('build:server',function(done) {
-    webpack(config.server, function(err, stats) {
+    var config = require("./webpack.config.js")
+    webpack(injectEnv(config.server), function(err, stats) {
         // compileLogger(err, stats);
         // callback();
     });
@@ -69,13 +92,15 @@ gulp.task('build:server',function(done) {
 
 // 打包
 gulp.task('build:client',function(done) {
-    webpack(config.client, function(err, stats) {
+    var config = require("./webpack.config.js")
+    webpack(injectEnv(config.client), function(err, stats) {
         // compileLogger(err, stats);
         // callback();
     });
     return done && done()
 })
 
-gulp.task('build', gulp.series('build:dll', 'build:client', 'build:server'))
-gulp.task('default', gulp.series('clean:dist', 'build', 'copy:assets'))
-// gulp.task('default', gulp.series('inject:tags'))
+gulp.task('copy', gulp.series('copy:static', 'copy:lib'));
+gulp.task('clean', gulp.series('clean:dist', 'clean:lib'));
+gulp.task('dll', gulp.series('build:dll'));
+gulp.task('build', gulp.series('build:server', 'build:client'));

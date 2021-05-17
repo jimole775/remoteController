@@ -49,17 +49,12 @@
     "webpack-stream": "^5.1.1"
   },
   "scripts": {
-    "dll": "webpack --display-modules --colors --config ./webpack.dll.js",
-    "move:assets": "gulp copy:assets",
-    "clean:dist": "gulp clean:dist",
-    "inject:tags": "gulp inject:tags",
-    "build:dev": "cross-env NODE_ENV=development gulp",
-    "build:prod": "cross-env NODE_ENV=production gulp",
-    "cache": "npm cache clean --force",
-    "pack": "webpack --hide-modules",
+    "build:dev": "gulp clean && gulp dll && gulp build --env dev && gulp copy",
+    "build:prod": "gulp clean && gulp dll && gulp build --env prod && gulp copy",
+    "serve": "npm run serve:dev",
     "serve:dev": "npm run build:dev && node server/bundle.node.js",
-    "serve:devtool": "npm run build:dev && devtool server/bundle.node.js",
     "serve:prod": "npm run build:prod && node server/bundle.node.js",
+    "serve:devtool": "npm run build:dev && gulp copy && devtool server/bundle.node.js",
     "serve:pm2": "npm run build:prod && pm2 start server/bundle.node.js",
     "test": "cross-env HOST=rongxis PORT=fff node test.js"
   },

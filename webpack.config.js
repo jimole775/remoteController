@@ -4,11 +4,8 @@
 // const ExtractTextPlugin = require("extract-text-webpack-plugin")
 let client = require("./webpack.client.js")
 let server = require("./webpack.server.js")
-let dll = require("./webpack.dll.js")
 let webpack = require("webpack")
 let test = require("./webpack.test.js")
-let devConfig = require("./build/dev.config.js")
-let prodConfig = require("./build/prod.config.js")
 
 let $module = {
     mode:"production",
@@ -84,19 +81,7 @@ let $module = {
 let $devtool
 $devtool = {devtool: "cheap-module-eval-source-map"}
 // $devtool = $devtool ? $devtool : {};    // 在注销devtool时，不用修改后面的代码
-client = injectPlugins(Object.assign(client, $module, $devtool))
-server = injectPlugins(Object.assign(server, $module, $devtool))
+client = Object.assign(client, $module, $devtool)
+server = Object.assign(server, $module, $devtool)
 
-function injectPlugins (config) {
-    let envprops = {}
-    if (process.env.NODE_ENV === 'development') {
-        envprops = devConfig
-    }
-    if (process.env.NODE_ENV === 'production') {
-        envprops = prodConfig
-    }
-    config.plugins.push(new webpack.DefinePlugin({ 'global.env': JSON.stringify(envprops) }))
-    return config
-}
-
-module.exports = { client, server, dll }
+module.exports = { client, server }
