@@ -74,7 +74,7 @@ gulp.task('inject:tags', function (done) {
 gulp.task('build:dll', function (done) {
   var config = require("./webpack.dll.js")
   webpack(config, function (err, stats) {
-    // compileLogger(err, stats)
+    if (err) console.error('build:dll', err)
     // callback()
   })
   return done && done()
@@ -83,8 +83,14 @@ gulp.task('build:dll', function (done) {
 // 打包
 gulp.task('build:server', function (done) {
   var config = require("./webpack.config.js")
+  if (parseArgv().env === 'dev') {
+    config.server.mode = 'development'
+  }
+  if (parseArgv().env === 'prod') {
+    config.server.mode = 'production'
+  }
   webpack(injectEnv(config.server), function (err, stats) {
-    // compileLogger(err, stats)
+    if (err) console.error('build:server', err)
     // callback()
   })
   return done && done()
@@ -93,8 +99,14 @@ gulp.task('build:server', function (done) {
 // 打包
 gulp.task('build:client', function (done) {
   var config = require("./webpack.config.js")
+  if (parseArgv().env === 'dev') {
+    config.client.mode = 'development'
+  }
+  if (parseArgv().env === 'prod') {
+    config.client.mode = 'production'
+  }
   webpack(injectEnv(config.client), function (err, stats) {
-    // compileLogger(err, stats)
+    if (err) console.error('build:client', err)
     // callback()
   })
   return done && done()
@@ -103,4 +115,4 @@ gulp.task('build:client', function (done) {
 gulp.task('copy', gulp.series('copy:static', 'copy:lib'))
 gulp.task('clean', gulp.series('clean:dist', 'clean:lib'))
 gulp.task('dll', gulp.series('build:dll'))
-gulp.task('build', gulp.series('build:server', 'build:client'))
+gulp.task('build', gulp.series('build:client', 'build:server'))

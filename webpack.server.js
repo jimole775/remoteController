@@ -10,14 +10,14 @@ const serverDis = path.join(__dirname, "server");
 const publicDist = path.join(__dirname, "public");
 
 var server = {
-    target: "node"
+    target: 'node'
 };
 
 server.entry = path.resolve(serverDis, "index.js");
 
 server.output = {
-    publicPath: path.join(hostDist),
-    path: path.join(serverDis),
+    publicPath: hostDist,
+    path: serverDis,
     filename: 'bundle.node.js'
 };
 

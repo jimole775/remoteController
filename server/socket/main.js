@@ -11,13 +11,12 @@ export default class WebSocketServer {
       })
       socket.on('data', (e) => {
         const frame = tool.frameDecode(e)
-        //第一次握手
+        // 第一次握手
         if (frame.FIN === 0) {
           console.log("握手")
           this.handshake(e, socket)
-        }
-        //数据交互
-        else {
+        } else {
+          // 数据交互
           host(frame, socket)
         }
       })

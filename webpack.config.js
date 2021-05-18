@@ -8,7 +8,7 @@ let webpack = require("webpack")
 let test = require("./webpack.test.js")
 
 let $module = {
-    mode:"production",
+    mode: 'production',
     module: {
         rules: [
             {
