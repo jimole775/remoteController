@@ -25,7 +25,7 @@ export default function (e) {
     s = e.slice(i, frame.PayloadLength)//否则直接使用数据
   }
   //数组转换成缓冲区来使用
-  s = new Buffer(s)
+  s = Buffer.from(s)
   //如果有必要则把缓冲区转换成字符串来使用
   if (frame.Opcode == 1) {
     s = s.toString()

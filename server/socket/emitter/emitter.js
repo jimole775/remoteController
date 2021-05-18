@@ -16,8 +16,7 @@ export default function (status, emitData, socket) {
         // 谁发上来的数据，就返回给谁，其他用户一律返回null
         "clientData": emitData.clientData && emitData.clientData.uid === socket.uid ? emitData.clientData : null
     };
-    console.log("emitProtocolMap:", emitProtocolMap);
-    let PayloadData = opcode == 1 ? JSON.stringify(emitProtocolMap) : new Buffer(JSON.stringify(emitProtocolMap));
+    let PayloadData = opcode == 1 ? JSON.stringify(emitProtocolMap) : Buffer.from(JSON.stringify(emitProtocolMap));
 
     if(socket.uid && socket.writable)
         socket.write(

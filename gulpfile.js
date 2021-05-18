@@ -17,16 +17,30 @@ function parseArgv () {
   })
   return params
 }
+
+// 给项目注入 global 变量
 function injectEnv (config) {
   let envprops = {}
   if (parseArgv().env === 'dev') {
-    envprops = devConfig
+    envprops = devConfig.env
   }
   if (parseArgv().env === 'prod') {
-    envprops = prodConfig
+    envprops = prodConfig.env
   }
   config.plugins.push(new webpack.DefinePlugin({ 'global.env': JSON.stringify(envprops) }))
   return config
+}
+
+// 混进指定环境的配置项
+function mixinConfig (config) {
+  let newConfig = {}
+  if (parseArgv().env === 'dev') {
+    newConfig = Object.assign(config, devConfig.mixins)
+  }
+  if (parseArgv().env === 'prod') {
+    newConfig = Object.assign(config, prodConfig.mixins)
+  }
+  return newConfig
 }
 
 gulp.task('clean:dist', function (done) {
@@ -82,13 +96,8 @@ gulp.task('build:dll', function (done) {
 
 // 打包
 gulp.task('build:server', function (done) {
-  var config = require("./webpack.config.js")
-  if (parseArgv().env === 'dev') {
-    config.server.mode = 'development'
-  }
-  if (parseArgv().env === 'prod') {
-    config.server.mode = 'production'
-  }
+  const config = require("./webpack.config.js")
+  config.server = mixinConfig(config.server)
   webpack(injectEnv(config.server), function (err, stats) {
     if (err) console.error('build:server', err)
     // callback()
@@ -98,13 +107,8 @@ gulp.task('build:server', function (done) {
 
 // 打包
 gulp.task('build:client', function (done) {
-  var config = require("./webpack.config.js")
-  if (parseArgv().env === 'dev') {
-    config.client.mode = 'development'
-  }
-  if (parseArgv().env === 'prod') {
-    config.client.mode = 'production'
-  }
+  const config = require("./webpack.config.js")
+  config.client = mixinConfig(config.client)
   webpack(injectEnv(config.client), function (err, stats) {
     if (err) console.error('build:client', err)
     // callback()

@@ -2,7 +2,7 @@
  * Created by Andy on 2017/11/4.
  */
 export default function (e) {
-  var s = [], o = new Buffer(e.PayloadData), l = o.length
+  var s = [], o = Buffer.from(e.PayloadData), l = o.length
   // 输入第一个字节
   s.push((e.FIN << 7) + e.Opcode)
 
@@ -18,5 +18,5 @@ export default function (e) {
   }
 
   // 返回头部分和数据部分的合并缓冲区
-  return Buffer.concat([new Buffer(s), o])
+  return Buffer.concat([Buffer.from(s), o])
 }

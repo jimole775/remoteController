@@ -1,35 +1,34 @@
 
-const fs = require("fs")
-const path = require("path")
+import fs from 'fs'
+import path from 'path'
+import buildPath from '../utils/build-path'
+
 export default new class Log {
 
   data(data) {
     data = Log.queryMsg(data)
     const timer = Log.getTimer()
-    const fileName = Log.createFileName("data")
     const content = `【${timer}】\r\n${data}\r\n`
-    this.writeFile("data", fileName, content)
+    this.writeFile('data', content)
   }
 
   error(msg) {
     msg = Log.queryMsg(msg)
     const timer = Log.getTimer()
-    const fileName = Log.createFileName("error")
     const content = `【${timer}】\r\n${msg}\r\n`
-    this.writeFile("error", fileName, content)
+    this.writeFile('error', content)
   }
 
   user(id, ip) {
     id = Log.queryMsg(id)
     ip = Log.queryMsg(ip)
     const timer = Log.getTimer()
-    const fileName = Log.createFileName("user")
     const content = `【${timer}】\r\n${ip} ${id}\r\n`
-    this.writeFile("user", fileName, content)
+    this.writeFile('user', content)
   }
 
   static queryMsg(msg) {
-    if (typeof msg === "object") {
+    if (typeof msg === 'object') {
       try {
         msg = JSON.stringify(msg)
       } catch (error) {
@@ -50,31 +49,19 @@ export default new class Log {
     return `${h}:${m}:${s}`
   }
 
-  static createFileName(type) {
+  static createFileName(dbpath) {
     const now = new Date()
 
     const y = now.getFullYear()
     const m = now.getMonth()
     const d = now.getDay()
 
-    return path.resolve(__dirname.split("\\").join("/"), type, `${y}.${m}.${d}.log`)
+    return path.join(dbpath, `${y}.${m}.${d}.log`)
   }
 
-  writeFile(type, filePath, content) {
-    const mkdir = new Promise(function (resolve, reject) {
-      fs.readdir(path.join(__dirname, type), function (err, fileGroup) {
-        if (fileGroup instanceof Array) resolve()
-        else reject()
-      })
-    })
-
-    mkdir
-      .then(function () {
-        fs.appendFile(filePath, content, "utf8")
-      }, function () {
-        fs.mkdir(path.join(__dirname, type), function () {
-          fs.appendFile(filePath, content, "utf8")
-        })
-      })
+  writeFile(type, content) {
+    const dbpath = buildPath(path.join(global.LOG_DIS, type))
+    const fileName = Log.createFileName(dbpath)
+    fs.appendFile(fileName, content, () => {})
   }
 }
