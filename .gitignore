@@ -1,8 +1,10 @@
 .idea
-node_modules
+node_modules/
 *.zip
 test
 .vscode
 client/dist/
 client/lib/
 server/log/
+server/bundle.node.js
+database/
