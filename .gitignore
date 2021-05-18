@@ -6,4 +6,3 @@ test
 client/dist/
 client/lib/
 server/log/
-server/bundle.node.js
