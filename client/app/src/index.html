@@ -134,11 +134,13 @@
     </script>
 </head>
 
-<body ng-app="myApp">
-    <foot-bar></foot-bar>
-    <section ui-view=""></section>
-    <head-bar></head-bar>
-    <components></components>
+<body>
+    <div ng-app="myApp" ng-strict-di>
+        <foot-bar></foot-bar>
+        <section ui-view></section>
+        <head-bar></head-bar>
+        <components></components>
+    </div>
     <script>
         (function () {
             // setTimeout(function(){

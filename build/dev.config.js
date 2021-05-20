@@ -4,7 +4,7 @@ const globalEnv = {
   WSPORT: 8081
 }
 const configmixins = {
-  devtool: 'eval-cheap-module-source-map',
+  devtool: 'eval-source-map',
   mode: 'development'
 }
 module.exports = {

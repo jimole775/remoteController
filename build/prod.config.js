@@ -4,7 +4,6 @@ const globalEnv = {
   WSPORT: 8081
 }
 const configmixins = {
-  devtool: 'none',
   mode: 'production'
 }
 module.exports = {
