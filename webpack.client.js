@@ -30,7 +30,7 @@ const webClient = {
 webClient.plugins = [
     new HtmlWebpackPlugin({
         title: 'RMT',
-        inject: true,
+        inject: 'head',
         template: path.join(__dirname, 'client/lib/index.html'),
         filename: path.join(__dirname, 'client/dist/index.html')
     })

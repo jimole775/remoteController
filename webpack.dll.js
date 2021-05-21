@@ -24,6 +24,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
+            inject: 'head',
             template: path.join(__dirname, 'client/app/src/index.html'),
             filename: path.join(__dirname, 'client/lib/index.html')
         }),
