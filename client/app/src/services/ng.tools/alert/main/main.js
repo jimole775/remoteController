@@ -26,10 +26,8 @@ class Ctrl {
         $scope.alert = AlertInterface;   //指针，已经把$scope.alert指向了 Alert的实例 “alert” 的地址
     }
 }
-
+Ctrl.$inject = ['$scope']
 function link($scope, $element) {
-    "ngInject";
-
     $scope.alert.hide = function () {
         $scope.promptVisible = false;
         $scope.loadingVisible = false;
@@ -65,7 +63,4 @@ function link($scope, $element) {
     };
 
 }
-
-
-
-
+link.$inject = ['$scope', '$element']

@@ -5,7 +5,7 @@ import "./scanner.less"
 import tpl from "./scanner.jade"
 import JRoll from "jroll";
 import initViewButtonImg from "../images/scanner_5.png";
-export default function ($stateProvider) {
+export default ['$stateProvider', function ($stateProvider) {
     $stateProvider
         .state("scanner",
         {
@@ -15,12 +15,10 @@ export default function ($stateProvider) {
             controller: Ctrl
         }
     )
-}
+}]
 
 class Ctrl {
     constructor($scope, $element, ngTool, ajax) {
-        "ngInject";
-
         this.scope = $scope;
         $scope.thisCtrl = this;
 
@@ -358,7 +356,7 @@ class Ctrl {
             });
     }
 }
-
+Ctrl.$inject = ['$scope', '$element', 'ngTool', 'ajax']
 // 尝试进行行为归类
 // 首先需要进行需求细分
 // 确定整体结构

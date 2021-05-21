@@ -16,7 +16,7 @@ export default function () {
     }
 }
 
-class Ctrl{
+class Ctrl {
     constructor($scope, $rootScope, wsService, ngTool, userStorage){
 
         $scope.safeApply = ngTool.injectScope().safeApply;
@@ -49,6 +49,7 @@ class Ctrl{
 
     }
 }
+Ctrl.$inject = ['$scope', '$rootScope', 'wsService', 'ngTool', 'userStorage']
 function link($scope) {
     $scope.disConnect = function(){
         if($scope.userStorage.getStorage("remoteId")){
@@ -65,3 +66,4 @@ function link($scope) {
         }
     }
 }
+link.$inject = ['$scope']

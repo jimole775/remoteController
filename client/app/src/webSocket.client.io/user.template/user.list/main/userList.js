@@ -19,8 +19,6 @@ export default function () {
 
 class Ctrl {
     constructor($scope, $rootScope, ngTool, wsService, userStorage, charState) {
-        "ngInject";
-
         $scope.safeApply = ngTool.injectScope($scope).safeApply;
         $scope.Drag = ngTool.Drag;
         $scope.alert = ngTool.alert;
@@ -38,10 +36,10 @@ class Ctrl {
             let userList = userStorage.getStorage("userList");
 
 
-            if(!userList && !userList.length)return;
+            if (!userList && !userList.length) return;
 
             let remoteChanelMap = userStorage.getStorage("remoteChanelMap");
-            let askerName = userStorage.getStorage("askerName") ;
+            let askerName = userStorage.getStorage("askerName");
             let helperName = userStorage.getStorage("helperName");
 
             $scope.safeApply(function () {
@@ -52,7 +50,7 @@ class Ctrl {
                 userStorage.getStorage("userList").forEach(function (user, index) {
                     $scope.items.push({
                         isDisabled: $scope.isRMT != 0,
-                        isAbleMsgFn: $scope.isRMT != 0 && (user.name === askerName|| user.name === helperName),
+                        isAbleMsgFn: $scope.isRMT != 0 && (user.name === askerName || user.name === helperName),
                         userName: user.name,
                         RMTState: "协助者 || 忙碌中",
                         isBusing: user.connectWith,
@@ -86,17 +84,17 @@ class Ctrl {
 
     }
 }
-
+Ctrl.$inject = ['$scope', '$rootScope', 'ngTool', 'wsService', 'userStorage', 'charState']
 function link($scope, $element) {
 
     // 实例化拖拽事件
-    setTimeout(function(){
+    setTimeout(function () {
         new $scope.Drag(
             $element[0].querySelector(".user-list-header"),
             $element[0].querySelector(".user-list-frame"),
             $element[0].querySelector(".extend-trigger")
         );
-    },100);
+    }, 100);
 
     // 用户列表关联按钮的样式
     $scope.user_list_style = {
@@ -127,7 +125,7 @@ function link($scope, $element) {
         $scope.showUserList = false;
     };
 
-    $scope.showCharForm = function(oppositeName){
+    $scope.showCharForm = function (oppositeName) {
         $scope.charState.charShow = true;
         $scope.charState.charWith = oppositeName;
         $scope.$root.$emit($scope.charState);
@@ -136,11 +134,10 @@ function link($scope, $element) {
     $scope.mainButtonClick = function () {
         $scope.newUserCount = 0;
         $scope.showUserList = !$scope.showUserList;
-        setTimeout(function(){
+        setTimeout(function () {
             $scope.jroll($element[0].querySelectorAll(".user-list-wrapper")[0]);
-        },100);
+        }, 100);
     };
 
 }
-
-
+link.$inject = ['$scope', '$rootScope']

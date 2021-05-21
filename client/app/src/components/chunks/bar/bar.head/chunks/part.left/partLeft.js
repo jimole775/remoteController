@@ -15,11 +15,11 @@ export default function () {
 }
 
 class Ctrl {
-    constructor($scope, $rootScope) {
+    constructor() {
 
     }
 }
 
-function link($scope) {
+function link() {
 
 }

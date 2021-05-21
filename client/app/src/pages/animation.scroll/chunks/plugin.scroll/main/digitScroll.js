@@ -46,7 +46,6 @@ export default function () {
 }
 
 function link($scope, $element, $attrs, that) {
-    "ngInject";
     let values = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     $scope.wrappers = that.spellWrappers(values);
@@ -68,10 +67,10 @@ function link($scope, $element, $attrs, that) {
         that.bindEvents();
     });
 }
+link.$inject = ['$scope', '$element', '$attrs', 'that']
 
 class JrollPlugin {
     constructor($scope, $element, $rootScope, $attrs) {
-        "ngInject";
         this.lineHeight = 3 * Number.parseInt($("html").css("fontSize"));  //获取每行的行高，计算方式为 3 * 浏览器默认字体大小
         this.maxColumn = $scope.maxColumn !== undefined ? $scope.maxColumn : 5;
         this.maxRow = $scope.maxRow !== undefined ? $scope.maxRow : $("body").height() > 720 ? 7 : 5;
@@ -343,3 +342,4 @@ class JrollPlugin {
     }
 
 }
+JrollPlugin.$inject = ['$scope', '$element', '$rootScope', '$attrs']

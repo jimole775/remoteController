@@ -4,21 +4,19 @@
 import tpl from "./main.jade";
 import "./main.less";
 
-export default function (){
+export default function () {
     return {
-        restrict:"EA",
-        replace:true,
-        scope:false,
-        template:tpl(),
-        controller:Ctrl
+        restrict: "EA",
+        replace: true,
+        scope: false,
+        template: tpl(),
+        controller: Ctrl
     }
 }
 
-class Ctrl{
-    constructor($scope, $element, ngTool, $rootScope, userStorage, charState){
-        "ngInject";
+class Ctrl {
+    constructor($scope, $element, ngTool, $rootScope, userStorage, charState) {
         $scope.safeApply = ngTool.injectScope($scope).safeApply;
-        // ʵ������ק�¼�
         new ngTool.Drag(
             $element[0].querySelector(".char-head-bar"),
             $element[0].querySelector(".char-form")
@@ -29,6 +27,6 @@ class Ctrl{
             $scope.charShow = charState.charShow;
             $scope.remoteId = userStorage.getStorage("remoteId");
         });
-
     }
 }
+Ctrl.$inject = ['$scope', '$element', 'ngTool', '$rootScope', 'userStorage', 'charState']

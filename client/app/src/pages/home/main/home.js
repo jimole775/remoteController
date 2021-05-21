@@ -5,7 +5,7 @@ import tpl from "./home.jade";
 import "./home.less";
 import SimulateSlider  from "SimulateSlider";
 
-export default function ($stateProvider) {
+export default ['$stateProvider', function ($stateProvider) {
     $stateProvider
         .state("home", {
             url: '/home',
@@ -13,12 +13,11 @@ export default function ($stateProvider) {
             template: tpl(),
             controller: Ctrl
         });
-}
+}]
 
 
 class Ctrl {
     constructor($scope, $element, $rootScope, userStorage, ngTool) {
-        "ngInject";
         let slider = new SimulateSlider({
              tabId: "sliderTab"
             , slidingShoeId: "slidingShoe"
@@ -56,6 +55,6 @@ class Ctrl {
             }
         });
     }
-
 }
 
+Ctrl.$inject = ['$scope', '$element', '$rootScope', 'userStorage', 'ngTool']

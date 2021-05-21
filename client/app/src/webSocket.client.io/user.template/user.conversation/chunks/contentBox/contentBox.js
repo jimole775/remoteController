@@ -11,29 +11,28 @@ export default function () {
         scope: {},
         template: tpl(),
         controller: Ctrl,
-        link:link
+        link: link
     }
 }
 
 class Ctrl {
     constructor($scope, $element, $rootScope, ngTool, userStorage, charState) {
-        "ngInject";
         $scope.safeApply = ngTool.injectScope($scope).safeApply;
         $scope.charState = charState;
         $scope.userStorage = userStorage;
         $scope.ngTool = ngTool;
 
-        $rootScope.$on(charState,function(){
-            $scope.remoteId =  $scope.userStorage.getStorage("remoteId");
-            if(charState.charParagraphs.length){
-                ngTool.jroll($element[0],"bottom");
+        $rootScope.$on(charState, function () {
+            $scope.remoteId = $scope.userStorage.getStorage("remoteId");
+            if (charState.charParagraphs.length) {
+                ngTool.jroll($element[0], "bottom");
             }
         });
     }
 }
+Ctrl.$inject = ['$scope', '$element', '$rootScope', 'ngTool', 'userStorage', 'charState']
 
-
-function link($scope){
+function link($scope) {
     $scope.avatarStyle = {
         background: `url(${avatar}) no-repeat`,
         backgroundSize: "3rem",
@@ -42,10 +41,11 @@ function link($scope){
     };
 
     $scope.nativeStyle = {
-        "flex-direction":"row"
+        "flex-direction": "row"
     };
 
     $scope.oppositeStyle = {
         "flex-direction": "row-reverse"
     }
 }
+link.$inject = ['$scope']

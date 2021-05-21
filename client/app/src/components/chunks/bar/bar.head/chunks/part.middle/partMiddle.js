@@ -16,3 +16,4 @@ export default function () {
 function link($scope) {
     $scope.title = "远程测试机";
 }
+link.$inject = ['$scope']

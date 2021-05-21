@@ -19,8 +19,6 @@ export default function () {
 
 class Ctrl {
     constructor($scope, $element, ngTool, ajax) {
-        "ngInject";
-
         this.scope = $scope;
         $scope.element = $element;
         $scope.thisCtrl = this;
@@ -56,3 +54,5 @@ class Ctrl {
 function link() {
 
 }
+
+Ctrl.$inject = ['$scope', '$element', 'ngTool', 'ajax']

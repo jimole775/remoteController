@@ -6,12 +6,12 @@ import wsClient from "./webSocket.client.io/ws.client.export.js";
 import pages from "./pages/exports.js";
 import components from "./components/exports.js";
 (function (app) {
-    app.config(function ($stateProvider, $urlRouterProvider) {
+    app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise("home");
-    })
-    .run(function run ($state,$rootScope,userStorage) {
+    }])
+    .run(['$state', '$rootScope', 'userStorage', function ($state, $rootScope, userStorage) {
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-          
+
             const $ = angular.element;
 
             // 禁止 求助者控制操作
@@ -26,5 +26,6 @@ import components from "./components/exports.js";
 
             console.log(event, toState, toParams, fromState, fromParams);
         });
-    });
+    }]);
+
 }(angular.module('myApp', [uiRouter, components.name, pages.name, services.name, wsClient.name])));

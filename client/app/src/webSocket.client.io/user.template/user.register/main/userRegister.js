@@ -41,9 +41,9 @@ class Ctrl {
             }
 
             // 每有一位中文，长度限制就减一，最终目的：7位中文 or 14位英文
-            $scope.safeApply(function(){
+            $scope.safeApply(function () {
                 let lastSpace = 14 - zhCount;
-                if(lastSpace >= 7){
+                if (lastSpace >= 7) {
                     $scope.maxLength = lastSpace;
                 }
             });
@@ -58,14 +58,14 @@ class Ctrl {
                 else {
                     $scope.tool.alert.loading("正在注册...");
                     $scope.userStorage.setStorage("nativeName", $scope.userName);
-                    $scope.wsService.emit(0x01,function(response){                        
+                    $scope.wsService.emit(0x01, function (response) {
                         $scope.tool.alert.loading.hide();
-                        if(response.serverData.regPass){
+                        if (response.serverData.regPass) {
                             $element.remove();
                             $("section").css("filter", "blur(0)");
                             $scope.watcher();
                             $scope.tool.alert.prompt("恭喜您，已经注册成功。\r\n现在您可以点击左上角的用户列表，和其他用户进行互动了。\r\n如果还没有用户在线，可以再新建一个窗口，自己和自己玩！");
-                        }else{
+                        } else {
                             $scope.tool.alert.warns("那么帅气的名字已经被抢了");
                         }
                     });
@@ -76,11 +76,9 @@ class Ctrl {
             }
         };
     }
-
 }
-
-function link($scope, $element, $attr, ctrl) {
-    "ngInject";
+Ctrl.$inject = ['$scope', '$element', 'ngTool', 'wsService', 'userStorage']
+function link($scope, $element) {
 
     // 添加磨砂玻璃效果
     $("section").ready(function () {
@@ -88,11 +86,10 @@ function link($scope, $element, $attr, ctrl) {
     });
 
     // 监听回车键
-    document.body.onkeydown = function(e){
-        if(e.keyCode === 13 && $($element).is(":visible")){
-            $scope.submit.call($scope,null);
+    document.body.onkeydown = function (e) {
+        if (e.keyCode === 13 && $($element).is(":visible")) {
+            $scope.submit.call($scope, null);
         }
     }
-
-
 }
+link.$inject = ['$scope', '$element']

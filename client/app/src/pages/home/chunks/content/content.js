@@ -13,7 +13,7 @@ export default function () {
         restrict: "E",
         scope: {},
         template: tpl(),
-        controller: ctrl,
+        controller: Ctrl,
         link: link
     }
 };
@@ -24,9 +24,10 @@ function link($scope, $element, $attrs, req) {
 
 }
 
-class ctrl {
+link.$inject = ['$scope', '$element', '$attrs', 'req']
+
+class Ctrl {
     constructor($scope, ngTool) {
-        "ngInject";
         $scope.contentItem = [
             {
                 title: "动画测试",
@@ -61,5 +62,6 @@ class ctrl {
             }
         }
     }
-
 }
+
+Ctrl.$inject = ['$scope', 'ngTool']

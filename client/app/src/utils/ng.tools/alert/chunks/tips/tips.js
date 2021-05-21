@@ -18,11 +18,10 @@ export default function () {
 
 class Ctrl {
     constructor($scope) {
-        "ngInject";
         $scope.tip = "提示";
     }
 }
-
+Ctrl.$inject = ['$scope']
 function link($scope, $element) {
 
     let _element = $($element);
@@ -51,7 +50,7 @@ function link($scope, $element) {
 
     };
 }
-
+link.$inject = ['$scope', '$element']
 function calcSize(fatherTarget, thisElement) {
 
     let offsetLeft = fatherTarget.offset().left;
@@ -134,7 +133,7 @@ function queryDom(target) {
 function fadeInOut(timer, thisElement) {
     clearTimeout(timer); // 先清除上一个timer，再设置下一个
     timer = setTimeout(function () {
-        thisElement.animate({opacity: 0}, 500, function () {
+        thisElement.animate({ opacity: 0 }, 500, function () {
             thisElement.remove();  // 最后删除元素
         });
     }, 500);

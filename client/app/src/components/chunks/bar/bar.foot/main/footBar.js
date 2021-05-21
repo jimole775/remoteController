@@ -4,16 +4,16 @@
 import tpl from "./footBar.jade";
 import "./footBar.less";
 
-export default function(){
+export default function () {
     return {
         restrict: 'E',
-        replace:true,
+        replace: true,
         scope: {},
-        link:link,
-        template:tpl()
+        link: link,
+        template: tpl()
     }
 }
 
-function link(){
+function link() {
 
 }

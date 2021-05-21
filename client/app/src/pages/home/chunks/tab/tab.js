@@ -10,21 +10,21 @@ export default function () {
         restrict: "E",
         scope: {},
         template: tpl(),
-        controller: ctrl,
+        controller: Ctrl,
         link: link
     }
 }
 
-function link($scope) {
+function link() {
 }
 
-class ctrl {
+class Ctrl {
     constructor($scope) {
-        "ngInject";
         $scope.tabItem = [
-            {title: "动画测试"},
-            {title: "数据测试"}
+            { title: "动画测试" },
+            { title: "数据测试" }
         ];
     }
-
 }
+
+Ctrl.$inject = ['$scope']

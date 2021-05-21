@@ -4,7 +4,7 @@
 import tpl from "./animation.jade";
 import "./animation.less";
 
-export default function ($stateProvider) {
+export default  ['$stateProvider', function($stateProvider) {
     $stateProvider
         .state("animation", {
             url: '/animation',
@@ -12,16 +12,16 @@ export default function ($stateProvider) {
             template: tpl(),
             controller: Ctrl
         });
-}
+}]
 
-class Ctrl{
-    constructor($rootScope,$state){
-        "ngInject";
+class Ctrl {
+    constructor($rootScope, $state) {
         $rootScope.footBtn({
             btn1Text:"返回",
-            btn1Callback:function(){
+            btn1Callback:function() {
                 $state.go("home");
             }
         })
     }
 }
+Ctrl.$inject = ['$rootScope', '$state']

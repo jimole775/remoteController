@@ -13,8 +13,6 @@ import emitHandler from "./emit.handler/emitHandler.js";
  * 可以使用 $rootScope.$emit 实时刷新获取的数据给其他模块使用
  * */
 export default function service($rootScope, ngTool, wsTool, userStorage, charState) {
-    "ngInject";
-
     let that = this;
     // let hostUrl = userStorage.getStorage("hostUrl");
     let hostName = location.hostname || userStorage.getStorage("hostUrl");
@@ -58,3 +56,4 @@ export default function service($rootScope, ngTool, wsTool, userStorage, charSta
 
     return this.bindListener();
 }
+service.$inject = ['$rootScope', 'ngTool', 'wsTool', 'userStorage', 'charState']

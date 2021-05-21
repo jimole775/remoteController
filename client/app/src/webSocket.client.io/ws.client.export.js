@@ -6,8 +6,8 @@ import wsStorage from "wsClient/ws.storage/wsStorage";
 import wsTool from "wsClient/ws.tools/exports";
 import user from "wsClient/user.template/exports";
 export default angular.module("wsClient",[user.name])
-    .config(function($provide){
+    .config(['$provide', function($provide){
         $provide.service("wsService",wsService);
         $provide.factory("wsTool",wsTool);
         $provide.constant("userStorage",wsStorage);
-    });
+    }]);

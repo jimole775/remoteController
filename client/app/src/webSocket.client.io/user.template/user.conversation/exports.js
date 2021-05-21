@@ -15,7 +15,7 @@ export default angular.module("user.conversation",[])
     .directive("charHeadBar",head)
     .directive("hoverButton",hoverButton)
     .directive("phraseForm",phraseForm)
-    .config(function($provide){
+    .config(['$provide', function($provide){
         $provide.value("charState",{
             charShow:false,
             phraseFormShow:false,
@@ -25,6 +25,6 @@ export default angular.module("user.conversation",[])
                 console.log(content);
             }
         });
-    });
+    }]);
 
 

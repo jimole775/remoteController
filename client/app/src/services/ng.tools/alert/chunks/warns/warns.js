@@ -4,25 +4,25 @@
 import tpl from "./warns.jade";
 import "./warns.less";
 import $ from "jquery";
-export default function(){
+export default function () {
     return {
-        replace:true,
-        restrict:"E",
-        template:tpl(),
-        controller:Ctrl,
-        link:link,
-        scope:false,
-        require:"^alertPlugin"
+        replace: true,
+        restrict: "E",
+        template: tpl(),
+        controller: Ctrl,
+        link: link,
+        scope: false,
+        require: "^alertPlugin"
     }
 }
 
-class Ctrl{
-    constructor($scope){
+class Ctrl {
+    constructor($scope) {
 
     }
 }
-
-function link($scope,$element,$attr,req){
+Ctrl.$inject = ['$scope']
+function link($scope, $element, $attr, req) {
 
     let thisEle = $($element);
     let parentEle = thisEle.parent();
@@ -30,10 +30,10 @@ function link($scope,$element,$attr,req){
     $scope.alert.warns = function (message = "提醒") {
         $scope.message = message;
 
-        parentEle.append(thisEle.css({opacity: 1}).show().stop());
+        parentEle.append(thisEle.css({ opacity: 1 }).show().stop());
         //显示500毫秒就淡出
         setTimeout(function () {
-            thisEle.animate({opacity: 0}, 700, function () {
+            thisEle.animate({ opacity: 0 }, 700, function () {
                 thisEle.remove();  //最后删除元素
             });
         }, 500);
@@ -42,3 +42,4 @@ function link($scope,$element,$attr,req){
     };
 
 }
+link.$inject = ['$scope', '$element', '$attr', 'req']

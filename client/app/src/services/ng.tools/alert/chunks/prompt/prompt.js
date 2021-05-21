@@ -4,26 +4,24 @@
 import tpl from "./prompt.jade";
 import "./prompt.less";
 
-export default function(){
+export default function () {
     return {
-        restrict:"E",
-        template:tpl(),
-        controller:Ctrl,
-        replace:true,
-        link:link,
-        scope:false,
-        require:"^alertPlugin"
+        restrict: "E",
+        template: tpl(),
+        controller: Ctrl,
+        replace: true,
+        link: link,
+        scope: false,
+        require: "^alertPlugin"
     }
 }
 
-class Ctrl{
-    constructor($scope){
-        "ngInject";
+class Ctrl {
+    constructor() {
     }
 }
 
-function link($scope,$element,$attr,req){
-
+function link($scope, $element, $attr, req) {
     $scope.alert.prompt = function (message = "信息") {
         $scope.loadingVisble = false;
         $scope.message = message;
@@ -38,3 +36,5 @@ function link($scope,$element,$attr,req){
     };
 
 }
+
+link.$inject = ['$scope', '$element', '$attr', 'req']

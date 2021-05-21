@@ -5,7 +5,6 @@ import tpl from "./footButton.jade";
 import "./footButton.less";
 
 export default function () {
-
     return {
         restrict: 'E',
         replace: true,
@@ -18,7 +17,6 @@ export default function () {
 }
 
 function link($scope, $element, $attr, reController) {
-    "ngInject";
 
     $scope.btn1Text = '退出';
     $scope.btn2Text = '';
@@ -146,10 +144,9 @@ function link($scope, $element, $attr, reController) {
         }
     };
 }
-
+link.$inject = ['$scope', '$element', '$attr', 'reController']
 class FooterControl {
     constructor($scope, $rootScope, $element) {
-        "ngInject";
         this.name = "test";
         $scope.safeApply = function (fn) {
             var phase = this.$root.$$phase;
@@ -191,5 +188,4 @@ class FooterControl {
 
     }
 }
-
-
+FooterControl.$inject = ['$scope', '$rootScope', '$element']

@@ -11,7 +11,6 @@ import jroll from "./jroll/jroll.js";
 
 export default angular.module("ngTool", [alertModule.name])
     .factory("ngTool", function () {
-        "ngInject";
         let scope = {};
         return {
 
