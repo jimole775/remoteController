@@ -53,8 +53,8 @@ export default new class Log {
     const now = new Date()
 
     const y = now.getFullYear()
-    const m = now.getMonth()
-    const d = now.getDay()
+    const m = now.getMonth() + 1
+    const d = now.getDate()
 
     return path.join(dbpath, `${y}.${m}.${d}.log`)
   }
