@@ -8,10 +8,10 @@ export default function (asbFilePath) {
   const splitMark = getPathSeparator(asbFilePath)
   const pathArr = asbFilePath.split(splitMark)
   for (let i = 0; i < pathArr.length; i++) {
-    if (!prevPath) prevPath = pathArr[0]
+    if (!prevPath) prevPath = pathArr[0] || splitMark
     else prevPath = path.join(prevPath, pathArr[i])
     const isDirExist = fs.existsSync(prevPath)
-    if (!isDirExist && !/\.\w+$/i.test(pathArr[i])) fs.mkdirSync(prevPath)
+    if (!isDirExist) fs.mkdirSync(prevPath)
   }
   return asbFilePath
 }
