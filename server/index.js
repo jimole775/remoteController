@@ -11,9 +11,10 @@ global.SERVER_DIS = path.resolve(__dirname)
 global.DB_DIS = path.resolve(__dirname, '../database/json')
 global.LOG_DIS = path.resolve(__dirname, '../database/log')
 
-const http = new HTTPServer()
-http.open(global.env.HTTPPORT)
-
+if (process.env.NODE_ENV === 'development') {
+  const http = new HTTPServer()
+  http.open(global.env.HTTPPORT)
+}
 const socket = new WebSocketServer()
 socket.open(global.env.WSPORT)
 
