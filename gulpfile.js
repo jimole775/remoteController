@@ -27,6 +27,7 @@ function injectEnv (config) {
   if (parseArgv().env === 'prod') {
     envprops = prodConfig.env
   }
+  !config.plugins && (config.plugins = [])
   config.plugins.push(new webpack.DefinePlugin({ 'global.env': JSON.stringify(envprops) }))
   return config
 }
